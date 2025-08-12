@@ -1,53 +1,127 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Дневник тренировки</title>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-        }
-        h1 {
-            text-align: center;
-        }
-        .card {
-            background: white;
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Дневник тренировки — GymKeeper style</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Дневник тренировки</h1>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo">GK</div>
+        <div class="brand-text">
+          <strong>GymKeeper</strong>
+          <small>Дневник тренировки</small>
+        </div>
+      </div>
+      <nav class="nav">
+        <button class="nav-btn active" data-view="workout">Тренировка</button>
+        <button class="nav-btn" data-view="exercises">Упражнения</button>
+        <button class="nav-btn" data-view="history">История</button>
+        <button class="nav-btn" data-view="profile">Профиль</button>
+      </nav>
+      <div class="sidebar-foot">
+        <small>Бот: <span id="bot-username"></span></small>
+      </div>
+    </aside>
 
-    <div class="card">
-        <p>Это тестовая версия мини-приложения. Нажми кнопку "Сохранить" внизу, чтобы отправить данные боту.</p>
-    </div>
+    <main class="main">
+      <header class="topbar">
+        <div class="search-wrap">
+          <input id="search" placeholder="Поиск упражнений..." />
+        </div>
+        <div class="top-actions">
+          <button id="import-data" title="Импорт">Импорт</button>
+          <button id="export-data" title="Экспорт">Экспорт</button>
+        </div>
+      </header>
 
-    <script>
-        let tg = window.Telegram.WebApp;
-        tg.expand(); // Разворачиваем на весь экран
+      <section class="view view--workout" data-view="workout">
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Создать тренировку</h2>
+            <div class="muted">Добавляйте упражнения, указывайте подходы, вес и повторы</div>
+          </div>
+          <div class="panel-body">
+            <div class="row inputs">
+              <label>Дата <input type="date" id="workout-date" /></label>
+              <label>День недели
+                <select id="workout-weekday">
+                  <option value="1">Понедельник</option>
+                  <option value="2">Вторник</option>
+                  <option value="3">Среда</option>
+                  <option value="4">Четверг</option>
+                  <option value="5">Пятница</option>
+                  <option value="6">Суббота</option>
+                  <option value="0">Воскресенье</option>
+                </select>
+              </label>
+              <div class="select-add">
+                <select id="select-exercise"></select>
+                <button id="btn-add-ex-to-workout">Добавить</button>
+              </div>
+            </div>
 
-        console.log("User:", tg.initDataUnsafe.user); // Информация о пользователе
+            <div id="workout-exercises" class="grid"></div>
 
-        tg.MainButton.setText("Сохранить");
-        tg.MainButton.show();
+            <div class="panel-foot">
+              <button id="save-workout" class="primary">Сохранить тренировку</button>
+              <button id="clear-editor">Очистить</button>
+            </div>
+          </div>
+        </div>
+      </section>
 
-        tg.MainButton.onClick(() => {
-            tg.sendData(JSON.stringify({
-                action: "save_profile",
-                username: tg.initDataUnsafe.user?.username || "без_username",
-                first_name: tg.initDataUnsafe.user?.first_name || "",
-                last_name: tg.initDataUnsafe.user?.last_name || ""
-            }));
-        });
-    </script>
+      <section class="view view--exercises hidden" data-view="exercises">
+        <div class="panel">
+          <div class="panel-head">
+            <h2>База упражнений</h2>
+            <div class="muted">Добавьте GIF/картинку, чтобы визуально распознавать упражнение</div>
+          </div>
+          <div class="panel-body">
+            <form id="exercise-form" class="form-inline">
+              <input id="exercise-name" placeholder="Название упражнения" required />
+              <input id="exercise-gif" type="file" accept="image/gif,video/mp4,image/*" />
+              <button class="primary" type="submit">Добавить</button>
+            </form>
+            <div id="exercise-list" class="grid"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="view view--history hidden" data-view="history">
+        <div class="panel">
+          <div class="panel-head">
+            <h2>История тренировок</h2>
+            <div class="muted">Все сохранённые тренировки</div>
+          </div>
+          <div class="panel-body" id="history-list"></div>
+        </div>
+      </section>
+
+      <section class="view view--profile hidden" data-view="profile">
+        <div class="panel narrow">
+          <div class="panel-head"><h2>Профиль</h2></div>
+          <div class="panel-body">
+            <div id="profile-view"></div>
+            <form id="profile-form">
+              <input type="text" id="profile-name" placeholder="Имя" required />
+              <input type="number" id="profile-weight" placeholder="Вес (кг)" required />
+              <button class="primary" type="submit">Сохранить профиль</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <input type="file" id="import-file" style="display:none" accept="application/json" />
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>

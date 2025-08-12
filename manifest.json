@@ -1,0 +1,8 @@
+{
+  "name":"Дневник тренировки (GymKeeper-like)",
+  "short_name":"tnglog",
+  "start_url":"/",
+  "display":"standalone",
+  "background_color":"#071129",
+  "description":"Мини приложение дневник тренировок для Telegram WebApp"
+}
