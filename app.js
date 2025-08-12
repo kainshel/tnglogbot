@@ -1,52 +1,69 @@
 const tg = window.Telegram.WebApp;
 tg.expand();
 
-// Проверяем, доступно ли облачное хранилище
-if (!tg.CloudStorage) {
-    tg.showAlert("Облачное хранилище недоступно. Используем localStorage.");
+// Получаем ID пользователя из Telegram
+const userId = tg.initDataUnsafe.user?.id;
+if (!userId) {
+    tg.showAlert("Ошибка: пользователь не авторизован");
+    throw new Error("User ID not available");
 }
+
+// Ключи для хранения данных с привязкой к ID пользователя
+const PROFILE_KEY = `profile_${userId}`;
 
 // Загрузка профиля
 async function loadProfile() {
-    let name, weight;
-
-    // Пробуем получить данные из Telegram Cloud
     try {
-        name = await tg.CloudStorage.getItem("profile_name");
-        weight = await tg.CloudStorage.getItem("profile_weight");
+        // Пробуем получить данные из Telegram Cloud
+        const savedData = await tg.CloudStorage.getItem(PROFILE_KEY);
+        
+        if (savedData) {
+            // Данные найдены в облаке
+            document.getElementById("input-name").value = savedData.name;
+            document.getElementById("input-weight").value = savedData.weight;
+            return;
+        }
     } catch (e) {
-        console.error("Ошибка CloudStorage:", e);
+        console.log("CloudStorage error:", e);
     }
 
-    // Если в CloudStorage пусто, берём из localStorage или дефолтные значения
-    if (!name || !weight) {
-        name = localStorage.getItem("profile_name") || tg.initDataUnsafe.user?.first_name || "Аноним";
-        weight = localStorage.getItem("profile_weight") || 70;
-    }
-
-    document.getElementById("input-name").value = name;
-    document.getElementById("input-weight").value = weight;
+    // Если данных нет - устанавливаем значения по умолчанию
+    const user = tg.initDataUnsafe.user;
+    document.getElementById("input-name").value = user?.first_name || "Аноним";
+    document.getElementById("input-weight").value = 70;
 }
 
 // Сохранение профиля
 document.getElementById("profile-form").addEventListener("submit", async (e) => {
     e.preventDefault();
     
-    const name = document.getElementById("input-name").value;
-    const weight = document.getElementById("input-weight").value;
+    const profileData = {
+        name: document.getElementById("input-name").value,
+        weight: document.getElementById("input-weight").value
+    };
     
     try {
-        // Пробуем сохранить в Telegram Cloud
-        await tg.CloudStorage.setItem("profile_name", name);
-        await tg.CloudStorage.setItem("profile_weight", weight);
-        tg.showAlert("✅ Профиль сохранён в облако!");
-    } catch (e) {
-        // Если ошибка, сохраняем в localStorage
-        localStorage.setItem("profile_name", name);
-        localStorage.setItem("profile_weight", weight);
-        tg.showAlert("✅ Профиль сохранён локально (без облака).");
+        // Сохраняем в облако
+        await tg.CloudStorage.setItem(PROFILE_KEY, profileData);
+        tg.showAlert("✅ Профиль сохранён!");
+        
+        // Дополнительно сохраняем в localStorage
+        localStorage.setItem(PROFILE_KEY, JSON.stringify(profileData));
+    } catch (error) {
+        tg.showAlert("⚠️ Ошибка сохранения: " + error.message);
     }
 });
 
-// Инициализация
-document.addEventListener("DOMContentLoaded", loadProfile);
+// Инициализация при загрузке
+document.addEventListener("DOMContentLoaded", () => {
+    // Проверяем доступность CloudStorage
+    if (!tg.CloudStorage) {
+        tg.showAlert("Внимание: облачное хранилище недоступно");
+    }
+    
+    loadProfile();
+});
+
+console.log("User ID:", userId);
+console.log("Telegram WebApp:", tg);
+console.log("CloudStorage available:", !!tg.CloudStorage);
