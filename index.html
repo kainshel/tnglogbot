@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TNG Log App</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="app.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏋️ TNG Log App</h1>
+            <p>Записывайте свои тренировки</p>
+        </header>
+        
+        <div class="exercise-form">
+            <input type="text" id="exercise-input" placeholder="Название упражнения">
+            <button id="add-btn">Добавить</button>
+        </div>
+        
+        <div class="exercise-list" id="exercise-list">
+            <!-- Сюда будут добавляться упражнения -->
+        </div>
+    </div>
+</body>
+</html>
