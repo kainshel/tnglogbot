@@ -1,55 +1,52 @@
-// Инициализация Telegram WebApp
 const tg = window.Telegram.WebApp;
-tg.expand(); // Раскрываем на весь экран
+tg.expand();
 
-// Элементы интерфейса
-const profileCard = document.getElementById('profile-data');
-const lastWorkoutCard = document.getElementById('workout-data');
+// Проверяем, доступно ли облачное хранилище
+if (!tg.CloudStorage) {
+    tg.showAlert("Облачное хранилище недоступно. Используем localStorage.");
+}
 
-// Загрузка данных профиля (заглушка)
-// Загрузка профиля из памяти Telegram
-function loadProfile() {
-    const userData = tg.initDataUnsafe.user || {};
-    const savedData = {
-        name: localStorage.getItem('profile_name') || userData.first_name || 'Аноним',
-        weight: localStorage.getItem('profile_weight') || 70
-    };
+// Загрузка профиля
+async function loadProfile() {
+    let name, weight;
 
-    document.getElementById('input-name').value = savedData.name;
-    document.getElementById('input-weight').value = savedData.weight;
+    // Пробуем получить данные из Telegram Cloud
+    try {
+        name = await tg.CloudStorage.getItem("profile_name");
+        weight = await tg.CloudStorage.getItem("profile_weight");
+    } catch (e) {
+        console.error("Ошибка CloudStorage:", e);
+    }
+
+    // Если в CloudStorage пусто, берём из localStorage или дефолтные значения
+    if (!name || !weight) {
+        name = localStorage.getItem("profile_name") || tg.initDataUnsafe.user?.first_name || "Аноним";
+        weight = localStorage.getItem("profile_weight") || 70;
+    }
+
+    document.getElementById("input-name").value = name;
+    document.getElementById("input-weight").value = weight;
 }
 
 // Сохранение профиля
-document.getElementById('profile-form').addEventListener('submit', (e) => {
+document.getElementById("profile-form").addEventListener("submit", async (e) => {
     e.preventDefault();
     
-    const name = document.getElementById('input-name').value;
-    const weight = document.getElementById('input-weight').value;
+    const name = document.getElementById("input-name").value;
+    const weight = document.getElementById("input-weight").value;
     
-    localStorage.setItem('profile_name', name);
-    localStorage.setItem('profile_weight', weight);
-    
-    tg.showAlert('✅ Профиль сохранен!');
+    try {
+        // Пробуем сохранить в Telegram Cloud
+        await tg.CloudStorage.setItem("profile_name", name);
+        await tg.CloudStorage.setItem("profile_weight", weight);
+        tg.showAlert("✅ Профиль сохранён в облако!");
+    } catch (e) {
+        // Если ошибка, сохраняем в localStorage
+        localStorage.setItem("profile_name", name);
+        localStorage.setItem("profile_weight", weight);
+        tg.showAlert("✅ Профиль сохранён локально (без облака).");
+    }
 });
 
-// Загрузка последней тренировки (заглушка)
-function loadLastWorkout() {
-    lastWorkoutCard.innerHTML = `
-        <p>Сегодня тренировки нет</p>
-    `;
-}
-
-// Инициализация при загрузке
-document.addEventListener('DOMContentLoaded', () => {
-    loadProfile();
-    loadLastWorkout();
-});
-
-// Обработчики кнопок
-document.getElementById('btn-new-workout').addEventListener('click', () => {
-    tg.showAlert('Форма новой тренировки будет здесь!');
-});
-
-document.getElementById('btn-exercises').addEventListener('click', () => {
-    tg.showAlert('База упражнений откроется здесь!');
-});
+// Инициализация
+document.addEventListener("DOMContentLoaded", loadProfile);
