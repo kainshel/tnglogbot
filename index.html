@@ -3,31 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TNG Log App</title>
+    <title>Дневник тренировок</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="app.js" defer></script>
 </head>
 <body>
     <div class="container">
+        <!-- Шапка с названием -->
         <header>
-            <h1>🏋️ TNG Log App</h1>
-            <p>Записывайте свои тренировки</p>
+            <h1>🏋️ Дневник тренировок</h1>
         </header>
-        
-        <div class="exercise-form">
-            <input type="text" id="exercise-input" placeholder="Название упражнения">
-            <button id="add-btn">Добавить</button>
+
+        <!-- Карточка профиля -->
+        <div class="card" id="profile-card">
+            <h2>👤 Профиль</h2>
+            <div id="profile-data">
+                <p>Загрузка...</p>
+            </div>
         </div>
-        
-        <div class="exercise-list" id="exercise-list">
-            <!-- Сюда будут добавляться упражнения -->
+
+        <!-- Карточка последней тренировки -->
+        <div class="card" id="last-workout">
+            <h2>📅 Сегодня</h2>
+            <div id="workout-data">
+                <p>Нет данных о тренировке</p>
+            </div>
+        </div>
+
+        <!-- Кнопки действий -->
+        <div class="buttons">
+            <button id="btn-new-workout">➕ Новая тренировка</button>
+            <button id="btn-exercises">📚 База упражнений</button>
         </div>
     </div>
-	<div class="input-group">
-    <input type="text" id="exercise-input" placeholder="Упражнение">
-    <input type="number" id="sets-input" placeholder="Подходы">
-    <button id="save-btn">💾 Сохранить</button>
-</div>
 </body>
 </html>

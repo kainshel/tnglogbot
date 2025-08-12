@@ -1,47 +1,47 @@
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Segoe UI', sans-serif;
+    background: #f5f5f5;
     margin: 0;
-    padding: 0;
-    background-color: #f5f5f5;
+    padding: 10px;
     color: #333;
 }
 
 .container {
     max-width: 600px;
     margin: 0 auto;
-    padding: 20px;
 }
 
-header {
-    text-align: center;
-    margin-bottom: 20px;
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.exercise-form {
+.card h2 {
+    margin-top: 0;
+    font-size: 1.2em;
+    color: #0088cc;
+}
+
+.buttons {
     display: flex;
     gap: 10px;
-    margin-bottom: 20px;
-}
-
-#exercise-input {
-    flex-grow: 1;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    margin-top: 20px;
 }
 
 button {
-    padding: 10px 15px;
-    background-color: #0088cc;
+    background: #0088cc;
     color: white;
     border: none;
-    border-radius: 4px;
+    padding: 12px;
+    border-radius: 8px;
+    flex: 1;
+    font-size: 16px;
     cursor: pointer;
 }
 
-.exercise-list {
-    background-color: white;
-    border-radius: 8px;
-    padding: 15px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+button:hover {
+    background: #006699;
 }

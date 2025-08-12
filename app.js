@@ -2,44 +2,36 @@
 const tg = window.Telegram.WebApp;
 tg.expand(); // Раскрываем на весь экран
 
-// Элементы DOM
-const exerciseInput = document.getElementById('exercise-input');
-const addBtn = document.getElementById('add-btn');
-const exerciseList = document.getElementById('exercise-list');
+// Элементы интерфейса
+const profileCard = document.getElementById('profile-data');
+const lastWorkoutCard = document.getElementById('workout-data');
 
-// Добавление упражнения
-addBtn.addEventListener('click', () => {
-    const exerciseName = exerciseInput.value.trim();
-    if (exerciseName) {
-        const exerciseItem = document.createElement('div');
-        exerciseItem.className = 'exercise-item';
-        exerciseItem.textContent = exerciseName;
-        exerciseList.appendChild(exerciseItem);
-        exerciseInput.value = '';
-    }
+// Загрузка данных профиля (заглушка)
+function loadProfile() {
+    profileCard.innerHTML = `
+        <p><strong>Имя:</strong> Пользователь</p>
+        <p><strong>Вес:</strong> 70 кг</p>
+    `;
+}
+
+// Загрузка последней тренировки (заглушка)
+function loadLastWorkout() {
+    lastWorkoutCard.innerHTML = `
+        <p>Сегодня тренировки нет</p>
+    `;
+}
+
+// Инициализация при загрузке
+document.addEventListener('DOMContentLoaded', () => {
+    loadProfile();
+    loadLastWorkout();
 });
 
-// Кнопка закрытия (для демонстрации)
-const closeBtn = document.createElement('button');
-closeBtn.textContent = 'Закрыть приложение';
-closeBtn.addEventListener('click', () => tg.close());
-document.body.appendChild(closeBtn);
+// Обработчики кнопок
+document.getElementById('btn-new-workout').addEventListener('click', () => {
+    tg.showAlert('Форма новой тренировки будет здесь!');
+});
 
-// После инициализации Telegram.WebApp
-const tg = window.Telegram.WebApp;
-tg.expand();
-
-// Кнопка "Сохранить тренировку"
-document.getElementById('save-btn').addEventListener('click', () => {
-    const exercise = document.getElementById('exercise-input').value;
-    const sets = document.getElementById('sets-input').value;
-    
-    // Отправляем данные в бота
-    tg.sendData(JSON.stringify({
-        action: "save_workout",
-        exercise: exercise,
-        sets: sets
-    }));
-    
-    tg.close(); // Закрываем Mini App
+document.getElementById('btn-exercises').addEventListener('click', () => {
+    tg.showAlert('База упражнений откроется здесь!');
 });
