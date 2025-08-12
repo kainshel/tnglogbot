@@ -24,3 +24,22 @@ const closeBtn = document.createElement('button');
 closeBtn.textContent = 'Закрыть приложение';
 closeBtn.addEventListener('click', () => tg.close());
 document.body.appendChild(closeBtn);
+
+// После инициализации Telegram.WebApp
+const tg = window.Telegram.WebApp;
+tg.expand();
+
+// Кнопка "Сохранить тренировку"
+document.getElementById('save-btn').addEventListener('click', () => {
+    const exercise = document.getElementById('exercise-input').value;
+    const sets = document.getElementById('sets-input').value;
+    
+    // Отправляем данные в бота
+    tg.sendData(JSON.stringify({
+        action: "save_workout",
+        exercise: exercise,
+        sets: sets
+    }));
+    
+    tg.close(); // Закрываем Mini App
+});
