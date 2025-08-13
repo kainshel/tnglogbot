@@ -11,12 +11,21 @@
   <div class="shell">
     <aside class="sidebar">
       <div class="brand">
-        <div class="logo">ДТ</div>
+        <div class="logo">ДТ
+        </div>
+    </div>
+    
         <div class="brand-text">
           <strong>Дневник тренировки</strong>
           <small>Дневник тренировки</small>
+        
         </div>
-      </div>
+    </div>
+    
+      
+        </div>
+    </div>
+    
       <nav class="nav">
         <button class="nav-btn active" data-view="workout">Тренировка</button>
         <button class="nav-btn" data-view="exercises">Упражнения</button>
@@ -27,71 +36,114 @@
       </nav>
       <div class="sidebar-foot">
         <small>Бот: <span id="bot-username"></span></small>
-      </div>
+      
+        </div>
+    </div>
+    
     </aside>
 
     <main class="main">
       <header class="topbar"><button class="burger" id="toggle-sidebar" aria-label="Меню">☰</button>
         <div class="search-wrap">
           <input id="search" placeholder="Поиск упражнений..." />
+        
         </div>
-        <div class="top-actions">
-          <button id="import-data" title="Импорт">Импорт</button>
-          <button id="export-data" title="Экспорт">Экспорт</button>
+    </div>
+    
+        
+    <div class="top-actions">
+        <div class="vertical-buttons">
+    
+          
+          
+        
         </div>
+    </div>
+    
       </header>
 
       <section class="view view--workout" data-view="workout">
         <div class="panel">
           <div class="panel-head">
             <h2>Создать тренировку</h2>
-            <div class="muted">Добавляйте упражнения, указывайте подходы, вес и повторы</div>
-          </div>
+            <div class="muted">Добавляйте упражнения, указывайте подходы, вес и повторы
+        </div>
+    </div>
+    
+          
+        </div>
+    </div>
+    
           <div class="panel-body">
             <div class="row inputs">
               <label>Дата <input type="date" id="workout-date" /></label>
               <label>День недели
-                <select id="workout-weekday">
-                  <option value="1">Понедельник</option>
-                  <option value="2">Вторник</option>
-                  <option value="3">Среда</option>
-                  <option value="4">Четверг</option>
-                  <option value="5">Пятница</option>
-                  <option value="6">Суббота</option>
-                  <option value="0">Воскресенье</option>
-                </select>
+                
               </label>
               <div class="select-add">
                 <select id="select-exercise"></select>
                 <button id="btn-add-ex-to-workout">Добавить</button>
-              </div>
-            </div>
+              
+        </div>
+    </div>
+    
+            
+        </div>
+    </div>
+    
 
-            <div id="workout-exercises" class="grid"></div>
+            <div id="workout-exercises" class="grid">
+        </div>
+    </div>
+    
 
             <div class="panel-foot">
               <button id="save-workout" class="primary">Сохранить тренировку</button>
               <button id="clear-editor">Очистить</button>
-            </div>
-          </div>
+            
         </div>
+    </div>
+    
+          
+        </div>
+    </div>
+    
+        
+        </div>
+    </div>
+    
       </section>
 
       <section class="view view--exercises hidden" data-view="exercises">
         <div class="panel">
           <div class="panel-head">
             <h2>База упражнений</h2>
-            <div class="muted">Добавьте GIF/картинку, чтобы визуально распознавать упражнение</div>
-          </div>
+            <div class="muted">Добавьте GIF/картинку, чтобы визуально распознавать упражнение
+        </div>
+    </div>
+    
+          
+        </div>
+    </div>
+    
           <div class="panel-body">
             <form id="exercise-form" class="form-inline">
               <input id="exercise-name" placeholder="Название упражнения" required />
               <input id="exercise-gif" type="file" accept="image/gif,video/mp4,image/*" />
               <button class="primary" type="submit">Добавить</button>
             </form>
-            <div id="exercise-list" class="grid"></div>
-          </div>
+            <div id="exercise-list" class="grid">
         </div>
+    </div>
+    
+          
+        </div>
+    </div>
+    
+        
+        </div>
+    </div>
+    
       </section>
 
       
@@ -99,28 +151,64 @@
         <div class="panel">
           <div class="panel-head">
             <h2>Календарь тренировок</h2>
-            <div class="muted">Планируйте и просматривайте тренировки по датам</div>
-          </div>
+            <div class="muted">Планируйте и просматривайте тренировки по датам
+        </div>
+    </div>
+    
+          
+        </div>
+    </div>
+    
           <div class="panel-body">
             <div class="calendar-head">
               <button id="cal-prev" class="ghost" aria-label="Предыдущий месяц">‹</button>
-              <div id="cal-title"></div>
-              <button id="cal-next" class="ghost" aria-label="Следующий месяц">›</button>
-            </div>
-            <div id="calendar-grid" class="calendar-grid"></div>
-            <div id="calendar-detail" class="calendar-detail"></div>
-          </div>
+              <div id="cal-title">
         </div>
+    </div>
+    
+              <button id="cal-next" class="ghost" aria-label="Следующий месяц">›</button>
+            
+        </div>
+    </div>
+    
+            <div id="calendar-grid" class="calendar-grid">
+        </div>
+    </div>
+    
+            <div id="calendar-detail" class="calendar-detail">
+        </div>
+    </div>
+    
+          
+        </div>
+    </div>
+    
+        
+        </div>
+    </div>
+    
       </section>
 
       <section class="view view--history hidden" data-view="history">
         <div class="panel">
           <div class="panel-head">
             <h2>История тренировок</h2>
-            <div class="muted">Все сохранённые тренировки</div>
-          </div>
-          <div class="panel-body" id="history-list"></div>
+            <div class="muted">Все сохранённые тренировки
         </div>
+    </div>
+    
+          
+        </div>
+    </div>
+    
+          <div class="panel-body" id="history-list">
+        </div>
+    </div>
+    
+        
+        </div>
+    </div>
+    
       </section>
 
       
@@ -128,33 +216,66 @@
         <div class="panel">
           <div class="panel-head">
             <h2>Статистика</h2>
-            <div class="muted">Объём и частота упражнений</div>
-          </div>
+            <div class="muted">Объём и частота упражнений
+        </div>
+    </div>
+    
+          
+        </div>
+    </div>
+    
           <div class="panel-body">
             <canvas id="stats-volume" width="900" height="280"></canvas>
-            <div class="small muted" style="margin-top:6px">Объём = вес × повторения, агрегировано по дням</div>
-            <h3 style="margin-top:20px;">Топ упражнений</h3>
-            <div id="stats-top-exercises" class="grid"></div>
-          </div>
+            <div class="small muted" style="margin-top:6px">Объём = вес × повторения, агрегировано по дням
         </div>
+    </div>
+    
+            <h3 style="margin-top:20px;">Топ упражнений</h3>
+            <div id="stats-top-exercises" class="grid">
+        </div>
+    </div>
+    
+          
+        </div>
+    </div>
+    
+        
+        </div>
+    </div>
+    
       </section>
 
       <section class="view view--profile hidden" data-view="profile">
         <div class="panel narrow">
-          <div class="panel-head"><h2>Профиль</h2></div>
+          <div class="panel-head"><h2>Профиль</h2>
+        </div>
+    </div>
+    
           <div class="panel-body">
-            <div id="profile-view"></div>
+            <div id="profile-view">
+        </div>
+    </div>
+    
             <form id="profile-form">
               <input type="text" id="profile-name" placeholder="Имя" required />
               <input type="number" id="profile-weight" placeholder="Вес (кг)" required />
               <button class="primary" type="submit">Сохранить профиль</button>
             </form>
-          </div>
+          
         </div>
+    </div>
+    
+        
+        </div>
+    </div>
+    
       </section>
 
     </main>
-  </div>
+  
+        </div>
+    </div>
+    
 
   <input type="file" id="import-file" style="display:none" accept="application/json" />
 
