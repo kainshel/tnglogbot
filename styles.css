@@ -70,3 +70,77 @@ button.primary{background:linear-gradient(90deg,var(--accent2),var(--accent));co
   .nav{flex-direction:row;gap:6px;overflow:auto}
   .main{order:2}
 }
+
+/* Мобильная адаптивность и улучшение UI */
+body {
+    font-family: Arial, sans-serif;
+}
+
+.shell {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.sidebar {
+    width: 240px;
+    background: #333;
+    color: #fff;
+    padding: 20px;
+}
+
+.sidebar .brand {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.sidebar .logo {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.nav-btn {
+    width: 100%;
+    padding: 10px;
+    background: #444;
+    color: #fff;
+    border: none;
+    margin: 10px 0;
+    cursor: pointer;
+}
+
+.nav-btn.active {
+    background: #007bff;
+}
+
+.sidebar-foot {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        position: fixed;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 10;
+        display: none;
+    }
+    .sidebar.open {
+        display: block;
+    }
+    .shell {
+        flex-direction: column;
+    }
+}
+
+#workout, #exercises, #history, #profile {
+    display: none;
+}
+
+#workout.active, #exercises.active, #history.active, #profile.active {
+    display: block;
+}
