@@ -21,6 +21,8 @@
         <button class="nav-btn active" data-view="workout">Тренировка</button>
         <button class="nav-btn" data-view="exercises">Упражнения</button>
         <button class="nav-btn" data-view="history">История</button>
+        <button class="nav-btn" data-view="calendar">Календарь</button>
+        <button class="nav-btn" data-view="stats">Статистика</button>
         <button class="nav-btn" data-view="profile">Профиль</button>
       </nav>
       <div class="sidebar-foot">
@@ -29,7 +31,7 @@
     </aside>
 
     <main class="main">
-      <header class="topbar">
+      <header class="topbar"><button class="burger" id="toggle-sidebar" aria-label="Меню">☰</button>
         <div class="search-wrap">
           <input id="search" placeholder="Поиск упражнений..." />
         </div>
@@ -92,6 +94,25 @@
         </div>
       </section>
 
+      
+      <section class="view view--calendar hidden" data-view="calendar">
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Календарь тренировок</h2>
+            <div class="muted">Планируйте и просматривайте тренировки по датам</div>
+          </div>
+          <div class="panel-body">
+            <div class="calendar-head">
+              <button id="cal-prev" class="ghost" aria-label="Предыдущий месяц">‹</button>
+              <div id="cal-title"></div>
+              <button id="cal-next" class="ghost" aria-label="Следующий месяц">›</button>
+            </div>
+            <div id="calendar-grid" class="calendar-grid"></div>
+            <div id="calendar-detail" class="calendar-detail"></div>
+          </div>
+        </div>
+      </section>
+
       <section class="view view--history hidden" data-view="history">
         <div class="panel">
           <div class="panel-head">
@@ -99,6 +120,22 @@
             <div class="muted">Все сохранённые тренировки</div>
           </div>
           <div class="panel-body" id="history-list"></div>
+        </div>
+      </section>
+
+      
+      <section class="view view--stats hidden" data-view="stats">
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Статистика</h2>
+            <div class="muted">Объём и частота упражнений</div>
+          </div>
+          <div class="panel-body">
+            <canvas id="stats-volume" width="900" height="280"></canvas>
+            <div class="small muted" style="margin-top:6px">Объём = вес × повторения, агрегировано по дням</div>
+            <h3 style="margin-top:20px;">Топ упражнений</h3>
+            <div id="stats-top-exercises" class="grid"></div>
+          </div>
         </div>
       </section>
 

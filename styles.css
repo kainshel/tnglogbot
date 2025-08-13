@@ -71,76 +71,30 @@ button.primary{background:linear-gradient(90deg,var(--accent2),var(--accent));co
   .main{order:2}
 }
 
-/* Мобильная адаптивность и улучшение UI */
-body {
-    font-family: Arial, sans-serif;
-}
 
-.shell {
-    display: flex;
-    flex-wrap: wrap;
+/* --- Mobile / responsive improvements --- */
+.topbar { display:flex; align-items:center; gap:10px; position:sticky; top:0; z-index:5; background:transparent; }
+.topbar .burger { display:none; border:0; background:var(--glass); padding:10px 12px; border-radius:10px; font-size:18px; color:#fff; }
+@media (max-width: 900px){
+  .shell{ flex-direction:column; padding:12px; }
+  .sidebar{ position:fixed; left:0; top:0; bottom:0; width:86vw; max-width:320px; transform:translateX(-120%); transition:.28s ease; z-index:20; }
+  .sidebar.open{ transform:translateX(0); }
+  .topbar .burger{ display:inline-flex; }
+  .main{ padding-top:8px; }
 }
+input, select, button{ font-size:16px; } /* Prevent iOS zoom on focus */
 
-.sidebar {
-    width: 240px;
-    background: #333;
-    color: #fff;
-    padding: 20px;
-}
+/* --- Calendar --- */
+.calendar-head{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px; }
+#cal-title{ font-weight:600; }
+.calendar-grid{ display:grid; grid-template-columns: repeat(7, 1fr); gap:8px; }
+.calendar-grid .day{ background:var(--card); border-radius:12px; padding:10px; min-height:84px; display:flex; flex-direction:column; gap:6px; }
+.calendar-grid .day .dnum{ font-weight:700; font-size:14px; opacity:.9; }
+.calendar-grid .day .badge{ font-size:11px; padding:4px 6px; border-radius:8px; background:var(--glass); display:inline-block; }
+.calendar-grid .day.today{ outline:1px solid rgba(255,255,255,.09); box-shadow: inset 0 0 0 1px rgba(255,255,255,.04); }
+.calendar-grid .day.has-workout{ background: linear-gradient(180deg, rgba(124,92,255,.16), rgba(15,23,36,.7)); }
+.calendar-detail{ margin-top:12px; }
+.calendar-detail .card{ margin-top:8px; }
 
-.sidebar .brand {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.sidebar .logo {
-    font-size: 30px;
-    font-weight: bold;
-}
-
-.nav-btn {
-    width: 100%;
-    padding: 10px;
-    background: #444;
-    color: #fff;
-    border: none;
-    margin: 10px 0;
-    cursor: pointer;
-}
-
-.nav-btn.active {
-    background: #007bff;
-}
-
-.sidebar-foot {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-}
-
-@media (max-width: 768px) {
-    .sidebar {
-        width: 100%;
-        position: fixed;
-        height: 100%;
-        top: 0;
-        left: 0;
-        z-index: 10;
-        display: none;
-    }
-    .sidebar.open {
-        display: block;
-    }
-    .shell {
-        flex-direction: column;
-    }
-}
-
-#workout, #exercises, #history, #profile {
-    display: none;
-}
-
-#workout.active, #exercises.active, #history.active, #profile.active {
-    display: block;
-}
+/* --- Stats --- */
+#stats-volume{ width:100%; height:auto; background:var(--glass); border-radius:14px; }
