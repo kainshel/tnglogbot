@@ -1,127 +1,60 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Дневник тренировки — GymKeeper style</title>
-  <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GymKeeper - Веб-версия</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
 </head>
 <body>
-  <div class="shell">
-    <aside class="sidebar">
-      <div class="brand">
-        <div class="logo">GK</div>
-        <div class="brand-text">
-          <strong>GymKeeper</strong>
-          <small>Дневник тренировки</small>
-        </div>
-      </div>
-      <nav class="nav">
-        <button class="nav-btn active" data-view="workout">Тренировка</button>
-        <button class="nav-btn" data-view="exercises">Упражнения</button>
-        <button class="nav-btn" data-view="history">История</button>
-        <button class="nav-btn" data-view="profile">Профиль</button>
-      </nav>
-      <div class="sidebar-foot">
-        <small>Бот: <span id="bot-username"></span></small>
-      </div>
-    </aside>
-
-    <main class="main">
-      <header class="topbar">
-        <div class="search-wrap">
-          <input id="search" placeholder="Поиск упражнений..." />
-        </div>
-        <div class="top-actions">
-          <button id="import-data" title="Импорт">Импорт</button>
-          <button id="export-data" title="Экспорт">Экспорт</button>
-        </div>
-      </header>
-
-      <section class="view view--workout" data-view="workout">
-        <div class="panel">
-          <div class="panel-head">
-            <h2>Создать тренировку</h2>
-            <div class="muted">Добавляйте упражнения, указывайте подходы, вес и повторы</div>
-          </div>
-          <div class="panel-body">
-            <div class="row inputs">
-              <label>Дата <input type="date" id="workout-date" /></label>
-              <label>День недели
-                <select id="workout-weekday">
-                  <option value="1">Понедельник</option>
-                  <option value="2">Вторник</option>
-                  <option value="3">Среда</option>
-                  <option value="4">Четверг</option>
-                  <option value="5">Пятница</option>
-                  <option value="6">Суббота</option>
-                  <option value="0">Воскресенье</option>
-                </select>
-              </label>
-              <div class="select-add">
-                <select id="select-exercise"></select>
-                <button id="btn-add-ex-to-workout">Добавить</button>
-              </div>
+    <div class="container-fluid">
+        <header class="row">
+            <div class="col-12 text-center py-3">
+                <h1>GymKeeper</h1>
+                <p>Ваш персональный тренер</p>
             </div>
-
-            <div id="workout-exercises" class="grid"></div>
-
-            <div class="panel-foot">
-              <button id="save-workout" class="primary">Сохранить тренировку</button>
-              <button id="clear-editor">Очистить</button>
+        </header>
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="showSection('workouts')">План тренировок</button>
+                    <button class="btn btn-secondary" onclick="showSection('history')">Мои тренировки</button>
+                    <button class="btn btn-success" onclick="showSection('goals')">Цели</button>
+                    <button class="btn btn-info" onclick="showSection('statistics')">Статистика</button>
+                    <button class="btn btn-warning" onclick="showSection('settings')">Настройки</button>
+                </div>
             </div>
-          </div>
         </div>
-      </section>
-
-      <section class="view view--exercises hidden" data-view="exercises">
-        <div class="panel">
-          <div class="panel-head">
-            <h2>База упражнений</h2>
-            <div class="muted">Добавьте GIF/картинку, чтобы визуально распознавать упражнение</div>
-          </div>
-          <div class="panel-body">
-            <form id="exercise-form" class="form-inline">
-              <input id="exercise-name" placeholder="Название упражнения" required />
-              <input id="exercise-gif" type="file" accept="image/gif,video/mp4,image/*" />
-              <button class="primary" type="submit">Добавить</button>
-            </form>
-            <div id="exercise-list" class="grid"></div>
-          </div>
+        <div id="workouts" class="content-section">
+            <h2>Выберите тренировку</h2>
+            <button class="btn btn-outline-primary" onclick="startWorkout('fullbody')">Тренировка для всего тела</button>
+            <button class="btn btn-outline-primary" onclick="startWorkout('legs')">Тренировка для ног</button>
+            <button class="btn btn-outline-primary" onclick="startWorkout('arms')">Тренировка для рук</button>
         </div>
-      </section>
-
-      <section class="view view--history hidden" data-view="history">
-        <div class="panel">
-          <div class="panel-head">
-            <h2>История тренировок</h2>
-            <div class="muted">Все сохранённые тренировки</div>
-          </div>
-          <div class="panel-body" id="history-list"></div>
+        <div id="history" class="content-section" style="display:none;">
+            <h2>Мои тренировки</h2>
+            <p>История всех выполненных тренировок</p>
+            <!-- Здесь можно динамически отображать данные -->
         </div>
-      </section>
-
-      <section class="view view--profile hidden" data-view="profile">
-        <div class="panel narrow">
-          <div class="panel-head"><h2>Профиль</h2></div>
-          <div class="panel-body">
-            <div id="profile-view"></div>
-            <form id="profile-form">
-              <input type="text" id="profile-name" placeholder="Имя" required />
-              <input type="number" id="profile-weight" placeholder="Вес (кг)" required />
-              <button class="primary" type="submit">Сохранить профиль</button>
-            </form>
-          </div>
+        <div id="goals" class="content-section" style="display:none;">
+            <h2>Цели</h2>
+            <p>Установите свои тренировочные цели</p>
+            <!-- Можно добавить формы для ввода целей -->
         </div>
-      </section>
-
-    </main>
-  </div>
-
-  <input type="file" id="import-file" style="display:none" accept="application/json" />
-
-  <script src="config.js"></script>
-  <script src="app.js"></script>
+        <div id="statistics" class="content-section" style="display:none;">
+            <h2>Статистика</h2>
+            <p>Графики и статистика вашего прогресса</p>
+            <canvas id="progressChart"></canvas>
+        </div>
+        <div id="settings" class="content-section" style="display:none;">
+            <h2>Настройки</h2>
+            <p>Настройте свой профиль и предпочтения</p>
+            <!-- Форма для настроек -->
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
