@@ -5,7 +5,7 @@ window.BOT_CONFIG = {
 
 // Public (non-secret) app settings
 window.CONFIG = {
-  apiUrl: 'https://kainshel.github.io/tnglogbot/', // исправлено: в кавычках
+  apiUrl: './', // исправлено: в кавычках
   workout: {
     maxExercises: 10,
     maxSetsPerExercise: 5,
