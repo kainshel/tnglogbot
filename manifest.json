@@ -1,6 +1,6 @@
 {
-  "name": "GymKeeper",
-  "short_name": "GymKeeper",
+  "name": "Дневник Тренировок",
+  "short_name": "Дневник Тренировок",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#F7FAF6",
