@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
-  <title>Тренировка · GymKeeper</title>
+  <title>Тренировка · Дневник Тренировок</title>
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#8FAF8F">
   <link rel="icon" href="icon.png">
@@ -12,7 +12,7 @@
 <body>
   <div class="app">
     <aside class="sidebar">
-      <div class="brand">GK<span>·</span>GymKeeper</div>
+      <div class="brand">DT<span>·</span>Дневник Тренировок</div>
       <button id="burger" class="nav-toggle">☰</button>
       <nav class="nav" id="nav">
         <a class="" href="index.html">Профиль</a>
@@ -21,21 +21,12 @@
         <a class="" href="calendar.html">Календарь</a>
         <a class="" href="stats.html">Статистика</a>
       </nav>
-      <div class="version">
-        <button id="exportBtn" class="btn ghost">Экспорт</button>
-        <label class="file-btn">Импорт
-          <input id="importInput" type="file" accept="application/json" hidden>
-        </label>
-      </div>
     </aside>
     <main class="content">
-      <!-- CONTENT -->
       
 <header class="section-head">
   <h1>Новая тренировка</h1>
-  <div class="row wrap">
-    <input type="date" id="workoutDate">
-  </div>
+  <div class="row wrap"><input type="date" id="workoutDate"></div>
 </header>
 <div class="grid two">
   <div class="card">
@@ -47,7 +38,6 @@
     </div>
     <div id="results" class="pick-list"></div>
   </div>
-
   <div class="card">
     <h2>Состав тренировки</h2>
     <div id="plan"></div>
@@ -57,7 +47,6 @@
     </div>
   </div>
 </div>
-
 <template id="pickItemTpl">
   <button class="pick-item">
     <img class="thumb" alt="">
@@ -96,5 +85,6 @@
   <script type="module" src="storage.js"></script>
   <script>document.getElementById('burger').onclick=()=>document.getElementById('nav').classList.toggle('show');</script>
   <script type="module" src="app_workout.js"></script>
+  <div class="modal-back" id="modalBack"><div class="modal" id="modal"></div></div>
 </body>
 </html>
