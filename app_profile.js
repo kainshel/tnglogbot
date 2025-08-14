@@ -1,10 +1,24 @@
 import {DB, toast} from './storage.js';
-const qs=(id)=>document.getElementById(id);
-const fields=['name','age','gender','height','weight','level','goal','bodyfat','neck','chest','waist','hips','notes'];
-const p=DB.profile; fields.forEach(f=>{ const el=qs(f); if(el) el.value=p[f]??''; });
-const avatarPreview=qs('avatarPreview'); avatarPreview.src=p.avatar||'icon.png';
-function save(){ const obj={}; fields.forEach(f=>obj[f]=qs(f).value); obj.avatar=avatarPreview.src; DB.profile=obj; toast('Профиль сохранён'); }
-qs('saveProfile').onclick=save;
-['change','input'].forEach(ev=>fields.forEach(f=>qs(f).addEventListener(ev,()=>{ DB.profile={...DB.profile,[f]:qs(f).value}; })));
-qs('avatarInput').addEventListener('change',(e)=>{ const file=e.target.files[0]; if(!file) return; const r=new FileReader(); r.onload=()=>{ avatarPreview.src=r.result; DB.profile={...DB.profile,avatar:r.result}; toast('Фото обновлено'); }; r.readAsDataURL(file); });
-qs('clearAvatar').onclick=()=>{ avatarPreview.src='icon.png'; DB.profile={...DB.profile,avatar:''}; };
+
+const p = DB.profile;
+const nameEl = document.getElementById('name');
+const ageEl = document.getElementById('age');
+const genderEl = document.getElementById('gender');
+const heightEl = document.getElementById('height');
+const weightEl = document.getElementById('weight');
+const avatarPreview = document.getElementById('avatarPreview');
+
+nameEl.value = p.name||''; ageEl.value=p.age||''; genderEl.value=p.gender||''; heightEl.value=p.height||''; weightEl.value=p.weight||'';
+avatarPreview.src = p.avatar || 'icon.png';
+
+document.getElementById('saveProfile').onclick = ()=>{
+  DB.profile = {name:nameEl.value.trim(), age:ageEl.value, gender:genderEl.value, height:heightEl.value, weight:weightEl.value, avatar:avatarPreview.src};
+  toast('Профиль сохранён');
+};
+document.getElementById('avatarInput').addEventListener('change', async (e)=>{
+  const file = e.target.files[0]; if(!file) return;
+  const reader = new FileReader();
+  reader.onload = ()=>{ avatarPreview.src = reader.result; };
+  reader.readAsDataURL(file);
+});
+document.getElementById('clearAvatar').onclick = ()=>{ avatarPreview.src='icon.png'; };

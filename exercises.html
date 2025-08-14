@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
-  <title>Упражнения · Дневник Тренировок</title>
+  <title>Упражнения · GymKeeper</title>
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#8FAF8F">
   <link rel="icon" href="icon.png">
@@ -12,7 +12,7 @@
 <body>
   <div class="app">
     <aside class="sidebar">
-      <div class="brand">DT<span>·</span>Дневник Тренировок</div>
+      <div class="brand">GK<span>·</span>GymKeeper</div>
       <button id="burger" class="nav-toggle">☰</button>
       <nav class="nav" id="nav">
         <a class="" href="index.html">Профиль</a>
@@ -21,8 +21,15 @@
         <a class="" href="calendar.html">Календарь</a>
         <a class="" href="stats.html">Статистика</a>
       </nav>
+      <div class="version">
+        <button id="exportBtn" class="btn ghost">Экспорт</button>
+        <label class="file-btn">Импорт
+          <input id="importInput" type="file" accept="application/json" hidden>
+        </label>
+      </div>
     </aside>
     <main class="content">
+      <!-- CONTENT -->
       
 <header class="section-head">
   <h1>Упражнения</h1>
@@ -39,6 +46,7 @@
     <tbody id="exercisesBody"></tbody>
   </table>
 </div>
+
 <template id="exerciseRowTpl">
 <tr>
   <td><img class="thumb" alt=""></td>
@@ -46,11 +54,7 @@
   <td class="group"></td>
   <td class="subgroup"></td>
   <td class="gif"></td>
-  <td class="td-actions">
-    <button class="icon-btn view" title="Просмотр">🔍</button>
-    <button class="icon-btn edit" title="Редактировать">✎</button>
-    <button class="icon-btn del" title="Удалить">🗑</button>
-  </td>
+  <td class="td-actions"><button class="icon-btn edit">✎</button> <button class="icon-btn del">🗑</button></td>
 </tr>
 </template>
 
@@ -60,6 +64,5 @@
   <script type="module" src="storage.js"></script>
   <script>document.getElementById('burger').onclick=()=>document.getElementById('nav').classList.toggle('show');</script>
   <script type="module" src="app_exercises.js"></script>
-  <div class="modal-back" id="modalBack"><div class="modal" id="modal"></div></div>
 </body>
 </html>
