@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
-  <title>Статистика · GymKeeper</title>
+  <title>Статистика · Дневник Тренировок</title>
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#8FAF8F">
   <link rel="icon" href="icon.png">
@@ -12,7 +12,7 @@
 <body>
   <div class="app">
     <aside class="sidebar">
-      <div class="brand">GK<span>·</span>GymKeeper</div>
+      <div class="brand">DT<span>·</span>Дневник Тренировок</div>
       <button id="burger" class="nav-toggle">☰</button>
       <nav class="nav" id="nav">
         <a class="" href="index.html">Профиль</a>
@@ -21,15 +21,8 @@
         <a class="" href="calendar.html">Календарь</a>
         <a class="active" href="stats.html">Статистика</a>
       </nav>
-      <div class="version">
-        <button id="exportBtn" class="btn ghost">Экспорт</button>
-        <label class="file-btn">Импорт
-          <input id="importInput" type="file" accept="application/json" hidden>
-        </label>
-      </div>
     </aside>
     <main class="content">
-      <!-- CONTENT -->
       
 <header class="section-head"><h1>Статистика</h1></header>
 <div class="card table-wrap">
@@ -46,5 +39,6 @@
   <script type="module" src="storage.js"></script>
   <script>document.getElementById('burger').onclick=()=>document.getElementById('nav').classList.toggle('show');</script>
   <script type="module" src="app_stats.js"></script>
+  <div class="modal-back" id="modalBack"><div class="modal" id="modal"></div></div>
 </body>
 </html>

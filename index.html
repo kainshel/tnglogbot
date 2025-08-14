@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
-  <title>Профиль · GymKeeper</title>
+  <title>Профиль · Дневник Тренировок</title>
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#8FAF8F">
   <link rel="icon" href="icon.png">
@@ -12,7 +12,7 @@
 <body>
   <div class="app">
     <aside class="sidebar">
-      <div class="brand">GK<span>·</span>GymKeeper</div>
+      <div class="brand">DT<span>·</span>Дневник Тренировок</div>
       <button id="burger" class="nav-toggle">☰</button>
       <nav class="nav" id="nav">
         <a class="active" href="index.html">Профиль</a>
@@ -21,22 +21,15 @@
         <a class="" href="calendar.html">Календарь</a>
         <a class="" href="stats.html">Статистика</a>
       </nav>
-      <div class="version">
-        <button id="exportBtn" class="btn ghost">Экспорт</button>
-        <label class="file-btn">Импорт
-          <input id="importInput" type="file" accept="application/json" hidden>
-        </label>
-      </div>
     </aside>
     <main class="content">
-      <!-- CONTENT -->
       
 <header class="section-head"><h1>Профиль</h1></header>
 <div class="card">
   <div class="row wrap">
     <img id="avatarPreview" class="thumb" alt="аватар" style="width:72px;height:72px;border-radius:50%">
     <div style="display:flex;flex-direction:column;gap:8px">
-      <label class="file-btn">Выбрать фото<input type="file" id="avatarInput" accept="image/*" hidden></label>
+      <label class="file-btn btn ghost">Выбрать фото<input type="file" id="avatarInput" accept="image/*" hidden></label>
       <button id="clearAvatar" class="btn ghost">Убрать фото</button>
     </div>
   </div>
@@ -46,6 +39,14 @@
     <select id="gender"><option value="">Пол</option><option>Муж</option><option>Жен</option></select>
     <input id="height" type="number" min="0" placeholder="Рост (см)">
     <input id="weight" type="number" min="0" step="0.1" placeholder="Вес (кг)">
+    <select id="level"><option value="">Уровень</option><option>Новичок</option><option>Средний</option><option>Продвинутый</option></select>
+    <select id="goal"><option value="">Цель</option><option>Набор мышц</option><option>Снижение веса</option><option>Поддержание</option><option>Сила</option></select>
+    <input id="bodyfat" type="number" min="0" max="100" step="0.1" placeholder="Жир (%)">
+    <input id="neck" type="number" min="0" step="0.1" placeholder="Шея (см)">
+    <input id="chest" type="number" min="0" step="0.1" placeholder="Грудь (см)">
+    <input id="waist" type="number" min="0" step="0.1" placeholder="Талия (см)">
+    <input id="hips" type="number" min="0" step="0.1" placeholder="Бёдра (см)">
+    <textarea id="notes" placeholder="Заметки"></textarea>
     <button id="saveProfile" class="btn">Сохранить</button>
   </div>
 </div>
@@ -56,5 +57,6 @@
   <script type="module" src="storage.js"></script>
   <script>document.getElementById('burger').onclick=()=>document.getElementById('nav').classList.toggle('show');</script>
   <script type="module" src="app_profile.js"></script>
+  <div class="modal-back" id="modalBack"><div class="modal" id="modal"></div></div>
 </body>
 </html>
