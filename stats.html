@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
-  <title>Профиль · GymKeeper</title>
+  <title>Статистика · GymKeeper</title>
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#8FAF8F">
   <link rel="icon" href="icon.png">
@@ -15,11 +15,11 @@
       <div class="brand">GK<span>·</span>GymKeeper</div>
       <button id="burger" class="nav-toggle">☰</button>
       <nav class="nav" id="nav">
-        <a class="active" href="index.html">Профиль</a>
+        <a class="" href="index.html">Профиль</a>
         <a class="" href="exercises.html">Упражнения</a>
         <a class="" href="workout.html">Тренировка</a>
         <a class="" href="calendar.html">Календарь</a>
-        <a class="" href="stats.html">Статистика</a>
+        <a class="active" href="stats.html">Статистика</a>
       </nav>
       <div class="version">
         <button id="exportBtn" class="btn ghost">Экспорт</button>
@@ -31,23 +31,13 @@
     <main class="content">
       <!-- CONTENT -->
       
-<header class="section-head"><h1>Профиль</h1></header>
-<div class="card">
-  <div class="row wrap">
-    <img id="avatarPreview" class="thumb" alt="аватар" style="width:72px;height:72px;border-radius:50%">
-    <div style="display:flex;flex-direction:column;gap:8px">
-      <label class="file-btn">Выбрать фото<input type="file" id="avatarInput" accept="image/*" hidden></label>
-      <button id="clearAvatar" class="btn ghost">Убрать фото</button>
-    </div>
-  </div>
-  <div class="row wrap" style="margin-top:12px">
-    <input id="name" placeholder="Имя">
-    <input id="age" type="number" min="0" placeholder="Возраст">
-    <select id="gender"><option value="">Пол</option><option>Муж</option><option>Жен</option></select>
-    <input id="height" type="number" min="0" placeholder="Рост (см)">
-    <input id="weight" type="number" min="0" step="0.1" placeholder="Вес (кг)">
-    <button id="saveProfile" class="btn">Сохранить</button>
-  </div>
+<header class="section-head"><h1>Статистика</h1></header>
+<div class="card table-wrap">
+  <h2>Сводка по месяцам</h2>
+  <table>
+    <thead><tr><th>Месяц</th><th>Тренировок</th><th>Общий объём</th><th>Уникальных упражнений</th></tr></thead>
+    <tbody id="statsMonthly"></tbody>
+  </table>
 </div>
 
     </main>
@@ -55,6 +45,6 @@
   <div id="toast" class="toast" aria-live="polite"></div>
   <script type="module" src="storage.js"></script>
   <script>document.getElementById('burger').onclick=()=>document.getElementById('nav').classList.toggle('show');</script>
-  <script type="module" src="app_profile.js"></script>
+  <script type="module" src="app_stats.js"></script>
 </body>
 </html>
