@@ -1,98 +1,80 @@
-/* Base styles */
-:root {
-  --primary: #8FAF8F;
-  --primary-dark: #6E8F73;
-  --accent: #5B7F67;
-  --text: #1F2A24;
-  --text-muted: #6B7A6F;
-  --bg: #F7FAF6;
-  --card-bg: #FFFFFF;
-  --border: #DDE5D9;
-  --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  --radius: 8px;
+/* Laurel Light Theme */
+:root{
+  --primary:#8FAF8F;
+  --primary-dark:#6E8F73;
+  --text:#1F2A24;
+  --muted:#6B7A6F;
+  --bg:#F7FAF6;
+  --card:#ffffff;
+  --border:#DDE5D9;
+  --shadow:0 8px 24px rgba(31,42,36,.06);
+  --radius:14px;
 }
-
-.dark-theme {
-  --text: #1F2A24;
-  --text-muted: #6B7A6F;
-  --bg: #F7FAF6;
-  --card-bg: #FFFFFF;
-  --border: #DDE5D9;
-  --shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  color:var(--text);
+  background:var(--bg);
+  font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
 }
+.app{display:grid;grid-template-columns:260px 1fr;min-height:100vh}
+.sidebar{padding:20px;border-right:1px solid var(--border);background:#F2F6F1}
+.brand{font-weight:800;letter-spacing:.5px;margin-bottom:16px}
+.brand span{color:var(--primary)}
+.nav{display:flex;flex-direction:column;gap:8px}
+.nav-btn{border:1px solid var(--border);background:#fff;border-radius:12px;padding:10px 12px;text-align:left;cursor:pointer}
+.nav-btn.active,.nav-btn:hover{border-color:var(--primary);box-shadow:0 0 0 3px rgba(143,175,143,.25)}
+.version{margin-top:auto;color:var(--muted);font-size:12px}
 
-/* Layout */
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  color: var(--text);
-  background: var(--bg);
-  margin: 0;
-  padding: 0;
-  transition: background 0.3s ease;
-}
+.content{padding:24px 28px}
+.section-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:14px}
+.section-head .row{display:flex;gap:8px;align-items:center}
+.row{display:flex;gap:10px;align-items:center}
+.row.small{gap:6px}
+.row.right{justify-content:flex-end}
+input,select{border:1px solid var(--border);background:var(--card);border-radius:12px;padding:10px 12px;min-height:40px}
+input:focus,select:focus{outline:none;box-shadow:0 0 0 3px rgba(143,175,143,.25);border-color:var(--primary)}
+.btn{background:var(--primary);color:#fff;border:none;border-radius:12px;padding:10px 14px;cursor:pointer;box-shadow:var(--shadow)}
+.btn.small{padding:8px 10px;font-size:14px}
+.btn.ghost{background:#fff;color:var(--text);border:1px solid var(--border)}
+.icon-btn{border:1px solid var(--border);background:#fff;border-radius:10px;padding:6px 10px;cursor:pointer}
+.icon-btn:hover{border-color:var(--primary)}
 
-.shell {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px;margin-bottom:16px}
+.grid.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse}
+th,td{padding:10px;border-bottom:1px solid var(--border);vertical-align:top}
+th{background:#f3f7f1;text-align:left}
+.td-actions{width:128px}
+.w100{width:100%}
 
-.main {
-  flex: 1;
-  padding: 1rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
-}
+.badge{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--border);padding:4px 8px;border-radius:999px;font-size:12px;background:#fff}
+.pick-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px;margin-top:8px}
+.pick-item{display:flex;justify-content:space-between;gap:8px;align-items:center;border:1px solid var(--border);background:#fff;border-radius:12px;padding:10px 12px;cursor:pointer}
+.pick-item:hover{border-color:var(--primary)}
 
-/* Components */
-.btn {
-  padding: 0.5rem 1rem;
-  border-radius: var(--radius);
-  border: none;
-  cursor: pointer;
-  font-weight: 500;
-  transition: all 0.2s ease;
-}
+.plan-ex{border:1px dashed var(--border);border-radius:12px;padding:10px 12px;margin-bottom:10px}
+.plan-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.set-row{display:flex;gap:8px;align-items:center;margin:6px 0}
+.set-row input{width:110px}
 
-.btn-primary {
-  background: var(--primary);
-  color: white;
-}
+.cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.cal-title{font-weight:700}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.cal-cell{border:1px solid var(--border);border-radius:12px;background:#fff;min-height:78px;padding:8px;position:relative}
+.cal-cell .d{position:absolute;top:6px;right:8px;color:var(--muted);font-size:12px}
+.cal-cell.has .d{color:var(--primary)}
+.cal-badge{margin-top:24px;font-size:12px;color:var(--primary)}
 
-.btn-primary:hover {
-  background: var(--primary-dark);
-}
+.toast{position:fixed;right:16px;bottom:16px;background:#1F2A24;color:#fff;padding:10px 14px;border-radius:12px;opacity:0;transform:translateY(8px);transition:.2s;z-index:99}
+.toast.show{opacity:1;transform:none}
 
-/* Add more styles as needed */
-
-/* Laurel theme enhancements */
-:root {
-  --focus-ring: 0 0 0 3px rgba(143, 175, 143, 0.35);
-  --shadow-soft: 0 6px 20px rgba(31, 42, 36, 0.06);
-}
-
-*:focus-visible {
-  outline: none;
-  box-shadow: var(--focus-ring);
-  border-radius: 8px;
-}
-
-.card, .exercise-card, .workout-exercise, .stats-card, .sidebar, .topbar {
-  box-shadow: var(--shadow-soft);
-}
-
-/* Smooth hover for interactive elements */
-.button, .btn, .btn-primary, .icon-btn, .nav-item {
-  transition: transform .12s ease, box-shadow .2s ease, background-color .2s ease, color .2s ease;
-}
-.button:hover, .btn:hover, .btn-primary:hover, .icon-btn:hover, .nav-item:hover {
-  transform: translateY(-1px);
-}
-
-/* Optional laurel divider */
-.hr-laurel {
-  height: 1px;
-  background-image: linear-gradient(to right, transparent, var(--border), transparent);
-  border: 0;
+@media (max-width: 900px){
+  .app{grid-template-columns:1fr}
+  .sidebar{position:sticky;top:0;z-index:10;display:flex;gap:12px;align-items:center}
+  .nav{flex-direction:row;overflow:auto}
+  .content{padding:16px}
+  .grid.two{grid-template-columns:1fr}
 }

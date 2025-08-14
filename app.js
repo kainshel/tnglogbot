@@ -1,591 +1,264 @@
-// Конфигурация приложения
-const APP_CONFIG = {
-  STORAGE_KEY: 'gymkeeper_data_v3',
-// Замените APP_CONFIG.DEFAULT_EXERCISES на:
-DEFAULT_EXERCISES: [
-  {
-    id: 'squats',
-    name: 'Приседания',
-    gif: 'https://example.com/squat.gif',
-    muscleGroup: 'ноги',
-    description: 'Базовое упражнение для развития мышц ног',
-    created: Date.now()
-  },
-  {
-    id: 'bench-press',
-    name: 'Жим лёжа',
-    gif: 'https://example.com/benchpress.gif',
-    muscleGroup: 'грудь',
-    description: 'Развивает грудные мышцы и трицепсы',
-    created: Date.now()
-  },
-  // Добавьте другие упражнения
-]
-  MUSCLE_GROUPS: ['ноги', 'руки', 'спина', 'грудь', 'плечи', 'пресс', 'кардио']
+// Simple GymKeeper (tables only) — no frameworks
+const LS = {
+  get(key, fallback){ try{ return JSON.parse(localStorage.getItem(key)) ?? fallback }catch{ return fallback } },
+  set(key, val){ localStorage.setItem(key, JSON.stringify(val)); }
 };
 
-// Утилиты
-const dom = {
-  qs: (selector, parent = document) => parent.querySelector(selector),
-  qsa: (selector, parent = document) => [...parent.querySelectorAll(selector)],
-  on: (element, event, handler, options) => element.addEventListener(event, handler, options),
-  create: (tag, attributes = {}, children = []) => {
-    const el = document.createElement(tag);
-    Object.entries(attributes).forEach(([key, value]) => el.setAttribute(key, value));
-    children.forEach(child => el.appendChild(child));
-    return el;
-  }
+const DB = {
+  exKey: 'gk_exercises_v1',
+  woKey: 'gk_workouts_v1',
+  get exercises(){ return LS.get(this.exKey, defaultExercises()) },
+  set exercises(v){ LS.set(this.exKey, v) },
+  get workouts(){ return LS.get(this.woKey, []) },
+  set workouts(v){ LS.set(this.woKey, v) }
 };
 
-// State management
-class GymStore {
-  constructor() {
-    this._state = this._loadInitialState();
-    this._listeners = [];
-  }
+function defaultExercises(){
+  return [
+    {id: uid(), name:'Жим лёжа', group:'Грудь'},
+    {id: uid(), name:'Тяга верхнего блока', group:'Спина'},
+    {id: uid(), name:'Приседания', group:'Ноги'},
+    {id: uid(), name:'Жим гантелей сидя', group:'Плечи'},
+    {id: uid(), name:'Подъём штанги на бицепс', group:'Руки'},
+    {id: uid(), name:'Скручивания', group:'Пресс'}
+  ];
+}
 
-  get state() {
-    return this._state;
-  }
+function uid(){ return Math.random().toString(36).slice(2,9) }
 
-  subscribe(listener) {
-    this._listeners.push(listener);
-    return () => {
-      this._listeners = this._listeners.filter(l => l !== listener);
-    };
-  }
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
 
-  _notify() {
-    this._listeners.forEach(listener => listener(this._state));
-  }
+const toast = (msg)=>{
+  const t = $('#toast'); t.textContent = msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 1800);
+};
 
-  _loadInitialState() {
-    try {
-      const saved = localStorage.getItem(APP_CONFIG.STORAGE_KEY);
-      if (saved) return JSON.parse(saved);
-      
-      return {
-        version: 3,
-        profiles: {},
-        exercises: APP_CONFIG.DEFAULT_EXERCISES,
-        workouts: [],
-        settings: {
-          theme: 'system',
-          units: 'kg',
-          language: 'ru'
-        },
-        lastUpdated: Date.now()
+// NAV
+$$('.nav-btn').forEach(b=>b.addEventListener('click', e=>{
+  $$('.nav-btn').forEach(x=>x.classList.remove('active'));
+  e.currentTarget.classList.add('active');
+  const tab = e.currentTarget.dataset.tab;
+  $$('.tab').forEach(s=>s.classList.toggle('active', s.id===tab));
+  if(tab==='calendar') renderCalendar();
+  if(tab==='stats') renderStats();
+}));
+
+// EXERCISES
+const exBody = $('#exercisesBody');
+const exTpl = $('#exerciseRowTpl');
+const search = $('#search');
+const groupFilter = $('#groupFilter');
+const addExerciseBtn = $('#addExercise');
+
+function renderExercises(){
+  const q = search.value.trim().toLowerCase();
+  const g = groupFilter.value;
+  exBody.innerHTML = '';
+  DB.exercises
+    .filter(e => (!q || e.name.toLowerCase().includes(q)) && (!g || e.group===g))
+    .forEach(e => {
+      const row = exTpl.content.firstElementChild.cloneNode(true);
+      row.querySelector('.name').textContent = e.name;
+      row.querySelector('.group').textContent = e.group;
+      row.querySelector('.edit').onclick = ()=>{
+        const name = prompt('Название упражнения:', e.name);
+        const group = prompt('Группа (Грудь/Спина/Ноги/Плечи/Руки/Пресс):', e.group);
+        if(name && group){
+          e.name = name.trim(); e.group = group.trim();
+          DB.exercises = DB.exercises.map(x=>x.id===e.id? e : x);
+          renderAll();
+        }
       };
-    } catch (error) {
-      console.error('Failed to load state:', error);
-      return this._createDefaultState();
-    }
-  }
+      row.querySelector('.del').onclick = ()=>{
+        if(confirm('Удалить упражнение?')){
+          DB.exercises = DB.exercises.filter(x=>x.id!==e.id);
+          renderAll();
+        }
+      };
+      exBody.appendChild(row);
+    });
+}
+search.oninput = renderExercises;
+groupFilter.onchange = renderExercises;
+addExerciseBtn.onclick = ()=>{
+  const name = prompt('Новое упражнение:');
+  if(!name) return;
+  const group = prompt('Группа (Грудь/Спина/Ноги/Плечи/Руки/Пресс):','Руки');
+  if(!group) return;
+  DB.exercises = DB.exercises.concat({id: uid(), name: name.trim(), group: group.trim()});
+  renderAll(); toast('Упражнение добавлено');
+};
 
-  _createDefaultState() {
-    return {
-      version: 3,
-      profiles: {},
-      exercises: APP_CONFIG.DEFAULT_EXERCISES,
-      workouts: [],
-      settings: {
-        theme: 'system',
-        units: 'kg',
-        language: 'ru'
-      },
-      lastUpdated: Date.now()
-    };
-  }
+// WORKOUT builder
+const pickList = $('#pickList');
+const pickSearch = $('#pickSearch');
+const pickGroup = $('#pickGroup');
+const plan = $('#plan');
+const planExerciseTpl = $('#planExerciseTpl');
+const setRowTpl = $('#setRowTpl');
+const saveBtn = $('#saveWorkout');
+const clearBtn = $('#clearWorkout');
+const workoutDate = $('#workoutDate');
+const workoutTitle = $('#workoutTitle');
 
-  saveState(newState) {
-    this._state = {
-      ...newState,
-      lastUpdated: Date.now()
-    };
-    localStorage.setItem(APP_CONFIG.STORAGE_KEY, JSON.stringify(this._state));
-    this._notify();
-  }
+workoutDate.valueAsDate = new Date();
 
-  // CRUD operations
-  addExercise(exercise) {
-    const newExercise = {
-      ...exercise,
-      id: crypto.randomUUID(),
-      created: Date.now()
-    };
-    const newState = {
-      ...this._state,
-      exercises: [...this._state.exercises, newExercise]
-    };
-    this.saveState(newState);
-    return newExercise;
-  }
+let planState = []; // [{id, name, sets:[{w,r}]}]
 
-  updateExercise(id, updates) {
-    const newState = {
-      ...this._state,
-      exercises: this._state.exercises.map(ex => 
-        ex.id === id ? { ...ex, ...updates, updated: Date.now() } : ex
-      )
-    };
-    this.saveState(newState);
-  }
+function renderPick(){
+  const q = pickSearch.value.trim().toLowerCase();
+  const g = pickGroup.value;
+  pickList.innerHTML='';
+  DB.exercises
+    .filter(e => (!q || e.name.toLowerCase().includes(q)) && (!g || e.group===g))
+    .forEach(e=>{
+      const btn = $('#pickItemTpl').content.firstElementChild.cloneNode(true);
+      btn.querySelector('.name').textContent = e.name;
+      btn.querySelector('.group').textContent = e.group;
+      btn.onclick = ()=>addToPlan(e);
+      pickList.appendChild(btn);
+    });
+}
+pickSearch.oninput = renderPick;
+pickGroup.onchange = renderPick;
 
-  deleteExercise(id) {
-    const newState = {
-      ...this._state,
-      exercises: this._state.exercises.filter(ex => ex.id !== id)
-    };
-    this.saveState(newState);
+function addToPlan(ex){
+  if(planState.find(x=>x.id===ex.id)){ toast('Уже в плане'); return; }
+  planState.push({ id: ex.id, name: ex.name, sets: [] });
+  renderPlan();
+}
+function renderPlan(){
+  plan.innerHTML='';
+  planState.forEach(item=>{
+    const el = planExerciseTpl.content.firstElementChild.cloneNode(true);
+    el.querySelector('.title').textContent = item.name;
+    el.querySelector('.del').onclick = ()=>{ planState = planState.filter(x=>x.id!==item.id); renderPlan(); };
+    const setsWrap = el.querySelector('.sets');
+    const addSet = el.querySelector('.add-set');
+    addSet.onclick = ()=>{ item.sets.push({w:null,r:null}); renderPlan(); };
+    item.sets.forEach((s, i)=>{
+      const row = setRowTpl.content.firstElementChild.cloneNode(true);
+      row.querySelector('.n').textContent = i+1;
+      const w = row.querySelector('.w'); const r = row.querySelector('.r');
+      w.value = s.w ?? ''; r.value = s.r ?? '';
+      w.oninput = ()=>{ s.w = Number(w.value); }; r.oninput = ()=>{ s.r = Number(r.value); };
+      row.querySelector('.del').onclick = ()=>{ item.sets.splice(i,1); renderPlan(); };
+      setsWrap.appendChild(row);
+    });
+    plan.appendChild(el);
+  });
+}
+saveBtn.onclick = ()=>{
+  if(planState.length===0){ toast('Добавьте упражнения'); return; }
+  const date = workoutDate.value || new Date().toISOString().slice(0,10);
+  const title = workoutTitle.value.trim() || 'Тренировка';
+  const workout = { id: uid(), date, title, items: planState.map(x=>({exId:x.id, name:x.name, sets:x.sets.filter(s=>s.r>0)})) };
+  DB.workouts = DB.workouts.concat(workout);
+  planState = []; renderPlan(); toast('Тренировка сохранена');
+};
+clearBtn.onclick = ()=>{ planState=[]; renderPlan(); };
+
+// CALENDAR
+const calGrid = $('#calendarGrid');
+const calTitle = $('#calTitle');
+const prevMonth = $('#prevMonth');
+const nextMonth = $('#nextMonth');
+let cal = new Date(); cal.setDate(1);
+
+function monthKey(d){ return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}` }
+
+function renderCalendar(){
+  const y = cal.getFullYear(); const m = cal.getMonth();
+  calTitle.textContent = new Date(y,m).toLocaleString('ru-RU',{month:'long',year:'numeric'});
+  calGrid.innerHTML='';
+  const first = new Date(y,m,1);
+  const startDay = (first.getDay()+6)%7; // Mon=0
+  const days = new Date(y, m+1, 0).getDate();
+  for(let i=0;i<startDay;i++){ calGrid.appendChild(emptyCell()); }
+  for(let d=1; d<=days; d++){
+    const dateStr = `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const cell = document.createElement('div'); cell.className='cal-cell';
+    const list = DB.workouts.filter(w=>w.date===dateStr);
+    cell.innerHTML = `<div class="d">${d}</div>` + (list.length? `<div class="cal-badge">${list.length} трен.</div>` : '');
+    if(list.length) cell.classList.add('has');
+    cell.onclick = ()=>showDay(dateStr, list);
+    calGrid.appendChild(cell);
   }
 }
+function emptyCell(){ const d=document.createElement('div'); d.className='cal-cell'; return d; }
+$('#prevMonth').onclick = ()=>{ cal.setMonth(cal.getMonth()-1); renderCalendar(); };
+$('#nextMonth').onclick = ()=>{ cal.setMonth(cal.getMonth()+1); renderCalendar(); };
 
-// UI Components
-class ExerciseList {
-  constructor(store) {
-    this.store = store;
-    this.container = dom.qs('#exercise-list');
-    this.searchInput = dom.qs('#exercise-search');
-    this.filterSelect = dom.qs('#exercise-filter');
-    this._setupEventListeners();
-    this._renderFilters();
-    this.unsubscribe = store.subscribe(() => this.render());
-    this.render();
-  }
-
-  _setupEventListeners() {
-    dom.on(this.searchInput, 'input', () => this.render());
-    dom.on(this.filterSelect, 'change', () => this.render());
-    dom.on(this.container, 'click', (e) => {
-      const card = e.target.closest('.exercise-card');
-      if (card) {
-        const id = card.dataset.id;
-        this._openExerciseModal(id);
-      }
-    });
-  }
-
-  _renderFilters() {
-    APP_CONFIG.MUSCLE_GROUPS.forEach(group => {
-      const option = dom.create('option', { value: group }, [document.createTextNode(group)]);
-      this.filterSelect.appendChild(option);
-    });
-  }
-
-  _openExerciseModal(id) {
-    const exercise = this.store.state.exercises.find(ex => ex.id === id);
-    if (!exercise) return;
-    
-    const modal = new ExerciseModal(exercise, this.store);
-    modal.open();
-  }
-
-  render() {
-    const searchTerm = this.searchInput.value.toLowerCase();
-    const filterValue = this.filterSelect.value;
-    
-    const exercises = this.store.state.exercises
-      .filter(ex => 
-        ex.name.toLowerCase().includes(searchTerm) &&
-        (filterValue === '' || ex.muscleGroup === filterValue)
-      )
-      .sort((a, b) => b.created - a.created);
-
-    this.container.innerHTML = '';
-    
-    if (exercises.length === 0) {
-      this.container.appendChild(this._createEmptyState());
-      return;
-    }
-
-    exercises.forEach(exercise => {
-      this.container.appendChild(this._createExerciseCard(exercise));
-    });
-  }
-
-  _createExerciseCard(exercise) {
-    const card = dom.create('div', { 
-      class: 'exercise-card', 
-      'data-id': exercise.id 
-    });
-    
-    const thumb = dom.create('div', { class: 'exercise-thumb' }, [
-      dom.create('img', { 
-        src: exercise.gif || 'placeholder.svg', 
-        alt: exercise.name,
-        loading: 'lazy'
-      })
-    ]);
-    
-    const name = dom.create('div', { class: 'exercise-name' }, [
-      document.createTextNode(exercise.name)
-    ]);
-    
-    const muscleGroup = dom.create('div', { class: 'exercise-muscle-group' }, [
-      document.createTextNode(exercise.muscleGroup || '—')
-    ]);
-    
-    card.append(thumb, name, muscleGroup);
-    return card;
-  }
-
-  _createEmptyState() {
-    return dom.create('div', { class: 'empty-state' }, [
-      dom.create('img', { src: 'empty.svg', alt: '' }),
-      dom.create('h3', {}, [document.createTextNode('Упражнения не найдены')]),
-      dom.create('p', {}, [document.createTextNode('Попробуйте изменить параметры поиска')])
-    ]);
-  }
+const dayCard = $('#dayWorkoutsCard');
+const dayTitle = $('#dayTitle');
+const dayTbody = $('#dayWorkouts');
+function showDay(dateStr, list){
+  dayCard.hidden = false;
+  dayTitle.textContent = `Тренировки за ${dateStr}`;
+  dayTbody.innerHTML='';
+  list.forEach(w=>{
+    const tr = document.createElement('tr');
+    const volume = w.items.reduce((acc,i)=>acc + i.sets.reduce((a,s)=>a+(Number(s.w||0)*Number(s.r||0)),0),0);
+    tr.innerHTML = `<td>${w.title}</td><td>${volume}</td>`;
+    const td = document.createElement('td');
+    const open = document.createElement('button'); open.className='icon-btn'; open.textContent='Открыть';
+    open.onclick = ()=>openWorkout(w.id);
+    const del = document.createElement('button'); del.className='icon-btn'; del.textContent='Удалить';
+    del.onclick = ()=>{ if(confirm('Удалить тренировку?')){ DB.workouts = DB.workouts.filter(x=>x.id!==w.id); renderAll(); } };
+    td.append(open, del);
+    tr.appendChild(td);
+    dayTbody.appendChild(tr);
+  });
+}
+function openWorkout(id){
+  const w = DB.workouts.find(x=>x.id===id); if(!w) return;
+  // Load into builder for editing
+  $('.nav-btn[data-tab="workout"]').click();
+  workoutDate.value = w.date; workoutTitle.value = w.title;
+  planState = w.items.map(i=>({ id:i.exId, name:i.name, sets: i.sets.map(s=>({w:s.w,r:s.r})) }));
+  renderPlan();
 }
 
-class ExerciseModal {
-  constructor(exercise, store) {
-    this.exercise = exercise;
-    this.store = store;
-    this.modalElement = this._createModal();
-    this._setupEventListeners();
-  }
+// STATS (tables only)
+const statsMonthly = $('#statsMonthly');
+const statsTop = $('#statsTop');
+function renderStats(){
+  // Monthly summary
+  const byMonth = new Map();
+  DB.workouts.forEach(w=>{
+    const k = w.date.slice(0,7);
+    const vol = w.items.reduce((acc,i)=>acc + i.sets.reduce((a,s)=>a+(Number(s.w||0)*Number(s.r||0)),0),0);
+    const exSet = new Set(w.items.map(i=>i.name));
+    if(!byMonth.has(k)) byMonth.set(k, {count:0, vol:0, ex:new Set()});
+    const m = byMonth.get(k); m.count++; m.vol+=vol; exSet.forEach(e=>m.ex.add(e));
+  });
+  statsMonthly.innerHTML='';
+  Array.from(byMonth.entries()).sort((a,b)=>a[0]<b[0]?-1:1).forEach(([k,v])=>{
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${k}</td><td>${v.count}</td><td>${v.vol}</td><td>${v.ex.size}</td>`;
+    statsMonthly.appendChild(tr);
+  });
 
-  open() {
-    document.body.appendChild(this.modalElement);
-    document.body.classList.add('modal-open');
-  }
-
-  close() {
-    document.body.removeChild(this.modalElement);
-    document.body.classList.remove('modal-open');
-  }
-
-  _createModal() {
-    const modal = dom.create('div', { class: 'modal' });
-    const overlay = dom.create('div', { class: 'modal-overlay' });
-    const content = dom.create('div', { class: 'modal-content' });
-    
-    const header = dom.create('div', { class: 'modal-header' }, [
-      dom.create('h2', {}, [document.createTextNode(this.exercise.name)]),
-      dom.create('button', { class: 'close-btn', 'aria-label': 'Закрыть' }, [
-        dom.create('span', {}, [document.createTextNode('×')])
-      ])
-    ]);
-    
-    const body = dom.create('div', { class: 'modal-body' }, [
-      dom.create('div', { class: 'exercise-detail' }, [
-        dom.create('img', { 
-          src: this.exercise.gif || 'placeholder.svg', 
-          alt: this.exercise.name,
-          class: 'exercise-gif'
-        }),
-        dom.create('div', { class: 'exercise-info' }, [
-          dom.create('p', {}, [
-            dom.create('strong', {}, [document.createTextNode('Группа мышц: ')]),
-            document.createTextNode(this.exercise.muscleGroup || '—')
-          ]),
-          dom.create('p', {}, [
-            dom.create('strong', {}, [document.createTextNode('Описание: ')]),
-            document.createTextNode(this.exercise.description || 'Нет описания')
-          ])
-        ])
-      ]),
-      dom.create('div', { class: 'modal-actions' }, [
-        dom.create('button', { 
-          class: 'btn btn-edit',
-          'data-action': 'edit'
-        }, [document.createTextNode('Редактировать')]),
-        dom.create('button', { 
-          class: 'btn btn-delete',
-          'data-action': 'delete'
-        }, [document.createTextNode('Удалить')])
-      ])
-    ]);
-    
-    content.append(header, body);
-    modal.append(overlay, content);
-    return modal;
-  }
-
-  _setupEventListeners() {
-    dom.on(this.modalElement.querySelector('.modal-overlay'), 'click', () => this.close());
-    dom.on(this.modalElement.querySelector('.close-btn'), 'click', () => this.close());
-    dom.on(this.modalElement.querySelector('[data-action="edit"]'), 'click', () => this._editExercise());
-    dom.on(this.modalElement.querySelector('[data-action="delete"]'), 'click', () => this._deleteExercise());
-  }
-
-  _editExercise() {
-    this.close();
-    const form = new ExerciseForm(this.exercise, this.store);
-    form.open();
-  }
-
-  _deleteExercise() {
-    if (confirm(`Удалить упражнение "${this.exercise.name}"?`)) {
-      this.store.deleteExercise(this.exercise.id);
-      this.close();
-    }
-  }
+  // Top exercises
+  const map = new Map();
+  DB.workouts.forEach(w=>w.items.forEach(i=>{
+    const vol = i.sets.reduce((a,s)=>a+(Number(s.w||0)*Number(s.r||0)),0);
+    const m = map.get(i.name) || {count:0, vol:0};
+    m.count++; m.vol += vol; map.set(i.name, m);
+  }));
+  statsTop.innerHTML='';
+  Array.from(map.entries()).sort((a,b)=>b[1].vol-a[1].vol).slice(0,50).forEach(([name, v])=>{
+    const tr = document.createElement('tr'); tr.innerHTML = `<td>${name}</td><td>${v.count}</td><td>${v.vol}</td>`;
+    statsTop.appendChild(tr);
+  });
 }
 
-class ExerciseForm {
-  constructor(exercise = null, store) {
-    this.isEdit = !!exercise;
-    this.exercise = exercise || {};
-    this.store = store;
-    this.formElement = this._createForm();
-    this._setupEventListeners();
-  }
+// INITIAL RENDER
+function renderAll(){ renderExercises(); renderPick(); renderPlan(); renderCalendar(); renderStats(); }
+renderAll();
 
-  open() {
-    document.body.appendChild(this.formElement);
-    document.body.classList.add('modal-open');
-  }
-
-  close() {
-    document.body.removeChild(this.formElement);
-    document.body.classList.remove('modal-open');
-  }
-
-  _createForm() {
-    const modal = dom.create('div', { class: 'modal' });
-    const overlay = dom.create('div', { class: 'modal-overlay' });
-    const content = dom.create('div', { class: 'modal-content' });
-    
-    const header = dom.create('div', { class: 'modal-header' }, [
-      dom.create('h2', {}, [
-        document.createTextNode(this.isEdit ? 'Редактировать упражнение' : 'Новое упражнение')
-      ]),
-      dom.create('button', { class: 'close-btn', 'aria-label': 'Закрыть' }, [
-        dom.create('span', {}, [document.createTextNode('×')])
-      ])
-    ]);
-    
-    const form = dom.create('form', { class: 'exercise-form' });
-    
-    const nameField = this._createFormField('name', 'text', 'Название', this.exercise.name || '', true);
-    const gifField = this._createFormField('gif', 'url', 'Ссылка на GIF', this.exercise.gif || '');
-    const muscleGroupField = this._createSelectField('muscleGroup', 'Группа мышц', this.exercise.muscleGroup || '');
-    const descriptionField = this._createTextareaField('description', 'Описание', this.exercise.description || '');
-    
-    const actions = dom.create('div', { class: 'form-actions' }, [
-      dom.create('button', { 
-        type: 'submit', 
-        class: 'btn btn-primary'
-      }, [document.createTextNode('Сохранить')]),
-      dom.create('button', { 
-        type: 'button',
-        class: 'btn btn-secondary',
-        'data-action': 'cancel'
-      }, [document.createTextNode('Отмена')])
-    ]);
-    
-    form.append(nameField, gifField, muscleGroupField, descriptionField, actions);
-    content.append(header, form);
-    modal.append(overlay, content);
-    return modal;
-  }
-
-  _createFormField(name, type, label, value, required = false) {
-    const field = dom.create('div', { class: 'form-field' });
-    const labelEl = dom.create('label', { for: name }, [document.createTextNode(label)]);
-    const input = dom.create('input', { 
-      type,
-      id: name,
-      name,
-      value,
-      required
-    });
-    
-    field.append(labelEl, input);
-    return field;
-  }
-
-  _createSelectField(name, label, selectedValue) {
-    const field = dom.create('div', { class: 'form-field' });
-    const labelEl = dom.create('label', { for: name }, [document.createTextNode(label)]);
-    const select = dom.create('select', { id: name, name });
-    
-    const emptyOption = dom.create('option', { value: '' }, [document.createTextNode('— Выберите группу —')]);
-    select.appendChild(emptyOption);
-    
-    APP_CONFIG.MUSCLE_GROUPS.forEach(group => {
-      const option = dom.create('option', { 
-        value: group,
-        selected: group === selectedValue
-      }, [document.createTextNode(group)]);
-      select.appendChild(option);
-    });
-    
-    field.append(labelEl, select);
-    return field;
-  }
-
-  _createTextareaField(name, label, value) {
-    const field = dom.create('div', { class: 'form-field' });
-    const labelEl = dom.create('label', { for: name }, [document.createTextNode(label)]);
-    const textarea = dom.create('textarea', { 
-      id: name,
-      name,
-      rows: 3
-    }, [document.createTextNode(value)]);
-    
-    field.append(labelEl, textarea);
-    return field;
-  }
-
-  _setupEventListeners() {
-    dom.on(this.formElement.querySelector('.modal-overlay'), 'click', () => this.close());
-    dom.on(this.formElement.querySelector('.close-btn'), 'click', () => this.close());
-    dom.on(this.formElement.querySelector('[data-action="cancel"]'), 'click', () => this.close());
-    dom.on(this.formElement.querySelector('form'), 'submit', (e) => {
-      e.preventDefault();
-      this._submitForm();
-    });
-  }
-
-  _submitForm() {
-    const formData = new FormData(this.formElement.querySelector('form'));
-    const exerciseData = {
-      name: formData.get('name'),
-      gif: formData.get('gif'),
-      muscleGroup: formData.get('muscleGroup'),
-      description: formData.get('description')
-    };
-    
-    if (this.isEdit) {
-      this.store.updateExercise(this.exercise.id, exerciseData);
-    } else {
-      this.store.addExercise(exerciseData);
-    }
-    
-    this.close();
-  }
+// PWA
+if('serviceWorker' in navigator){
+  window.addEventListener('load', ()=>navigator.serviceWorker.register('sw.js'));
 }
-
-// Инициализация приложения
-class GymApp {
-  constructor() {
-    this.store = new GymStore();
-    this._initUI();
-    this._setupNavigation();
-    this._setupServiceWorker();
-  }
-
-  _initUI() {
-    // Инициализация компонентов для разных страниц
-    if (dom.qs('#exercise-list')) {
-      this.exerciseList = new ExerciseList(this.store);
-    }
-    
-    // Инициализация темы
-    this._applyTheme();
-    
-    // Кнопка добавления упражнения
-    dom.on(dom.qs('#add-exercise-btn'), 'click', () => {
-      const form = new ExerciseForm(null, this.store);
-      form.open();
-    });
-  }
-
-  _setupNavigation() {
-    dom.qsa('.nav-item').forEach(btn => {
-      dom.on(btn, 'click', () => {
-        dom.qsa('.nav-item').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        this._showView(btn.dataset.view);
-      });
-    });
-    
-    // Боковое меню
-    dom.on(dom.qs('#openSidebar'), 'click', () => this._toggleSidebar(true));
-    dom.on(dom.qs('#closeSidebar'), 'click', () => this._toggleSidebar(false));
-    dom.on(dom.qs('#closeSidebarDim'), 'click', () => this._toggleSidebar(false));
-  }
-
-  _showView(name) {
-    dom.qsa('.view').forEach(v => v.classList.add('hidden'));
-    const el = dom.qs(`#view-${name}`);
-    if (el) el.classList.remove('hidden');
-    this._toggleSidebar(false);
-  }
-
-  _toggleSidebar(open) {
-    dom.qs('#sidebar').classList.toggle('open', open);
-    dom.qs('#closeSidebarDim').classList.toggle('open', open);
-  }
-
-  _applyTheme() {
-    const theme = this.store.state.settings.theme;
-    if (theme === 'system') {
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      document.documentElement.classList.toggle('dark-theme', prefersDark);
-    } else {
-      document.documentElement.classList.toggle('dark-theme', theme === 'dark');
-    }
-  }
-
-  _setupServiceWorker() {
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js').then(
-          registration => console.log('ServiceWorker registration successful'),
-          err => console.log('ServiceWorker registration failed: ', err)
-        );
-      });
-    }
-  }
-}
-
-// Запуск приложения
-document.addEventListener('DOMContentLoaded', () => {
-  const app = new GymApp();
-  window.gymApp = app; // Для доступа из консоли при необходимости
-});
-
-// Инициализация приложения после загрузки DOM
-document.addEventListener('DOMContentLoaded', () => {
-  // Создаем экземпляр хранилища
-  const store = new GymStore();
-  
-  // Инициализируем компоненты
-  new ExerciseList(store);
-  
-  
-  
-  // Настройка навигации
-  const navItems = dom.qsa('.nav-item');
-  navItems.forEach(item => {
-    dom.on(item, 'click', () => {
-      navItems.forEach(i => i.classList.remove('active'));
-      item.classList.add('active');
-      const view = item.dataset.view;
-      dom.qs('#view-title').textContent = item.querySelector('span').textContent;
-      dom.qsa('.view').forEach(v => v.classList.add('hidden'));
-      dom.qs(`#view-${view}`).classList.remove('hidden');
-    });
-  });
-  
-  // Боковое меню
-  dom.on(dom.qs('#openSidebar'), 'click', () => {
-    dom.qs('#sidebar').setAttribute('aria-hidden', 'false');
-  });
-  
-  dom.on(dom.qs('#closeSidebar'), 'click', () => {
-    dom.qs('#sidebar').setAttribute('aria-hidden', 'true');
-  });
-  
-  dom.on(dom.qs('#closeSidebarDim'), 'click', () => {
-    dom.qs('#sidebar').setAttribute('aria-hidden', 'true');
-  });
-  
-  // Переключение темы
-  dom.on(dom.qs('#themeToggle'), 'click', () => {
-    const currentTheme = store.state.settings.theme;
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    store.saveState({
-      ...store.state,
-      settings: {
-        ...store.state.settings,
-        theme: newTheme
-      }
-    });
-    document.documentElement.classList.toggle('dark-theme', newTheme === 'dark');
-  });
-});
