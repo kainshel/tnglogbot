@@ -8,6 +8,39 @@
   <meta name="theme-color" content="#1E90FF">
   <link rel="icon" href="icon.png">
   <link rel="stylesheet" href="styles.css">
+
+<style>
+@media (max-width: 640px) {
+  table.exercises-table { display: none; }
+  .exercise-card {
+    background: white;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+  .exercise-card h3 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    color: #000;
+  }
+  .exercise-card img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 8px;
+  }
+  .exercise-card .muscle-info {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 10px;
+  }
+  .exercise-card .actions button {
+    margin-right: 5px;
+    margin-bottom: 5px;
+  }
+}
+</style>
+
 </head>
 <body>
   <div class="app">
@@ -60,5 +93,34 @@
   <script>document.getElementById('burger').onclick=()=>document.getElementById('nav').classList.toggle('show');</script>
   <script type="module" src="app_exercises.js"></script>
   <div class="modal-back" id="modalBack"><div class="modal" id="modal"></div></div>
+
+<script>
+function renderExerciseCards(exercises) {
+  const container = document.getElementById('exerciseCardsContainer');
+  container.innerHTML = '';
+  exercises.forEach(ex => {
+    const card = document.createElement('div');
+    card.className = 'exercise-card';
+    card.innerHTML = `
+      <h3>${ex.name}</h3>
+      <img src="${ex.gifUrl || ''}" alt="${ex.name}">
+      <div class="muscle-info">${ex.group} - ${ex.subgroup || ''}</div>
+      <div class="actions">
+        <button onclick="viewExercise('${ex.id}')">Просмотр</button>
+        <button onclick="editExercise('${ex.id}')">Редактировать</button>
+        <button onclick="deleteExercise('${ex.id}')">Удалить</button>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+}
+document.addEventListener('DOMContentLoaded', () => {
+  if (window.innerWidth <= 640) {
+    const list = DB.getExercises();
+    renderExerciseCards(list);
+  }
+});
+</script>
+
 </body>
 </html>
