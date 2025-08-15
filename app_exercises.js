@@ -1,40 +1,123 @@
-import {DB, MUSCLE_GROUPS, toast, uid} from './storage.js';
-const exBody=document.getElementById('exercisesBody'), exTpl=document.getElementById('exerciseRowTpl');
-const search=document.getElementById('search'), groupFilter=document.getElementById('groupFilter'), subgroupFilter=document.getElementById('subgroupFilter');
-const addBtn=document.getElementById('addExercise'); const modalBack=document.getElementById('modalBack'); const modal=document.getElementById('modal');
-Object.keys(MUSCLE_GROUPS).forEach(g=>{ const o=document.createElement('option'); o.value=g;o.textContent=g; groupFilter.appendChild(o); });
-groupFilter.onchange=()=>{ fillSub(); render(); }; subgroupFilter.onchange=render; search.oninput=render;
-function fillSub(){ const g=groupFilter.value; subgroupFilter.innerHTML='<option value=\"\">Все подгруппы</option>'; const subs=MUSCLE_GROUPS[g]||[]; subs.forEach(s=>{ const o=document.createElement('option'); o.value=s;o.textContent=s; subgroupFilter.appendChild(o); }); subgroupFilter.disabled=subs.length===0; }
-fillSub();
-function render(){ const q=search.value.trim().toLowerCase(); const g=groupFilter.value, sg=subgroupFilter.value; exBody.innerHTML='';
-  DB.exercises.filter(e=>(!q||e.name.toLowerCase().includes(q))&&(!g||e.group===g)&&(!sg||e.subgroup===sg)).forEach(e=>{
-    const row=exTpl.content.firstElementChild.cloneNode(true); const img=row.querySelector('img'); img.src=e.gif||'icon.png'; img.alt=e.name;
-    row.querySelector('.name').textContent=e.name; row.querySelector('.group').textContent=e.group; row.querySelector('.subgroup').textContent=e.subgroup||'—';
-    row.querySelector('.view').onclick=()=>view(e); row.querySelector('.edit').onclick=()=>edit(e); row.querySelector('.del').onclick=()=>{ if(confirm('Удалить?')){ DB.exercises=DB.exercises.filter(x=>x.id!==e.id); render(); } };
-    exBody.appendChild(row);
+
+import {DB, MUSCLE_GROUPS, toast} from './storage.js';
+
+// Elements
+const grid = document.getElementById('exercisesGrid');
+const search = document.getElementById('filterSearch');
+const groupFilter = document.getElementById('filterGroup');
+const zoneFilter = document.getElementById('filterZone');
+const typeFilter = document.getElementById('filterType');
+const equipFilter = document.getElementById('filterEquip');
+const sortBy = document.getElementById('filterSort');
+const resetBtn = document.getElementById('filterReset');
+
+// Populate filters
+function fillGroups() {
+  const groups = Object.keys(MUSCLE_GROUPS).sort();
+  groups.forEach(g => {
+    const o = document.createElement('option');
+    o.value = g; o.textContent = g;
+    groupFilter.appendChild(o);
   });
 }
-render();
-addBtn.onclick=()=>edit();
-function edit(ex=null){ modal.innerHTML=''; const h=el('h3', ex?'Редактировать упражнение':'Новое упражнение'); const form=div('row wrap');
-  const name=input('Название', ex?.name||''); const groupSel=select(Object.keys(MUSCLE_GROUPS), ex?.group||''); const subSel=select(MUSCLE_GROUPS[groupSel.value]||[], ex?.subgroup||'');
-  groupSel.addEventListener('change',()=>{ updateSelect(subSel, MUSCLE_GROUPS[groupSel.value]||[], ''); });
-  const gif=input('GIF URL', ex?.gif||''); const desc=textarea('Описание', ex?.description||'');
-  const save=button('Сохранить','btn'), cancel=button('Отмена','btn ghost');
-  save.onclick=()=>{ const obj={id:ex?.id||uid(), name:name.value.trim(), group:groupSel.value, subgroup:subSel.value, gif:gif.value.trim(), description:desc.value.trim()};
-    if(!obj.name) return alert('Введите название'); if(ex){ DB.exercises=DB.exercises.map(x=>x.id===ex.id?obj:x);} else { DB.exercises=DB.exercises.concat(obj);} close(); render(); toast('Сохранено'); };
-  cancel.onclick=close; [name,groupSel,subSel,gif,desc,save,cancel].forEach(el=>form.appendChild(el)); modal.append(h,form); open(); }
-function view(e){ modal.innerHTML=''; const h=el('h3',e.name); const row=div('row wrap');
-  const image=new Image(); image.src=e.gif||'icon.png'; image.style.maxWidth='320px'; image.style.borderRadius='12px'; image.style.border='1px solid var(--border)';
-  const text=div(); text.innerHTML=`<div class="badge">${e.group}</div> <div class="badge">${e.subgroup||'—'}</div><p style="margin-top:8px;white-space:pre-wrap">${e.description||'Описание не добавлено.'}</p>`;
-  const closeBtn=button('Закрыть','btn'); closeBtn.onclick=close; row.append(image,text); modal.append(h,row,closeBtn); open(); }
-function open(){ document.getElementById('modalBack').style.display='flex'; } function close(){ document.getElementById('modalBack').style.display='none'; }
-document.getElementById('modalBack').addEventListener('click',(e)=>{ if(e.target.id==='modalBack') close(); });
+function fillZones() {
+  const g = groupFilter.value;
+  const zones = g ? MUSCLE_GROUPS[g] || [] : Array.from(new Set(Object.values(MUSCLE_GROUPS).flat()));
+  zoneFilter.innerHTML = '<option value="">Все целевые зоны</option>';
+  zones.forEach(z => {
+    const o = document.createElement('option');
+    o.value = z; o.textContent = z;
+    zoneFilter.appendChild(o);
+  });
+  zoneFilter.disabled = zones.length === 0;
+}
+function fillTypesAndEquip() {
+  const list = DB.exercises;
+  const types = Array.from(new Set(list.map(e => (e.type||'').trim()).filter(Boolean))).sort();
+  const equips = Array.from(new Set(list.map(e => (e.equipment||'').trim()).filter(Boolean))).sort();
+  typeFilter.innerHTML = '<option value="">Все типы</option>';
+  equipFilter.innerHTML = '<option value="">Все оборудование</option>';
+  types.forEach(t => { const o=document.createElement('option'); o.value=t; o.textContent=t; typeFilter.appendChild(o); });
+  equips.forEach(eq => { const o=document.createElement('option'); o.value=eq; o.textContent=eq; equipFilter.appendChild(o); });
+}
 
-// helpers
-function el(t,txt){ const e=document.createElement(t); if(txt) e.textContent=txt; return e } function div(cls){ const d=document.createElement('div'); if(cls) d.className=cls; return d }
-function input(ph,val){ const i=document.createElement('input'); i.placeholder=ph; i.value=val; return i }
-function textarea(ph,val){ const t=document.createElement('textarea'); t.placeholder=ph; t.value=val; return t }
-function select(opts,selected){ const s=document.createElement('select'); updateSelect(s,opts,selected); return s }
-function updateSelect(sel, arr, selected){ sel.innerHTML=''; arr.forEach(v=>{ const o=document.createElement('option'); o.value=v; o.textContent=v; sel.appendChild(o); }); sel.value=selected||''; }
-function button(txt, cls){ const b=document.createElement('button'); b.textContent=txt; b.className=cls; return b }
+fillGroups();
+fillZones();
+fillTypesAndEquip();
+
+groupFilter.onchange = () => { fillZones(); render(); };
+zoneFilter.onchange = render;
+typeFilter.onchange = render;
+equipFilter.onchange = render;
+search.oninput = render;
+sortBy.onchange = render;
+resetBtn.onclick = () => {
+  search.value = '';
+  groupFilter.value = '';
+  fillZones();
+  zoneFilter.value = '';
+  typeFilter.value = '';
+  equipFilter.value = '';
+  sortBy.value = 'name';
+  render();
+};
+
+function sortList(list) {
+  const key = sortBy.value || 'name';
+  const collator = new Intl.Collator('ru', {numeric:true, sensitivity:'base'});
+  return list.slice().sort((a,b)=>collator.compare((a[key]||'').toString(), (b[key]||'').toString()));
+}
+
+function passesFilters(e) {
+  const q = search.value.trim().toLowerCase();
+  const g = groupFilter.value;
+  const z = zoneFilter.value;
+  const t = typeFilter.value;
+  const eq = equipFilter.value;
+  return (!q || (e.name && e.name.toLowerCase().includes(q)) || (e.name_en && e.name_en.toLowerCase().includes(q)))
+    && (!g || e.group === g)
+    && (!z || (e.target_zone||'') === z)
+    && (!t || (e.type||'') === t)
+    && (!eq || (e.equipment||'') === eq);
+}
+
+function render() {
+  const list = DB.exercises.filter(passesFilters);
+  const sorted = sortList(list);
+  grid.innerHTML = '';
+  if (sorted.length === 0) {
+    const empty = document.createElement('div');
+    empty.className = 'empty';
+    empty.textContent = 'Ничего не найдено';
+    grid.appendChild(empty);
+    return;
+  }
+  sorted.forEach(e => {
+    const card = document.createElement('div');
+    card.className = 'exercise-card';
+    card.innerHTML = `
+      <h3 class="ex-title">${e.name}</h3>
+      <div class="ex-image-wrap"><img loading="lazy" src="${e.gif || 'icon.png'}" alt="${e.name}"></div>
+      <div class="ex-meta">
+        <span class="badge">${e.group}</span>
+        <span class="dot">•</span>
+        <span class="badge secondary">${e.target_zone || 'Целевая зона не указана'}</span>
+      </div>
+      <div class="ex-tags">
+        ${e.type ? `<span class="tag">${e.type}</span>` : ''}
+        ${e.equipment ? `<span class="tag">${e.equipment}</span>` : ''}
+      </div>
+      <div class="ex-actions">
+        <button class="btn add">Добавить</button>
+        <a class="btn ghost" target="_blank" rel="noopener" href="${e.gif}">Открыть GIF</a>
+      </div>
+    `;
+    card.querySelector('.add').onclick = () => {
+      toast('Упражнение добавлено в тренировку');
+      // Hook for integration with workout flow can be placed here
+    };
+    grid.appendChild(card);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', render);
