@@ -1,6 +1,6 @@
 import {DB, toast} from './storage.js';
 const qs=(id)=>document.getElementById(id);
-const fields=['name','age','gender','height','weight','level','goal','bodyfat','neck','chest','waist','hips','notes'];
+const fields=['name','age','gender','height','weight','level','goal','notes'];
 const p=DB.profile; fields.forEach(f=>{ const el=qs(f); if(el) el.value=p[f]??''; });
 const avatarPreview=qs('avatarPreview'); avatarPreview.src=p.avatar||'icon.png';
 function save(){ const obj={}; fields.forEach(f=>obj[f]=qs(f).value); obj.avatar=avatarPreview.src; DB.profile=obj; toast('Профиль сохранён'); }

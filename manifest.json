@@ -3,8 +3,8 @@
   "short_name": "Дневник",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#F7FAF6",
-  "theme_color": "#8FAF8F",
+  "background_color": "#FFFFFF",
+  "theme_color": "#1E90FF",
   "icons": [
     {
       "src": "icon.png",

@@ -11,8 +11,8 @@ function renderCalendar(){ const y=cal.getFullYear(), m=cal.getMonth(); calTitle
     if(list.length) cell.classList.add('has'); cell.onclick=()=>showDay(dateStr, list); calGrid.appendChild(cell); } }
 function empty(){ const d=document.createElement('div'); d.className='cal-cell'; return d }
 function showDay(dateStr,list){ dayCard.hidden=false; dayTitle.textContent=`Тренировки за ${dateStr}`; dayTbody.innerHTML='';
-  list.forEach(w=>{ const tr=document.createElement('tr'); tr.innerHTML=`<td>${w.date}</td><td>${totalVolume(w)}</td>`;
-    const td=document.createElement('td'); const open=document.createElement('a'); open.className='icon-btn'; open.textContent='Открыть'; open.href=`view.html?id=${w.id}`;
+  list.forEach(w=>{ const tr=document.createElement('tr'); tr.innerHTML=`<td data-label="Дата">${w.date}</td><td data-label="Объём">${totalVolume(w)}</td>`;
+    const td=document.createElement('td'); td.setAttribute('data-label','Действия'); const open=document.createElement('a'); open.className='icon-btn'; open.textContent='Открыть'; open.href=`view.html?id=${w.id}`;
     const del=document.createElement('button'); del.className='icon-btn'; del.textContent='Удалить'; del.onclick=()=>{ if(confirm('Удалить?')){ DB.workouts=DB.workouts.filter(x=>x.id!==w.id); renderCalendar(); dayCard.hidden=true; } };
     td.append(open,del); tr.appendChild(td); dayTbody.appendChild(tr); }); }
 prevMonth.onclick=()=>{ cal.setMonth(cal.getMonth()-1); renderCalendar(); }; nextMonth.onclick=()=>{ cal.setMonth(cal.getMonth()+1); renderCalendar(); }; renderCalendar();

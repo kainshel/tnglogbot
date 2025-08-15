@@ -5,6 +5,6 @@ const title=document.getElementById('title'), histItems=document.getElementById(
 if(!w){ title.textContent='Тренировка не найдена'; } else {
   title.textContent=`${w.title} — ${w.date} (объём: ${totalVolume(w)})`;
   w.items.forEach(i=>{ const tr=document.createElement('tr'); const sets=i.sets.map(s=>`${s.w||0}×${s.r||0}`).join(', ');
-    const vol=i.sets.reduce((a,s)=>a+(Number(s.w||0)*Number(s.r||0)),0); tr.innerHTML=`<td>${i.name}</td><td>${sets}</td><td>${vol}</td>`; histItems.appendChild(tr); });
+    const vol=i.sets.reduce((a,s)=>a+(Number(s.w||0)*Number(s.r||0)),0); tr.innerHTML=`<td data-label="Упражнение">${i.name}</td><td data-label="Подходы">${sets}</td><td data-label="Объём">${vol}</td>`; histItems.appendChild(tr); });
   repeatBtn.href=`workout.html#repeat=${w.id}`;
 }
