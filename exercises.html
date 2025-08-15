@@ -9,11 +9,16 @@
   <link rel="icon" href="icon.png">
   <link rel="stylesheet" href="styles.css">
   <style>
+    .filters-bar { position: sticky; top: 0; background: white; z-index: 10; padding: 0.5rem; border-bottom: 1px solid #ccc; }
+    .filters-bar .row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .filters-bar select, .filters-bar input { padding: 0.3rem; }
     @media (max-width: 640px) {
       .filters-bar .row { flex-direction: column; align-items: stretch; }
       .filters-bar input, .filters-bar select, .filters-bar .btn { width: 100%; }
       .grid { grid-template-columns: 1fr !important; }
     }
+    .exercise-card { display: flex; flex-direction: column; align-items: center; padding: 1rem; border: 1px solid #ddd; border-radius: 8px; }
+    .exercise-card img { max-width: 100%; height: auto; }
   </style>
 </head>
 <body>
@@ -32,33 +37,21 @@
   </aside>
   <main class="content">
     <header class="section-head"><h1>Упражнения</h1></header>
-<div class="filters-bar">
-    <div class="container">
+    <div class="filters-bar">
       <div class="row">
-        <input id="filterSearch" type="search" placeholder="Поиск по названию…" />
-        <select id="filterGroup"><option value="">Все группы</option></select>
-        <select id="filterZone"><option value="">Все целевые зоны</option></select>
-        <select id="filterType"><option value="">Все типы</option></select>
-        <select id="filterEquip"><option value="">Все оборудование</option></select>
-        <select id="filterSort">
-          <option value="name">Сортировать: Названию</option>
-          <option value="type">Сортировать: Типу</option>
-          <option value="equipment">Сортировать: Оборудованию</option>
-        </select>
-        <button id="filterReset" class="btn">Сбросить фильтры</button>
+        <input type="text" id="searchInput" placeholder="Поиск...">
+        <select id="groupFilter"><option value="">Все группы</option></select>
+        <select id="zoneFilter"><option value="">Все целевые зоны</option></select>
+        <select id="typeFilter"><option value="">Все типы</option></select>
+        <select id="equipmentFilter"><option value="">Все оборудование</option></select>
+        <button class="btn" id="clearFilters">Сбросить</button>
       </div>
     </div>
-  </div>
-
-  <div class="container">
     <div id="exercisesGrid" class="grid"></div>
-  </div>
-
-  <script type="module" src="app_exercises.js"></script>
-</body>
   </main>
 </div>
-<script type="module" src="app_exercises.js"></script>
 <script src="menu.js"></script>
+<script src="storage.js"></script>
+<script src="app_exercises.js"></script>
 </body>
 </html>
