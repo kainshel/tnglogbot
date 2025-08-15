@@ -2,69 +2,80 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no"/>
   <title>Таймер · Дневник Тренировок</title>
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#1E90FF">
   <link rel="icon" href="icon.png">
   <link rel="stylesheet" href="styles.css">
-  <style>
-    .timer-container { display: flex; flex-direction: column; align-items: center; gap: 1rem; padding: 1rem; }
-    .time-display { font-size: 3rem; font-weight: bold; }
-    .controls { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; }
-    .controls button { font-size: 1rem; padding: 0.5rem 1rem; }
-    @media (max-width: 640px) {
-      .controls { flex-direction: column; width: 100%; }
-      .controls button { width: 100%; }
-    }
-    .tab-buttons { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
-    .tab-buttons button.active { background-color: #1E90FF; color: white; }
-  </style>
 </head>
 <body>
-<div class="app">
-  <aside class="sidebar">
-    <div class="brand">DT<span>·</span>Дневник Тренировок</div>
-    <button id="burger" class="nav-toggle">☰</button>
-    <nav class="nav" id="nav">
-      <a href="index.html">Профиль</a>
-      <a href="exercises.html">Упражнения</a>
-      <a href="workout.html">Тренировка</a>
-      <a href="calendar.html">Календарь</a>
-      <a href="stats.html">Статистика</a>
-      <a class="active" href="timer.html">Таймер</a>
-    </nav>
-  </aside>
+  
+<header class="mobile-topbar">
+  <nav class="mobile-nav">
+    <a href="index.html" class="nav-item"><span>👤</span><small>Профиль</small></a>
+    <a href="exercises.html" class="nav-item"><span>🏋️</span><small>Упражнения</small></a>
+    <a href="workout.html" class="nav-item"><span>📝</span><small>Тренировка</small></a>
+    <a href="calendar.html" class="nav-item"><span>🗓️</span><small>Календарь</small></a>
+    <a href="stats.html" class="nav-item"><span>📊</span><small>Статистика</small></a>
+    <a href="timer.html" class="nav-item active" class="nav-item"><span>⏱️</span><small>Таймер</small></a>
+  </nav>
+</header>
+
   <main class="content">
-    <header class="section-head"><h1>Таймер и секундомер</h1></header>
-    <div class="timer-container">
-      <div class="tab-buttons">
-        <button id="tab-timer" class="active">Таймер</button>
-        <button id="tab-stopwatch">Секундомер</button>
+    <header class="section-head"><h1>Таймер</h1></header>
+    <div class="container">
+      
+<div class="timer-wrap">
+  <div class="timer-tabs">
+    <button id="tab-timer" class="active">Таймер</button>
+    <button id="tab-stopwatch">Секундомер</button>
+  </div>
+
+  <div id="timer-section">
+    <div class="timer-canvas">
+      <svg viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="45" stroke="#eee" stroke-width="10" fill="none"></circle>
+        <circle id="progress" cx="50" cy="50" r="45" stroke="#1E90FF" stroke-width="10" fill="none" stroke-linecap="round" stroke-dasharray="282.743" stroke-dashoffset="0"></circle>
+      </svg>
+      <div class="time" id="timer-display">00:00</div>
+    </div>
+    <div class="timer-controls">
+      <div class="row">
+        <input type="number" id="minutes" placeholder="Минуты" min="0">
+        <input type="number" id="seconds" placeholder="Секунды" min="0" max="59">
       </div>
-      <div id="timer-section">
-        <input type="number" id="minutes" placeholder="Минуты" min="0" style="width:80px;">
-        <input type="number" id="seconds" placeholder="Секунды" min="0" max="59" style="width:80px;">
-        <div class="time-display" id="timer-display">00:00</div>
-        <div class="controls">
-          <button id="timer-start">Старт</button>
-          <button id="timer-pause">Пауза</button>
-          <button id="timer-reset">Сброс</button>
-        </div>
-      </div>
-      <div id="stopwatch-section" style="display:none;">
-        <div class="time-display" id="stopwatch-display">00:00:00</div>
-        <div class="controls">
-          <button id="sw-start">Старт</button>
-          <button id="sw-pause">Пауза</button>
-          <button id="sw-reset">Сброс</button>
-        </div>
+      <div class="row">
+        <button id="timer-start">Старт</button>
+        <button id="timer-pause">Пауза</button>
+        <button id="timer-reset">Сброс</button>
       </div>
     </div>
-  </main>
+  </div>
+
+  <div id="stopwatch-section" style="display:none;">
+    <div class="timer-canvas">
+      <svg viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="45" stroke="#eee" stroke-width="10" fill="none"></circle>
+        <circle id="sw-progress" cx="50" cy="50" r="45" stroke="#1E90FF" stroke-width="10" fill="none" stroke-linecap="round" stroke-dasharray="282.743" stroke-dashoffset="282.743"></circle>
+      </svg>
+      <div class="time" id="stopwatch-display">00:00:00</div>
+    </div>
+    <div class="timer-controls">
+      <div class="row">
+        <button id="sw-start">Старт</button>
+        <button id="sw-pause">Пауза</button>
+        <button id="sw-reset">Сброс</button>
+      </div>
+    </div>
+  </div>
 </div>
-<script src="menu.js"></script>
+
 <script>
+const CIRC = 2*Math.PI*45; // circumference
+const progress = document.getElementById('progress');
+const swProgress = document.getElementById('sw-progress');
+
 // Tabs
 const tabTimer = document.getElementById('tab-timer');
 const tabSW = document.getElementById('tab-stopwatch');
@@ -74,42 +85,61 @@ tabTimer.onclick = () => { tabTimer.classList.add('active'); tabSW.classList.rem
 tabSW.onclick = () => { tabSW.classList.add('active'); tabTimer.classList.remove('active'); timerSection.style.display='none'; swSection.style.display='block'; };
 
 // Timer
-let timerInterval;
-let timerRemaining = 0;
+let timerInterval; let timerTotal=0; let timerRemain=0;
+function setStrokeByRemain(){
+  if (!timerTotal) { progress.style.strokeDashoffset = '0'; return; }
+  const ratio = Math.max(0, timerRemain) / timerTotal;
+  const offset = CIRC * (1 - ratio);
+  progress.style.strokeDashoffset = String(offset);
+  // color stages
+  if (ratio > 0.5) progress.style.stroke = '#22c55e'; // green
+  else if (ratio > 0.2) progress.style.stroke = '#f59e0b'; // amber
+  else progress.style.stroke = '#ef4444'; // red
+}
+function updateTimerDisplay(){
+  const m = String(Math.floor(timerRemain/60)).padStart(2,'0');
+  const s = String(Math.max(0, timerRemain%60)).padStart(2,'0');
+  document.getElementById('timer-display').textContent = m+':'+s;
+  setStrokeByRemain();
+}
 document.getElementById('timer-start').onclick = () => {
-  if (timerInterval) return;
-  const m = parseInt(document.getElementById('minutes').value) || 0;
-  const s = parseInt(document.getElementById('seconds').value) || 0;
-  if (timerRemaining <= 0) timerRemaining = m*60 + s;
-  updateTimerDisplay();
-  timerInterval = setInterval(()=>{
-    timerRemaining--;
-    if (timerRemaining <= 0) { clearInterval(timerInterval); timerInterval=null; alert('Время вышло!'); timerRemaining=0; }
-    updateTimerDisplay();
-  },1000);
+  if (!timerInterval){
+    if (timerRemain<=0){
+      const m = parseInt(document.getElementById('minutes').value)||0;
+      const s = parseInt(document.getElementById('seconds').value)||0;
+      timerTotal = Math.max(1, m*60+s);
+      timerRemain = timerTotal;
+    }
+    timerInterval = setInterval(()=>{
+      timerRemain--;
+      updateTimerDisplay();
+      if (timerRemain<=0){ clearInterval(timerInterval); timerInterval=null; timerRemain=0; updateTimerDisplay(); try{ new AudioContext(); }catch(e){} alert('Время вышло!'); }
+    }, 1000);
+  }
 };
 document.getElementById('timer-pause').onclick = () => { clearInterval(timerInterval); timerInterval=null; };
-document.getElementById('timer-reset').onclick = () => { clearInterval(timerInterval); timerInterval=null; timerRemaining=0; updateTimerDisplay(); };
-function updateTimerDisplay(){
-  const m = String(Math.floor(timerRemaining/60)).padStart(2,'0');
-  const s = String(timerRemaining%60).padStart(2,'0');
-  document.getElementById('timer-display').textContent = m+':'+s;
-}
+document.getElementById('timer-reset').onclick = () => { clearInterval(timerInterval); timerInterval=null; timerRemain=0; timerTotal=0; updateTimerDisplay(); };
 
 // Stopwatch
 let swInterval; let swElapsed=0;
-document.getElementById('sw-start').onclick = () => {
-  if (swInterval) return;
-  swInterval = setInterval(()=>{ swElapsed++; updateSWDisplay(); },1000);
-};
-document.getElementById('sw-pause').onclick = () => { clearInterval(swInterval); swInterval=null; };
-document.getElementById('sw-reset').onclick = () => { clearInterval(swInterval); swInterval=null; swElapsed=0; updateSWDisplay(); };
-function updateSWDisplay(){
+function updateSW(){
   const h = String(Math.floor(swElapsed/3600)).padStart(2,'0');
   const m = String(Math.floor((swElapsed%3600)/60)).padStart(2,'0');
   const s = String(swElapsed%60).padStart(2,'0');
   document.getElementById('stopwatch-display').textContent = h+':'+m+':'+s;
+  const ratio = (swElapsed%60)/60;
+  swProgress.style.strokeDashoffset = String(CIRC*(1-ratio));
+  swProgress.style.stroke = '#1E90FF';
 }
+document.getElementById('sw-start').onclick = () => { if(!swInterval){ swInterval=setInterval(()=>{ swElapsed++; updateSW(); },1000);} };
+document.getElementById('sw-pause').onclick = () => { clearInterval(swInterval); swInterval=null; };
+document.getElementById('sw-reset').onclick = () => { clearInterval(swInterval); swInterval=null; swElapsed=0; updateSW(); };
+
+updateTimerDisplay(); updateSW();
 </script>
+
+    </div>
+  </main>
+  <script>/* no desktop sidebar scripts */</script>
 </body>
 </html>
