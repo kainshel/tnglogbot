@@ -9,33 +9,30 @@
   <link rel="icon" href="icon.png">
   <link rel="stylesheet" href="styles.css">
   <style>
-    .filters-bar {{ position: sticky; top: 0; z-index: 30; background: var(--bg,#f7f9fc); padding: 10px; border-bottom: 1px solid var(--border,#e5e7eb); box-shadow: 0 2px 8px rgba(0,0,0,0.04); }}
-    .filters-bar .row {{ display:flex; gap:10px; flex-wrap: wrap; align-items:center; }}
-    .filters-bar input, .filters-bar select {{ padding: 10px 12px; border: 1px solid var(--border,#e5e7eb); border-radius: 10px; background: white; }}
-    .filters-bar .btn {{ padding: 10px 14px; border-radius: 10px; border: 1px solid var(--border,#e5e7eb); background: white; cursor: pointer; }}
-    .filters-bar .btn:hover {{ background: #f3f4f6; }}
-    .container {{ max-width: 1100px; margin: 0 auto; padding: 10px 12px 24px; }}
-    .grid {{ display:grid; grid-template-columns: repeat(3, 1fr); gap:16px; margin-top: 14px; }}
-    @media (max-width: 1024px) {{ .grid {{ grid-template-columns: repeat(2,1fr); }} }}
-    @media (max-width: 640px) {{ .grid {{ grid-template-columns: 1fr; }} .filters-bar {{ position: sticky; }} }}
-    .exercise-card {{ background:white; border: 1px solid var(--border,#e5e7eb); border-radius: 16px; padding: 14px; box-shadow: 0 2px 6px rgba(0,0,0,0.06);}}
-    .exercise-card .ex-title {{ margin: 0 0 10px; font-size: 18px; }}
-    .ex-image-wrap {{ width: 100%; border-radius: 12px; overflow: hidden; border:1px solid var(--border,#e5e7eb); }}
-    .ex-image-wrap img {{ display:block; width: 100%; height: auto; }}
-    .ex-meta {{ margin-top: 10px; display:flex; gap:8px; align-items:center; flex-wrap:wrap; }}
-    .badge {{ display:inline-block; padding:4px 8px; background:#eef2ff; border-radius: 999px; font-size:12px; }}
-    .badge.secondary {{ background:#ecfeff; }}
-    .dot {{ opacity: .6; }}
-    .ex-tags {{ margin-top: 8px; display:flex; gap:8px; flex-wrap:wrap; }}
-    .tag {{ font-size: 12px; border:1px solid var(--border,#e5e7eb); border-radius:999px; padding:4px 8px; }}
-    .ex-actions {{ display:flex; gap:10px; margin-top:12px; }}
-    .ex-actions .btn {{ padding:10px 12px; border-radius:10px; border:1px solid var(--border,#e5e7eb); background:white; cursor:pointer; }}
-    .ex-actions .btn.ghost {{ background: transparent; }}
-    .empty {{ padding: 40px; text-align:center; opacity:.6; }}
+    @media (max-width: 640px) {
+      .filters-bar .row { flex-direction: column; align-items: stretch; }
+      .filters-bar input, .filters-bar select, .filters-bar .btn { width: 100%; }
+      .grid { grid-template-columns: 1fr !important; }
+    }
   </style>
 </head>
 <body>
-  <div class="filters-bar">
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">DT<span>·</span>Дневник Тренировок</div>
+    <button id="burger" class="nav-toggle">☰</button>
+    <nav class="nav" id="nav">
+      <a href="index.html">Профиль</a>
+      <a class="active" href="exercises.html">Упражнения</a>
+      <a href="workout.html">Тренировка</a>
+      <a href="calendar.html">Календарь</a>
+      <a href="stats.html">Статистика</a>
+      <a href="timer.html">Таймер</a>
+    </nav>
+  </aside>
+  <main class="content">
+    <header class="section-head"><h1>Упражнения</h1></header>
+<div class="filters-bar">
     <div class="container">
       <div class="row">
         <input id="filterSearch" type="search" placeholder="Поиск по названию…" />
@@ -58,5 +55,10 @@
   </div>
 
   <script type="module" src="app_exercises.js"></script>
+</body>
+  </main>
+</div>
+<script type="module" src="app_exercises.js"></script>
+<script src="menu.js"></script>
 </body>
 </html>

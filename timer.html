@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <title>Таймер · Дневник Тренировок</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#1E90FF">
+  <link rel="icon" href="icon.png">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .timer-container { display: flex; flex-direction: column; align-items: center; gap: 1rem; padding: 1rem; }
+    .time-display { font-size: 3rem; font-weight: bold; }
+    .controls { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; }
+    .controls button { font-size: 1rem; padding: 0.5rem 1rem; }
+    @media (max-width: 640px) {
+      .controls { flex-direction: column; width: 100%; }
+      .controls button { width: 100%; }
+    }
+    .tab-buttons { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+    .tab-buttons button.active { background-color: #1E90FF; color: white; }
+  </style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">DT<span>·</span>Дневник Тренировок</div>
+    <button id="burger" class="nav-toggle">☰</button>
+    <nav class="nav" id="nav">
+      <a href="index.html">Профиль</a>
+      <a href="exercises.html">Упражнения</a>
+      <a href="workout.html">Тренировка</a>
+      <a href="calendar.html">Календарь</a>
+      <a href="stats.html">Статистика</a>
+      <a class="active" href="timer.html">Таймер</a>
+    </nav>
+  </aside>
+  <main class="content">
+    <header class="section-head"><h1>Таймер и секундомер</h1></header>
+    <div class="timer-container">
+      <div class="tab-buttons">
+        <button id="tab-timer" class="active">Таймер</button>
+        <button id="tab-stopwatch">Секундомер</button>
+      </div>
+      <div id="timer-section">
+        <input type="number" id="minutes" placeholder="Минуты" min="0" style="width:80px;">
+        <input type="number" id="seconds" placeholder="Секунды" min="0" max="59" style="width:80px;">
+        <div class="time-display" id="timer-display">00:00</div>
+        <div class="controls">
+          <button id="timer-start">Старт</button>
+          <button id="timer-pause">Пауза</button>
+          <button id="timer-reset">Сброс</button>
+        </div>
+      </div>
+      <div id="stopwatch-section" style="display:none;">
+        <div class="time-display" id="stopwatch-display">00:00:00</div>
+        <div class="controls">
+          <button id="sw-start">Старт</button>
+          <button id="sw-pause">Пауза</button>
+          <button id="sw-reset">Сброс</button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="menu.js"></script>
+<script>
+// Tabs
+const tabTimer = document.getElementById('tab-timer');
+const tabSW = document.getElementById('tab-stopwatch');
+const timerSection = document.getElementById('timer-section');
+const swSection = document.getElementById('stopwatch-section');
+tabTimer.onclick = () => { tabTimer.classList.add('active'); tabSW.classList.remove('active'); timerSection.style.display='block'; swSection.style.display='none'; };
+tabSW.onclick = () => { tabSW.classList.add('active'); tabTimer.classList.remove('active'); timerSection.style.display='none'; swSection.style.display='block'; };
+
+// Timer
+let timerInterval;
+let timerRemaining = 0;
+document.getElementById('timer-start').onclick = () => {
+  if (timerInterval) return;
+  const m = parseInt(document.getElementById('minutes').value) || 0;
+  const s = parseInt(document.getElementById('seconds').value) || 0;
+  if (timerRemaining <= 0) timerRemaining = m*60 + s;
+  updateTimerDisplay();
+  timerInterval = setInterval(()=>{
+    timerRemaining--;
+    if (timerRemaining <= 0) { clearInterval(timerInterval); timerInterval=null; alert('Время вышло!'); timerRemaining=0; }
+    updateTimerDisplay();
+  },1000);
+};
+document.getElementById('timer-pause').onclick = () => { clearInterval(timerInterval); timerInterval=null; };
+document.getElementById('timer-reset').onclick = () => { clearInterval(timerInterval); timerInterval=null; timerRemaining=0; updateTimerDisplay(); };
+function updateTimerDisplay(){
+  const m = String(Math.floor(timerRemaining/60)).padStart(2,'0');
+  const s = String(timerRemaining%60).padStart(2,'0');
+  document.getElementById('timer-display').textContent = m+':'+s;
+}
+
+// Stopwatch
+let swInterval; let swElapsed=0;
+document.getElementById('sw-start').onclick = () => {
+  if (swInterval) return;
+  swInterval = setInterval(()=>{ swElapsed++; updateSWDisplay(); },1000);
+};
+document.getElementById('sw-pause').onclick = () => { clearInterval(swInterval); swInterval=null; };
+document.getElementById('sw-reset').onclick = () => { clearInterval(swInterval); swInterval=null; swElapsed=0; updateSWDisplay(); };
+function updateSWDisplay(){
+  const h = String(Math.floor(swElapsed/3600)).padStart(2,'0');
+  const m = String(Math.floor((swElapsed%3600)/60)).padStart(2,'0');
+  const s = String(swElapsed%60).padStart(2,'0');
+  document.getElementById('stopwatch-display').textContent = h+':'+m+':'+s;
+}
+</script>
+</body>
+</html>
