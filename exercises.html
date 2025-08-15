@@ -11,7 +11,7 @@
 
 <style>
 @media (max-width: 640px) {
-  table.exercises-table { display: none; }
+  .table-responsive { display: none !important; }
   .exercise-card {
     background: white;
     border-radius: 10px;
@@ -95,7 +95,7 @@
   <div class="modal-back" id="modalBack"><div class="modal" id="modal"></div></div>
 
 <script>
-function renderExerciseCards(exercises) {
+function renderExerciseCardsMobile(exercises) {
   const container = document.getElementById('exerciseCardsContainer');
   container.innerHTML = '';
   exercises.forEach(ex => {
@@ -117,7 +117,7 @@ function renderExerciseCards(exercises) {
 document.addEventListener('DOMContentLoaded', () => {
   if (window.innerWidth <= 640) {
     const list = DB.getExercises();
-    renderExerciseCards(list);
+    renderExerciseCardsMobile(list);
   }
 });
 </script>
