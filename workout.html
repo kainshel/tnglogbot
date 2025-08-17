@@ -1,1 +1,38 @@
-<!-- workout page placeholder -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Тренировка</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">Дневник Тренировок</div>
+    <nav class="nav">
+      <a href="index.html">Главная</a>
+      <a href="exercises.html">Упражнения</a>
+      <a class="active" href="workout.html">Тренировка</a>
+      <a href="profile.html">Профиль</a>
+    </nav>
+  </aside>
+  <main class="content">
+    <h1>Моя тренировка</h1>
+    <section class="filters">
+      <input type="text" id="searchWorkout" placeholder="Поиск по названию">
+      <select id="filter-groups-workout"><option value="">Группа мышц</option></select>
+      <select id="filter-targets-workout"><option value="">Целевая зона</option></select>
+      <select id="filter-type-workout"><option value="">Тип</option></select>
+      <select id="filter-equipment-workout"><option value="">Оборудование</option></select>
+    </section>
+    <section id="workout-exercises" class="exercise-grid"></section>
+
+    <h2>Мой план</h2>
+    <div id="workout-plan"></div>
+    <button class="details-btn" onclick="saveWorkout()">💾 Сохранить тренировку</button>
+  </main>
+</div>
+
+<script src="app_workout.js"></script>
+</body>
+</html>
