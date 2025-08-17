@@ -49,7 +49,41 @@ async function loadExercises() {
     });
   }
 
-  function applyFilters() {
+  
+function applyFilters() {
+  let filtered = exercises;
+
+  const query = searchInput.value.toLowerCase();
+  if (query) {
+    filtered = filtered.filter(ex =>
+      ex.name_ru.toLowerCase().includes(query) ||
+      ex.name_en.toLowerCase().includes(query)
+    );
+  }
+  
+  const groups = document.getElementById('filter-group').value;
+  if (groups) {
+    filtered = filtered.filter(ex => ex.groups.some(group => group.toLowerCase().includes(groups.toLowerCase())));
+  }
+  
+  const targets = document.getElementById('filter-target').value;
+  if (targets) {
+    filtered = filtered.filter(ex => ex.targets.some(target => target.toLowerCase().includes(targets.toLowerCase())));
+  }
+  
+  const type = filterType.value;
+  if (type) {
+    filtered = filtered.filter(ex => ex.type === type);
+  }
+
+  const equipment = filterEquipment.value;
+  if (equipment) {
+    filtered = filtered.filter(ex => ex.equipment.includes(equipment));
+  }
+
+  render(filtered);
+}
+
     let filtered = exercises;
 
     const query = searchInput.value.toLowerCase();
