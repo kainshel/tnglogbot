@@ -7,6 +7,8 @@ async function loadExercises() {
   const searchInput = document.getElementById('search');
   const filterType = document.getElementById('filter-type');
   const filterEquipment = document.getElementById('filter-equipment');
+  const filterGroups = document.getElementById('filter-groups');
+  const filterTargets = document.getElementById('filter-targets');
 
   function render(list) {
     container.innerHTML = '';
@@ -49,41 +51,7 @@ async function loadExercises() {
     });
   }
 
-  
-function applyFilters() {
-  let filtered = exercises;
-
-  const query = searchInput.value.toLowerCase();
-  if (query) {
-    filtered = filtered.filter(ex =>
-      ex.name_ru.toLowerCase().includes(query) ||
-      ex.name_en.toLowerCase().includes(query)
-    );
-  }
-  
-  const groups = document.getElementById('filter-group').value;
-  if (groups) {
-    filtered = filtered.filter(ex => ex.groups.some(group => group.toLowerCase().includes(groups.toLowerCase())));
-  }
-  
-  const targets = document.getElementById('filter-target').value;
-  if (targets) {
-    filtered = filtered.filter(ex => ex.targets.some(target => target.toLowerCase().includes(targets.toLowerCase())));
-  }
-  
-  const type = filterType.value;
-  if (type) {
-    filtered = filtered.filter(ex => ex.type === type);
-  }
-
-  const equipment = filterEquipment.value;
-  if (equipment) {
-    filtered = filtered.filter(ex => ex.equipment.includes(equipment));
-  }
-
-  render(filtered);
-}
-
+  function applyFilters() {
     let filtered = exercises;
 
     const query = searchInput.value.toLowerCase();
@@ -99,7 +67,7 @@ function applyFilters() {
       filtered = filtered.filter(ex => ex.Groups === groups);
     }
 	
-	 const targets = filtertargets.value;
+	 const targets = filterTargets.value;
     if (targets) {
       filtered = filtered.filter(ex => ex.targets === targets);
     }
