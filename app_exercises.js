@@ -86,21 +86,21 @@ async function loadExercises() {
   }
 
   // Заполним фильтры
-    const groups = [...new Set(exercises.flatMap(ex => ex.groups))];
-  groups.forEach(eq => {
-    const opt = document.createElement('option');
-    opt.value = eq;
-    opt.textContent = eq;
-    filtergroups.appendChild(opt);
-  });
-  
-    const targets = [...new Set(exercises.flatMap(ex => ex.targets))];
-  targets.forEach(eq => {
-    const opt = document.createElement('option');
-    opt.value = eq;
-    opt.textContent = eq;
-    filtertargets.appendChild(opt);
-  });
+  const groups = [...new Set(exercises.flatMap(ex => ex.groups))];
+groups.forEach(g => {
+  const opt = document.createElement('option');
+  opt.value = g;
+  opt.textContent = g;
+  filterGroups.appendChild(opt);
+});
+
+  const targets = [...new Set(exercises.flatMap(ex => ex.targets))];
+targets.forEach(z => {
+  const opt = document.createElement('option');
+  opt.value = z;
+  opt.textContent = z;
+  filterTargets.appendChild(opt);
+});
   
   const types = [...new Set(exercises.map(ex => ex.type))];
   types.forEach(t => {
