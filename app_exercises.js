@@ -126,7 +126,7 @@
     const gr = (filterGroups?.value || '').trim();
     if (gr) list = list.filter(ex => ex.groups.includes(gr));
 
-    const tg = (filterTargetS?.value || '').trim();
+    const tg = (filterTargets?.value || '').trim();
     if (tg) list = list.filter(ex => ex.targets.includes(tg));
 
     const t = (filterType?.value || '').trim();
