@@ -16,15 +16,16 @@ header {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  padding: 1rem;
+  padding: 0.5rem 1rem;
   background: #f4f4f4;
+  margin-bottom: 0.5rem; /* Уменьшение отступа */
 }
 
 .exercise-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 1rem;
-  padding: 1rem;
+  padding: 0 1rem; /* Уменьшение отступа */
 }
 
 .exercise-card {
