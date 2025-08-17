@@ -32,7 +32,7 @@ function fillZones() {
   zoneFilter.disabled = zones.length === 0;
 }
 function fillTypesAndEquip() {
-  const list = DB.exercises;
+  const list = EXERCISES;
   const types = Array.from(new Set(list.map(e => (e.type||'').trim()).filter(Boolean))).sort();
   const equips = Array.from(new Set(list.map(e => (e.equipment||'').trim()).filter(Boolean))).sort();
   typeFilter.innerHTML = '<option value="">Все типы</option>';
@@ -82,7 +82,7 @@ function passesFilters(e) {
 }
 
 function render() {
-  const list = DB.exercises.filter(passesFilters);
+  const list = EXERCISES.filter(passesFilters);
   const sorted = sortList(list);
   grid.innerHTML = '';
   if (sorted.length === 0) {
