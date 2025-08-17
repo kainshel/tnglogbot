@@ -1,0 +1,15 @@
+{
+  "name": "Дневник Тренировок",
+  "short_name": "Дневник",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#F7FAF6",
+  "theme_color": "#8FAF8F",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
