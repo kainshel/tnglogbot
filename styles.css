@@ -1,0 +1,75 @@
+:root{--primary:#8FAF8F;--primary-dark:#6E8F73;--text:#1F2A24;--bg:#F7FAF6;--card:#fff;--border:#DDE5D9;--shadow:0 8px 24px rgba(31,42,36,.06);--radius:14px}
+*{box-sizing:border-box}body{margin:0;color:var(--text);background:var(--bg);font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif}
+a{color:inherit;text-decoration:none}img{max-width:100%;display:block}
+.app{display:grid;grid-template-columns:1fr;min-height:100vh}
+.sidebar{padding:12px;border-bottom:1px solid var(--border);background:#F2F6F1;position:sticky;top:0;z-index:5}
+.brand{font-weight:800;letter-spacing:.5px;margin-bottom:8px}.brand span{color:var(--primary)}
+.nav-toggle{display:inline-block;background:#fff;border:1px solid var(--border);border-radius:10px;padding:6px 10px;margin-right:8px}
+.nav{display:none;gap:8px;flex-wrap:wrap}.nav.show{display:flex}
+.nav a{display:block;border:1px solid var(--border);background:#fff;border-radius:12px;padding:10px 12px}
+.nav a.active,.nav a:hover{border-color:var(--primary);box-shadow:0 0 0 3px rgba(143,175,143,.25)}
+.content{padding:16px}.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+.row{display:flex;gap:10px;align-items:center}.row.wrap{flex-wrap:wrap}
+input,select,textarea{border:1px solid var(--border);background:var(--card);border-radius:12px;padding:10px 12px;min-height:40px}
+textarea{min-height:96px}input:focus,select:focus,textarea:focus{outline:none;box-shadow:0 0 0 3px rgba(143,175,143,.25);border-color:var(--primary)}
+.btn{background:var(--primary);color:#fff;border:none;border-radius:12px;padding:10px 14px;cursor:pointer;box-shadow:var(--shadow)}.btn.ghost{background:#fff;color:var(--text);border:1px solid var(--border)}
+.icon-btn{border:1px solid var(--border);background:#fff;border-radius:10px;padding:6px 10px;cursor:pointer}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px;margin-bottom:16px}
+.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px;border-bottom:1px solid var(--border);vertical-align:middle}th{background:#f3f7f1;text-align:left}
+.td-actions{white-space:nowrap}.thumb{width:48px;height:48px;object-fit:cover;border-radius:10px;border:1px solid var(--border);background:#fff}
+.badge{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--border);padding:4px 8px;border-radius:999px;font-size:12px;background:#fff}
+.toast{position:fixed;right:16px;bottom:16px;background:#1F2A24;color:#fff;padding:10px 14px;border-radius:12px;opacity:0;transform:translateY(8px);transition:.2s;z-index:99}.toast.show{opacity:1;transform:none}
+.grid.two{display:grid;grid-template-columns:1fr;gap:16px}
+.pick-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:8px;margin-top:8px}
+.pick-item{display:flex;gap:8px;align-items:center;border:1px solid var(--border);background:#fff;border-radius:12px;padding:10px 12px;cursor:pointer;text-align:left}
+.pick-item:hover{border-color:var(--primary)}
+.set-row{display:flex;gap:8px;align-items:center;margin:6px 0}.plan-ex{border:1px dashed var(--border);border-radius:12px;padding:10px 12px;margin-bottom:10px}
+.plan-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.w110{width:110px}
+.cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}.cal-title{font-weight:700}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.cal-cell{border:1px solid var(--border);border-radius:12px;background:#fff;min-height:78px;padding:8px;position:relative}
+.cal-cell .d{position:absolute;top:6px;right:8px;color:var(--muted,#6B7A6F);font-size:12px}.cal-cell.has .d{color:var(--primary)}.cal-badge{margin-top:24px;font-size:12px;color:var(--primary)}
+.modal-back{position:fixed;inset:0;background:rgba(0,0,0,.35);display:none;align-items:center;justify-content:center;z-index:100}
+.modal{background:#fff;border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow);padding:16px;max-width:720px;width:94vw;max-height:90vh;overflow:auto}
+@media (min-width: 900px){.app{grid-template-columns:260px 1fr}.sidebar{padding:20px;border-right:1px solid var(--border);border-bottom:0;position:static}.nav{display:flex}.nav-toggle{display:none}table{display:table;white-space:normal}.grid.two{grid-template-columns:1fr 1fr}}
+
+/* Стили для упражнений */
+.exercises-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.exercise-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  padding: 15px;
+  text-align: center;
+}
+
+.exercise-title {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.exercise-gif {
+  width: 100%;
+  max-height: 200px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.exercise-actions button {
+  margin: 5px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  background: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+.exercise-actions button:hover {
+  background: #0056b3;
+}
