@@ -31,3 +31,45 @@ textarea{min-height:96px}input:focus,select:focus,textarea:focus{outline:none;bo
 .modal-back{position:fixed;inset:0;background:rgba(0,0,0,.35);display:none;align-items:center;justify-content:center;z-index:100}
 .modal{background:#fff;border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow);padding:16px;max-width:720px;width:94vw;max-height:90vh;overflow:auto}
 @media (min-width: 900px){.app{grid-template-columns:260px 1fr}.sidebar{padding:20px;border-right:1px solid var(--border);border-bottom:0;position:static}.nav{display:flex}.nav-toggle{display:none}table{display:table;white-space:normal}.grid.two{grid-template-columns:1fr 1fr}}
+
+/* Стили для упражнений */
+.exercises-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.exercise-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  padding: 15px;
+  text-align: center;
+}
+
+.exercise-title {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.exercise-gif {
+  width: 100%;
+  max-height: 200px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.exercise-actions button {
+  margin: 5px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  background: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+.exercise-actions button:hover {
+  background: #0056b3;
+}
