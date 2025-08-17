@@ -59,7 +59,17 @@ async function loadExercises() {
         ex.name_en.toLowerCase().includes(query)
       );
     }
-
+	
+    const groups = filterGroups.value;
+    if (groups) {
+      filtered = filtered.filter(ex => ex.Groups === groups);
+    }
+	
+	 const targets = filtertargets.value;
+    if (targets) {
+      filtered = filtered.filter(ex => ex.targets === targets);
+    }
+	
     const type = filterType.value;
     if (type) {
       filtered = filtered.filter(ex => ex.type === type);
