@@ -28,6 +28,8 @@
 <div class="card">
   <div class="row wrap">
     <input type="text" id="search" placeholder="Поиск по названию...">
+	<select id="filter-groups"><option value="">Все группы мышц</option></select>
+    <select id="filter-targets"><option value="">Все целевые зоны</option></select>
     <select id="filter-type"><option value="">Все типы</option></select>
     <select id="filter-equipment"><option value="">Все оборудование</option></select>
   </div>
@@ -43,6 +45,16 @@
   <div class="modal-back" id="modalBack"><div class="modal" id="modal"></div></div>
 </body>
 </html>
+
+<script>
+function showDetails() {
+  const description = 'Описание упражнения (пример)'; // This should come from the JSON or server
+  const imageUrl = 'https://example.com/exercise.jpg'; // This should be the URL of the exercise image
+  document.getElementById('exercise-description').textContent = description;
+  document.getElementById('exercise-image').src = imageUrl;
+  document.getElementById('exercise-details').style.display = 'block';
+}
+</script>
 
 <script>
 function showDetails() {
