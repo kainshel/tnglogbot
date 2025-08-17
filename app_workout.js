@@ -6,9 +6,9 @@ Object.keys(MUSCLE_GROUPS).forEach(g=>{ const o=document.createElement('option')
 pickGroup.onchange=()=>{ fillSub(); searchRender(); }; pickSubgroup.onchange=searchRender; pickSearch.oninput=searchRender;
 function fillSub(){ const g=pickGroup.value; pickSubgroup.innerHTML='<option value=\"\">Все подгруппы</option>'; const subs=MUSCLE_GROUPS[g]||[]; subs.forEach(s=>{ const o=document.createElement('option'); o.value=s;o.textContent=s; pickSubgroup.appendChild(o); }); pickSubgroup.disabled=subs.length===0; } fillSub();
 function searchRender(){ const q=pickSearch.value.trim().toLowerCase(); const g=pickGroup.value, sg=pickSubgroup.value;
-  const subset=DB.exercises.filter(e=>(!q||e.name.toLowerCase().includes(q))&&(!g||e.group===g)&&(!sg||e.subgroup===sg)).slice(0,50);
+  const subset=DB.exercises.filter(e=>(!q||e.name.toLowerCase().includes(q))&&(!g||e.group===g)&&(!sg || ((e.target_zone||'') === sg))).slice(0,50);
   results.innerHTML=''; subset.forEach(e=>{ const btn=document.getElementById('pickItemTpl').content.firstElementChild.cloneNode(true);
-    btn.querySelector('.name').textContent=e.name; btn.querySelector('.group').textContent=e.group; btn.querySelector('.subgroup').textContent=e.subgroup||'—'; btn.querySelector('img').src=e.gif||'icon.png'; btn.onclick=()=>addToPlan(e); results.appendChild(btn); }); }
+    btn.querySelector('.name').textContent=e.name; btn.querySelector('.group').textContent=e.group; btn.querySelector('.subgroup').textContent = (e.target_zone||'—'); btn.querySelector('img').src=e.gif||'icon.png'; btn.onclick=()=>addToPlan(e); results.appendChild(btn); }); }
 searchRender();
 let planState=[];
 function addToPlan(ex){ if(planState.find(x=>x.id===ex.id)) return toast('Уже в плане'); planState.push({id:ex.id,name:ex.name,gif:ex.gif,sets:[]}); renderPlan(); }

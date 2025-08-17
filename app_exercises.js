@@ -32,7 +32,7 @@ function fillZones() {
   zoneFilter.disabled = zones.length === 0;
 }
 function fillTypesAndEquip() {
-  const list = DB.exercises;
+  const list = Array.isArray(DB.exercises)?DB.exercises:[];
   const types = Array.from(new Set(list.map(e => (e.type||'').trim()).filter(Boolean))).sort();
   const equips = Array.from(new Set(list.map(e => (e.equipment||'').trim()).filter(Boolean))).sort();
   typeFilter.innerHTML = '<option value="">Все типы</option>';
