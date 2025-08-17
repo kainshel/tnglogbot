@@ -375,36 +375,6 @@
     "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Incline Chest Press Machine.gif?raw=true"
   },
   {
-    "name_ru": "nan",
-    "name_en": "nan",
-    "groups": [
-      "nan"
-    ],
-    "targets": [
-      "nan"
-    ],
-    "type": "nan",
-    "equipment": [
-      "nan"
-    ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/nan.gif?raw=true"
-  },
-  {
-    "name_ru": "Название (RU)",
-    "name_en": "Название (EN)",
-    "groups": [
-      "Основная группа"
-    ],
-    "targets": [
-      "Подгруппа"
-    ],
-    "type": "Тип",
-    "equipment": [
-      "Оборудование"
-    ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Название (EN).gif?raw=true"
-  },
-  {
     "name_ru": "Подтягивания широким хватом",
     "name_en": "Wide-Grip Pull-Ups",
     "groups": [
@@ -853,36 +823,6 @@
     "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Weighted Back Extension.gif?raw=true"
   },
   {
-    "name_ru": "nan",
-    "name_en": "nan",
-    "groups": [
-      "nan"
-    ],
-    "targets": [
-      "nan"
-    ],
-    "type": "nan",
-    "equipment": [
-      "nan"
-    ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/nan.gif?raw=true"
-  },
-  {
-    "name_ru": "Название (RU)",
-    "name_en": "Название (EN)",
-    "groups": [
-      "Основная группа"
-    ],
-    "targets": [
-      "Подгруппа"
-    ],
-    "type": "Тип",
-    "equipment": [
-      "Оборудование"
-    ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Название (EN).gif?raw=true"
-  },
-  {
     "name_ru": "Жим штанги стоя",
     "name_en": "Overhead Barbell Press",
     "groups": [
@@ -1244,36 +1184,6 @@
       "Штанга"
     ],
     "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Push Press.gif?raw=true"
-  },
-  {
-    "name_ru": "nan",
-    "name_en": "nan",
-    "groups": [
-      "nan"
-    ],
-    "targets": [
-      "nan"
-    ],
-    "type": "nan",
-    "equipment": [
-      "nan"
-    ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/nan.gif?raw=true"
-  },
-  {
-    "name_ru": "Название (RU)",
-    "name_en": "Название (EN)",
-    "groups": [
-      "Основная группа"
-    ],
-    "targets": [
-      "Подгруппа"
-    ],
-    "type": "Тип",
-    "equipment": [
-      "Оборудование"
-    ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Название (EN).gif?raw=true"
   },
   {
     "name_ru": "Подъём штанги на бицепс",
@@ -1696,36 +1606,6 @@
     "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Pronation/Supination.gif?raw=true"
   },
   {
-    "name_ru": "nan",
-    "name_en": "nan",
-    "groups": [
-      "nan"
-    ],
-    "targets": [
-      "nan"
-    ],
-    "type": "nan",
-    "equipment": [
-      "nan"
-    ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/nan.gif?raw=true"
-  },
-  {
-    "name_ru": "Название (RU)",
-    "name_en": "Название (EN)",
-    "groups": [
-      "Основная группа"
-    ],
-    "targets": [
-      "Подгруппа"
-    ],
-    "type": "Тип",
-    "equipment": [
-      "Оборудование"
-    ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Название (EN).gif?raw=true"
-  },
-  {
     "name_ru": "Жим штанги лёжа",
     "name_en": "Barbell Bench Press",
     "groups": [
@@ -2101,36 +1981,6 @@
     "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Incline Chest Press Machine.gif?raw=true"
   },
   {
-    "name_ru": "nan",
-    "name_en": "nan",
-    "groups": [
-      "nan"
-    ],
-    "targets": [
-      "nan"
-    ],
-    "type": "nan",
-    "equipment": [
-      "nan"
-    ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/nan.gif?raw=true"
-  },
-  {
-    "name_ru": "Название (RU)",
-    "name_en": "Название (EN)",
-    "groups": [
-      "Основная группа"
-    ],
-    "targets": [
-      "Подгруппа"
-    ],
-    "type": "Тип",
-    "equipment": [
-      "Оборудование"
-    ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Название (EN).gif?raw=true"
-  },
-  {
     "name_ru": "Скручивания на полу",
     "name_en": "Crunch",
     "groups": [
@@ -2412,36 +2262,6 @@
       "Гриф"
     ],
     "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Bar Twist.gif?raw=true"
-  },
-  {
-    "name_ru": "nan",
-    "name_en": "nan",
-    "groups": [
-      "nan"
-    ],
-    "targets": [
-      "nan"
-    ],
-    "type": "nan",
-    "equipment": [
-      "nan"
-    ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/nan.gif?raw=true"
-  },
-  {
-    "name_ru": "Название (RU)",
-    "name_en": "Название (EN)",
-    "groups": [
-      "Основная группа"
-    ],
-    "targets": [
-      "Подгруппа"
-    ],
-    "type": "Тип",
-    "equipment": [
-      "Оборудование"
-    ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Название (EN).gif?raw=true"
   },
   {
     "name_ru": "Берпи",
