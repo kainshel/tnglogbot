@@ -8,21 +8,33 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <h1>Список упражнений</h1>
-  </header>
-  <main>
-    <div class="filters">
-      <input type="text" id="search" placeholder="Поиск по названию...">
-      <select id="filter-type">
-        <option value="">Все типы</option>
-      </select>
-      <select id="filter-equipment">
-        <option value="">Все оборудование</option>
-      </select>
-    </div>
-    <div id="exercises-container" class="exercises-grid"></div>
-  </main>
+  <div id="sidebar">
+    <ul>
+      <li><a href="index.html">Главная</a></li>
+      <li><a href="exercises.html">Упражнения</a></li>
+      <li><a href="profile.html">Профиль</a></li>
+      <li><a href="workout.html">Тренировка</a></li>
+    </ul>
+  </div>
+
+  <div id="content">
+    <header>
+      <h1>Список упражнений</h1>
+    </header>
+    <main>
+      <div class="filters">
+        <input type="text" id="search" placeholder="Поиск по названию...">
+        <select id="filter-type">
+          <option value="">Все типы</option>
+        </select>
+        <select id="filter-equipment">
+          <option value="">Все оборудование</option>
+        </select>
+      </div>
+      <div id="exercises-container" class="exercises-grid"></div>
+    </main>
+  </div>
+
   <script src="app_exercises.js"></script>
 </body>
 </html>

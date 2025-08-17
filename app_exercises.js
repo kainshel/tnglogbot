@@ -14,18 +14,37 @@ async function loadExercises() {
       const card = document.createElement('div');
       card.className = 'exercise-card';
 
-      card.innerHTML = `
-        <h2 class="exercise-title">${ex.name_ru}</h2>
-        <img src="${ex.gif}" alt="${ex.name_en}" class="exercise-gif">
-        <p><strong>Группы мышц:</strong> ${ex.groups.join(', ')}</p>
-        <p><strong>Целевые зоны:</strong> ${ex.targets.join(', ')}</p>
-        <p><strong>Тип:</strong> ${ex.type}</p>
-        <p><strong>Оборудование:</strong> ${ex.equipment.join(', ')}</p>
-        <div class="exercise-actions">
-          <button>Добавить</button>
-          <button>Подробнее</button>
-        </div>
-      `;
+      const gif = new Image();
+      gif.src = ex.gif;
+      gif.onload = () => {
+        card.innerHTML = `
+          <h2 class="exercise-title">${ex.name_ru}</h2>
+          <img src="${ex.gif}" alt="${ex.name_en}" class="exercise-gif">
+          <p><strong>Группы мышц:</strong> ${ex.groups.join(', ')}</p>
+          <p><strong>Целевые зоны:</strong> ${ex.targets.join(', ')}</p>
+          <p><strong>Тип:</strong> ${ex.type}</p>
+          <p><strong>Оборудование:</strong> ${ex.equipment.join(', ')}</p>
+          <div class="exercise-actions">
+            <button>Добавить</button>
+            <button>Подробнее</button>
+          </div>
+        `;
+      };
+      gif.onerror = () => {
+        card.innerHTML = `
+          <h2 class="exercise-title">${ex.name_ru}</h2>
+          <p>GIF не доступен</p>
+          <p><strong>Группы мышц:</strong> ${ex.groups.join(', ')}</p>
+          <p><strong>Целевые зоны:</strong> ${ex.targets.join(', ')}</p>
+          <p><strong>Тип:</strong> ${ex.type}</p>
+          <p><strong>Оборудование:</strong> ${ex.equipment.join(', ')}</p>
+          <div class="exercise-actions">
+            <button>Добавить</button>
+            <button>Подробнее</button>
+          </div>
+        `;
+      };
+
       container.appendChild(card);
     });
   }
