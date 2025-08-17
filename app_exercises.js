@@ -3,8 +3,8 @@
 (async function () {
   const container = document.getElementById('exercises-container');
   const searchInput = document.getElementById('search');
-  const filterGroup = document.getElementById('filter-group');
-  const filterTarget = document.getElementById('filter-target');
+  const filterGroups = document.getElementById('filter-groups');
+  const filterTargets = document.getElementById('filter-targets');
   const filterType = document.getElementById('filter-type');
   const filterEquipment = document.getElementById('filter-equipment');
 
@@ -55,8 +55,8 @@
 
   fillSelect(filterType, exercises.map(ex => ex.type));
   fillSelect(filterEquipment, exercises.flatMap(ex => ex.equipment));
-  fillSelect(filterGroup, exercises.flatMap(ex => ex.groups));
-  fillSelect(filterTarget, exercises.flatMap(ex => ex.targets));
+  fillSelect(filterGroups, exercises.flatMap(ex => ex.groups));
+  fillSelect(filterTargets, exercises.flatMap(ex => ex.targets));
 
   function card(ex) {
     const eq = ex.equipment.join(', ');
@@ -123,24 +123,24 @@
       );
     }
 
-    const g = (filterGroup?.value || '').trim();
-    if (g) list = list.filter(ex => ex.groups.some(v => v === g));
+    const gr = (filterGroups?.value || '').trim();
+    if (gr) list = list.filter(ex => ex.groups.includes(gr));
 
-    const z = (filterTarget?.value || '').trim();
-    if (z) list = list.filter(ex => ex.targets.some(v => v === z));
+    const tg = (filterTarget?.value || '').trim();
+    if (tg) list = list.filter(ex => ex.targets.includes(tg));
 
     const t = (filterType?.value || '').trim();
     if (t) list = list.filter(ex => ex.type === t);
 
-    const e = (filterEquipment?.value || '').trim();
-    if (e) list = list.filter(ex => ex.equipment.includes(e));
+    const eq = (filterEquipment?.value || '').trim();
+    if (eq) list = list.filter(ex => ex.equipment.includes(eq));
 
     render(list);
   }
 
   // Bind events
   if (searchInput) searchInput.addEventListener('input', applyFilters);
-  [filterGroup, filterTarget, filterType, filterEquipment].forEach(sel => {
+  [filterGroups, filterTargets, filterType, filterEquipment].forEach(sel => {
     if (sel) sel.addEventListener('change', applyFilters);
   });
 
