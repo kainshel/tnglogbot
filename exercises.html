@@ -5,42 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
   <title>Упражнения · Дневник Тренировок</title>
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#1E90FF">
+  <meta name="theme-color" content="#8FAF8F">
   <link rel="icon" href="icon.png">
   <link rel="stylesheet" href="styles.css">
-
-<style>
-@media (max-width: 640px) {
-  .table-responsive { display: none !important; }
-  .exercise-card {
-    background: white;
-    border-radius: 10px;
-    padding: 10px;
-    margin-bottom: 15px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  }
-  .exercise-card h3 {
-    margin: 0 0 10px;
-    font-size: 18px;
-    color: #000;
-  }
-  .exercise-card img {
-    width: 100%;
-    border-radius: 8px;
-    margin-bottom: 8px;
-  }
-  .exercise-card .muscle-info {
-    font-size: 14px;
-    color: #555;
-    margin-bottom: 10px;
-  }
-  .exercise-card .actions button {
-    margin-right: 5px;
-    margin-bottom: 5px;
-  }
-}
-</style>
-
 </head>
 <body>
   <div class="app">
@@ -68,17 +35,18 @@
 </header>
 <div class="card table-wrap">
   <table>
-    <thead><tr><th>Превью</th><th>Название</th><th>Группа</th><th>Подгруппа</th><th>Действия</th></tr></thead>
+    <thead><tr><th>Превью</th><th>Название</th><th>Группа</th><th>Подгруппа</th><th>GIF URL</th><th>Действия</th></tr></thead>
     <tbody id="exercisesBody"></tbody>
   </table>
 </div>
 <template id="exerciseRowTpl">
 <tr>
-  <td data-label="Превью"><img class="thumb" alt=""></td>
-  <td class="name" data-label="Название"></td>
-  <td class="group" data-label="Группа"></td>
-  <td class="subgroup" data-label="Подгруппа"></td>
-  <td class="td-actions" data-label="Действия">
+  <td><img class="thumb" alt=""></td>
+  <td class="name"></td>
+  <td class="group"></td>
+  <td class="subgroup"></td>
+  <td class="gif"></td>
+  <td class="td-actions">
     <button class="icon-btn view" title="Просмотр">🔍</button>
     <button class="icon-btn edit" title="Редактировать">✎</button>
     <button class="icon-btn del" title="Удалить">🗑</button>
@@ -93,34 +61,5 @@
   <script>document.getElementById('burger').onclick=()=>document.getElementById('nav').classList.toggle('show');</script>
   <script type="module" src="app_exercises.js"></script>
   <div class="modal-back" id="modalBack"><div class="modal" id="modal"></div></div>
-
-<script>
-function renderExerciseCardsMobile(exercises) {
-  const container = document.getElementById('exerciseCardsContainer');
-  container.innerHTML = '';
-  exercises.forEach(ex => {
-    const card = document.createElement('div');
-    card.className = 'exercise-card';
-    card.innerHTML = `
-      <h3>${ex.name}</h3>
-      <img src="${ex.gifUrl || ''}" alt="${ex.name}">
-      <div class="muscle-info">${ex.group} - ${ex.subgroup || ''}</div>
-      <div class="actions">
-        <button onclick="viewExercise('${ex.id}')">Просмотр</button>
-        <button onclick="editExercise('${ex.id}')">Редактировать</button>
-        <button onclick="deleteExercise('${ex.id}')">Удалить</button>
-      </div>
-    `;
-    container.appendChild(card);
-  });
-}
-document.addEventListener('DOMContentLoaded', () => {
-  if (window.innerWidth <= 640) {
-    const list = DB.getExercises();
-    renderExerciseCardsMobile(list);
-  }
-});
-</script>
-
 </body>
 </html>
