@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
   <title>Профиль · Дневник Тренировок</title>
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#1E90FF">
@@ -10,24 +10,48 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  
-<header class="mobile-topbar">
-  <nav class="mobile-nav">
-    <a href="index.html" class="nav-item active" class="nav-item"><span>👤</span><small>Профиль</small></a>
-    <a href="exercises.html" class="nav-item"><span>🏋️</span><small>Упражнения</small></a>
-    <a href="workout.html" class="nav-item"><span>📝</span><small>Тренировка</small></a>
-    <a href="calendar.html" class="nav-item"><span>🗓️</span><small>Календарь</small></a>
-    <a href="stats.html" class="nav-item"><span>📊</span><small>Статистика</small></a>
-    <a href="timer.html" class="nav-item"><span>⏱️</span><small>Таймер</small></a>
-  </nav>
-</header>
-
-  <main class="content">
-    <header class="section-head"><h1>Профиль</h1></header>
-    <div class="container">
-      <div id="profileRoot"></div><script type="module" src="app_profile.js"></script>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">DT<span>·</span>Дневник Тренировок</div>
+      <button id="burger" class="nav-toggle">☰</button>
+      <nav class="nav" id="nav">
+        <a class="active" href="index.html">Профиль</a>
+        <a class="" href="exercises.html">Упражнения</a>
+        <a class="" href="workout.html">Тренировка</a>
+        <a class="" href="calendar.html">Календарь</a>
+        <a class="" href="stats.html">Статистика</a>
+      </nav>
+    </aside>
+    <main class="content">
+      
+<header class="section-head"><h1>Профиль</h1></header>
+<div class="card">
+  <div class="row wrap">
+    <img id="avatarPreview" class="thumb" alt="аватар" style="width:72px;height:72px;border-radius:50%">
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <label class="file-btn btn ghost">Выбрать фото<input type="file" id="avatarInput" accept="image/*" hidden></label>
+      <button id="clearAvatar" class="btn ghost">Убрать фото</button>
     </div>
-  </main>
-  <script>/* no desktop sidebar scripts */</script>
+  </div>
+  <div class="row wrap" style="margin-top:12px">
+    <input id="name" placeholder="Имя">
+    <input id="age" type="number" min="0" placeholder="Возраст">
+    <select id="gender"><option value="">Пол</option><option>Муж</option><option>Жен</option></select>
+    <input id="height" type="number" min="0" placeholder="Рост (см)">
+    <input id="weight" type="number" min="0" step="0.1" placeholder="Вес (кг)">
+    <select id="level"><option value="">Уровень</option><option>Новичок</option><option>Средний</option><option>Продвинутый</option></select>
+    <select id="goal"><option value="">Цель</option><option>Набор мышц</option><option>Снижение веса</option><option>Поддержание</option><option>Сила</option></select>
+    <textarea id="notes" placeholder="Заметки"></textarea>
+    <button id="saveProfile" class="btn">Сохранить</button>
+  </div>
+</div>
+
+    </main>
+  </div>
+  <div id="toast" class="toast" aria-live="polite"></div>
+  <script type="module" src="storage.js"></script>
+  <script>document.getElementById('burger').onclick=()=>document.getElementById('nav').classList.toggle('show');</script>
+  <script type="module" src="app_profile.js"></script>
+  <div class="modal-back" id="modalBack"><div class="modal" id="modal"></div></div>
 </body>
 </html>
