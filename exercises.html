@@ -43,3 +43,13 @@
   <div class="modal-back" id="modalBack"><div class="modal" id="modal"></div></div>
 </body>
 </html>
+
+<script>
+function showDetails() {
+  const description = 'Описание упражнения (пример)'; // This should come from the JSON or server
+  const imageUrl = 'https://example.com/exercise.jpg'; // This should be the URL of the exercise image
+  document.getElementById('exercise-description').textContent = description;
+  document.getElementById('exercise-image').src = imageUrl;
+  document.getElementById('exercise-details').style.display = 'block';
+}
+</script>
