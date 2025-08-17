@@ -41,7 +41,7 @@ function renderPick(list, onAdd) {
   });
 }
 
-function renderPlan(plan, onRemove) {
+function renderPlan(plan, onRemove, onEdit) {
   const container = document.getElementById('plan');
   container.innerHTML = '';
   if (!plan.length) {
@@ -56,9 +56,29 @@ function renderPlan(plan, onRemove) {
         <div style="font-weight:600">${ex.name_ru}</div>
         <div class="muted">${ex.type} · ${ex.equipment.join(', ')}</div>
       </div>
-      <button class="icon-btn" title="Удалить">✕</button>`;
-    row.querySelector('button').onclick = () => onRemove(idx);
+      <div>
+        <label>Подходы</label><input type="number" value="${ex.sets || 1}" class="sets" data-index="${idx}">
+        <label>Повторения</label><input type="number" value="${ex.reps || 10}" class="reps" data-index="${idx}">
+        <label>Вес (кг)</label><input type="number" value="${ex.weight || 0}" class="weight" data-index="${idx}">
+      </div>
+      <button class="icon-btn" title="Удалить" onclick="onRemove(${idx})">✕</button>
+    `;
     container.appendChild(row);
+  });
+  // Attach edit event listeners for sets, reps, and weight
+  document.querySelectorAll('.sets, .reps, .weight').forEach(input => {
+    input.addEventListener('input', (e) => {
+      const idx = e.target.dataset.index;
+      const value = e.target.value;
+      if (e.target.classList.contains('sets')) {
+        plan[idx].sets = value;
+      } else if (e.target.classList.contains('reps')) {
+        plan[idx].reps = value;
+      } else if (e.target.classList.contains('weight')) {
+        plan[idx].weight = value;
+      }
+      savePlan(plan);
+    });
   });
 }
 
@@ -68,29 +88,45 @@ function renderPlan(plan, onRemove) {
   // Populate filters
   const filterType = document.getElementById('w-filter-type');
   const filterEq = document.getElementById('w-filter-equipment');
-  [...new Set(data.map(x=>x.type))].forEach(t=>{const o=document.createElement('option');o.value=t;o.textContent=t;filterType.appendChild(o)});
-  [...new Set(data.flatMap(x=>x.equipment))].forEach(e=>{const o=document.createElement('option');o.value=e;o.textContent=e;filterEq.appendChild(o)});
+  const filterGroup = document.getElementById('w-search-group');
+  const filterTarget = document.getElementById('w-search-target');
 
-  const search = document.getElementById('w-search');
+  [...new Set(data.map(x=>x.type))].forEach(t => {const o=document.createElement('option');o.value=t;o.textContent=t;filterType.appendChild(o);});
+  [...new Set(data.flatMap(x=>x.equipment))].forEach(e => {const o=document.createElement('option');o.value=e;o.textContent=e;filterEq.appendChild(o);});
+
   let plan = loadPlan();
 
   function apply() {
-    const q = search.value.trim().toLowerCase();
+    let list = data;
+    const q = filterGroup.value.trim().toLowerCase();
     const t = filterType.value;
     const e = filterEq.value;
-    let list = data;
-    if (q) list = list.filter(x => x.name_ru.toLowerCase().includes(q) || x.name_en.toLowerCase().includes(q));
+    const target = filterTarget.value.trim().toLowerCase();
+    if (q) list = list.filter(x => x.groups.some(group => group.toLowerCase().includes(q)));
+    if (target) list = list.filter(x => x.targets.some(zone => zone.toLowerCase().includes(target)));
     if (t) list = list.filter(x => x.type === t);
     if (e) list = list.filter(x => x.equipment.includes(e));
-    renderPick(list, (ex) => { plan.push(ex); savePlan(plan); renderPlan(plan, remove); });
+    renderPick(list, (ex) => { plan.push(ex); savePlan(plan); renderPlan(plan, remove, edit); });
   }
 
   function remove(idx) {
-    plan.splice(idx,1); savePlan(plan); renderPlan(plan, remove);
+    plan.splice(idx, 1);
+    savePlan(plan);
+    renderPlan(plan, remove, edit);
   }
 
-  document.getElementById('clearPlan').onclick = ()=>{ plan=[]; savePlan(plan); renderPlan(plan, remove); };
-  search.oninput = apply; filterType.onchange = apply; filterEq.onchange = apply;
+  function edit(idx, ex) {
+    plan[idx] = ex;
+    savePlan(plan);
+    renderPlan(plan, remove, edit);
+  }
 
-  apply(); renderPlan(plan, remove);
+  document.getElementById('clearPlan').onclick = () => { plan = []; savePlan(plan); renderPlan(plan, remove, edit); };
+  filterGroup.oninput = apply;
+  filterTarget.oninput = apply;
+  filterType.onchange = apply;
+  filterEq.onchange = apply;
+
+  apply();
+  renderPlan(plan, remove, edit);
 })();

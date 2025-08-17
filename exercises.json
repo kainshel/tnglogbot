@@ -17,7 +17,7 @@
       "Штанга",
       "Скамья"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/main/gif_exercises/bench_press.gif?raw=true"
+    "gif": "https://raw.githubusercontent.com/kainshel/tnglogbot/refs/heads/main/gif_exercises/bench_press.gif"
   },
   {
     "name_ru": "Жим гантелей лёжа",
@@ -57,7 +57,7 @@
       "Штанга",
       "Скамья"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/main/gif_exercises/Incline_Bench_Press.gif?raw=true"
+    "gif": "https://github.com/kainshel/tnglogbot/blob/main/gif_exercises/Incline_Bench_Press.gif"
   },
   {
     "name_ru": "Жим гантелей на наклонной",
