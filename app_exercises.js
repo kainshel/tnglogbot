@@ -84,6 +84,22 @@ async function loadExercises() {
   }
 
   // Заполним фильтры
+    const groups = [...new Set(exercises.flatMap(ex => ex.groups))];
+  groups.forEach(eq => {
+    const opt = document.createElement('option');
+    opt.value = eq;
+    opt.textContent = eq;
+    filtergroups.appendChild(opt);
+  });
+  
+    const targets = [...new Set(exercises.flatMap(ex => ex.targets))];
+  targets.forEach(eq => {
+    const opt = document.createElement('option');
+    opt.value = eq;
+    opt.textContent = eq;
+    filtertargets.appendChild(opt);
+  });
+  
   const types = [...new Set(exercises.map(ex => ex.type))];
   types.forEach(t => {
     const opt = document.createElement('option');
@@ -103,6 +119,8 @@ async function loadExercises() {
   searchInput.addEventListener('input', applyFilters);
   filterType.addEventListener('change', applyFilters);
   filterEquipment.addEventListener('change', applyFilters);
+  filtergroups.addEventListener('change', applyFilters);  
+  filtertargets.addEventListener('change', applyFilters);
 
   render(exercises);
 }
