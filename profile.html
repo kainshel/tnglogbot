@@ -13,13 +13,14 @@
   </button>
   <div id="backdrop" class="backdrop" hidden></div>
 
-  <aside id="sidebar" class="sidebar">
-    <div class="brand">Дневник Тренировок</div>
-    <nav role="navigation" aria-label="Main" class="nav">
-      <a href="index.html">Главная</a>
-      <a href="exercises.html">Упражнения</a>
-      <a href="workout.html">Тренировка</a>
-      <a class="active" href="profile.html">Профиль</a>
+  <aside id="sidebar" class="sidebar" aria-hidden="true">
+    <nav aria-label="Главное меню">
+      <ul>
+        <li><a href="index.html">Главная</a></li>
+        <li><a href="exercises.html">Упражнения</a></li>
+        <li><a href="workout.html">Тренировка</a></li>
+        <li><a href="profile.html" class="active">Профиль</a></li>
+      </ul>
     </nav>
   </aside>
 
@@ -54,7 +55,7 @@
     </section>
 
     <section class="card profile-actions">
-      <button class="btn danger" onclick="logout()">Сбросить</button>
+      <button class="btn danger" onclick="logout()">Выйти</button>
     </section>
   </main>
 
@@ -66,20 +67,24 @@
 
     function renderProfile() {
       const p = loadProfile();
-      if (!p) return;
-      document.getElementById("username").textContent = p.username;
-      document.getElementById("usergoal").textContent = "Цель: " + p.goal;
-      document.getElementById("age").textContent = p.age;
-      document.getElementById("height").textContent = p.height + " см";
-      document.getElementById("weight").textContent = p.weight + " кг";
-      document.getElementById("totalWorkouts").textContent = p.totalWorkouts;
-      document.getElementById("totalExercises").textContent = p.totalExercises;
-      const historyEl = document.getElementById("workoutHistory");
-      historyEl.innerHTML = "";
-      p.history.forEach(item => {
+      if (p) {
+        document.getElementById("username").textContent = p.username;
+        document.getElementById("usergoal").textContent = "Цель: " + p.goal;
+        document.getElementById("age").textContent = p.age;
+        document.getElementById("height").textContent = p.height + " см";
+        document.getElementById("weight").textContent = p.weight + " кг";
+        document.getElementById("totalWorkouts").textContent = p.totalWorkouts || 0;
+        document.getElementById("totalExercises").textContent = p.totalExercises || 0;
+      }
+
+      const history = JSON.parse(localStorage.getItem("workoutHistory")) || [];
+      const list = document.getElementById("workoutHistory");
+      list.innerHTML = "";
+      history.slice(-5).reverse().forEach(item => {
         const li = document.createElement("li");
-        li.textContent = item;
-        historyEl.appendChild(li);
+        const names = item.exercises.map(e => e.name).join(", ");
+        li.textContent = `${item.date} — ${names}`;
+        list.appendChild(li);
       });
     }
 

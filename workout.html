@@ -1,52 +1,65 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<link rel="manifest" href="manifest.json">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="UTF-8">
-  <title>Тренировка</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Тренировка — TngLogBot</title>
   <link rel="stylesheet" href="styles.css">
-<script src="nav.js" defer></script>
+  <script src="nav.js" defer></script>
+  <script src="workout.js" defer></script>
 </head>
 <body>
+  <button id="burger" class="burger" aria-label="Открыть меню" aria-controls="sidebar" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <div id="backdrop" class="backdrop" hidden></div>
 
-<button id="burger" class="burger" aria-label="Открыть меню" aria-controls="sidebar" aria-expanded="false">
-  <span></span><span></span><span></span>
-</button>
-<div id="backdrop" class="backdrop" hidden></div>
-
-    <div class="bar"></div>
-        <div class="bar"></div>
-    </div>
-
-<div class="app">
-  <aside id="sidebar" class="sidebar">
-    <div class="brand">Дневник Тренировок</div>
-    <nav role="navigation" aria-label="Main" class="nav">
-      <a href="index.html">Главная</a>
-      <a href="exercises.html">Упражнения</a>
-      <a class="active" href="workout.html">Тренировка</a>
-      <a href="profile.html">Профиль</a>
+  <aside id="sidebar" class="sidebar" aria-hidden="true">
+    <nav aria-label="Главное меню">
+      <ul>
+        <li><a href="index.html">Главная</a></li>
+        <li><a href="exercises.html">Упражнения</a></li>
+        <li><a href="workout.html" class="active">Тренировка</a></li>
+        <li><a href="profile.html">Профиль</a></li>
+      </ul>
     </nav>
   </aside>
+
   <main class="content">
-    <h1>Моя тренировка</h1>
-    <section class="filters">
-      <input type="text" id="searchWorkout" placeholder="Поиск по названию">
-      <select id="filter-groups-workout"><option value="">Группа мышц</option></select>
-      <select id="filter-targets-workout"><option value="">Целевая зона</option></select>
-      <select id="filter-type-workout"><option value="">Тип</option></select>
-      <select id="filter-equipment-workout"><option value="">Оборудование</option></select>
+    <h1>План тренировки</h1>
+
+    <section class="card">
+      <label for="workoutDate"><strong>Дата тренировки:</strong></label>
+      <input type="date" id="workoutDate" value="">
     </section>
-    <section id="workout-exercises" class="exercise-grid"></section>
 
-    <h2>Мой план</h2>
-    <div id="workout-plan"></div>
-    <button class="details-btn" onclick="saveWorkout()">💾 Сохранить тренировку</button>
+    <section class="card filters">
+      <h2>Фильтры упражнений</h2>
+      <input type="text" id="search" placeholder="Поиск по названию...">
+      <select id="typeFilter">
+        <option value="">Все типы</option>
+        <option value="cardio">Кардио</option>
+        <option value="strength">Силовые</option>
+        <option value="stretch">Растяжка</option>
+      </select>
+      <select id="levelFilter">
+        <option value="">Все уровни</option>
+        <option value="beginner">Новичок</option>
+        <option value="intermediate">Средний</option>
+        <option value="advanced">Продвинутый</option>
+      </select>
+    </section>
+
+    <section class="card">
+      <h2>Доступные упражнения</h2>
+      <ul id="exerciseList" class="exercise-list"></ul>
+    </section>
+
+    <section class="card">
+      <h2>Текущая тренировка</h2>
+      <ul id="currentWorkout"></ul>
+      <button class="btn" onclick="saveWorkout()">💾 Сохранить тренировку</button>
+    </section>
   </main>
-</div>
-
-<script src="app_workout.js"></script>
-
 </body>
 </html>
