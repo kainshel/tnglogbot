@@ -1,164 +1,128 @@
+// === Глобальные переменные ===
+let allExercises = [];
+let workoutPlan = [];
 
-// ---- Safe localStorage patch (auto-injected) ----
-(function(){
-  if (!('localStorage' in window)) return;
+// === DOM элементы ===
+const searchInput = document.getElementById("search");
+const filterGroup = document.getElementById("filter-groups");
+const filterTarget = document.getElementById("filter-targets");
+const filterType = document.getElementById("filter-type");
+const filterEquipment = document.getElementById("filter-equipment");
+const exercisesContainer = document.getElementById("exercises-container");
+const planContainer = document.getElementById("plan");
+
+// === Шаблоны ===
+const tplExercise = document.getElementById("pickItemTpl");
+const tplPlanExercise = document.getElementById("planExerciseTpl");
+const tplSetRow = document.getElementById("setRowTpl");
+
+// === Загрузка базы упражнений ===
+async function loadExercises() {
   try {
-    const _set = localStorage.setItem.bind(localStorage);
-    const _get = localStorage.getItem.bind(localStorage);
-    const _remove = localStorage.removeItem.bind(localStorage);
-    const _clear = localStorage.clear.bind(localStorage);
-    localStorage.setItem = function(k,v){ try { return _set(k,v); } catch(e){ console.error('localStorage.setItem error', e); } };
-    localStorage.getItem = function(k){ try { return _get(k); } catch(e){ console.error('localStorage.getItem error', e); return null; } };
-    localStorage.removeItem = function(k){ try { return _remove(k); } catch(e){ console.error('localStorage.removeItem error', e); } };
-    localStorage.clear = function(){ try { return _clear(); } catch(e){ console.error('localStorage.clear error', e); } };
-  } catch(e){ /* silent */ }
-})();
-// -----------------------------------------------
-
-
-const STORAGE_KEY = 'currentWorkout';
-
-async function loadData() {
-  const res = await fetch('exercises.json');
-  return await res.json();
+    const res = await fetch("exercises.json");
+    allExercises = await res.json();
+    renderExercises();
+  } catch (err) {
+    console.error("Ошибка загрузки exercises.json:", err);
+  }
 }
 
-function loadPlan() {
-  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); }
-  catch { return []; }
+// === Фильтрация и отрисовка упражнений ===
+function renderExercises() {
+  exercisesContainer.innerHTML = "";
+
+  const search = searchInput.value.toLowerCase();
+  const group = filterGroup.value;
+  const target = filterTarget.value;
+  const type = filterType.value;
+  const equipment = filterEquipment.value;
+
+  allExercises
+    .filter(e =>
+      (!search || e.name.toLowerCase().includes(search)) &&
+      (!group || e.group === group) &&
+      (!target || e.target === target) &&
+      (!type || e.type === type) &&
+      (!equipment || e.equipment === equipment)
+    )
+    .forEach(e => {
+      const card = tplExercise.content.cloneNode(true);
+      card.querySelector("h3").textContent = e.name;
+      card.querySelector(".type").textContent = `Тип: ${e.type}`;
+      card.querySelector(".target").textContent = `Целевая группа: ${e.target}`;
+      card.querySelector(".equipment").textContent = `Оборудование: ${e.equipment || "нет"}`;
+
+      const addBtn = card.querySelector(".btn");
+      addBtn.addEventListener("click", () => addExerciseToPlan(e));
+
+      exercisesContainer.appendChild(card);
+    });
 }
 
-function savePlan(plan) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(plan));
-  toast('План сохранён');
-}
+// === Добавление упражнения в план ===
+function addExerciseToPlan(ex) {
+  const planItem = tplPlanExercise.content.cloneNode(true);
+  planItem.querySelector("h3").textContent = ex.name;
 
-function toast(msg) {
-  const el = document.getElementById('toast');
-  if (!el) return;
-  el.textContent = msg;
-  el.classList.add('show');
-  setTimeout(() => el.classList.remove('show'), 1200);
-}
+  const setsContainer = planItem.querySelector(".sets");
 
-function renderPick(list, onAdd) {
-  const pick = document.getElementById('pick');
-  pick.innerHTML = '';
-  list.forEach(ex => {
-    const item = document.createElement('button');
-    item.className = 'pick-item';
-    item.innerHTML = `
-      <img class="thumb" alt="" src="${ex.gif}" onerror="this.style.display='none'">
-      <div style="text-align:left">
-        <div style="font-weight:600">${ex.name_ru}</div>
-        <div class="muted">${ex.type} · ${ex.equipment.join(', ')}</div>
-      </div>`;
-    item.onclick = () => onAdd(ex);
-    pick.appendChild(item);
+  // Добавление нового подхода
+  const addSetBtn = planItem.querySelector(".add-set");
+  addSetBtn.addEventListener("click", () => {
+    const setRow = tplSetRow.content.cloneNode(true);
+    setsContainer.appendChild(setRow);
   });
+
+  // Удаление упражнения
+  const removeBtn = planItem.querySelector(".remove-exercise");
+  removeBtn.addEventListener("click", () => {
+    planItemEl.remove();
+  });
+
+  const planItemEl = planItem.querySelector(".plan-exercise");
+  planContainer.appendChild(planItem);
 }
 
-function renderPlan(plan, onRemove) {
-  const container = document.getElementById('plan');
-  container.innerHTML = '';
-  if (!plan.length) {
-    container.innerHTML = '<div class="muted">План пуст. Добавьте упражнения слева.</div>';
+// === Сохранение тренировки ===
+function saveWorkout() {
+  const date = document.getElementById("workoutDate").value || new Date().toISOString().slice(0,10);
+
+  const exercises = [];
+  planContainer.querySelectorAll(".plan-exercise").forEach(block => {
+    const name = block.querySelector("h3").textContent;
+    const sets = [];
+    block.querySelectorAll(".set-row").forEach(row => {
+      const reps = row.querySelector(".reps").value;
+      const weight = row.querySelector(".weight").value;
+      sets.push({ reps, weight });
+    });
+    exercises.push({ name, sets });
+  });
+
+  if (exercises.length === 0) {
+    alert("Добавьте хотя бы одно упражнение!");
     return;
   }
-  plan.forEach((ex, idx) => {
-    const row = document.createElement('div');
-    row.className = 'set-row';
-    row.innerHTML = `
-      <div style="font-weight:600">${ex.name_ru}</div>
-      <img class="exercise-gif" src="${ex.gif}" alt="${ex.name_en}">
-      <div>
-        ${ex.sets.map((set, setIdx) => `
-          <div class="set-entry">
-            <label>Подход ${setIdx + 1}</label>
-            <input type="number" value="${set.sets || 1}" class="sets" data-index="${idx}" data-setindex="${setIdx}">
-            <label>Повторения</label>
-            <input type="number" value="${set.reps || 10}" class="reps" data-index="${idx}" data-setindex="${setIdx}">
-            <label>Вес (кг)</label>
-            <input type="number" value="${set.weight || 0}" class="weight" data-index="${idx}" data-setindex="${setIdx}">
-          </div>
-        `).join('')}
-      </div>
-      <button class="icon-btn" title="Удалить" onclick="onRemove(${idx})">✕</button>
-    `;
-    container.appendChild(row);
-  });
 
-  // Attach edit event listeners for sets, reps, and weight
-  document.querySelectorAll('.sets, .reps, .weight').forEach(input => {
-    input.addEventListener('input', (e) => {
-      const idx = e.target.dataset.index;
-      const setIdx = e.target.dataset.setindex;
-      const value = e.target.value;
-      if (e.target.classList.contains('sets')) {
-        plan[idx].sets[setIdx].sets = value;
-      } else if (e.target.classList.contains('reps')) {
-        plan[idx].sets[setIdx].reps = value;
-      } else if (e.target.classList.contains('weight')) {
-        plan[idx].sets[setIdx].weight = value;
-      }
-      savePlan(plan);
-    });
-  });
+  let history = JSON.parse(localStorage.getItem("workoutHistory")) || [];
+  history.push({ date, exercises });
+  localStorage.setItem("workoutHistory", JSON.stringify(history));
+
+  alert("Тренировка сохранена!");
+  planContainer.innerHTML = "";
 }
 
-function addSet(idx) {
-  const plan = loadPlan();
-  plan[idx].sets.push({ sets: 1, reps: 10, weight: 0 });
-  savePlan(plan);
-  renderPlan(plan, remove);
-}
+// === Инициализация ===
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("workoutDate").value = new Date().toISOString().slice(0,10);
 
-function remove(idx) {
-  const plan = loadPlan();
-  plan.splice(idx, 1);
-  savePlan(plan);
-  renderPlan(plan, remove);
-}
+  loadExercises();
 
-(async function init() {
-  const data = await loadData();
+  searchInput.addEventListener("input", renderExercises);
+  filterGroup.addEventListener("change", renderExercises);
+  filterTarget.addEventListener("change", renderExercises);
+  filterType.addEventListener("change", renderExercises);
+  filterEquipment.addEventListener("change", renderExercises);
 
-  // Populate filters
-  const filterType = document.getElementById('w-filter-type');
-  const filterEq = document.getElementById('w-filter-equipment');
-  const filterGroup = document.getElementById('w-search-group');
-  const filterTarget = document.getElementById('w-search-target');
-
-  [...new Set(data.map(x => x.type))].forEach(t => { const o = document.createElement('option'); o.value = t; o.textContent = t; filterType.appendChild(o); });
-  [...new Set(data.flatMap(x => x.equipment))].forEach(e => { const o = document.createElement('option'); o.value = e; o.textContent = e; filterEq.appendChild(o); });
-
-  let plan = loadPlan();
-
-  function apply() {
-    let list = data;
-    const q = filterGroup.value.trim().toLowerCase();
-    const t = filterType.value;
-    const e = filterEq.value;
-    const target = filterTarget.value.trim().toLowerCase();
-    if (q) list = list.filter(x => x.groups.some(group => group.toLowerCase().includes(q)));
-    if (target) list = list.filter(x => x.targets.some(zone => zone.toLowerCase().includes(target)));
-    if (t) list = list.filter(x => x.type === t);
-    if (e) list = list.filter(x => x.equipment.includes(e));
-    renderPick(list, (ex) => { plan.push(ex); savePlan(plan); renderPlan(plan, remove); });
-  }
-
-  function remove(idx) {
-    plan.splice(idx, 1);
-    savePlan(plan);
-    renderPlan(plan, remove);
-  }
-
-  document.getElementById('clearPlan').onclick = () => { plan = []; savePlan(plan); renderPlan(plan, remove); };
-  filterGroup.oninput = apply;
-  filterTarget.oninput = apply;
-  filterType.onchange = apply;
-  filterEq.onchange = apply;
-
-  apply();
-  renderPlan(plan, remove);
-})();
+  document.getElementById("saveWorkoutBtn").addEventListener("click", saveWorkout);
+});
