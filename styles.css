@@ -7,6 +7,7 @@
   --card-bg: #fff;
   --shadow: 0 4px 12px rgba(0,0,0,0.08);
   --radius: 12px;
+  --menu-width: 100%;
 }
 
 * {
@@ -20,7 +21,7 @@ body {
   color: var(--text-color);
 }
 
-/* Sidebar and Navbar (for mobile) */
+/* Sidebar (for mobile) */
 .sidebar {
   background: var(--primary-color);
   color: white;
@@ -58,14 +59,14 @@ body {
   background: rgba(255, 255, 255, 0.2);
 }
 
-/* Content area */
+/* Main content */
 .app {
   display: flex;
   flex-direction: column;
 }
 
 .content {
-  margin-top: 60px; /* to avoid sidebar being overlapped */
+  margin-top: 60px;
   padding: 1rem;
   width: 100%;
 }

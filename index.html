@@ -3,23 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <title>Главная</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles_mobile_only.css">
 </head>
 <body>
-<div class="app">
-  <aside class="sidebar">
-    <div class="brand">Дневник Тренировок</div>
-    <nav class="nav">
-      <a class="active" href="index.html">Главная</a>
-      <a href="exercises.html">Упражнения</a>
-      <a href="workout.html">Тренировка</a>
-      <a href="profile.html">Профиль</a>
-    </nav>
-  </aside>
-  <main class="content">
-    <h1>Добро пожаловать!</h1>
-    <p>Используйте меню слева, чтобы перейти к нужному разделу.</p>
-  </main>
-</div>
+  <div class="app">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">Дневник Тренировок</div>
+      <button id="burger" class="nav-toggle">☰</button>
+      <nav class="nav" id="nav">
+        <a class="active" href="index.html">Главная</a>
+        <a href="exercises.html">Упражнения</a>
+        <a href="workout.html">Тренировка</a>
+        <a href="profile.html">Профиль</a>
+      </nav>
+    </aside>
+    <main class="content">
+      <h1>Добро пожаловать!</h1>
+      <p>Используйте меню слева, чтобы перейти к нужному разделу.</p>
+    </main>
+  </div>
+  <script>
+    document.getElementById('burger').onclick = () => document.getElementById('nav').classList.toggle('show');
+  </script>
 </body>
 </html>
