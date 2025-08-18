@@ -1,8 +1,4 @@
-// === Глобальные переменные ===
 let allExercises = [];
-let workoutPlan = [];
-
-// === DOM элементы ===
 const searchInput = document.getElementById("search");
 const filterGroup = document.getElementById("filter-groups");
 const filterTarget = document.getElementById("filter-targets");
@@ -11,23 +7,54 @@ const filterEquipment = document.getElementById("filter-equipment");
 const exercisesContainer = document.getElementById("exercises-container");
 const planContainer = document.getElementById("plan");
 
-// === Шаблоны ===
+// Шаблоны
 const tplExercise = document.getElementById("pickItemTpl");
 const tplPlanExercise = document.getElementById("planExerciseTpl");
 const tplSetRow = document.getElementById("setRowTpl");
 
-// === Загрузка базы упражнений ===
+// === Загружаем упражнения из базы ===
 async function loadExercises() {
   try {
     const res = await fetch("exercises.json");
     allExercises = await res.json();
+    populateFilters();
     renderExercises();
   } catch (err) {
     console.error("Ошибка загрузки exercises.json:", err);
   }
 }
 
-// === Фильтрация и отрисовка упражнений ===
+// === Заполняем фильтры уникальными значениями ===
+function populateFilters() {
+  const groups = new Set();
+  const targets = new Set();
+  const types = new Set();
+  const equipments = new Set();
+
+  allExercises.forEach(e => {
+    if (e.group) groups.add(e.group);
+    if (e.target) targets.add(e.target);
+    if (e.type) types.add(e.type);
+    if (e.equipment) equipments.add(e.equipment);
+  });
+
+  fillSelect(filterGroup, groups, "Группа мышц");
+  fillSelect(filterTarget, targets, "Целевая зона");
+  fillSelect(filterType, types, "Тип");
+  fillSelect(filterEquipment, equipments, "Оборудование");
+}
+
+function fillSelect(select, values, placeholder) {
+  select.innerHTML = `<option value="">${placeholder}</option>`;
+  Array.from(values).sort().forEach(v => {
+    const opt = document.createElement("option");
+    opt.value = v;
+    opt.textContent = v;
+    select.appendChild(opt);
+  });
+}
+
+// === Отрисовка упражнений с учётом фильтров ===
 function renderExercises() {
   exercisesContainer.innerHTML = "";
 
@@ -66,14 +93,14 @@ function addExerciseToPlan(ex) {
 
   const setsContainer = planItem.querySelector(".sets");
 
-  // Добавление нового подхода
+  // Кнопка добавления подхода
   const addSetBtn = planItem.querySelector(".add-set");
   addSetBtn.addEventListener("click", () => {
     const setRow = tplSetRow.content.cloneNode(true);
     setsContainer.appendChild(setRow);
   });
 
-  // Удаление упражнения
+  // Кнопка удаления упражнения
   const removeBtn = planItem.querySelector(".remove-exercise");
   removeBtn.addEventListener("click", () => {
     planItemEl.remove();
