@@ -1,50 +1,31 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
-<head>
-<link rel="manifest" href="manifest.json">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta charset="UTF-8">
-  <title>Главная</title>
-  <link rel="stylesheet" href="styles.css">
-<script src="nav.js" defer></script>
-</head>
-<body>
-
-<button id="burger" class="burger" aria-label="Открыть меню" aria-controls="sidebar" aria-expanded="false">
-  <span></span><span></span><span></span>
-</button>
-<div id="backdrop" class="backdrop" hidden></div>
-
-    <div class="bar"></div>
-        <div class="bar"></div>
-    </div>
-
-<div class="app">
-  <aside id="sidebar" class="sidebar">
-    <div class="brand">Дневник Тренировок</div>
-    <nav role="navigation" aria-label="Main" class="nav">
-      <a class="active" href="index.html">Главная</a>
-      <a href="exercises.html">Упражнения</a>
-      <a href="workout.html">Тренировка</a>
-      <a href="profile.html">Профиль</a>
-    </nav>
-  </aside>
-  <main class="content">
-    <h1>Добро пожаловать!</h1>
-    <p>Используйте меню слева, чтобы перейти к нужному разделу.</p>
-  </main>
-</div>
-
-<script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
-    navigator.serviceWorker.register('./sw.js').catch(function(e){
-      console.error('SW registration failed', e);
-    });
-  });
-}
-</script>
-
-
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>TNG Log Bot</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="manifest" href="./manifest.json" />
+  </head>
+  <body>
+    <header>
+      <nav id="topnav"></nav>
+    </header>
+    <main>
+      <section class="card">
+        <h1>Добро пожаловать 👋</h1>
+        <p>Перейдите к списку упражнений или в профиль.</p>
+        <p>
+          <a class="button" href="./exercises.html">Открыть упражнения</a>
+          <a class="button" href="./profile.html" style="margin-left:.5rem">Профиль</a>
+        </p>
+      </section>
+      <footer>v1 – восстановленная версия</footer>
+    </main>
+    <script type="module">
+      import { renderNav, registerSW } from './nav.js';
+      renderNav('home');
+      registerSW();
+    </script>
+  </body>
 </html>

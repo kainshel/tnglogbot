@@ -1,6 +1,39 @@
-const CACHE='gk-laurel-mp-v1';
-const ASSETS=['./','index.html','exercises.html','workout.html','calendar.html','stats.html','view.html',
-'styles.css','storage.js','app_profile.js','app_exercises.js','app_workout.js','app_calendar.js','app_stats.js','app_view.js','manifest.json','icon.png'];
-self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)))});
-self.addEventListener('activate',e=>{e.waitUntil(self.clients.claim())});
-self.addEventListener('fetch',e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request))) });
+
+const CACHE = 'tng-cache-v1';
+const ASSETS = [
+  "./",
+  "./exercises.html",
+  "./exercises.json",
+  "./icon-192.png",
+  "./icon-512.png",
+  "./icon.png",
+  "./index.html",
+  "./manifest.json",
+  "./nav.js",
+  "./profile.html",
+  "./storage.js",
+  "./styles.css"
+];
+
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches.open(CACHE).then(cache => cache.addAll(ASSETS))
+  );
+});
+
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches.keys().then(keys => Promise.all(keys.map(k => k !== CACHE ? caches.delete(k) : null)))
+  );
+});
+
+self.addEventListener('fetch', (event) => {
+  const req = event.request;
+  event.respondWith(
+    caches.match(req).then(cached => cached || fetch(req).then(res => {
+      const copy = res.clone();
+      caches.open(CACHE).then(cache => cache.put(req, copy));
+      return res;
+    }).catch(() => caches.match('./index.html')))
+  );
+});
