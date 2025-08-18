@@ -6,16 +6,21 @@
   <meta charset="UTF-8">
   <title>Главная</title>
   <link rel="stylesheet" href="styles.css">
+<script src="nav.js" defer></script>
 </head>
-<body><div id='sidebar'>
-    <div id="burger-menu" onclick="toggleSidebar()">
-        <div class="bar"></div>
-        <div class="bar"></div>
+<body>
+
+<button id="burger" class="burger" aria-label="Открыть меню" aria-controls="sidebar" aria-expanded="false">
+  <span></span><span></span><span></span>
+</button>
+<div id="backdrop" class="backdrop" hidden></div>
+
+    <div class="bar"></div>
         <div class="bar"></div>
     </div>
 
 <div class="app">
-  <aside class="sidebar">
+  <aside id="sidebar" class="sidebar">
     <div class="brand">Дневник Тренировок</div>
     <nav role="navigation" aria-label="Main" class="nav">
       <a class="active" href="index.html">Главная</a>
@@ -40,13 +45,6 @@ if ('serviceWorker' in navigator) {
 }
 </script>
 
-
-<script>
-function toggleSidebar() {
-    const sidebar = document.getElementById('sidebar');
-    sidebar.classList.toggle('open');
-}
-</script>
 
 </body>
 </html>
