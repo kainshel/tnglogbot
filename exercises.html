@@ -1,8 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Упражнения</title>
+  <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="styles_mobile_only.css">
 </head>
 <body>
@@ -19,25 +22,31 @@
     </aside>
     <main class="content">
       <h1>Упражнения</h1>
-      <section class="filters">
-        <input type="text" id="search" placeholder="Поиск по названию">
-        <select id="filter-groups"><option value="">Группа мышц</option></select>
-        <select id="filter-targets"><option value="">Целевая зона</option></select>
-        <select id="filter-type"><option value="">Тип</option></select>
-        <select id="filter-equipment"><option value="">Оборудование</option></select>
-      </section>
-      <section id="exercises-container" class="exercise-grid"></section>
+      <div class="filters">
+        <select id="category" class="filter-select">
+          <option value="">Выберите категорию</option>
+          <option value="upper-body">Верх тела</option>
+          <option value="lower-body">Низ тела</option>
+          <option value="full-body">Все тело</option>
+        </select>
+        <button class="btn-filter">Применить</button>
+      </div>
+
+      <div class="exercise-list">
+        <div class="exercise-card">
+          <img src="gif_exercises/bench_press.gif" alt="Bench Press" class="exercise-img">
+          <h3>Жим лежа</h3>
+        </div>
+        <div class="exercise-card">
+          <img src="gif_exercises/Dumbbell_Bench_Press.gif" alt="Dumbbell Bench Press" class="exercise-img">
+          <h3>Жим гантелей</h3>
+        </div>
+        <!-- Добавьте другие упражнения -->
+      </div>
     </main>
   </div>
-
-  <!-- Модальное окно -->
-  <div class="modal-back" id="modalBack">
-    <div class="modal" id="modal">
-      <button id="modalClose" class="modal-close">×</button>
-      <div id="modalContent"></div>
-    </div>
-  </div>
-
-  <script src="app_exercises.js"></script>
+  <script>
+    document.getElementById('burger').onclick = () => document.getElementById('nav').classList.toggle('show');
+  </script>
 </body>
 </html>
