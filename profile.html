@@ -1,46 +1,101 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Профиль</title>
-    <link rel="stylesheet" href="./styles.css" />
-    <link rel="manifest" href="./manifest.json" />
-  </head>
-  <body>
-    <header>
-      <nav id="topnav"></nav>
-    </header>
-    <main>
-      <section class="card">
-        <h1>Профиль</h1>
-        <form id="profileForm">
-          <label>Имя<br><input name="name" placeholder="Ваше имя"/></label><br><br>
-          <label>Вес (кг)<br><input name="weight" type="number" step="0.1"/></label><br><br>
-          <label>Рост (см)<br><input name="height" type="number"/></label><br><br>
-          <button type="submit">Сохранить</button>
-        </form>
-        <p id="status" style="margin-top:.75rem;opacity:.8"></p>
-      </section>
-    </main>
-    <script type="module">
-      import { renderNav, registerSW } from './nav.js';
-      import { saveProfile, loadProfile } from './storage.js';
-      renderNav('profile');
-      registerSW();
-      const form = document.getElementById('profileForm');
-      const status = document.getElementById('status');
-      const data = loadProfile();
-      for (const [k,v] of Object.entries(data)) {
-        if (form[k]) form[k].value = v;
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Профиль — TngLogBot</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="nav.js" defer></script>
+</head>
+<body>
+  <button id="burger" class="burger" aria-label="Открыть меню" aria-controls="sidebar" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <div id="backdrop" class="backdrop" hidden></div>
+
+  <aside id="sidebar" class="sidebar" aria-hidden="true">
+    <nav aria-label="Главное меню">
+      <ul>
+        <li><a href="index.html">Главная</a></li>
+        <li><a href="exercises.html">Упражнения</a></li>
+        <li><a href="workout.html">Тренировка</a></li>
+        <li><a href="profile.html" class="active">Профиль</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <section class="card profile-header">
+      <img src="avatar.png" alt="Аватар пользователя" class="avatar">
+      <div>
+        <h1 id="username">Имя пользователя</h1>
+        <p id="usergoal">Цель: —</p>
+      </div>
+    </section>
+
+    <section class="card profile-info">
+      <h2>Основная информация</h2>
+      <ul>
+        <li><strong>Возраст:</strong> <span id="age">—</span></li>
+        <li><strong>Рост:</strong> <span id="height">—</span></li>
+        <li><strong>Вес:</strong> <span id="weight">—</span></li>
+      </ul>
+      <a href="edit_profile.html" class="btn">Редактировать</a>
+    </section>
+
+    <section class="card profile-progress">
+      <h2>Прогресс</h2>
+      <p>Всего тренировок: <span id="totalWorkouts">0</span></p>
+      <p>Всего упражнений: <span id="totalExercises">0</span></p>
+    </section>
+
+    <section class="card profile-history">
+      <h2>Недавние тренировки</h2>
+      <ul id="workoutHistory"></ul>
+    </section>
+
+    <section class="card profile-actions">
+      <button class="btn danger" onclick="logout()">Выйти</button>
+    </section>
+  </main>
+
+  <script>
+    function loadProfile() {
+      const saved = localStorage.getItem("userProfile");
+      return saved ? JSON.parse(saved) : null;
+    }
+
+    function renderProfile() {
+      const p = loadProfile();
+      if (p) {
+        document.getElementById("username").textContent = p.username;
+        document.getElementById("usergoal").textContent = "Цель: " + p.goal;
+        document.getElementById("age").textContent = p.age;
+        document.getElementById("height").textContent = p.height + " см";
+        document.getElementById("weight").textContent = p.weight + " кг";
+        document.getElementById("totalWorkouts").textContent = p.totalWorkouts || 0;
+        document.getElementById("totalExercises").textContent = p.totalExercises || 0;
       }
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const payload = Object.fromEntries(new FormData(form).entries());
-        saveProfile(payload);
-        status.textContent = 'Сохранено ✅';
-        setTimeout(()=> status.textContent='', 1500);
+
+      const history = JSON.parse(localStorage.getItem("workoutHistory")) || [];
+      const list = document.getElementById("workoutHistory");
+      list.innerHTML = "";
+      history.slice(-5).reverse().forEach(item => {
+        const li = document.createElement("li");
+        const names = item.exercises.map(e => e.name).join(", ");
+        li.textContent = `${item.date} — ${names}`;
+        list.appendChild(li);
       });
-    </script>
-  </body>
+    }
+
+    function logout() {
+      if (confirm("Выйти из профиля?")) {
+        localStorage.removeItem("userProfile");
+        location.reload();
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", renderProfile);
+  </script>
+</body>
 </html>

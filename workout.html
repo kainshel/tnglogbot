@@ -1,75 +1,111 @@
-<!doctype html>
 <html lang="ru">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Тренировка</title>
-    <link rel="stylesheet" href="./styles.css" />
-    <link rel="manifest" href="./manifest.json" />
-    <style>
-      .grid { display:grid; gap:1rem; grid-template-columns: 1fr; }
-      @media (min-width: 900px){ .grid { grid-template-columns: 1fr 1fr; } }
-      .list { max-height: 60vh; overflow:auto; }
-      .ex-item{ display:flex; align-items:center; justify-content:space-between; padding:.5rem .75rem; border:1px solid #272a33; border-radius:10px; margin-bottom:.5rem;}
-      .ex-item h4{ margin:0; font-size:1rem; }
-      .ex-item .actions > button{ margin-left:.5rem }
-      .sets{ margin-top:.5rem }
-      .set-row{ display:flex; gap:.5rem; align-items:center; margin:.35rem 0; }
-      .set-row input{ width:6rem; padding:.4rem .5rem; border-radius:8px; border:1px solid #2a2e38; background:#12141b; color:inherit }
-      .tag{ font-size:.8rem; opacity:.8 }
-      dialog.modal{ border:0; border-radius:14px; padding:0; overflow:hidden; background:#151822; color:inherit }
-      dialog .modal-body{ padding:1rem; }
-      dialog::backdrop{ background: rgba(0,0,0,.6); }
-      .section-title{ display:flex; align-items:center; justify-content:space-between }
-      details summary{ cursor:pointer; }
-    </style>
-  </head>
-  <body>
-    <header><nav id="topnav"></nav></header>
-    <main>
-      <section class="card">
-        <div class="section-title">
-          <h1>Тренировка</h1>
-          <div>
-            <label>Дата: <input id="date" type="date"/></label>
-            <button id="saveBtn">Сохранить</button>
-          </div>
-        </div>
-        <div class="grid">
-          <div>
-            <h2 style="margin-top:0">База упражнений</h2>
-            <input id="search" placeholder="Поиск по названию" style="width:100%;padding:.6rem;border-radius:10px;border:1px solid #2a2e38;background:#12141b;color:inherit;margin-bottom:.75rem"/>
-            <div id="exList" class="list"></div>
-          </div>
-          <div>
-            <h2 style="margin-top:0">План на день</h2>
-            <div id="plan"></div>
-          </div>
-        </div>
-      </section>
+<head>
+<link rel="manifest" href="manifest.json">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Упражнения</title>
+  <link rel="stylesheet" href="styles.css">
+<script src="nav.js" defer></script>
+</head>
+<body>
 
-      <section class="card" style="margin-top:1rem">
-        <h2 style="margin-top:0">История</h2>
-        <div id="history"></div>
-      </section>
-    </main>
+<button id="burger" class="burger" aria-label="Открыть меню" aria-controls="sidebar" aria-expanded="false">
+  <span></span><span></span><span></span>
+</button>
+<div id="backdrop" class="backdrop" hidden></div>
 
-    <dialog id="infoModal" class="modal">
-      <div class="modal-body">
-        <div style="display:flex;justify-content:space-between;align-items:center">
-          <h3 id="infoTitle" style="margin:0"></h3>
-          <form method="dialog"><button style="background:#2b2f3a;color:#ddd">Закрыть</button></form>
-        </div>
-        <p id="infoMeta" class="tag"></p>
-        <div id="infoGifWrap" style="text-align:center"></div>
+    <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+
+<div class="app">
+  <aside id="sidebar" class="sidebar">
+    <div class="brand">Дневник Тренировок</div>
+    <nav role="navigation" aria-label="Main" class="nav">
+      <a href="index.html">Главная</a>
+      <a class="active" href="exercises.html">Упражнения</a>
+      <a href="workout.html">Тренировка</a>
+      <a href="profile.html">Профиль</a>
+    </nav>
+  </aside>
+  <main class="content">
+    <h1>Упражнения</h1>
+    <section class="filters">
+      <input type="text" id="search" placeholder="Поиск по названию">
+      <select id="filter-groups"><option value="">Группа мышц</option></select>
+      <select id="filter-targets"><option value="">Целевая зона</option></select>
+      <select id="filter-type"><option value="">Тип</option></select>
+      <select id="filter-equipment"><option value="">Оборудование</option></select>
+    </section>
+    <section id="exercises-container" class="exercise-grid"></section>
+  </main>
+</div>
+      <!-- CONTENT -->
+      
+<header class="section-head">
+  <h1>Новая тренировка</h1>
+  <div class="row wrap">
+    <input type="date" id="workoutDate">
+  </div>
+</header>
+<div class="grid two">
+  <div class="card">
+    <h2>Найти упражнение</h2>
+    <div class="row wrap">
+      <input id="pickSearch" placeholder="Поиск…">
+      <select id="pickGroup"><option value="">Все группы</option></select>
+      <select id="pickSubgroup" disabled><option value="">Все подгруппы</option></select>
+    </div>
+    <div id="results" class="pick-list"></div>
+  </div>
+
+  <div class="card">
+    <h2>Состав тренировки</h2>
+    <div id="plan"></div>
+    <div class="row" style="justify-content:flex-end">
+      <button id="clearWorkout" class="btn ghost">Очистить</button>
+      <button id="saveWorkout" class="btn">Сохранить</button>
+    </div>
+  </div>
+</div>
+
+<template id="pickItemTpl">
+  <button class="pick-item">
+    <img class="thumb" alt="">
+    <div style="display:flex;flex-direction:column;gap:4px">
+      <span class="name"></span>
+      <span class="badge group"></span>
+      <span class="badge subgroup"></span>
+    </div>
+  </button>
+</template>
+<template id="planExerciseTpl">
+  <div class="plan-ex">
+    <div class="plan-head">
+      <div class="title" style="display:flex;gap:8px;align-items:center">
+        <img class="thumb" alt="">
+        <span class="t"></span>
       </div>
-    </dialog>
+      <button class="icon-btn del">🗑</button>
+    </div>
+    <div class="sets"></div>
+    <button class="btn ghost add-set">+ Подход</button>
+  </div>
+</template>
+<template id="setRowTpl">
+  <div class="set-row">
+    <span class="badge">#<b class="n"></b></span>
+    <input type="number" min="0" step="0.5" class="w110 w" placeholder="Вес, кг">
+    <input type="number" min="1" class="w110 r" placeholder="Повторы">
+    <button class="icon-btn del">✖</button>
+  </div>
+</template>
 
-    <script type="module" src="./app_workout.js"></script>
-    <script type="module">
-      import { renderNav, registerSW } from './nav.js';
-      renderNav('workout');
-      registerSW();
-    </script>
-  </body>
+    </main>
+  </div>
+  <div id="toast" class="toast" aria-live="polite"></div>
+  <script type="module" src="storage.js"></script>
+  <script>document.getElementById('burger').onclick=()=>document.getElementById('nav').classList.toggle('show');</script>
+  <script type="module" src="app_workout.js"></script>
+</body>
 </html>

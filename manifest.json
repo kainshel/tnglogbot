@@ -1,11 +1,16 @@
 {
-  "name": "TNG Log Bot",
-  "short_name": "TNG Log",
-  "start_url": "./index.html",
+  "name": "Дневник Тренировок",
+  "short_name": "Дневник",
+  "start_url": "./",
   "display": "standalone",
-  "background_color": "#111111",
-  "theme_color": "#111111",
+  "background_color": "#F7FAF6",
+  "theme_color": "#8FAF8F",
   "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
     {
       "src": "icon-192.png",
       "sizes": "192x192",
@@ -14,11 +19,6 @@
     {
       "src": "icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
-    },
-    {
-      "src": "icon.png",
-      "sizes": "48x48",
       "type": "image/png"
     }
   ]
