@@ -316,3 +316,18 @@ body {
 .sidebar nav ul li a.active {
   background: rgba(255,255,255,0.2);
 }
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    left: -100%;
+    transition: left 0.3s ease;
+  }
+  body.drawer-open .sidebar {
+    left: 0;
+  }
+  #backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+  }
+}
