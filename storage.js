@@ -1,3 +1,20 @@
+
+// ---- Safe localStorage patch (auto-injected) ----
+(function(){
+  if (!('localStorage' in window)) return;
+  try {
+    const _set = localStorage.setItem.bind(localStorage);
+    const _get = localStorage.getItem.bind(localStorage);
+    const _remove = localStorage.removeItem.bind(localStorage);
+    const _clear = localStorage.clear.bind(localStorage);
+    localStorage.setItem = function(k,v){ try { return _set(k,v); } catch(e){ console.error('localStorage.setItem error', e); } };
+    localStorage.getItem = function(k){ try { return _get(k); } catch(e){ console.error('localStorage.getItem error', e); return null; } };
+    localStorage.removeItem = function(k){ try { return _remove(k); } catch(e){ console.error('localStorage.removeItem error', e); } };
+    localStorage.clear = function(){ try { return _clear(); } catch(e){ console.error('localStorage.clear error', e); } };
+  } catch(e){ /* silent */ }
+})();
+// -----------------------------------------------
+
 export const KEYS = { profile:'dt_profile_v2', ex:'dt_exercises_v4', wo:'dt_workouts_v3' };
 export const LS = { get:(k,fb)=>{try{return JSON.parse(localStorage.getItem(k))??fb}catch{return fb}}, set:(k,v)=>localStorage.setItem(k, JSON.stringify(v)) };
 export const MUSCLE_GROUPS = {

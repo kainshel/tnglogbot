@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+<link rel="manifest" href="manifest.json">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="UTF-8">
   <title>Главная</title>
   <link rel="stylesheet" href="styles.css">
@@ -9,7 +11,7 @@
 <div class="app">
   <aside class="sidebar">
     <div class="brand">Дневник Тренировок</div>
-    <nav class="nav">
+    <nav role="navigation" aria-label="Main" class="nav">
       <a class="active" href="index.html">Главная</a>
       <a href="exercises.html">Упражнения</a>
       <a href="workout.html">Тренировка</a>
@@ -21,5 +23,16 @@
     <p>Используйте меню слева, чтобы перейти к нужному разделу.</p>
   </main>
 </div>
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('./sw.js').catch(function(e){
+      console.error('SW registration failed', e);
+    });
+  });
+}
+</script>
+
 </body>
 </html>
