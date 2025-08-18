@@ -1,5 +1,5 @@
 
-/* Основные переменные */
+/* Общие стили */
 :root {
   --bg-color: #f9faf9;
   --primary-color: #A9BA9D;
@@ -7,7 +7,6 @@
   --card-bg: #fff;
   --shadow: 0 4px 12px rgba(0,0,0,0.08);
   --radius: 12px;
-  --menu-width: 220px;
 }
 
 * {
@@ -21,22 +20,26 @@ body {
   color: var(--text-color);
 }
 
-/* Sidebar / Navbar */
+/* Sidebar and Navbar (for mobile) */
 .sidebar {
   background: var(--primary-color);
   color: white;
   padding: 1rem;
-  min-height: 100vh;
+  width: 100%;
   position: fixed;
-  left: 0; top: 0;
-  width: var(--menu-width);
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  top: 0;
+  left: -100%;
+  height: 100%;
+  transition: left 0.3s ease;
+  z-index: 1000;
+}
+
+.sidebar.show {
+  left: 0;
 }
 
 .sidebar .brand {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 1rem;
 }
@@ -44,34 +47,34 @@ body {
 .sidebar .nav a {
   display: block;
   padding: 0.5rem 1rem;
-  border-radius: var(--radius);
   color: white;
   text-decoration: none;
-  transition: background 0.2s;
+  border-bottom: 1px solid #fff;
+  transition: background 0.2s ease;
 }
 
 .sidebar .nav a:hover,
 .sidebar .nav a.active {
-  background: rgba(255,255,255,0.2);
+  background: rgba(255, 255, 255, 0.2);
 }
 
-/* Main content */
+/* Content area */
 .app {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
 }
 
 .content {
-  margin-left: var(--menu-width);
-  padding: 2rem;
+  margin-top: 60px; /* to avoid sidebar being overlapped */
+  padding: 1rem;
   width: 100%;
 }
 
 /* Filters */
 .filters {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+  flex-direction: column;
+  gap: 1rem;
   margin-bottom: 1rem;
 }
 
@@ -80,12 +83,13 @@ body {
   border: 1px solid #ccc;
   border-radius: var(--radius);
   outline: none;
+  width: 100%;
 }
 
-/* Exercise cards */
+/* Cards */
 .exercise-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: 1rem;
 }
 
@@ -95,7 +99,7 @@ body {
   box-shadow: var(--shadow);
   padding: 1rem;
   text-align: center;
-  transition: transform 0.2s;
+  transition: transform 0.2s ease;
 }
 
 .exercise-card:hover {
@@ -116,14 +120,14 @@ body {
   color: white;
   cursor: pointer;
   border-radius: var(--radius);
-  transition: background 0.2s;
+  transition: background 0.2s ease;
 }
 
 .details-btn:hover {
   background: #8ea686;
 }
 
-/* Modal */
+/* Modal window */
 .modal-back {
   display: none;
   position: fixed;
@@ -164,28 +168,27 @@ body {
   margin: 1rem 0;
 }
 
+/* Animation for modal appearance */
 @keyframes fadeIn {
   from { opacity: 0; transform: scale(0.95); }
   to { opacity: 1; transform: scale(1); }
 }
 
-/* Responsive styles for mobile */
+/* Mobile-specific styles */
 @media (max-width: 768px) {
-  .app {
-    flex-direction: column;
-  }
   .sidebar {
-    position: absolute;
-    width: 100%;
+    position: fixed;
     top: 0;
     left: -100%;
-    transition: left 0.3s ease;
+    width: 100%;
+    height: 100%;
   }
   .sidebar.show {
     left: 0;
   }
   .content {
     margin-left: 0;
+    padding: 1rem;
   }
   .filters {
     justify-content: center;
@@ -195,7 +198,7 @@ body {
     margin-bottom: 10px;
   }
   .exercise-grid {
-    grid-template-columns: 1fr;
+    flex-direction: column;
   }
   .exercise-card {
     margin: 10px;
@@ -203,9 +206,12 @@ body {
   #burger {
     display: block;
   }
+  #burger:focus {
+    outline: none;
+  }
 }
 
-/* Burger button (for mobile) */
+/* Burger button for mobile */
 #burger {
   display: none;
   background-color: transparent;
@@ -213,6 +219,10 @@ body {
   color: white;
   font-size: 30px;
   cursor: pointer;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 1100;
 }
 
 #burger:focus {
