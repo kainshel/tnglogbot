@@ -165,3 +165,77 @@ body {
   from { opacity: 0; transform: scale(0.95); }
   to { opacity: 1; transform: scale(1); }
 }
+
+/* Бургерное меню */
+#burger-menu {
+    display: none;
+    cursor: pointer;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 100;
+}
+
+#burger-menu .bar {
+    width: 30px;
+    height: 4px;
+    background-color: #111;
+    margin: 6px 0;
+}
+
+#sidebar {
+    transition: transform 0.3s ease-in-out;
+}
+
+#sidebar.open {
+    transform: translateX(0);
+}
+
+#sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px; /* Изначально скрыто */
+    width: 250px;
+    height: 100%;
+    background-color: #333;
+    color: white;
+    z-index: 99;
+    padding-top: 20px;
+    transition: transform 0.3s ease-in-out;
+}
+
+#sidebar a {
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    display: block;
+}
+
+#sidebar a:hover {
+    background-color: #575757;
+}
+
+/* Мобильный стиль */
+@media (max-width: 768px) {
+    #sidebar {
+        width: 200px;
+    }
+    #sidebar.open {
+        transform: translateX(0);
+    }
+    #burger-menu {
+        display: block;
+    }
+    body {
+        margin-left: 0;
+    }
+    .content {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    #sidebar {
+        width: 180px;
+    }
+}

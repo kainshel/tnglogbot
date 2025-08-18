@@ -7,7 +7,13 @@
   <title>Упражнения</title>
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body><div id='sidebar'>
+    <div id="burger-menu" onclick="toggleSidebar()">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+
 <div class="app">
   <aside class="sidebar">
     <div class="brand">Дневник Тренировок</div>
@@ -40,5 +46,13 @@
 </div>
 
 <script src="app_exercises.js"></script>
+
+<script>
+function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('open');
+}
+</script>
+
 </body>
 </html>
