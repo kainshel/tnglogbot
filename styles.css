@@ -220,3 +220,44 @@ body {
   .content { margin-left: 0 !important; }
   .app { grid-template-columns: 1fr !important; }
 }
+/* --- Стили для страницы профиля --- */
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.profile-header .avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ddd;
+}
+
+.profile-info ul,
+.profile-history ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.profile-info li,
+.profile-history li {
+  margin: 6px 0;
+  font-size: 0.95rem;
+}
+
+.profile-actions {
+  text-align: center;
+}
+
+.profile-actions .btn {
+  background: #e74c3c;
+  color: #fff;
+  border: none;
+}
+
+.profile-actions .btn:hover {
+  background: #c0392b;
+}

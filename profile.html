@@ -1,39 +1,138 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<link rel="manifest" href="manifest.json">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="UTF-8">
-  <title>Профиль</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Профиль — TngLogBot</title>
   <link rel="stylesheet" href="styles.css">
-<script src="nav.js" defer></script>
+  <script src="nav.js" defer></script>
 </head>
 <body>
+  <button id="burger" class="burger" aria-label="Открыть меню" aria-controls="sidebar" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <div id="backdrop" class="backdrop" hidden></div>
 
-<button id="burger" class="burger" aria-label="Открыть меню" aria-controls="sidebar" aria-expanded="false">
-  <span></span><span></span><span></span>
-</button>
-<div id="backdrop" class="backdrop" hidden></div>
-
-    <div class="bar"></div>
-        <div class="bar"></div>
-    </div>
-
-<div class="app">
-  <aside id="sidebar" class="sidebar">
-    <div class="brand">Дневник Тренировок</div>
-    <nav role="navigation" aria-label="Main" class="nav">
-      <a href="index.html">Главная</a>
-      <a href="exercises.html">Упражнения</a>
-      <a href="workout.html">Тренировка</a>
-      <a class="active" href="profile.html">Профиль</a>
+  <aside id="sidebar" class="sidebar" aria-hidden="true">
+    <nav role="navigation" aria-label="Главное меню">
+      <ul>
+        <li><a href="index.html">Главная</a></li>
+        <li><a href="exercises.html">Упражнения</a></li>
+        <li><a href="workout.html">Тренировка</a></li>
+        <li><a href="profile.html" class="active">Профиль</a></li>
+      </ul>
     </nav>
   </aside>
-  <main class="content">
-    <h1>Профиль</h1>
-    <p>Здесь будут отображаться ваши личные данные и прогресс.</p>
-  </main>
-</div>
 
+  <main class="content">
+    <section class="card profile-header">
+      <img src="avatar.png" alt="Аватар пользователя" class="avatar">
+      <div>
+        <h1 id="username">Имя пользователя</h1>
+        <p id="usergoal">Цель: —</p>
+      </div>
+    </section>
+
+    <section class="card profile-info">
+      <h2>Основная информация</h2>
+      <ul>
+        <li><strong>Возраст:</strong> <span id="age">—</span></li>
+        <li><strong>Рост:</strong> <span id="height">—</span></li>
+        <li><strong>Вес:</strong> <span id="weight">—</span></li>
+      </ul>
+      <button class="btn" onclick="editProfile()">Редактировать</button>
+    </section>
+
+    <section class="card profile-progress">
+      <h2>Прогресс</h2>
+      <p>Всего тренировок: <span id="totalWorkouts">0</span></p>
+      <p>Всего упражнений: <span id="totalExercises">0</span></p>
+    </section>
+
+    <section class="card profile-history">
+      <h2>Недавние тренировки</h2>
+      <ul id="workoutHistory"></ul>
+    </section>
+
+    <section class="card profile-actions">
+      <button class="btn" onclick="logout()">Выйти</button>
+    </section>
+  </main>
+
+  <script>
+    // --- Работа с localStorage ---
+    const defaultProfile = {
+      username: "Иван Иванов",
+      goal: "Поддержка формы",
+      age: 28,
+      height: 180,
+      weight: 75,
+      totalWorkouts: 42,
+      totalExercises: 315,
+      history: [
+        "15.08.2025 — Силовая (45 мин)",
+        "13.08.2025 — Кардио (30 мин)",
+        "11.08.2025 — Йога (40 мин)"
+      ]
+    };
+
+    function loadProfile() {
+      const saved = localStorage.getItem("userProfile");
+      return saved ? JSON.parse(saved) : defaultProfile;
+    }
+
+    function saveProfile(profile) {
+      localStorage.setItem("userProfile", JSON.stringify(profile));
+    }
+
+    function renderProfile() {
+      const p = loadProfile();
+      document.getElementById("username").textContent = p.username;
+      document.getElementById("usergoal").textContent = "Цель: " + p.goal;
+      document.getElementById("age").textContent = p.age;
+      document.getElementById("height").textContent = p.height + " см";
+      document.getElementById("weight").textContent = p.weight + " кг";
+      document.getElementById("totalWorkouts").textContent = p.totalWorkouts;
+      document.getElementById("totalExercises").textContent = p.totalExercises;
+
+      const historyEl = document.getElementById("workoutHistory");
+      historyEl.innerHTML = "";
+      p.history.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = item;
+        historyEl.appendChild(li);
+      });
+    }
+
+    function editProfile() {
+      const p = loadProfile();
+      const username = prompt("Введите имя:", p.username);
+      if (username !== null) p.username = username;
+
+      const goal = prompt("Введите цель:", p.goal);
+      if (goal !== null) p.goal = goal;
+
+      const age = prompt("Возраст:", p.age);
+      if (age !== null && !isNaN(age)) p.age = Number(age);
+
+      const height = prompt("Рост (см):", p.height);
+      if (height !== null && !isNaN(height)) p.height = Number(height);
+
+      const weight = prompt("Вес (кг):", p.weight);
+      if (weight !== null && !isNaN(weight)) p.weight = Number(weight);
+
+      saveProfile(p);
+      renderProfile();
+    }
+
+    function logout() {
+      if (confirm("Выйти из профиля?")) {
+        localStorage.removeItem("userProfile");
+        location.reload();
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", renderProfile);
+  </script>
 </body>
 </html>
