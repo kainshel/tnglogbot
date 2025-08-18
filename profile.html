@@ -13,14 +13,13 @@
   </button>
   <div id="backdrop" class="backdrop" hidden></div>
 
-  <aside id="sidebar" class="sidebar" aria-hidden="true">
-    <nav role="navigation" aria-label="Главное меню">
-      <ul>
-        <li><a href="index.html">Главная</a></li>
-        <li><a href="exercises.html">Упражнения</a></li>
-        <li><a href="workout.html">Тренировка</a></li>
-        <li><a href="profile.html" class="active">Профиль</a></li>
-      </ul>
+  <aside id="sidebar" class="sidebar">
+    <div class="brand">Дневник Тренировок</div>
+    <nav role="navigation" aria-label="Main" class="nav">
+      <a href="index.html">Главная</a>
+      <a href="exercises.html">Упражнения</a>
+      <a href="workout.html">Тренировка</a>
+      <a class="active" href="profile.html">Профиль</a>
     </nav>
   </aside>
 
@@ -40,7 +39,7 @@
         <li><strong>Рост:</strong> <span id="height">—</span></li>
         <li><strong>Вес:</strong> <span id="weight">—</span></li>
       </ul>
-      <button class="btn" onclick="editProfile()">Редактировать</button>
+      <a href="edit_profile.html" class="btn">Редактировать</a>
     </section>
 
     <section class="card profile-progress">
@@ -55,38 +54,19 @@
     </section>
 
     <section class="card profile-actions">
-      <button class="btn" onclick="logout()">Выйти</button>
+      <button class="btn danger" onclick="logout()">Выйти</button>
     </section>
   </main>
 
   <script>
-    // --- Работа с localStorage ---
-    const defaultProfile = {
-      username: "Иван Иванов",
-      goal: "Поддержка формы",
-      age: 28,
-      height: 180,
-      weight: 75,
-      totalWorkouts: 42,
-      totalExercises: 315,
-      history: [
-        "15.08.2025 — Силовая (45 мин)",
-        "13.08.2025 — Кардио (30 мин)",
-        "11.08.2025 — Йога (40 мин)"
-      ]
-    };
-
     function loadProfile() {
       const saved = localStorage.getItem("userProfile");
-      return saved ? JSON.parse(saved) : defaultProfile;
-    }
-
-    function saveProfile(profile) {
-      localStorage.setItem("userProfile", JSON.stringify(profile));
+      return saved ? JSON.parse(saved) : null;
     }
 
     function renderProfile() {
       const p = loadProfile();
+      if (!p) return;
       document.getElementById("username").textContent = p.username;
       document.getElementById("usergoal").textContent = "Цель: " + p.goal;
       document.getElementById("age").textContent = p.age;
@@ -94,7 +74,6 @@
       document.getElementById("weight").textContent = p.weight + " кг";
       document.getElementById("totalWorkouts").textContent = p.totalWorkouts;
       document.getElementById("totalExercises").textContent = p.totalExercises;
-
       const historyEl = document.getElementById("workoutHistory");
       historyEl.innerHTML = "";
       p.history.forEach(item => {
@@ -102,27 +81,6 @@
         li.textContent = item;
         historyEl.appendChild(li);
       });
-    }
-
-    function editProfile() {
-      const p = loadProfile();
-      const username = prompt("Введите имя:", p.username);
-      if (username !== null) p.username = username;
-
-      const goal = prompt("Введите цель:", p.goal);
-      if (goal !== null) p.goal = goal;
-
-      const age = prompt("Возраст:", p.age);
-      if (age !== null && !isNaN(age)) p.age = Number(age);
-
-      const height = prompt("Рост (см):", p.height);
-      if (height !== null && !isNaN(height)) p.height = Number(height);
-
-      const weight = prompt("Вес (кг):", p.weight);
-      if (weight !== null && !isNaN(weight)) p.weight = Number(weight);
-
-      saveProfile(p);
-      renderProfile();
     }
 
     function logout() {

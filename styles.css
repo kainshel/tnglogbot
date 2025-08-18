@@ -261,3 +261,54 @@ body {
 .profile-actions .btn:hover {
   background: #c0392b;
 }
+
+
+.card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radius);
+  border: none;
+  cursor: pointer;
+  background: var(--primary-color);
+  color: #fff;
+  transition: background 0.2s;
+  text-decoration: none;
+}
+.btn:hover {
+  background: #8ea686;
+}
+.btn.danger {
+  background: #e74c3c;
+}
+.btn.danger:hover {
+  background: #c0392b;
+}
+
+
+
+
+
+/* Sidebar links (унифицировано, наследует цвет текста) */
+.sidebar nav ul { list-style: none; margin: 0; padding: 0; }
+.sidebar nav ul li { margin: 8px 0; }
+.sidebar nav ul li a {
+  display: block;
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: inherit; /* важно: использует color сайдбара (на десктопе белый) */
+  transition: background 0.2s, color 0.2s;
+  font-weight: 500;
+}
+.sidebar nav ul li a:hover,
+.sidebar nav ul li a.active {
+  background: rgba(255,255,255,0.2);
+}
