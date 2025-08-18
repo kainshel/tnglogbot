@@ -1,7 +1,8 @@
 
-const CACHE = 'tng-cache-v1';
+const CACHE = 'tng-cache-v2';
 const ASSETS = [
   "./",
+  "./app_workout.js",
   "./exercises.html",
   "./exercises.json",
   "./icon-192.png",
@@ -12,7 +13,8 @@ const ASSETS = [
   "./nav.js",
   "./profile.html",
   "./storage.js",
-  "./styles.css"
+  "./styles.css",
+  "./workout.html"
 ];
 
 self.addEventListener('install', (event) => {

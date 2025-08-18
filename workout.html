@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Тренировка</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="manifest" href="./manifest.json" />
+    <style>
+      .grid { display:grid; gap:1rem; grid-template-columns: 1fr; }
+      @media (min-width: 900px){ .grid { grid-template-columns: 1fr 1fr; } }
+      .list { max-height: 60vh; overflow:auto; }
+      .ex-item{ display:flex; align-items:center; justify-content:space-between; padding:.5rem .75rem; border:1px solid #272a33; border-radius:10px; margin-bottom:.5rem;}
+      .ex-item h4{ margin:0; font-size:1rem; }
+      .ex-item .actions > button{ margin-left:.5rem }
+      .sets{ margin-top:.5rem }
+      .set-row{ display:flex; gap:.5rem; align-items:center; margin:.35rem 0; }
+      .set-row input{ width:6rem; padding:.4rem .5rem; border-radius:8px; border:1px solid #2a2e38; background:#12141b; color:inherit }
+      .tag{ font-size:.8rem; opacity:.8 }
+      dialog.modal{ border:0; border-radius:14px; padding:0; overflow:hidden; background:#151822; color:inherit }
+      dialog .modal-body{ padding:1rem; }
+      dialog::backdrop{ background: rgba(0,0,0,.6); }
+      .section-title{ display:flex; align-items:center; justify-content:space-between }
+      details summary{ cursor:pointer; }
+    </style>
+  </head>
+  <body>
+    <header><nav id="topnav"></nav></header>
+    <main>
+      <section class="card">
+        <div class="section-title">
+          <h1>Тренировка</h1>
+          <div>
+            <label>Дата: <input id="date" type="date"/></label>
+            <button id="saveBtn">Сохранить</button>
+          </div>
+        </div>
+        <div class="grid">
+          <div>
+            <h2 style="margin-top:0">База упражнений</h2>
+            <input id="search" placeholder="Поиск по названию" style="width:100%;padding:.6rem;border-radius:10px;border:1px solid #2a2e38;background:#12141b;color:inherit;margin-bottom:.75rem"/>
+            <div id="exList" class="list"></div>
+          </div>
+          <div>
+            <h2 style="margin-top:0">План на день</h2>
+            <div id="plan"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" style="margin-top:1rem">
+        <h2 style="margin-top:0">История</h2>
+        <div id="history"></div>
+      </section>
+    </main>
+
+    <dialog id="infoModal" class="modal">
+      <div class="modal-body">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <h3 id="infoTitle" style="margin:0"></h3>
+          <form method="dialog"><button style="background:#2b2f3a;color:#ddd">Закрыть</button></form>
+        </div>
+        <p id="infoMeta" class="tag"></p>
+        <div id="infoGifWrap" style="text-align:center"></div>
+      </div>
+    </dialog>
+
+    <script type="module" src="./app_workout.js"></script>
+    <script type="module">
+      import { renderNav, registerSW } from './nav.js';
+      renderNav('workout');
+      registerSW();
+    </script>
+  </body>
+</html>

@@ -32,3 +32,27 @@ export function loadProfile() {
     return {};
   }
 }
+
+export const WORKOUT_KEY = 'tng_workouts';
+
+export function saveWorkout(dateISO, workout) {
+  if (!dateISO) return;
+  let all = {};
+  try { all = JSON.parse(ls.getItem(WORKOUT_KEY) || '{}'); } catch (e) { all = {}; }
+  all[dateISO] = workout || {};
+  ls.setItem(WORKOUT_KEY, JSON.stringify(all));
+}
+
+export function loadWorkout(dateISO) {
+  if (!dateISO) return null;
+  try {
+    const all = JSON.parse(ls.getItem(WORKOUT_KEY) || '{}');
+    return all[dateISO] || null;
+  } catch (e) {
+    return null;
+  }
+}
+
+export function loadAllWorkouts() {
+  try { return JSON.parse(ls.getItem(WORKOUT_KEY) || '{}'); } catch (e) { return {}; }
+}
