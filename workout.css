@@ -66,6 +66,7 @@
   max-height: 50px;           /* высота картинки не больше 90px */
   margin-left: 12px;         /* отступ справа от картинки */
   border-radius: 6px;         /* скруглённые углы картинки */
+    flex-direction: row-reverse;
   }
 .set-row input {
  padding: 0.5rem;
