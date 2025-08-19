@@ -22,14 +22,15 @@
   </aside>
 <button id="burger" aria-label="Меню">☰</button>
 <div id="backdrop" hidden></div>
+
   <!-- Основное содержимое -->
   <main class="content">
     <h1>План тренировки</h1>
 
     <!-- Выбор даты -->
     <section class="card">
-      <label for="workoutDate"><strong>Дата тренировки:</strong></label>
-      <input type="date" id="workoutDate" value="">
+      <label for="date"><strong>Дата тренировки:</strong></label>
+      <input type="date" id="date" value="">
     </section>
 
     <!-- Фильтры -->
@@ -52,37 +53,17 @@
     <section class="card">
       <h2>Состав тренировки</h2>
       <div id="plan"></div>
-      <button id="saveWorkoutBtn" class="btn">💾 Сохранить тренировку</button>
+      <button id="saveBtn" class="btn">💾 Сохранить тренировку</button>
     </section>
   </main>
 
-  <!-- Шаблон карточки упражнения -->
-  <template id="pickItemTpl">
-    <div class="card">
-      <h3></h3>
-      <p class="type"></p>
-      <p class="target"></p>
-      <p class="equipment"></p>
-      <button class="btn">Добавить</button>
+  <!-- Модальное окно для деталей упражнения -->
+  <div id="modalBack" class="modal-back">
+    <div id="modal" class="modal">
+      <button id="modalClose" class="modal-close">×</button>
+      <div id="modalContent" class="modal-content"></div>
     </div>
-  </template>
+  </div>
 
-  <!-- Шаблон блока упражнения в плане -->
-  <template id="planExerciseTpl">
-    <div class="plan-exercise card">
-      <h3></h3>
-      <div class="sets"></div>
-      <button type="button" class="btn add-set">Добавить подход</button>
-      <button type="button" class="btn danger remove-exercise">Удалить упражнение</button>
-    </div>
-  </template>
-
-  <!-- Шаблон строки подхода -->
-  <template id="setRowTpl">
-    <div class="set-row">
-      <label>Повторения: <input type="number" class="reps" min="1" value="10"></label>
-      <label>Вес (кг): <input type="number" class="weight" min="0" value="0"></label>
-    </div>
-  </template>
 </body>
 </html>
