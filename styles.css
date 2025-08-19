@@ -1,0 +1,333 @@
+
+:root {
+  --bg-color: #f9faf9;
+  --primary-color: #A9BA9D; /* Laurel green */
+  --text-color: #333;
+  --card-bg: #fff;
+  --shadow: 0 4px 12px rgba(0,0,0,0.08);
+  --radius: 12px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+/* Sidebar / Navbar */
+.sidebar {
+  background: var(--primary-color);
+  color: white;
+  padding: 1rem;
+  min-height: 100vh;
+  position: fixed;
+  left: 0; top: 0;
+  width: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sidebar .brand {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.sidebar .nav a {
+  display: block;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  color: white;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.sidebar .nav a:hover,
+.sidebar .nav a.active {
+  background: rgba(255,255,255,0.2);
+}
+
+/* Layout */
+.app {
+  display: flex;
+}
+
+.content {
+  margin-left: 220px;
+  padding: 2rem;
+  width: 100%;
+}
+
+/* Filters */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.filters input, .filters select {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: var(--radius);
+  outline: none;
+}
+
+/* Exercise cards */
+.exercise-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.exercise-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1rem;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.exercise-card:hover {
+  transform: translateY(-4px);
+}
+
+.exercise-card img.exercise-gif {
+  max-width: 100%;
+  border-radius: var(--radius);
+  margin: 0.5rem 0;
+}
+
+.details-btn {
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  background: var(--primary-color);
+  color: white;
+  cursor: pointer;
+  border-radius: var(--radius);
+  transition: background 0.2s;
+}
+
+.details-btn:hover {
+  background: #8ea686;
+}
+
+/* Modal */
+.modal-back {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: var(--card-bg);
+  padding: 2rem;
+  border-radius: var(--radius);
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow);
+  animation: fadeIn 0.3s ease;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text-color);
+}
+
+.modal img.modal-gif {
+  max-width: 100%;
+  border-radius: var(--radius);
+  margin: 1rem 0;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* === Drawer (burger) navigation - mobile friendly === */
+.burger {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  width: 40px;
+  height: 40px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: var(--card-bg, #fff);
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.08);
+  z-index: 1001;
+}
+.burger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  margin: 3px 0;
+  background: var(--text-color, #222);
+}
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease;
+  z-index: 1000;
+}
+/* Off-canvas behavior */
+@media (max-width: 1024px) {
+  .burger { display: inline-flex; }
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 280px;
+    max-width: 86vw;
+    transform: translateX(-100%);
+    transition: transform .25s ease-in-out;
+    box-shadow: 4px 0 16px rgba(0,0,0,.15);
+    z-index: 1002;
+  }
+  body.drawer-open .sidebar { transform: translateX(0); }
+  body.drawer-open { overflow: hidden; }
+  body.drawer-open .backdrop { opacity: 1; pointer-events: auto; }
+  /* Remove any fixed left margins from content on mobile */
+  .content { margin-left: 0 !important; }
+  .app { grid-template-columns: 1fr !important; }
+}
+/* --- Стили для страницы профиля --- */
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.profile-header .avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ddd;
+}
+
+.profile-info ul,
+.profile-history ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.profile-info li,
+.profile-history li {
+  margin: 6px 0;
+  font-size: 0.95rem;
+}
+
+.profile-actions {
+  text-align: center;
+}
+
+.profile-actions .btn {
+  background: #e74c3c;
+  color: #fff;
+  border: none;
+}
+
+.profile-actions .btn:hover {
+  background: #c0392b;
+}
+
+
+.card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.btn {
+  display: inline-block; /* одинаково для a и button */
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radius);
+  border: none;
+  cursor: pointer;
+  background: var(--primary-color);
+  color: #fff;
+  transition: background 0.2s;
+  text-decoration: none; /* чтобы убрать подчёркивание у ссылок */
+  font: inherit; /* выравнивает шрифты у <a> и <button> */
+  text-align: center; /* чтобы текст внутри выравнивался одинаково */
+}
+.btn:hover {
+  background: #8ea686;
+}
+.btn.danger {
+  background: #e74c3c;
+}
+.btn.danger:hover {
+  background: #c0392b;
+}
+#editForm input, #editForm select {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: var(--radius);
+  outline: none;
+}
+
+/* Sidebar links (унифицировано, наследует цвет текста) */
+.sidebar nav ul { list-style: none; margin: 0; padding: 0; }
+.sidebar nav ul li { margin: 8px 0; }
+.sidebar nav ul li a {
+  display: block;
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: inherit; /* важно: использует color сайдбара (на десктопе белый) */
+  transition: background 0.2s, color 0.2s;
+  font-weight: 500;
+}
+.sidebar nav ul li a:hover,
+.sidebar nav ul li a.active {
+  background: rgba(255,255,255,0.2);
+}
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    left: -100%;
+    transition: left 0.3s ease;
+  }
+  body.drawer-open .sidebar {
+    left: 0;
+  }
+  #backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+  }
+}
