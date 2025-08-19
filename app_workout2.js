@@ -1,4 +1,4 @@
-// ---- Безопасная «заплатка» для localStorage (синхронизировано с app_exercises.js) ----
+// ---- Безопасная «заплатка» для localStorage (автоматически добавлено) ----
 (function(){
   if (!('localStorage' in window)) return;
   try {
@@ -12,27 +12,21 @@
     localStorage.clear = function(){ try { return _clear(); } catch(e){ console.error('Ошибка при выполнении localStorage.clear', e); } };
   } catch(e){ /* тихое игнорирование */ }
 })();
-// ---------------------------------------------------------------------------
+// -------------------------------------------------------------------------
 
-let allExercises = [];
-const searchInput = document.getElementById("search");
-const filterGroups = document.getElementById("filter-groups");
-const filterTargets = document.getElementById("filter-targets");
-const filterType = document.getElementById("filter-type");
-const filterEquipment = document.getElementById("filter-equipment");
-const exercisesContainer = document.getElementById("exercises-container");
-const planContainer = document.getElementById("plan");
+let exercises = [];
+const container = document.getElementById('exercises-container');
+const filterGroups = document.getElementById('filter-groups');
+const filterTargets = document.getElementById('filter-targets');
+const filterType = document.getElementById('filter-type');
+const filterEquipment = document.getElementById('filter-equipment');
+const searchInput = document.getElementById('search');
 
-// Шаблоны для элементов плана (должны быть в workout.html)
-const tplPlanExercise = document.getElementById("planExerciseTpl");
-const tplSetRow = document.getElementById("setRowTpl");
+const modalBack = document.getElementById('modalBack');
+const modalContent = document.getElementById('modalContent');
+const modalClose = document.getElementById('modalClose');
 
-// Проверка: обязательные контейнеры должны существовать
-if (!exercisesContainer || !planContainer) {
-  console.error("[app_workout] Отсутствуют необходимые контейнеры #exercises-container или #plan");
-}
-
-// === Загрузка и подготовка данных ===
+// Загрузка упражнений из JSON
 async function loadExercises() {
   try {
     const res = await fetch('exercises.json', { cache: 'no-store' });
@@ -44,6 +38,8 @@ async function loadExercises() {
     console.error('Ошибка при загрузке упражнений', e);
   }
 }
+
+// Приведение данных к единообразному формату
 function normalizeData() {
   exercises = exercises.map(ex => ({
     ...ex,
@@ -53,7 +49,7 @@ function normalizeData() {
   }));
 }
 
-// Заполнение выпадающих фильтров
+// Заполнение фильтров уникальными значениями
 function fillFilters() {
   const groups = [...new Set(exercises.flatMap(ex => ex.groups))];
   groups.forEach(g => {
@@ -85,10 +81,9 @@ function fillFilters() {
   });
 }
 
-// === Отрисовка карточек упражнений ===
+// Отрисовка карточек упражнений
 function renderExercises(list) {
-  if (!exercisesContainer) return;
-  exercisesContainer.innerHTML = "";
+  container.innerHTML = '';
   list.forEach(ex => {
     const card = document.createElement('div');
     card.className = 'exercise-card';
@@ -97,21 +92,14 @@ function renderExercises(list) {
       <img src="${ex.gif}" alt="${ex.name_en}" class="exercise-gif">
       <p><b>Группы:</b> ${ex.groups.join(', ')}</p>
       <p><b>Цели:</b> ${ex.targets.join(', ')}</p>
-      <div class="card-actions">
-        <button class="btn add-btn">➕ В план</button>
-      </div>
+      <button class="details-btn">Подробнее</button>
     `;
-    const detailsBtn = card.querySelector(".details-btn");
-    const addBtn = card.querySelector(".add-btn");
-
-    detailsBtn.addEventListener("click", () => showDetails(ex));
-    addBtn.addEventListener("click", () => addExerciseToPlan(ex));
-
-    exercisesContainer.appendChild(card);
+    card.querySelector('.details-btn').onclick = () => showDetails(ex);
+    container.appendChild(card);
   });
 }
 
-// === Логика фильтров ===
+// Применение фильтров к списку упражнений
 function applyFilters() {
   let list = [...exercises];
   const search = searchInput.value.toLowerCase();
@@ -127,27 +115,28 @@ function applyFilters() {
   renderExercises(list);
 }
 
+// Отображение подробной информации об упражнении
+function showDetails(ex) {
+  modalContent.innerHTML = `
+    <h2>${ex.name_ru}</h2>
+    <img src="${ex.gif}" alt="${ex.name_en}" class="modal-gif">
+    <p><b>Группы:</b> ${ex.groups.join(', ')}</p>
+    <p><b>Цели:</b> ${ex.targets.join(', ')}</p>
+    <p><b>Тип:</b> ${ex.type}</p>
+    <p><b>Оборудование:</b> ${ex.equipment.join(', ')}</p>
+    <p>${ex.description || 'Описание отсутствует'}</p>
+  `;
+  modalBack.style.display = 'flex';
+}
+
+// Закрытие модального окна
+modalClose.onclick = () => modalBack.style.display = 'none';
+modalBack.onclick = (e) => { if (e.target === modalBack) modalBack.style.display = 'none'; };
+
 // Привязка фильтров и поиска
 [filterGroups, filterTargets, filterType, filterEquipment, searchInput].forEach(sel => {
   sel.addEventListener('input', applyFilters);
 });
 
-// === Управление планом тренировки ===
-function addExerciseToPlan(ex) {
-  if (!tplPlanExercise || !tplSetRow) {
-    console.error("[app_workout] Отсутствуют шаблоны #planExerciseTpl или #setRowTpl");
-    return;
-  }
-  const planItemFrag = tplPlanExercise.content.cloneNode(true);
-  const planItemEl = planItemFrag.querySelector(".plan-exercise");
-
-  planItemEl.querySelector("h3").textContent = ex.name_ru || ex.name_en;
-
-  const setsContainer = planItemEl.querySelector(".sets");
-
-  // по умолчанию добавляется 1 подход (удобнее для пользователя)
-  const initialRow = tplSetRow.content.cloneNode(true);
-  setsContainer.appendChild(initialRow);
-
-  const addSetBtn = planItemEl.querySelector(".add-set");
-  addSetBtn.addEventLi
+// Запуск загрузки упражнений при старте
+loadExercises();
