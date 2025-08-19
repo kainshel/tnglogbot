@@ -2,22 +2,22 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
+  <link rel="manifest" href="manifest.json">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Тренировка — TngLogBot</title>
   <link rel="stylesheet" href="styles.css">
   <script src="nav.js" defer></script>
-  <script src="app_workout.js" defer></script>
+  <script src="app_exercises.js" defer></script> #app_workout.js
 </head>
 <body>
   <!-- Боковое меню -->
-  <aside id="sidebar" class="sidebar" aria-hidden="true">
-    <nav aria-label="Главное меню">
-      <ul>
-        <li><a href="index.html">Главная</a></li>
-        <li><a href="exercises.html">Упражнения</a></li>
-        <li><a href="workout.html" class="active">Тренировка</a></li>
-        <li><a href="profile.html">Профиль</a></li>
-      </ul>
+  <aside id="sidebar" class="sidebar">
+    <div class="brand">Дневник Тренировок</div>
+    <nav role="navigation" aria-label="Main" class="nav">
+      <a href="index.html">Главная</a>
+      <a href="exercises.html">Упражнения</a>
+      <a class="active" href="workout.html">Тренировка</a>
+      <a href="profile.html">Профиль</a>
     </nav>
   </aside>
 <button id="burger" aria-label="Меню">☰</button>
