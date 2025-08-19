@@ -4,7 +4,6 @@
 .exercise-grid {
   display: flex;
   flex-direction: column;
-  align-items: stretch;
   gap: 10px;
 }
 .horizontal-cards .exercise-card {
@@ -14,21 +13,20 @@
   border: 1px solid #ccc;
   border-radius: 10px;
   background: #fff;
-  width: 600px;
+  max-width: 600px;
   margin: 6px auto;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   overflow: hidden;
-  overflow-wrap: break-word;
 }
 .horizontal-cards .exercise-card img.exercise-gif {
-  max-width: 700px;
-  max-height: 70px;
+  max-width: 90px;
+  max-height: 90px;
   margin-right: 12px;
   border-radius: 6px;
 }
 .horizontal-cards .exercise-card .info { flex: 1; }
 .horizontal-cards .exercise-card h3 {
-  font-size: 1.0rem;
+  font-size: 1.2rem;
   margin: 0 0 4px;
   font-weight: bold;
 }
@@ -45,7 +43,7 @@
 }
 .horizontal-cards .exercise-card .card-actions .btn {
   font-size: 0.7rem;
-  padding: 3px 4px;
+  padding: 3px 6px;
   min-width: 60px;
 }
 
@@ -60,20 +58,9 @@
   gap: 6px;
   margin-top: 6px;
 }
-
-.row img.exercise-gif {
-  max-width: 50px;            /* ширина картинки не больше 90px */
-  max-height: 50px;           /* высота картинки не больше 90px */
-  margin-left: 12px;         /* отступ справа от картинки */
-  border-radius: 6px;         /* скруглённые углы картинки */
-    flex-direction: row-reverse;
-  }
 .set-row input {
- padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: var(--radius);
-  outline: none;
-}
+  width: 70px;
+  padding: 2px 4px;
 }
 
 /* --- Модальное окно --- */
