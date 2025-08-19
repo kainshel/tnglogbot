@@ -22,7 +22,7 @@ const filterEquipment = document.getElementById("filter-equipment");
 const exercisesContainer = document.getElementById("exercises-container");
 const planContainer = document.getElementById("plan");
 const dateInput = document.getElementById("date");
-const saveBtn = document.getElementById("saveBtn");
+const saveBtn = document.getElementById("saveBtn") || document.getElementById("saveWorkoutBtn");
 
 // Модальное окно
 const modalBack = document.getElementById("modalBack");
@@ -37,17 +37,25 @@ function todayISO() {
   return d.toISOString().slice(0, 10);
 }
 function showModal(html) {
-  modalContent.innerHTML = html;
-  modalBack.style.display = "flex";
+  if (modalBack && modalContent) {
+    modalContent.innerHTML = html;
+    modalBack.style.display = "flex";
+  } else {
+    // Fallback: show plain-text modal via alert if markup is absent on this page
+    const tmp = document.createElement('div');
+    tmp.innerHTML = html;
+    alert(tmp.textContent || tmp.innerText || '');
+  }
 }
-function hideModal() { modalBack.style.display = "none"; }
-modalClose.addEventListener("click", hideModal);
-modalBack.addEventListener("click", e => { if (e.target === modalBack) hideModal(); });
+function hideModal() { if (modalBack) modalBack.style.display = "none"; }
+if (modalClose) modalClose.addEventListener("click", hideModal);
+if (modalBack) modalBack.addEventListener("click", e => { if (e.target === modalBack) hideModal(); });
 
 // === Загрузка базы упражнений ===
 async function loadExercises() {
   try {
     const res = await fetch("exercises.json", { cache: "no-store" });
+    if (!res.ok) throw new Error("HTTP " + res.status);
     exercises = await res.json();
     normalizeData();
     fillFilters();
@@ -209,7 +217,7 @@ function saveCurrent() {
   localStorage.setItem("workouts", JSON.stringify(workouts));
   alert("Сохранено ✅");
 }
-saveBtn.addEventListener("click", saveCurrent);
+if (saveBtn) saveBtn.addEventListener("click", saveCurrent);
 
 // === Инициализация ===
 (function init() {
