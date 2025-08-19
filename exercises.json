@@ -97,7 +97,7 @@
       "Штанга",
       "Скамья"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Decline Barbell Bench Press.gif?raw=true"
+    "gif": "gif_exercises/Decline_Barbell_Bench_Press.gif"
   },
   {
     "name_ru": "Жим гантелей на отрицательной скамье",
@@ -117,7 +117,7 @@
       "Гантели",
       "Скамья"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Decline Dumbbell Press.gif?raw=true"
+    "gif": "gif_exercises/Decline_Dumbbell_Press.gif"
   },
   {
     "name_ru": "Разведение гантелей лёжа",
@@ -135,7 +135,7 @@
       "Гантели",
       "Скамья"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Dumbbell Fly.gif?raw=true"
+    "gif": "gif_exercises/Dumbbell_Fly.gif"
   },
   {
     "name_ru": "Разведение гантелей на наклонной",
@@ -153,7 +153,7 @@
       "Гантели",
       "Скамья"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Incline Dumbbell Fly.gif?raw=true"
+    "gif": "gif_exercises/Incline_Dumbbell_Fly.gif"
   },
   {
     "name_ru": "Разведение гантелей на отрицательной",
@@ -171,7 +171,7 @@
       "Гантели",
       "Скамья"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Decline Dumbbell Fly.gif?raw=true"
+    "gif": "gif_exercises/Decline_Dumbbell_Fly.gif"
   },
   {
     "name_ru": "Сведение на кроссовере",
