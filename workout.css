@@ -60,9 +60,19 @@
   gap: 6px;
   margin-top: 6px;
 }
+
+.row img.exercise-gif {
+  max-width: 50px;            /* ширина картинки не больше 90px */
+  max-height: 50px;           /* высота картинки не больше 90px */
+  margin-left: 12px;         /* отступ справа от картинки */
+  border-radius: 6px;         /* скруглённые углы картинки */
+  }
 .set-row input {
-  width: 70px;
-  padding: 2px 4px;
+ padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: var(--radius);
+  outline: none;
+}
 }
 
 /* --- Модальное окно --- */

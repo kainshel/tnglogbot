@@ -157,6 +157,7 @@ function addExerciseToPlan(ex) {
   wrap.innerHTML = `
     <div class="row">
       <h3>${ex.name_ru || ex.name_en}</h3>
+            ${ex.gif ? `<img src="${ex.gif}" alt="${ex.name_en}" class="exercise-gif">` : ""}
       <div>
         <button class="btn add-set">+ Подход</button>
         <button class="btn remove-ex">✖ Удалить</button>
