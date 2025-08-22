@@ -1,103 +1,42 @@
 /* === ДОПОЛНИТЕЛЬНЫЕ АДАПТИВНЫЕ СТИЛИ === */
 
 /* Средние экраны (планшеты) */
-@media (max-width: 1024px) and (min-width: 769px) {
-  .exercise-grid {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 0.8rem;
+@media (max-width: 1024px) {
+  .burger { display: inline-flex; }
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 280px;
+    max-width: 86vw;
+    transform: translateX(-100%);
+    transition: transform .25s ease-in-out;
+    box-shadow: 4px 0 16px rgba(0,0,0,.15);
+    z-index: 1002;
   }
-  
-  .content {
-    padding: 1.5rem;
-  }
-  
-  .filters {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  
-  .filters input,
-  .filters select {
-    width: 100%;
-    margin-bottom: 0.5rem;
-  }
+  body.drawer-open .sidebar { transform: translateX(0); }
+  body.drawer-open { overflow: hidden; }
+  body.drawer-open .backdrop { opacity: 1; pointer-events: auto; }
+  /* Remove any fixed left margins from content on mobile */
+  .content { margin-left: 0 !important; }
+  .app { grid-template-columns: 1fr !important; }
 }
 
 /* Мобильные устройства */
 @media (max-width: 768px) {
-  /* Улучшенная адаптация контента */
-  .content {
-    padding: 1rem;
-    margin-top: 60px; /* Отступ для фиксированного заголовка */
+  .sidebar {
+    position: fixed;
+    left: -100%;
+    transition: left 0.3s ease;
   }
-  
-  /* Адаптация сетки упражнений */
-  .exercise-grid {
-    grid-template-columns: 1fr;
-    gap: 0.8rem;
+  body.drawer-open .sidebar {
+    left: 0;
   }
-  
-  /* Адаптация карточек */
-  .exercise-card {
-    padding: 0.8rem;
-  }
-  
-  .card {
-    padding: 1rem;
-    margin-bottom: 1rem;
-  }
-  
-  /* Адаптация фильтров */
-  .filters {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  
-  .filters input,
-  .filters select {
-    width: 100%;
-    margin-bottom: 0.5rem;
-  }
-  
-  /* Адаптация кнопок */
-  .btn {
-    width: 100%;
-    margin-bottom: 0.5rem;
-  }
-  
-  /* Адаптация модальных окон */
-  .modal {
-    width: 95%;
-    padding: 1.5rem;
-    margin: 1rem;
-  }
-  
-  .modal-close {
-    top: 5px;
-    right: 5px;
-    font-size: 1.2rem;
-  }
-  
-  /* Специфичные стили для профиля */
-  .profile-header {
-    flex-direction: column;
-    text-align: center;
-    gap: 1rem;
-  }
-  
-  /* Улучшение отступов для форм */
-  form {
-    padding: 1rem;
-  }
-  
-  input[type="text"],
-  input[type="number"],
-  input[type="email"],
-  input[type="password"],
-  select,
-  textarea {
-    width: 100%;
-    margin-bottom: 0.8rem;
+  #backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
   }
 }
 
