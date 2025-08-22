@@ -37,3 +37,16 @@
     if (a && a.getAttribute('href')) closeDrawer();
   });
 })();
+
+
+/* PWA: register service worker */
+(function(){
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('./sw.js').catch(function(err){
+        // Silently ignore in production, but helpful for dev
+        console.error('SW registration failed:', err);
+      });
+    });
+  }
+})();

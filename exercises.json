@@ -188,7 +188,7 @@
     "equipment": [
       "Кроссовер"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Cable Fly.gif?raw=true"
+    "gif": "gif_exercises/Cable_Fly.gif"
   },
   {
     "name_ru": "Сведение на кроссовере вверх",
@@ -205,7 +205,7 @@
     "equipment": [
       "Кроссовер"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/High Cable Fly.gif?raw=true"
+    "gif": "gif_exercises/High_Cable_Fly.gif"
   },
   {
     "name_ru": "Сведение на кроссовере вниз",
@@ -222,7 +222,7 @@
     "equipment": [
       "Кроссовер"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Low Cable Fly.gif?raw=true"
+    "gif": "gif_exercises/Low_Cable_Fly.gif"
   },
   {
     "name_ru": "Отжимания от пола",
@@ -241,7 +241,7 @@
     "equipment": [
       "Собственный вес"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Push-Ups.gif?raw=true"
+    "gif": "gif_exercises/Push_Ups.gif"
   },
   {
     "name_ru": "Отжимания узким хватом",
@@ -260,7 +260,7 @@
     "equipment": [
       "Собственный вес"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Close-Grip Push-Ups.gif?raw=true"
+    "gif": "gif_exercises/Close_Grip_Push_Ups.gif"
   },
   {
     "name_ru": "Отжимания с широким хватом",
@@ -277,7 +277,7 @@
     "equipment": [
       "Собственный вес"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Wide-Grip Push-Ups.gif?raw=true"
+    "gif": "gif_exercises/Wide_Grip_Push_Ups.gif"
   },
   {
     "name_ru": "Отжимания на брусьях",
@@ -296,7 +296,7 @@
     "equipment": [
       "Брусья"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Dips.gif?raw=true"
+    "gif": "gif_exercises/Dips.gif"
   },
   {
     "name_ru": "Отжимания на кольцах",
@@ -315,7 +315,7 @@
     "equipment": [
       "Гимнастические кольца"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Ring Dips.gif?raw=true"
+    "gif": "gif_exercises/Ring_Dips.gif"
   },
   {
     "name_ru": "Отжимания с хлопком",
@@ -334,7 +334,7 @@
     "equipment": [
       "Собственный вес"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Clap Push-Ups.gif?raw=true"
+    "gif": "gif_exercises/Clap_Push_Ups.gif"
   },
   {
     "name_ru": "Жим в тренажёре",
@@ -353,7 +353,7 @@
     "equipment": [
       "Тренажёр"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Chest Press Machine.gif?raw=true"
+    "gif": "gif_exercises/Chest_Press_Machine.gif"
   },
   {
     "name_ru": "Жим в тренажёре под углом",
@@ -372,37 +372,7 @@
     "equipment": [
       "Тренажёр"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Incline Chest Press Machine.gif?raw=true"
-  },
-  {
-    "name_ru": "nan",
-    "name_en": "nan",
-    "groups": [
-      "nan"
-    ],
-    "targets": [
-      "nan"
-    ],
-    "type": "nan",
-    "equipment": [
-      "nan"
-    ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/nan.gif?raw=true"
-  },
-  {
-    "name_ru": "Название (RU)",
-    "name_en": "Название (EN)",
-    "groups": [
-      "Основная группа"
-    ],
-    "targets": [
-      "Подгруппа"
-    ],
-    "type": "Тип",
-    "equipment": [
-      "Оборудование"
-    ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Название (EN).gif?raw=true"
+    "gif": "gif_exercises/Incline_Chest_Press_Machine.gif"
   },
   {
     "name_ru": "Подтягивания широким хватом",
@@ -420,7 +390,7 @@
     "equipment": [
       "Турник"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Wide-Grip Pull-Ups.gif?raw=true"
+    "gif": "gif_exercises/Wide_Grip_Pull_Ups.gif"
   },
   {
     "name_ru": "Подтягивания обратным хватом",
@@ -438,7 +408,7 @@
     "equipment": [
       "Турник"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Chin-Ups.gif?raw=true"
+    "gif": "gif_exercises/Chin_Ups.gif"
   },
   {
     "name_ru": "Подтягивания нейтральным хватом",
@@ -456,7 +426,7 @@
     "equipment": [
       "Турник"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Neutral-Grip Pull-Ups.gif?raw=true"
+    "gif": "gif_exercises/Neutral_Grip_Pull_Ups.gif"
   },
   {
     "name_ru": "Подтягивания с дополнительным весом",
@@ -475,7 +445,7 @@
       "Турник",
       "Пояс с отягощением"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Weighted Pull-Ups.gif?raw=true"
+    "gif": "gif_exercises/Weighted_Pull_Ups.gif"
   },
   {
     "name_ru": "Тяга верхнего блока",
@@ -493,7 +463,7 @@
     "equipment": [
       "Тренажёр"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Lat Pulldown.gif?raw=true"
+    "gif": "gif_exercises/Lat_Pulldown.gif"
   },
   {
     "name_ru": "Тяга верхнего блока обратным хватом",
@@ -511,7 +481,7 @@
     "equipment": [
       "Тренажёр"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Reverse-Grip Lat Pulldown.gif?raw=true"
+    "gif": "gif_exercises/Reverse_Grip_Lat_Pulldown.gif"
   },
   {
     "name_ru": "Тяга верхнего блока узким хватом",
@@ -529,7 +499,7 @@
     "equipment": [
       "Тренажёр"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Close-Grip Lat Pulldown.gif?raw=true"
+    "gif": "gif_exercises/Close_Grip_Lat_Pulldown.gif"
   },
   {
     "name_ru": "Тяга штанги в наклоне",
@@ -547,7 +517,7 @@
     "equipment": [
       "Штанга"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Bent-Over Barbell Row.gif?raw=true"
+    "gif": "gif_exercises/Bent_Over_Barbell_Row.gif"
   },
   {
     "name_ru": "Тяга гантели в наклоне",
@@ -566,7 +536,7 @@
       "Гантель",
       "Скамья"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/One-Arm Dumbbell Row.gif?raw=true"
+    "gif": "gif_exercises/One_Arm_Dumbbell_Row.gif"
   },
   {
     "name_ru": "Тяга Т-грифа",
@@ -584,7 +554,7 @@
     "equipment": [
       "Т-гриф"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/T-Bar Row.gif?raw=true"
+    "gif": "gif_exercises/T_Bar_Row.gif"
   },
   {
     "name_ru": "Тяга горизонтального блока",
@@ -602,7 +572,7 @@
     "equipment": [
       "Тренажёр"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Seated Cable Row.gif?raw=true"
+    "gif": "gif_exercises/Seated_Cable_Row.gif"
   },
   {
     "name_ru": "Тяга к поясу в наклоне с гирей",
@@ -620,7 +590,7 @@
     "equipment": [
       "Гиря"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Kettlebell Row.gif?raw=true"
+    "gif": "gif_exercises/Kettlebell_Row.gif"
   },
   {
     "name_ru": "Тяга штанги к подбородку",
@@ -639,7 +609,7 @@
     "equipment": [
       "Штанга"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Upright Barbell Row.gif?raw=true"
+    "gif": "gif_exercises/Upright_Barbell_Row.gif"
   },
   {
     "name_ru": "Тяга гантелей к подбородку",
@@ -658,7 +628,7 @@
     "equipment": [
       "Гантели"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Upright Dumbbell Row.gif?raw=true"
+    "gif": "gif_exercises/Upright_Dumbbell_Row.gif"
   },
   {
     "name_ru": "Пулловер с гантелей",
@@ -676,7 +646,7 @@
       "Гантель",
       "Скамья"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Dumbbell Pullover.gif?raw=true"
+    "gif": "gif_exercises/Dumbbell_Pullover.gif"
   },
   {
     "name_ru": "Пулловер в тренажёре",
@@ -693,7 +663,7 @@
     "equipment": [
       "Тренажёр"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Pullover Machine.gif?raw=true"
+    "gif": "gif_exercises/Pullover_Machine.gif"
   },
   {
     "name_ru": "Тяга нижнего блока к лицу",
@@ -710,7 +680,7 @@
     "equipment": [
       "Тросовый тренажёр"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Face Pull.gif?raw=true"
+    "gif": "gif_exercises/Face_Pull.gif"
   },
   {
     "name_ru": "Тяга каната к груди",
@@ -728,7 +698,7 @@
     "equipment": [
       "Кроссовер"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Close-Grip Cable Row.gif?raw=true"
+    "gif": "gif_exercises/Close_Grip_Cable_Row.gif"
   },
   {
     "name_ru": "Становая тяга",
@@ -747,7 +717,7 @@
     "equipment": [
       "Штанга"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Deadlift.gif?raw=true"
+    "gif": "gif_exercises/Deadlift.gif"
   },
   {
     "name_ru": "Становая тяга с гантелями",
@@ -766,7 +736,7 @@
     "equipment": [
       "Гантели"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Dumbbell Deadlift.gif?raw=true"
+    "gif": "gif_exercises/Dumbbell_Deadlift.gif"
   },
   {
     "name_ru": "Становая тяга сумо",
@@ -785,7 +755,7 @@
     "equipment": [
       "Штанга"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Sumo Deadlift.gif?raw=true"
+    "gif": "gif_exercises/Sumo_Deadlift.gif"
   },
   {
     "name_ru": "Становая тяга на прямых ногах",
@@ -802,7 +772,7 @@
     "equipment": [
       "Штанга"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Stiff-Leg Deadlift.gif?raw=true"
+    "gif": "gif_exercises/Stiff_Leg_Deadlift.gif"
   },
   {
     "name_ru": "Становая тяга с гирями",
@@ -819,7 +789,7 @@
     "equipment": [
       "Гиря"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Kettlebell Deadlift.gif?raw=true"
+    "gif": "gif_exercises/Kettlebell_Deadlift.gif"
   },
   {
     "name_ru": "Гиперэкстензия",
@@ -834,7 +804,7 @@
     "equipment": [
       "Гиперэкстензия"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Back Extension.gif?raw=true"
+    "gif": "gif_exercises/Back_Extension.gif"
   },
   {
     "name_ru": "Гиперэкстензия с весом",
@@ -850,37 +820,7 @@
       "Гиперэкстензия",
       "Блин"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Weighted Back Extension.gif?raw=true"
-  },
-  {
-    "name_ru": "nan",
-    "name_en": "nan",
-    "groups": [
-      "nan"
-    ],
-    "targets": [
-      "nan"
-    ],
-    "type": "nan",
-    "equipment": [
-      "nan"
-    ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/nan.gif?raw=true"
-  },
-  {
-    "name_ru": "Название (RU)",
-    "name_en": "Название (EN)",
-    "groups": [
-      "Основная группа"
-    ],
-    "targets": [
-      "Подгруппа"
-    ],
-    "type": "Тип",
-    "equipment": [
-      "Оборудование"
-    ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Название (EN).gif?raw=true"
+    "gif": "gif_exercises/Weighted_Back_Extension.gif"
   },
   {
     "name_ru": "Жим штанги стоя",
@@ -898,7 +838,7 @@
     "equipment": [
       "Штанга"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Overhead Barbell Press.gif?raw=true"
+    "gif": "gif_exercises/Overhead_Barbell_Press.gif"
   },
   {
     "name_ru": "Жим гантелей сидя",
@@ -917,7 +857,7 @@
       "Гантели",
       "Скамья"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Seated Dumbbell Press.gif?raw=true"
+    "gif": "gif_exercises/Seated_Dumbbell_Press.gif"
   },
   {
     "name_ru": "Жим гантелей стоя",
@@ -935,7 +875,7 @@
     "equipment": [
       "Гантели"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Standing Dumbbell Press.gif?raw=true"
+    "gif": "gif_exercises/Standing_Dumbbell_Press.gif"
   },
   {
     "name_ru": "Жим Арнольда",
@@ -953,7 +893,7 @@
     "equipment": [
       "Гантели"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Arnold Press.gif?raw=true"
+    "gif": "gif_exercises/Arnold_Press.gif"
   },
   {
     "name_ru": "Жим штанги из-за головы",
@@ -971,7 +911,7 @@
     "equipment": [
       "Штанга"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Behind-the-Neck Press.gif?raw=true"
+    "gif": "gif_exercises/Behind_the_Neck_Press.gif"
   },
   {
     "name_ru": "Жим в тренажёре для плеч",
@@ -989,7 +929,7 @@
     "equipment": [
       "Тренажёр"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Shoulder Press Machine.gif?raw=true"
+    "gif": "gif_exercises/Shoulder Press Machine.gif"
   },
   {
     "name_ru": "Подъём гантелей через стороны",
@@ -1004,7 +944,7 @@
     "equipment": [
       "Гантели"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Lateral Raise.gif?raw=true"
+    "gif": "gif_exercises/Lateral Raise.gif"
   },
   {
     "name_ru": "Подъём гантелей перед собой",
@@ -1019,7 +959,7 @@
     "equipment": [
       "Гантели"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Front Raise.gif?raw=true"
+    "gif": "gif_exercises/Front Raise.gif"
   },
   {
     "name_ru": "Подъём гантелей в наклоне",
@@ -1034,7 +974,7 @@
     "equipment": [
       "Гантели"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Bent-Over Lateral Raise.gif?raw=true"
+    "gif": "gif_exercises/Bent-Over Lateral Raise.gif"
   },
   {
     "name_ru": "Подъём гантелей в стороны в тренажёре",
@@ -1049,7 +989,7 @@
     "equipment": [
       "Тренажёр"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Lateral Raise Machine.gif?raw=true"
+    "gif": "gif_exercises/Lateral Raise Machine.gif"
   },
   {
     "name_ru": "Подъём гантелей перед собой в тренажёре",
@@ -1064,7 +1004,7 @@
     "equipment": [
       "Тренажёр"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Front Raise Machine.gif?raw=true"
+    "gif": "gif_exercises/Front Raise Machine.gif"
   },
   {
     "name_ru": "Подъём гантелей в наклоне в тренажёре",
@@ -1079,7 +1019,7 @@
     "equipment": [
       "Тренажёр"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Reverse Pec Deck.gif?raw=true"
+    "gif": "gif_exercises/Reverse Pec Deck.gif"
   },
   {
     "name_ru": "Жим штанги на наклонной скамье под углом 80°",
@@ -1099,7 +1039,7 @@
       "Штанга",
       "Скамья"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/High Incline Barbell Press.gif?raw=true"
+    "gif": "gif_exercises/High Incline Barbell Press.gif"
   },
   {
     "name_ru": "Жим гантелей на наклонной скамье под углом 80°",
@@ -1119,7 +1059,7 @@
       "Гантели",
       "Скамья"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/High Incline Dumbbell Press.gif?raw=true"
+    "gif": "gif_exercises/High Incline Dumbbell Press.gif"
   },
   {
     "name_ru": "Тяга штанги к подбородку",
@@ -1138,7 +1078,7 @@
     "equipment": [
       "Штанга"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Upright Barbell Row.gif?raw=true"
+    "gif": "gif_exercises/Upright Barbell Row.gif"
   },
   {
     "name_ru": "Тяга гантелей к подбородку",
@@ -1157,7 +1097,7 @@
     "equipment": [
       "Гантели"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Upright Dumbbell Row.gif?raw=true"
+    "gif": "gif_exercises/Upright Dumbbell Row.gif"
   },
   {
     "name_ru": "Подъём гирь через стороны",
@@ -1172,7 +1112,7 @@
     "equipment": [
       "Гиря"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Kettlebell Lateral Raise.gif?raw=true"
+    "gif": "gif_exercises/Kettlebell Lateral Raise.gif"
   },
   {
     "name_ru": "Подъём гирь перед собой",
@@ -1187,7 +1127,7 @@
     "equipment": [
       "Гиря"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Kettlebell Front Raise.gif?raw=true"
+    "gif": "gif_exercises/Kettlebell Front Raise.gif"
   },
   {
     "name_ru": "Жим гирь стоя",
@@ -1205,7 +1145,7 @@
     "equipment": [
       "Гиря"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Kettlebell Press.gif?raw=true"
+    "gif": "gif_exercises/Kettlebell Press.gif"
   },
   {
     "name_ru": "Жим гирь сидя",
@@ -1224,7 +1164,7 @@
       "Гиря",
       "Скамья"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Seated Kettlebell Press.gif?raw=true"
+    "gif": "gif_exercises/Seated Kettlebell Press.gif"
   },
   {
     "name_ru": "Подъём штанги на грудь и толчок",
@@ -1243,7 +1183,7 @@
     "equipment": [
       "Штанга"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Push Press.gif?raw=true"
+    "gif": "gif_exercises/Push Press.gif"
   },
   {
     "name_ru": "nan",
@@ -1258,7 +1198,7 @@
     "equipment": [
       "nan"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/nan.gif?raw=true"
+    "gif": "gif_exercises/nan.gif"
   },
   {
     "name_ru": "Название (RU)",
@@ -1273,7 +1213,7 @@
     "equipment": [
       "Оборудование"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Название (EN).gif?raw=true"
+    "gif": "gif_exercises/Название (EN).gif"
   },
   {
     "name_ru": "Подъём штанги на бицепс",
@@ -1288,7 +1228,7 @@
     "equipment": [
       "Штанга"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Barbell Curl.gif?raw=true"
+    "gif": "gif_exercises/Barbell Curl.gif"
   },
   {
     "name_ru": "Подъём гантелей на бицепс",
@@ -1303,7 +1243,7 @@
     "equipment": [
       "Гантели"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Dumbbell Curl.gif?raw=true"
+    "gif": "gif_exercises/Dumbbell Curl.gif"
   },
   {
     "name_ru": "Подъём гантелей на бицепс поочерёдно",
@@ -1318,7 +1258,7 @@
     "equipment": [
       "Гантели"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Alternating Dumbbell Curl.gif?raw=true"
+    "gif": "gif_exercises/Alternating Dumbbell Curl.gif"
   },
   {
     "name_ru": "Подъём гантелей молотковым хватом",
@@ -1335,7 +1275,7 @@
     "equipment": [
       "Гантели"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Hammer Curl.gif?raw=true"
+    "gif": "gif_exercises/Hammer Curl.gif"
   },
   {
     "name_ru": "Подъём штанги на скамье Скотта",
@@ -1351,7 +1291,7 @@
       "Штанга",
       "Скамья Скотта"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Preacher Curl.gif?raw=true"
+    "gif": "gif_exercises/Preacher Curl.gif"
   },
   {
     "name_ru": "Подъём гантелей на скамье Скотта",
@@ -1367,7 +1307,7 @@
       "Гантели",
       "Скамья Скотта"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Preacher Dumbbell Curl.gif?raw=true"
+    "gif": "gif_exercises/Preacher Dumbbell Curl.gif"
   },
   {
     "name_ru": "Концентрированный подъём на бицепс",
@@ -1382,7 +1322,7 @@
     "equipment": [
       "Гантель"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Concentration Curl.gif?raw=true"
+    "gif": "gif_exercises/Concentration Curl.gif"
   },
   {
     "name_ru": "Подъём EZ-штанги на бицепс",
@@ -1397,7 +1337,7 @@
     "equipment": [
       "EZ-штанга"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/EZ Bar Curl.gif?raw=true"
+    "gif": "gif_exercises/EZ Bar Curl.gif"
   },
   {
     "name_ru": "Подъём на бицепс в тренажёре",
@@ -1412,7 +1352,7 @@
     "equipment": [
       "Тренажёр"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Biceps Curl Machine.gif?raw=true"
+    "gif": "gif_exercises/Biceps Curl Machine.gif"
   },
   {
     "name_ru": "Подъём на бицепс на блоке",
@@ -1427,7 +1367,7 @@
     "equipment": [
       "Кроссовер"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Cable Curl.gif?raw=true"
+    "gif": "gif_exercises/Cable Curl.gif"
   },
   {
     "name_ru": "Подъём каната на бицепс",
@@ -1443,7 +1383,7 @@
     "equipment": [
       "Кроссовер"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Rope Cable Curl.gif?raw=true"
+    "gif": "gif_exercises/Rope Cable Curl.gif"
   },
   {
     "name_ru": "Разгибания штанги лёжа",
@@ -1459,7 +1399,7 @@
       "Штанга",
       "Скамья"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Lying Barbell Triceps Extension.gif?raw=true"
+    "gif": "gif_exercises/Lying Barbell Triceps Extension.gif"
   },
   {
     "name_ru": "Разгибания EZ-штанги лёжа",
@@ -1475,7 +1415,7 @@
       "EZ-штанга",
       "Скамья"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Lying EZ Bar Triceps Extension.gif?raw=true"
+    "gif": "gif_exercises/Lying EZ Bar Triceps Extension.gif"
   },
   {
     "name_ru": "Разгибания гантелей лёжа",
@@ -1491,7 +1431,7 @@
       "Гантели",
       "Скамья"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Lying Dumbbell Triceps Extension.gif?raw=true"
+    "gif": "gif_exercises/Lying Dumbbell Triceps Extension.gif"
   },
   {
     "name_ru": "Разгибания рук с гантелей из-за головы",
@@ -1506,7 +1446,7 @@
     "equipment": [
       "Гантель"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Overhead Dumbbell Extension.gif?raw=true"
+    "gif": "gif_exercises/Overhead Dumbbell Extension.gif"
   },
   {
     "name_ru": "Разгибания рук с штангой из-за головы",
@@ -1521,7 +1461,7 @@
     "equipment": [
       "Штанга"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Overhead Barbell Extension.gif?raw=true"
+    "gif": "gif_exercises/Overhead Barbell Extension.gif"
   },
   {
     "name_ru": "Разгибания рук на блоке",
@@ -1536,7 +1476,7 @@
     "equipment": [
       "Кроссовер"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Triceps Pushdown.gif?raw=true"
+    "gif": "gif_exercises/Triceps Pushdown.gif"
   },
   {
     "name_ru": "Разгибания рук с канатом на блоке",
@@ -1551,7 +1491,7 @@
     "equipment": [
       "Кроссовер"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Rope Triceps Pushdown.gif?raw=true"
+    "gif": "gif_exercises/Rope Triceps Pushdown.gif"
   },
   {
     "name_ru": "Разгибания рук на верхнем блоке одной рукой",
@@ -1566,7 +1506,7 @@
     "equipment": [
       "Кроссовер"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/One-Arm Cable Triceps Extension.gif?raw=true"
+    "gif": "gif_exercises/One-Arm Cable Triceps Extension.gif"
   },
   {
     "name_ru": "Алмазные отжимания",
@@ -1583,7 +1523,7 @@
     "equipment": [
       "Собственный вес"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Diamond Push-Ups.gif?raw=true"
+    "gif": "gif_exercises/Diamond Push-Ups.gif"
   },
   {
     "name_ru": "Отжимания на брусьях",
@@ -1600,7 +1540,7 @@
     "equipment": [
       "Брусья"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Dips.gif?raw=true"
+    "gif": "gif_exercises/Dips.gif"
   },
   {
     "name_ru": "Отжимания на брусьях с весом",
@@ -1618,7 +1558,7 @@
       "Брусья",
       "Пояс с отягощением"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Weighted Dips.gif?raw=true"
+    "gif": "gif_exercises/Weighted Dips.gif"
   },
   {
     "name_ru": "Сгибания запястий с штангой",
@@ -1633,7 +1573,7 @@
     "equipment": [
       "Штанга"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Wrist Curl.gif?raw=true"
+    "gif": "gif_exercises/Wrist Curl.gif"
   },
   {
     "name_ru": "Сгибания запястий с гантелями",
@@ -1648,7 +1588,7 @@
     "equipment": [
       "Гантели"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Dumbbell Wrist Curl.gif?raw=true"
+    "gif": "gif_exercises/Dumbbell Wrist Curl.gif"
   },
   {
     "name_ru": "Разгибания запястий с штангой",
@@ -1663,7 +1603,7 @@
     "equipment": [
       "Штанга"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Reverse Wrist Curl.gif?raw=true"
+    "gif": "gif_exercises/Reverse Wrist Curl.gif"
   },
   {
     "name_ru": "Разгибания запястий с гантелями",
@@ -1678,7 +1618,7 @@
     "equipment": [
       "Гантели"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Reverse Dumbbell Wrist Curl.gif?raw=true"
+    "gif": "gif_exercises/Reverse Dumbbell Wrist Curl.gif"
   },
   {
     "name_ru": "Пронация/супинация предплечья",
@@ -1693,7 +1633,7 @@
     "equipment": [
       "Гантели"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Pronation/Supination.gif?raw=true"
+    "gif": "gif_exercises/Pronation/Supination.gif"
   },
   {
     "name_ru": "nan",
@@ -1708,7 +1648,7 @@
     "equipment": [
       "nan"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/nan.gif?raw=true"
+    "gif": "gif_exercises/nan.gif"
   },
   {
     "name_ru": "Название (RU)",
@@ -1723,7 +1663,7 @@
     "equipment": [
       "Оборудование"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Название (EN).gif?raw=true"
+    "gif": "gif_exercises/Название (EN).gif"
   },
   {
     "name_ru": "Жим штанги лёжа",
@@ -1743,7 +1683,7 @@
       "Штанга",
       "Скамья"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Barbell Bench Press.gif?raw=true"
+    "gif": "gif_exercises/Barbell Bench Press.gif"
   },
   {
     "name_ru": "Жим гантелей лёжа",
@@ -1763,7 +1703,7 @@
       "Гантели",
       "Скамья"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Dumbbell Bench Press.gif?raw=true"
+    "gif": "gif_exercises/Dumbbell Bench Press.gif"
   },
   {
     "name_ru": "Жим штанги на наклонной скамье",
@@ -1783,7 +1723,7 @@
       "Штанга",
       "Скамья"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Incline Barbell Press.gif?raw=true"
+    "gif": "gif_exercises/Incline Barbell Press.gif"
   },
   {
     "name_ru": "Жим гантелей на наклонной",
@@ -1803,7 +1743,7 @@
       "Гантели",
       "Скамья"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Incline Dumbbell Press.gif?raw=true"
+    "gif": "gif_exercises/Incline Dumbbell Press.gif"
   },
   {
     "name_ru": "Жим штанги на отрицательной скамье",
@@ -1823,7 +1763,7 @@
       "Штанга",
       "Скамья"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Decline Barbell Bench Press.gif?raw=true"
+    "gif": "gif_exercises/Decline Barbell Bench Press.gif"
   },
   {
     "name_ru": "Жим гантелей на отрицательной скамье",
@@ -1843,7 +1783,7 @@
       "Гантели",
       "Скамья"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Decline Dumbbell Press.gif?raw=true"
+    "gif": "gif_exercises/Decline Dumbbell Press.gif"
   },
   {
     "name_ru": "Разведение гантелей лёжа",
@@ -1861,7 +1801,7 @@
       "Гантели",
       "Скамья"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Dumbbell Fly.gif?raw=true"
+    "gif": "gif_exercises/Dumbbell Fly.gif"
   },
   {
     "name_ru": "Разведение гантелей на наклонной",
@@ -1879,7 +1819,7 @@
       "Гантели",
       "Скамья"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Incline Dumbbell Fly.gif?raw=true"
+    "gif": "gif_exercises/Incline Dumbbell Fly.gif"
   },
   {
     "name_ru": "Разведение гантелей на отрицательной",
@@ -1897,7 +1837,7 @@
       "Гантели",
       "Скамья"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Decline Dumbbell Fly.gif?raw=true"
+    "gif": "gif_exercises/Decline Dumbbell Fly.gif"
   },
   {
     "name_ru": "Сведение на кроссовере",
@@ -1914,7 +1854,7 @@
     "equipment": [
       "Кроссовер"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Cable Fly.gif?raw=true"
+    "gif": "gif_exercises/Cable Fly.gif"
   },
   {
     "name_ru": "Сведение на кроссовере вверх",
@@ -1931,7 +1871,7 @@
     "equipment": [
       "Кроссовер"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/High Cable Fly.gif?raw=true"
+    "gif": "gif_exercises/High Cable Fly.gif"
   },
   {
     "name_ru": "Сведение на кроссовере вниз",
@@ -1948,7 +1888,7 @@
     "equipment": [
       "Кроссовер"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Low Cable Fly.gif?raw=true"
+    "gif": "gif_exercises/Low Cable Fly.gif"
   },
   {
     "name_ru": "Отжимания от пола",
@@ -1967,7 +1907,7 @@
     "equipment": [
       "Собственный вес"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Push-Ups.gif?raw=true"
+    "gif": "gif_exercises/Push-Ups.gif"
   },
   {
     "name_ru": "Отжимания узким хватом",
@@ -1986,7 +1926,7 @@
     "equipment": [
       "Собственный вес"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Close-Grip Push-Ups.gif?raw=true"
+    "gif": "gif_exercises/Close-Grip Push-Ups.gif"
   },
   {
     "name_ru": "Отжимания с широким хватом",
@@ -2003,7 +1943,7 @@
     "equipment": [
       "Собственный вес"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Wide-Grip Push-Ups.gif?raw=true"
+    "gif": "gif_exercises/Wide-Grip Push-Ups.gif"
   },
   {
     "name_ru": "Отжимания на брусьях",
@@ -2022,7 +1962,7 @@
     "equipment": [
       "Брусья"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Dips.gif?raw=true"
+    "gif": "gif_exercises/Dips.gif"
   },
   {
     "name_ru": "Отжимания на кольцах",
@@ -2041,7 +1981,7 @@
     "equipment": [
       "Гимнастические кольца"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Ring Dips.gif?raw=true"
+    "gif": "gif_exercises/Ring Dips.gif"
   },
   {
     "name_ru": "Отжимания с хлопком",
@@ -2060,7 +2000,7 @@
     "equipment": [
       "Собственный вес"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Clap Push-Ups.gif?raw=true"
+    "gif": "gif_exercises/Clap Push-Ups.gif"
   },
   {
     "name_ru": "Жим в тренажёре",
@@ -2079,7 +2019,7 @@
     "equipment": [
       "Тренажёр"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Chest Press Machine.gif?raw=true"
+    "gif": "gif_exercises/Chest Press Machine.gif"
   },
   {
     "name_ru": "Жим в тренажёре под углом",
@@ -2098,7 +2038,7 @@
     "equipment": [
       "Тренажёр"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Incline Chest Press Machine.gif?raw=true"
+    "gif": "gif_exercises/Incline Chest Press Machine.gif"
   },
   {
     "name_ru": "nan",
@@ -2113,7 +2053,7 @@
     "equipment": [
       "nan"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/nan.gif?raw=true"
+    "gif": "gif_exercises/nan.gif"
   },
   {
     "name_ru": "Название (RU)",
@@ -2128,7 +2068,7 @@
     "equipment": [
       "Оборудование"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Название (EN).gif?raw=true"
+    "gif": "gif_exercises/Название (EN).gif"
   },
   {
     "name_ru": "Скручивания на полу",
@@ -2143,7 +2083,7 @@
     "equipment": [
       "Собственный вес"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Crunch.gif?raw=true"
+    "gif": "gif_exercises/Crunch.gif"
   },
   {
     "name_ru": "Обратные скручивания",
@@ -2158,7 +2098,7 @@
     "equipment": [
       "Собственный вес"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Reverse Crunch.gif?raw=true"
+    "gif": "gif_exercises/Reverse Crunch.gif"
   },
   {
     "name_ru": "Подъём ног лёжа",
@@ -2173,7 +2113,7 @@
     "equipment": [
       "Собственный вес"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Leg Raise.gif?raw=true"
+    "gif": "gif_exercises/Leg Raise.gif"
   },
   {
     "name_ru": "Подъём ног в висе",
@@ -2188,7 +2128,7 @@
     "equipment": [
       "Турник"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Hanging Leg Raise.gif?raw=true"
+    "gif": "gif_exercises/Hanging Leg Raise.gif"
   },
   {
     "name_ru": "Подъём коленей в висе",
@@ -2203,7 +2143,7 @@
     "equipment": [
       "Турник"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Hanging Knee Raise.gif?raw=true"
+    "gif": "gif_exercises/Hanging Knee Raise.gif"
   },
   {
     "name_ru": "Скручивания на скамье с наклоном",
@@ -2218,7 +2158,7 @@
     "equipment": [
       "Скамья"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Decline Bench Crunch.gif?raw=true"
+    "gif": "gif_exercises/Decline Bench Crunch.gif"
   },
   {
     "name_ru": "Русский твист",
@@ -2235,7 +2175,7 @@
       "Гантеля",
       "Собственный вес"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Russian Twist.gif?raw=true"
+    "gif": "gif_exercises/Russian Twist.gif"
   },
   {
     "name_ru": "Планка",
@@ -2251,7 +2191,7 @@
     "equipment": [
       "Собственный вес"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Plank.gif?raw=true"
+    "gif": "gif_exercises/Plank.gif"
   },
   {
     "name_ru": "Боковая планка",
@@ -2267,7 +2207,7 @@
     "equipment": [
       "Собственный вес"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Side Plank.gif?raw=true"
+    "gif": "gif_exercises/Side Plank.gif"
   },
   {
     "name_ru": "Планка с подъёмом ноги",
@@ -2283,7 +2223,7 @@
     "equipment": [
       "Собственный вес"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Plank with Leg Raise.gif?raw=true"
+    "gif": "gif_exercises/Plank with Leg Raise.gif"
   },
   {
     "name_ru": "Велосипед",
@@ -2300,7 +2240,7 @@
     "equipment": [
       "Собственный вес"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Bicycle Crunch.gif?raw=true"
+    "gif": "gif_exercises/Bicycle Crunch.gif"
   },
   {
     "name_ru": "Косые скручивания",
@@ -2316,7 +2256,7 @@
     "equipment": [
       "Собственный вес"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Oblique Crunch.gif?raw=true"
+    "gif": "gif_exercises/Oblique Crunch.gif"
   },
   {
     "name_ru": "Дракон флаг",
@@ -2332,7 +2272,7 @@
     "equipment": [
       "Скамья"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Dragon Flag.gif?raw=true"
+    "gif": "gif_exercises/Dragon Flag.gif"
   },
   {
     "name_ru": "Колесо для пресса",
@@ -2349,7 +2289,7 @@
     "equipment": [
       "Колесо для пресса"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Ab Wheel Rollout.gif?raw=true"
+    "gif": "gif_exercises/Ab Wheel Rollout.gif"
   },
   {
     "name_ru": "Подъём туловища на римском стуле",
@@ -2366,7 +2306,7 @@
     "equipment": [
       "Римский стул"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Back Extension Roman Chair.gif?raw=true"
+    "gif": "gif_exercises/Back Extension Roman Chair.gif"
   },
   {
     "name_ru": "V-скручивания",
@@ -2381,7 +2321,7 @@
     "equipment": [
       "Собственный вес"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/V-Up.gif?raw=true"
+    "gif": "gif_exercises/V-Up.gif"
   },
   {
     "name_ru": "Касания пяток",
@@ -2396,7 +2336,7 @@
     "equipment": [
       "Собственный вес"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Heel Touch.gif?raw=true"
+    "gif": "gif_exercises/Heel Touch.gif"
   },
   {
     "name_ru": "Повороты корпуса с грифом",
@@ -2411,7 +2351,7 @@
     "equipment": [
       "Гриф"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Bar Twist.gif?raw=true"
+    "gif": "gif_exercises/Bar Twist.gif"
   },
   {
     "name_ru": "nan",
@@ -2426,7 +2366,7 @@
     "equipment": [
       "nan"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/nan.gif?raw=true"
+    "gif": "gif_exercises/nan.gif"
   },
   {
     "name_ru": "Название (RU)",
@@ -2441,7 +2381,7 @@
     "equipment": [
       "Оборудование"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Название (EN).gif?raw=true"
+    "gif": "gif_exercises/Название (EN).gif"
   },
   {
     "name_ru": "Берпи",
@@ -2458,7 +2398,7 @@
     "equipment": [
       "Собственный вес"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Burpee.gif?raw=true"
+    "gif": "gif_exercises/Burpee.gif"
   },
   {
     "name_ru": "Берпи с прыжком на тумбу",
@@ -2475,7 +2415,7 @@
     "equipment": [
       "Плиометрическая тумба"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Burpee Box Jump.gif?raw=true"
+    "gif": "gif_exercises/Burpee Box Jump.gif"
   },
   {
     "name_ru": "Прыжки на тумбу",
@@ -2492,7 +2432,7 @@
     "equipment": [
       "Плиометрическая тумба"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Box Jump.gif?raw=true"
+    "gif": "gif_exercises/Box Jump.gif"
   },
   {
     "name_ru": "Прыжки через скакалку",
@@ -2508,7 +2448,7 @@
     "equipment": [
       "Скакалка"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Jump Rope.gif?raw=true"
+    "gif": "gif_exercises/Jump Rope.gif"
   },
   {
     "name_ru": "Альпинист",
@@ -2525,7 +2465,7 @@
     "equipment": [
       "Собственный вес"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Mountain Climber.gif?raw=true"
+    "gif": "gif_exercises/Mountain Climber.gif"
   },
   {
     "name_ru": "Тяга гири к подбородку",
@@ -2542,7 +2482,7 @@
     "equipment": [
       "Гиря"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Kettlebell High Pull.gif?raw=true"
+    "gif": "gif_exercises/Kettlebell High Pull.gif"
   },
   {
     "name_ru": "Свинг гирей",
@@ -2559,7 +2499,7 @@
     "equipment": [
       "Гиря"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Kettlebell Swing.gif?raw=true"
+    "gif": "gif_exercises/Kettlebell Swing.gif"
   },
   {
     "name_ru": "Турецкий подъём",
@@ -2576,7 +2516,7 @@
     "equipment": [
       "Гиря"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/TGU (Turkish Get-Up).gif?raw=true"
+    "gif": "gif_exercises/TGU (Turkish Get-Up).gif"
   },
   {
     "name_ru": "Толчок штанги",
@@ -2593,7 +2533,7 @@
     "equipment": [
       "Штанга"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Push Jerk.gif?raw=true"
+    "gif": "gif_exercises/Push Jerk.gif"
   },
   {
     "name_ru": "Рывок штанги",
@@ -2610,7 +2550,7 @@
     "equipment": [
       "Штанга"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Snatch.gif?raw=true"
+    "gif": "gif_exercises/Snatch.gif"
   },
   {
     "name_ru": "Рывок гири",
@@ -2627,7 +2567,7 @@
     "equipment": [
       "Гиря"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Kettlebell Snatch.gif?raw=true"
+    "gif": "gif_exercises/Kettlebell Snatch.gif"
   },
   {
     "name_ru": "Гребля на тренажёре",
@@ -2644,7 +2584,7 @@
     "equipment": [
       "Гребной тренажёр"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Rowing Machine.gif?raw=true"
+    "gif": "gif_exercises/Rowing Machine.gif"
   },
   {
     "name_ru": "Атакующая велотренировка",
@@ -2661,7 +2601,7 @@
     "equipment": [
       "Велотренажёр"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Assault Bike.gif?raw=true"
+    "gif": "gif_exercises/Assault Bike.gif"
   },
   {
     "name_ru": "Спринт",
@@ -2678,7 +2618,7 @@
       "Беговая дорожка",
       "Стадион"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Sprint.gif?raw=true"
+    "gif": "gif_exercises/Sprint.gif"
   },
   {
     "name_ru": "Бег на месте",
@@ -2694,7 +2634,7 @@
     "equipment": [
       "Собственный вес"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Running in Place.gif?raw=true"
+    "gif": "gif_exercises/Running in Place.gif"
   },
   {
     "name_ru": "Подтягивания с хлопком",
@@ -2711,7 +2651,7 @@
     "equipment": [
       "Турник"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Clap Pull-Up.gif?raw=true"
+    "gif": "gif_exercises/Clap Pull-Up.gif"
   },
   {
     "name_ru": "Отжимания с хлопком",
@@ -2728,7 +2668,7 @@
     "equipment": [
       "Собственный вес"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Clap Push-Up.gif?raw=true"
+    "gif": "gif_exercises/Clap Push-Up.gif"
   },
   {
     "name_ru": "Чередующиеся выпрыгивания",
@@ -2745,7 +2685,7 @@
     "equipment": [
       "Собственный вес"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Alternating Jump Lunge.gif?raw=true"
+    "gif": "gif_exercises/Alternating Jump Lunge.gif"
   },
   {
     "name_ru": "Скейт-джамп",
@@ -2762,7 +2702,7 @@
     "equipment": [
       "Собственный вес"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Skater Jump.gif?raw=true"
+    "gif": "gif_exercises/Skater Jump.gif"
   },
   {
     "name_ru": "Гребной бурпи",
@@ -2780,6 +2720,6 @@
       "Собственный вес",
       "Гребной тренажёр"
     ],
-    "gif": "https://github.com/kainshel/tnglogbot/blob/f4a372b5015a0b826bd9d3f6a3f7a5d28445ea09/gif_exercises/Rowing Burpee.gif?raw=true"
+    "gif": "gif_exercises/Rowing_Burpee.gif"
   }
 ]
