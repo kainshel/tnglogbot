@@ -53,3 +53,72 @@
   .content { margin-left: 0 !important; }
   .app { grid-template-columns: 1fr !important; }
 }
+
+.card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.btn {
+  display: inline-block; /* одинаково для a и button */
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radius);
+  border: none;
+  cursor: pointer;
+  background: var(--primary-color);
+  color: #fff;
+  transition: background 0.2s;
+  text-decoration: none; /* чтобы убрать подчёркивание у ссылок */
+  font: inherit; /* выравнивает шрифты у <a> и <button> */
+  text-align: center; /* чтобы текст внутри выравнивался одинаково */
+}
+.btn:hover {
+  background: #8ea686;
+}
+.btn.danger {
+  background: #e74c3c;
+}
+.btn.danger:hover {
+  background: #c0392b;
+}
+#editForm input, #editForm select {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: var(--radius);
+  outline: none;
+}
+
+/* Sidebar links (унифицировано, наследует цвет текста) */
+.sidebar nav ul { list-style: none; margin: 0; padding: 0; }
+.sidebar nav ul li { margin: 8px 0; }
+.sidebar nav ul li a {
+  display: block;
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: inherit; /* важно: использует color сайдбара (на десктопе белый) */
+  transition: background 0.2s, color 0.2s;
+  font-weight: 500;
+}
+.sidebar nav ul li a:hover,
+.sidebar nav ul li a.active {
+  background: rgba(255,255,255,0.2);
+}
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    left: -100%;
+    transition: left 0.3s ease;
+  }
+  body.drawer-open .sidebar {
+    left: 0;
+  }
+  #backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+  }
+}
