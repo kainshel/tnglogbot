@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Профиль — TngLogBot</title>
-  <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles/main.css">
+<link rel="stylesheet" href="styles/responsive.css">
+<link rel="stylesheet" href="styles/profile.css">
   <script src="nav.js" defer></script>
   <link rel="manifest" href="manifest.json">
 </head>
@@ -19,7 +21,8 @@
     <nav role="navigation" aria-label="Main" class="nav">
       <a href="index.html">Главная</a>
       <a href="exercises.html">Упражнения</a>
-      <a class="active" href="workout.html">Тренировка</a>
+      <a href="workout.html">Тренировка</a>
+	  <a href="history.html">История</a> <!-- Добавляем эту строку -->
       <a class="active" href="profile.html">Профиль</a>
     </nav>
   </aside>
@@ -50,9 +53,11 @@
     </section>
 
     <section class="card profile-history">
-      <h2>Недавние тренировки</h2>
-      <ul id="workoutHistory"></ul>
-    </section>
+  <h2>Статистика тренировок</h2>
+  <p><strong>Всего тренировок:</strong> <span id="totalWorkouts">0</span></p>
+  <p><strong>Разных упражнений:</strong> <span id="totalExercises">0</span></p>
+  <a href="history.html" class="btn">Смотреть всю историю</a>
+</section>
 
     <section class="card profile-actions">
       <button class="btn danger" onclick="logout()">Выйти</button>
@@ -65,17 +70,19 @@
       return saved ? JSON.parse(saved) : null;
     }
 
-    function renderProfile() {
-      const p = loadProfile();
-      if (p) {
-        document.getElementById("username").textContent = p.username;
-        document.getElementById("usergoal").textContent = "Цель: " + p.goal;
-        document.getElementById("age").textContent = p.age;
-        document.getElementById("height").textContent = p.height + " см";
-        document.getElementById("weight").textContent = p.weight + " кг";
-        document.getElementById("totalWorkouts").textContent = p.totalWorkouts || 0;
-        document.getElementById("totalExercises").textContent = p.totalExercises || 0;
-      }
+function renderProfile() {
+  const p = loadProfile();
+  if (p) {
+    document.getElementById("username").textContent = p.username;
+    document.getElementById("usergoal").textContent = "Цель: " + p.goal;
+    document.getElementById("age").textContent = p.age;
+    document.getElementById("height").textContent = p.height + " см";
+    document.getElementById("weight").textContent = p.weight + " кг";
+    document.getElementById("totalWorkouts").textContent = p.totalWorkouts || 0;
+    document.getElementById("totalExercises").textContent = p.totalExercises || 0;
+  }
+  // УБИРАЕМ код загрузки истории тренировок - она теперь на отдельной странице
+}
 
       const history = JSON.parse(localStorage.getItem("workoutHistory")) || [];
       const list = document.getElementById("workoutHistory");

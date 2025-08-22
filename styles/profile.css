@@ -1,0 +1,39 @@
+/* --- Стили для страницы профиля --- */
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.profile-header .avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ddd;
+}
+
+.profile-info ul,
+.profile-history ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.profile-info li,
+.profile-history li {
+  margin: 6px 0;
+  font-size: 0.95rem;
+}
+
+.profile-actions {
+  text-align: center;
+}
+
+#editForm input, 
+#editForm select {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: var(--radius);
+  outline: none;
+}

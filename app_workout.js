@@ -121,6 +121,12 @@ function applyFilters() {
 // === Отрисовка упражнений ===
 function renderExercises(list) {
   exercisesContainer.innerHTML = "";
+  
+  if (list.length === 0) {
+    exercisesContainer.innerHTML = '<p class="empty-plan-message">Упражнения не найдены</p>';
+    return;
+  }
+  
   list.forEach(ex => {
     const card = document.createElement("div");
     card.className = "exercise-card";
@@ -128,10 +134,9 @@ function renderExercises(list) {
       <h3>${ex.name_ru || ex.name_en}</h3>
       ${ex.gif ? `<img src="${ex.gif}" alt="${ex.name_en}" class="exercise-gif">` : ""}
       <p><b>Группы:</b> ${ex.groups.join(", ")}</p>
-      <p><b>Цели:</b> ${ex.targets.join(", ")}</p>
       <div class="card-actions">
-        <button class="btn add-btn">➕ В план</button>
-        <button class="btn details-btn">ℹ Подробнее</button>
+        <button class="btn add-btn">➕ Добавить</button>
+        <button class="btn details-btn">ℹ️</button>
       </div>
     `;
     card.querySelector(".add-btn").addEventListener("click", () => addExerciseToPlan(ex));
@@ -224,3 +229,192 @@ if (saveBtn) saveBtn.addEventListener("click", saveCurrent);
   dateInput.value = todayISO();
   loadExercises();
 })();
+
+
+// === План тренировки ===
+function renderPlan() {
+  planContainer.innerHTML = '';
+  
+  // Сообщение если план пустой
+  if (plan.length === 0) {
+    planContainer.innerHTML = `
+      <div class="empty-plan-message">
+        <p>Ваш план тренировки пуст</p>
+        <p>Добавьте упражнения из списка ниже</p>
+      </div>
+    `;
+    return;
+  }
+  
+  plan.forEach((EX, index) => {
+    const wrap = document.createElement("div");
+    wrap.className = "card plan-exercise";
+    wrap.innerHTML = `
+      <div class="row">
+        <h3>${EX.meta.name_ru || EX.meta.name_en}</h3>
+        <div>
+          <button class="btn add-set">+ Подход</button>
+          <button class="btn danger remove-ex">✖ Удалить</button>
+        </div>
+      </div>
+      <div class="sets"></div>
+    `;
+    
+    const setsEl = wrap.querySelector(".sets");
+    
+    function renderSets() {
+      setsEl.innerHTML = "";
+      EX.sets.forEach((s, i) => {
+        const row = document.createElement("div");
+        row.className = "set-row";
+        row.innerHTML = `
+          <span>#${i + 1}</span>
+          <input type="number" step="0.5" min="0" placeholder="Вес, кг" value="${s.weight ?? ""}">
+          <input type="number" step="1" min="0" placeholder="Повторы" value="${s.reps ?? ""}">
+          <button class="rm">×</button>
+        `;
+        
+        const [ , wEl, rEl, rm ] = row.children;
+        
+        // Валидация ввода
+        const validateNumberInput = (inputElement) => {
+          if (inputElement.value && !/^\d*\.?\d*$/.test(inputElement.value)) {
+            inputElement.value = '';
+          }
+        };
+        
+        wEl.addEventListener("input", () => {
+          validateNumberInput(wEl);
+          s.weight = wEl.value ? parseFloat(wEl.value) : null;
+        });
+        
+        rEl.addEventListener("input", () => {
+          validateNumberInput(rEl);
+          s.reps = rEl.value ? parseInt(rEl.value, 10) : null;
+        });
+        
+        rm.addEventListener("click", () => { 
+          EX.sets.splice(i, 1); 
+          renderSets();
+          // Если удалили все подходы - удаляем упражнение
+          if (EX.sets.length === 0) {
+            plan.splice(index, 1);
+            renderPlan();
+          }
+        });
+        
+        setsEl.appendChild(row);
+      });
+    }
+    
+    wrap.querySelector(".add-set").addEventListener("click", () => {
+      EX.sets.push({ weight: null, reps: null });
+      renderSets();
+    });
+    
+    wrap.querySelector(".remove-ex").addEventListener("click", () => {
+      plan = plan.filter(p => p !== EX);
+      renderPlan(); // Используем новую функцию
+    });
+    
+    planContainer.appendChild(wrap);
+    renderSets();
+  });
+}
+
+function addExerciseToPlan(ex) {
+  const EX = { meta: ex, sets: [] };
+  plan.push(EX);
+  renderPlan(); // Используем новую функцию
+  
+  // Добавляем первый пустой подход
+  EX.sets.push({ weight: null, reps: null });
+  
+  // Прокручиваем к добавленному упражнению
+  const lastExercise = planContainer.lastElementChild;
+  if (lastExercise) {
+    lastExercise.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+// === Сохранение плана ===
+function saveCurrent() {
+  if (plan.length === 0) {
+    alert("Добавьте хотя бы одно упражнение в план тренировки!");
+    return;
+  }
+  
+  const date = dateInput.value || todayISO();
+  const workouts = JSON.parse(localStorage.getItem("workouts") || "{}");
+  
+  workouts[date] = plan.map(e => ({
+    name_ru: e.meta.name_ru,
+    name_en: e.meta.name_en,
+    type: e.meta.type,
+    groups: e.meta.groups,
+    equipment: e.meta.equipment,
+    sets: e.sets
+  }));
+  
+  localStorage.setItem("workouts", JSON.stringify(workouts));
+  
+  // Обновляем статистику профиля
+  const profile = JSON.parse(localStorage.getItem("userProfile") || "{}");
+  profile.totalWorkouts = Object.keys(workouts).length;
+  
+  let allExercises = [];
+  Object.values(workouts).forEach(workout => {
+    workout.forEach(ex => allExercises.push(ex.name_ru));
+  });
+  profile.totalExercises = new Set(allExercises).size;
+  
+  localStorage.setItem("userProfile", JSON.stringify(profile));
+  
+  alert("Тренировка сохранена! ✅");
+  
+  // Очищаем план после сохранения
+  plan = [];
+  renderPlan();
+}
+
+// === Инициализация ===
+(function init() {
+  dateInput.value = todayISO();
+  renderPlan(); // Инициализируем отображение плана
+  loadExercises();
+})();
+function renderExercises(list) {
+  exercisesContainer.innerHTML = "";
+  
+  if (list.length === 0) {
+    exercisesContainer.innerHTML = '<p class="empty-plan-message">Упражнения не найдены</p>';
+    return;
+  }
+  
+  list.forEach(ex => {
+    const card = document.createElement("div");
+    card.className = "exercise-card";
+    card.innerHTML = `
+      <h3>${ex.name_ru || ex.name_en}</h3>
+      ${ex.gif ? `<img src="${ex.gif}" alt="${ex.name_en}" class="exercise-gif">` : ""}
+      <p><b>Группы:</b> ${ex.groups.join(", ")}</p>
+      <p><b>Цели:</b> ${ex.targets.join(", ")}</p>
+      <div class="card-actions">
+        <button class="btn add-btn">➕ В план</button>
+        <button class="btn details-btn">ℹ Подробнее</button>
+      </div>
+    `;
+    
+    card.querySelector(".add-btn").addEventListener("click", () => {
+      addExerciseToPlan(ex);
+      // Плавная прокрутка к верху, к плану тренировки
+      document.querySelector('#plan').scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'start' 
+      });
+    });
+    
+    card.querySelector(".details-btn").addEventListener("click", () => showDetails(ex));
+    exercisesContainer.appendChild(card);
+  });
+}
