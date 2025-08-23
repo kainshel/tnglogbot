@@ -1,4 +1,4 @@
-const CACHE = 'tnglogbot-v1';
+const CACHE = 'tnglogbot-v2-1';
 const ASSETS = [
   "./app_exercises.js",
   "./app_history.js",
@@ -24,9 +24,8 @@ const ASSETS = [
 ];
 
 self.addEventListener('install', (event) => {
-  self.skipWaiting();
   event.waitUntil(
-    caches.open(CACHE).then((cache) => cache.addAll(ASSETS))
+    caches.open(CACHE).then((cache) => cache.addAll(ASSETS)).then(() => self.skipWaiting())
   );
 });
 
@@ -40,6 +39,7 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('fetch', (event) => {
   const req = event.request;
+  // HTML navigations: network-first with cache fallback
   if (req.mode === 'navigate') {
     event.respondWith(
       fetch(req).then((res) => {
@@ -48,9 +48,17 @@ self.addEventListener('fetch', (event) => {
         return res;
       }).catch(() => caches.match(req).then((r) => r || caches.match('./index.html')))
     );
-  } else {
-    event.respondWith(
-      caches.match(req).then((cached) => cached || fetch(req))
-    );
+    return;
   }
+  // Static/assets: stale-while-revalidate
+  event.respondWith(
+    caches.match(req).then((cached) => {
+      const fetchPromise = fetch(req).then((networkRes) => {
+        const copy = networkRes.clone();
+        caches.open(CACHE).then((c) => c.put(req, copy));
+        return networkRes;
+      }).catch(() => cached);
+      return cached || fetchPromise;
+    })
+  );
 });

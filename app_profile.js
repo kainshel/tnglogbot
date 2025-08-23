@@ -1,10 +1,10 @@
 function loadProfile() {
-      const saved = localStorage.getItem("userProfile");
+      const saved = localStorage.getItem('userProfile');
       return saved ? JSON.parse(saved) : null;
     }
 
     function calculateWorkoutStats() {
-      const workouts = JSON.parse(localStorage.getItem("workouts") || "{}");
+      const workouts = JSON.parse(localStorage.getItem('workouts') || '{}');
       const workoutDates = Object.keys(workouts);
       
       // Считаем разные упражнения
@@ -29,43 +29,43 @@ function loadProfile() {
         totalWorkouts: workoutDates.length,
         totalExercises: allExercises.size,
         totalSets: totalSets,
-        lastWorkout: lastWorkoutDate
+        lastWorkout: lastWorkoutDate;
       };
     }
 
     function renderProfile() {
       const p = loadProfile();
       if (p) {
-        document.getElementById("username").textContent = p.username;
-        document.getElementById("usergoal").textContent = "Цель: " + p.goal;
-        document.getElementById("age").textContent = p.age;
-        document.getElementById("height").textContent = p.height + " см";
-        document.getElementById("weight").textContent = p.weight + " кг";
+        document.getElementById('username').textContent = p.username;
+        document.getElementById('usergoal').textContent = 'Цель: ' + p.goal;
+        document.getElementById('age').textContent = p.age;
+        document.getElementById('height').textContent = p.height + ' см';
+        document.getElementById('weight').textContent = p.weight + ' кг';
       }
       
       // Загружаем статистику из истории тренировок
       const stats = calculateWorkoutStats();
-      document.getElementById("totalWorkouts").textContent = stats.totalWorkouts;
-      document.getElementById("totalExercises").textContent = stats.totalExercises;
-      document.getElementById("totalSets").textContent = stats.totalSets;
-      document.getElementById("lastWorkout").textContent = stats.lastWorkout || "—";
+      document.getElementById('totalWorkouts').textContent = stats.totalWorkouts;
+      document.getElementById('totalExercises').textContent = stats.totalExercises;
+      document.getElementById('totalSets').textContent = stats.totalSets;
+      document.getElementById('lastWorkout').textContent = stats.lastWorkout || '—';
       
       // Обновляем профиль с актуальной статистикой
       if (p) {
         const updatedProfile = {
           ...p,
           totalWorkouts: stats.totalWorkouts,
-          totalExercises: stats.totalExercises
+          totalExercises: stats.totalExercises;
         };
-        localStorage.setItem("userProfile", JSON.stringify(updatedProfile));
+        localStorage.setItem('userProfile', JSON.stringify(updatedProfile));
       }
     }
 
     function logout() {
-      if (confirm("Выйти из профиля?")) {
-        localStorage.removeItem("userProfile");
+      if (confirm('Выйти из профиля?')) {
+        localStorage.removeItem('userProfile');
         location.reload();
       }
     }
 
-    document.addEventListener("DOMContentLoaded", renderProfile);
+    document.addEventListener('DOMContentLoaded', renderProfile);
