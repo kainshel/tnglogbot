@@ -1,4 +1,3 @@
-
 // ---- Safe localStorage patch (auto-injected) ----
 (function(){
   if (!('localStorage' in window)) return;
@@ -49,6 +48,12 @@ function normalizeData() {
 }
 
 function fillFilters() {
+  // Очищаем фильтры
+  [filterGroups, filterTargets, filterType, filterEquipment].forEach(filter => {
+    filter.innerHTML = '<option value="">Все</option>';
+  });
+  
+  // Заполняем группы мышц
   const groups = [...new Set(exercises.flatMap(ex => ex.groups))];
   groups.forEach(g => {
     const opt = document.createElement('option');
@@ -56,6 +61,8 @@ function fillFilters() {
     opt.textContent = g;
     filterGroups.appendChild(opt);
   });
+  
+  // Заполняем целевые зоны
   const targets = [...new Set(exercises.flatMap(ex => ex.targets))];
   targets.forEach(t => {
     const opt = document.createElement('option');
@@ -63,6 +70,8 @@ function fillFilters() {
     opt.textContent = t;
     filterTargets.appendChild(opt);
   });
+  
+  // Заполняем типы упражнений
   const types = [...new Set(exercises.map(ex => ex.type))];
   types.forEach(t => {
     const opt = document.createElement('option');
@@ -70,12 +79,105 @@ function fillFilters() {
     opt.textContent = t;
     filterType.appendChild(opt);
   });
+  
+  // Заполняем оборудование
   const equipments = [...new Set(exercises.flatMap(ex => ex.equipment))];
   equipments.forEach(eq => {
     const opt = document.createElement('option');
     opt.value = eq;
     opt.textContent = eq;
     filterEquipment.appendChild(opt);
+  });
+  
+  // Добавляем обработчики для зависимых фильтров
+  setupDependentFilters();
+}
+
+function setupDependentFilters() {
+  // Удаляем старые обработчики, чтобы избежать дублирования
+  filterGroups.onchange = null;
+  filterTargets.onchange = null;
+  
+  // При изменении группы мышц обновляем целевые зоны
+  filterGroups.addEventListener('change', function() {
+    updateTargetsFilter(this.value);
+    applyFilters();
+  });
+  
+  // При изменении целевых зон обновляем группы мышц
+  filterTargets.addEventListener('change', function() {
+    updateGroupsFilter(this.value);
+    applyFilters();
+  });
+}
+
+function updateTargetsFilter(selectedGroup) {
+  // Сохраняем текущее выбранное значение
+  const currentTarget = filterTargets.value;
+  
+  // Очищаем фильтр целевых зон
+  filterTargets.innerHTML = '<option value="">Все</option>';
+  
+  if (!selectedGroup) {
+    // Если группа не выбрана, показываем все целевые зоны
+    const allTargets = [...new Set(exercises.flatMap(ex => ex.targets))];
+    allTargets.forEach(target => {
+      const opt = document.createElement('option');
+      opt.value = target;
+      opt.textContent = target;
+      if (target === currentTarget) opt.selected = true;
+      filterTargets.appendChild(opt);
+    });
+    return;
+  }
+  
+  // Получаем целевые зоны только для выбранной группы
+  const filteredExercises = exercises.filter(ex => ex.groups.includes(selectedGroup));
+  const availableTargets = [...new Set(filteredExercises.flatMap(ex => ex.targets))];
+  
+  availableTargets.forEach(target => {
+    const opt = document.createElement('option');
+    opt.value = target;
+    opt.textContent = target;
+    if (target === currentTarget && availableTargets.includes(currentTarget)) {
+      opt.selected = true;
+    }
+    filterTargets.appendChild(opt);
+  });
+}
+
+function updateGroupsFilter(selectedTarget) {
+  // Сохраняем текущее выбранное значение
+  const currentGroup = filterGroups.value;
+  
+  // Очищаем фильтр групп
+  filterGroups.innerHTML = '<option value="">Все</option>';
+  
+  if (!selectedTarget) {
+    // Если целевая зона не выбрана, показываем все группы
+    const allGroups = [...new Set(exercises.flatMap(ex => ex.groups))];
+    allGroups.forEach(group => {
+      const opt = document.createElement('option');
+      opt.value = group;
+      opt.textContent = group;
+      if (group === currentGroup) opt.selected = true;
+      filterGroups.appendChild(opt);
+    });
+    return;
+  }
+  
+  // Получаем группы только для выбранной целевой зоны
+  const filteredExercises = exercises.filter(ex => ex.targets.includes(selectedTarget));
+  const availableGroups = [...new Set(filteredExercises.flatMap(ex => ex.groups))];
+  
+  availableGroups.forEach(group => {
+    const opt = document.createElement('option');
+    opt.value = group;
+    opt.textContent = group;
+    if (group === currentGroup && availableGroups.includes(currentGroup)) {
+      opt.selected = true;
+    }
+    filterGroups.appendChild(opt);
   });
 }
 
@@ -127,6 +229,7 @@ function showDetails(ex) {
 modalClose.onclick = () => modalBack.style.display = 'none';
 modalBack.onclick = (e) => { if (e.target === modalBack) modalBack.style.display = 'none'; };
 
+// Добавляем обработчики для всех фильтров
 [filterGroups, filterTargets, filterType, filterEquipment, searchInput].forEach(sel => {
   sel.addEventListener('input', applyFilters);
 });
