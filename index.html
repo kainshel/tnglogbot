@@ -7,7 +7,7 @@
   <title>Главная</title>
 <link rel="stylesheet" href="styles/main.css">
 <link rel="stylesheet" href="styles/responsive.css">
-<link rel="stylesheet" href="styles/home.css">
+
 <script src="nav.js" defer></script>
 </head>
 <body>
@@ -15,11 +15,7 @@
 <button id="burger" class="burger" aria-label="Открыть меню" aria-controls="sidebar" aria-expanded="false">
   <span></span><span></span><span></span>
 </button>
-<div id="backdrop" class="backdrop" hidden></div>
-
-    <div class="bar"></div>
-        <div class="bar"></div>
-    </div>
+<div id="backdrop" class="backdrop" hidden></div></div>
 
 <div class="app">
   <aside id="sidebar" class="sidebar">
@@ -36,8 +32,6 @@
     <h1>Добро пожаловать!</h1>
     <p>Используйте меню слева, чтобы перейти к нужному разделу.</p>
   </main>
-</div>
-
 <script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
