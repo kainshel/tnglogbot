@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="styles/responsive.css">
 <link rel="stylesheet" href="styles/profile.css">
   <script src="nav.js" defer></script>
+  <script src="app_profile.js" defer></script>
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
@@ -22,7 +23,7 @@
       <a href="index.html">Главная</a>
       <a href="exercises.html">Упражнения</a>
       <a href="workout.html">Тренировка</a>
-	  <a href="history.html">История</a> <!-- Добавляем эту строку -->
+      <a href="history.html">История</a>
       <a class="active" href="profile.html">Профиль</a>
     </nav>
   </aside>
@@ -47,62 +48,31 @@
     </section>
 
     <section class="card profile-progress">
-      <h2>Прогресс</h2>
-      <p>Всего тренировок: <span id="totalWorkouts">0</span></p>
-      <p>Всего упражнений: <span id="totalExercises">0</span></p>
+      <h2>Статистика тренировок</h2>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <span class="stat-number" id="totalWorkouts">0</span>
+          <span class="stat-label">Всего тренировок</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" id="totalExercises">0</span>
+          <span class="stat-label">Разных упражнений</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" id="totalSets">0</span>
+          <span class="stat-label">Всего подходов</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" id="lastWorkout">—</span>
+          <span class="stat-label">Последняя тренировка</span>
+        </div>
+      </div>
+      <a href="history.html" class="btn">Смотреть всю историю</a>
     </section>
-
-    <section class="card profile-history">
-  <h2>Статистика тренировок</h2>
-  <p><strong>Всего тренировок:</strong> <span id="totalWorkouts">0</span></p>
-  <p><strong>Разных упражнений:</strong> <span id="totalExercises">0</span></p>
-  <a href="history.html" class="btn">Смотреть всю историю</a>
-</section>
 
     <section class="card profile-actions">
       <button class="btn danger" onclick="logout()">Выйти</button>
     </section>
   </main>
-
-  <script>
-    function loadProfile() {
-      const saved = localStorage.getItem("userProfile");
-      return saved ? JSON.parse(saved) : null;
-    }
-
-function renderProfile() {
-  const p = loadProfile();
-  if (p) {
-    document.getElementById("username").textContent = p.username;
-    document.getElementById("usergoal").textContent = "Цель: " + p.goal;
-    document.getElementById("age").textContent = p.age;
-    document.getElementById("height").textContent = p.height + " см";
-    document.getElementById("weight").textContent = p.weight + " кг";
-    document.getElementById("totalWorkouts").textContent = p.totalWorkouts || 0;
-    document.getElementById("totalExercises").textContent = p.totalExercises || 0;
-  }
-  // УБИРАЕМ код загрузки истории тренировок - она теперь на отдельной странице
-}
-
-      const history = JSON.parse(localStorage.getItem("workoutHistory")) || [];
-      const list = document.getElementById("workoutHistory");
-      list.innerHTML = "";
-      history.slice(-5).reverse().forEach(item => {
-        const li = document.createElement("li");
-        const names = item.exercises.map(e => e.name).join(", ");
-        li.textContent = `${item.date} — ${names}`;
-        list.appendChild(li);
-      });
-    }
-
-    function logout() {
-      if (confirm("Выйти из профиля?")) {
-        localStorage.removeItem("userProfile");
-        location.reload();
-      }
-    }
-
-    document.addEventListener("DOMContentLoaded", renderProfile);
-  </script>
 </body>
 </html>
