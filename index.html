@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+
+  <!DOCTYPE html>
 <html lang="ru">
 <head>
-<link rel="manifest" href="manifest.json">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta charset="UTF-8">
   <title>Главная</title>
 <link rel="stylesheet" href="styles/main.css">
 <link rel="stylesheet" href="styles/responsive.css">
@@ -28,20 +28,77 @@
       <a href="profile.html">Профиль</a>
     </nav>
   </aside>
-  <main class="content">
-    <h1>Добро пожаловать!</h1>
-    <p>Используйте меню слева, чтобы перейти к нужному разделу.</p>
-  </main>
+<title>Telegram Mini App</title>
+<style>
+  body { font-family: Arial, sans-serif; padding: 20px; text-align: center; }
+  button { padding: 10px 20px; font-size: 16px; margin: 10px; cursor: pointer; }
+  .hidden { display: none; }
+  #results { margin-top: 20px; }
+</style>
+</head>
+<body>
+
+<h1>Добро пожаловать в наше мини-приложение!</h1>
+<div id="login-block">
+  <button id="login-btn">Войти через Telegram</button>
+</div>
+
+<div id="user-block" class="hidden">
+  <h2>Привет, <span id="user-name"></span>!</h2>
+  <button id="start-btn">Начать новый тест</button>
+  <div id="results">
+    <h3>История результатов:</h3>
+    <ul id="results-list"></ul>
+  </div>
+</div>
+
 <script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
-    navigator.serviceWorker.register('./sw.js').catch(function(e){
-      console.error('SW registration failed', e);
+  // Подключаем Telegram Web App
+  const tg = window.Telegram.WebApp;
+
+  const loginBtn = document.getElementById('login-btn');
+  const loginBlock = document.getElementById('login-block');
+  const userBlock = document.getElementById('user-block');
+  const userNameEl = document.getElementById('user-name');
+  const resultsList = document.getElementById('results-list');
+
+  // Клик по кнопке "Войти через Telegram"
+  loginBtn.addEventListener('click', () => {
+    const user = tg.initDataUnsafe.user; // Получаем данные пользователя
+    if (!user) {
+      alert("Ошибка: не удалось получить данные пользователя Telegram.");
+      return;
+    }
+
+    const userId = user.id;
+    const fullName = `${user.first_name || ''} ${user.last_name || ''}`.trim();
+    userNameEl.textContent = fullName;
+
+    // Прячем блок входа, показываем блок пользователя
+    loginBlock.classList.add('hidden');
+    userBlock.classList.remove('hidden');
+
+    // Загружаем результаты из локального хранилища (или с сервера)
+    const results = JSON.parse(localStorage.getItem(`results_${userId}`)) || [];
+    results.forEach(r => {
+      const li = document.createElement('li');
+      li.textContent = r;
+      resultsList.appendChild(li);
+    });
+
+    // Кнопка "Начать тест"
+    document.getElementById('start-btn').addEventListener('click', () => {
+      const result = prompt("Введите результат теста:");
+      if (result) {
+        results.push(result);
+        localStorage.setItem(`results_${userId}`, JSON.stringify(results));
+        const li = document.createElement('li');
+        li.textContent = result;
+        resultsList.appendChild(li);
+      }
     });
   });
-}
 </script>
-
 
 </body>
 </html>
