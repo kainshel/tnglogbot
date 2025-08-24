@@ -462,3 +462,17 @@ if (saveBtn) saveBtn.addEventListener("click", saveCurrent);
   renderPlan();
   loadExercises();
 })();
+
+    // Добавляем текущую дату по умолчанию
+    document.addEventListener('DOMContentLoaded', function() {
+      const today = new Date();
+      const yyyy = today.getFullYear();
+      let mm = today.getMonth() + 1;
+      let dd = today.getDate();
+      
+      if (dd < 10) dd = '0' + dd;
+      if (mm < 10) mm = '0' + mm;
+      
+      const formattedToday = yyyy + '-' + mm + '-' + dd;
+      document.getElementById('date').value = formattedToday;
+    });

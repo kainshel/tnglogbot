@@ -1,0 +1,213 @@
+
+        * {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+        }
+
+        body {
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+background-color: var(--bg-color);
+color: var(--text-color);
+line-height: 1.6;
+overflow-x: hidden;
+        }
+
+        /* === TOPBAR === */
+        .topbar {
+position: sticky;
+top: 0;
+z-index: 1000;
+background: var(--card-bg);
+border-bottom: var(--border);
+box-shadow: var(--shadow);
+display: flex;
+align-items: center;
+gap: 12px;
+padding: 10px 14px;
+        }
+
+        .app-title {
+font-size: 1.1rem;
+font-weight: 700;
+color: var(--text-color);
+margin: 0;
+flex: 1 1 auto;
+text-align: left;
+        }
+
+        /* === БУРГЕР МЕНЮ === */
+        .burger {
+flex: 0 0 auto;
+background: var(--primary-color);
+border: none;
+border-radius: 999px;
+width: 40px;
+height: 40px;
+display: grid;
+place-content: center;
+box-shadow: var(--shadow);
+cursor: pointer;
+        }
+
+        .burger:focus-visible { 
+box-shadow: 0 0 0 3px rgba(169,186,157,0.5); 
+        }
+
+        .burger span { 
+background: #fff; 
+width: 22px; 
+height: 2px; 
+margin: 2px 0; 
+display: block; 
+transition: transform 0.3s ease;
+        }
+
+        body.drawer-open .burger span:nth-child(1) {
+transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        body.drawer-open .burger span:nth-child(2) {
+opacity: 0;
+        }
+
+        body.drawer-open .burger span:nth-child(3) {
+transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* === САЙДБАР === */
+/* Sidebar / Navbar */
+.sidebar {
+  background: var(--primary-color);
+  color: white;
+  padding: 1rem;
+  min-height: 100vh;
+  position: fixed;
+  left: 0; top: 0;
+  width: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  z-index: 1000;
+}
+
+.sidebar .brand {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.sidebar .nav a {
+  display: block;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  color: white;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.sidebar .nav a:hover,
+.sidebar .nav a.active {
+  background: rgba(255,255,255,0.2);
+}
+
+/* Sidebar links */
+.sidebar nav ul { 
+  list-style: none; 
+  margin: 0; 
+  padding: 0; 
+}
+
+.sidebar nav ul li { 
+  margin: 8px 0; 
+}
+
+.sidebar nav ul li a {
+  display: block;
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.2s, color 0.2s;
+  font-weight: 500;
+}
+
+.sidebar nav ul li a:hover,
+.sidebar nav ul li a.active {
+  background: rgba(255,255,255,0.2);
+}
+
+        /* === BACKDROP === */
+        .backdrop {
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: rgba(0, 0, 0, 0.5);
+opacity: 0;
+pointer-events: none;
+transition: opacity 0.3s ease;
+z-index: 900;
+        }
+
+        body.drawer-open .backdrop {
+opacity: 1;
+pointer-events: auto;
+        }
+
+        body.drawer-open {
+overflow: hidden;
+        }
+
+        /* === ОСНОВНОЙ КОНТЕНТ === */
+        .main-content {
+max-width: 980px;
+margin: 16px auto;
+padding: 0 16px 64px;
+        }
+
+        .card {
+background: var(--card-bg);
+border: var(--border);
+border-radius: var(--radius);
+box-shadow: var(--shadow);
+padding: 16px;
+margin-bottom: 20px;
+        }
+
+        h1 {
+color: var(--primary-color);
+margin-bottom: 16px;
+        }
+
+        p {
+margin-bottom: 16px;
+line-height: 1.6;
+        }
+
+        /* === АДАПТИВНОСТЬ === */
+        @media (max-width: 768px) {
+.burger {
+    position: relative;
+    inset: auto;
+}
+
+.sidebar {
+    width: 85vw;
+    max-width: 300px;
+}
+
+.main-content {
+    padding: 0 12px 40px;
+}
+        }
+
+        /* Улучшение для touch-устройств */
+        button, a {
+min-height: 44px;
+display: flex;
+align-items: center;
+justify-content: center;
+        }

@@ -26,12 +26,6 @@ const modalBack = document.getElementById('modalBack');
 const modalContent = document.getElementById('modalContent');
 const modalClose = document.getElementById('modalClose');
 
-// Проверяем, что все необходимые элементы существуют
-if (!container || !filterGroups || !filterTargets || !filterType || !filterEquipment || !searchInput || 
-    !modalBack || !modalContent || !modalClose) {
-  console.error('Не найдены необходимые DOM элементы');
-}
-
 async function loadExercises() {
   try {
     const res = await fetch('exercises.json', { cache: 'no-store' });
@@ -41,7 +35,6 @@ async function loadExercises() {
     renderExercises(exercises);
   } catch (e) {
     console.error('Ошибка загрузки упражнений', e);
-    container.innerHTML = '<p>Ошибка загрузки упражнений. Проверьте консоль для подробностей.</p>';
   }
 }
 
@@ -55,8 +48,6 @@ function normalizeData() {
 }
 
 function fillFilters() {
-  if (!filterGroups || !filterTargets || !filterType || !filterEquipment) return;
-  
   // Очищаем фильтры
   [filterGroups, filterTargets, filterType, filterEquipment].forEach(filter => {
     filter.innerHTML = '<option value="">Все</option>';
@@ -103,9 +94,7 @@ function fillFilters() {
 }
 
 function setupDependentFilters() {
-  if (!filterGroups || !filterTargets) return;
-  
-  // Удаляем старые обработчики
+  // Удаляем старые обработчики, чтобы избежать дублирования
   filterGroups.onchange = null;
   filterTargets.onchange = null;
   
@@ -123,18 +112,28 @@ function setupDependentFilters() {
 }
 
 function updateTargetsFilter(selectedGroup) {
-  if (!filterTargets) return;
-  
+  // Сохраняем текущее выбранное значение
   const currentTarget = filterTargets.value;
+  
+  // Очищаем фильтр целевых зон
   filterTargets.innerHTML = '<option value="">Все</option>';
   
-  let availableTargets;
   if (!selectedGroup) {
-    availableTargets = [...new Set(exercises.flatMap(ex => ex.targets))];
-  } else {
-    const filteredExercises = exercises.filter(ex => ex.groups.includes(selectedGroup));
-    availableTargets = [...new Set(filteredExercises.flatMap(ex => ex.targets))];
+    // Если группа не выбрана, показываем все целевые зоны
+    const allTargets = [...new Set(exercises.flatMap(ex => ex.targets))];
+    allTargets.forEach(target => {
+      const opt = document.createElement('option');
+      opt.value = target;
+      opt.textContent = target;
+      if (target === currentTarget) opt.selected = true;
+      filterTargets.appendChild(opt);
+    });
+    return;
   }
+  
+  // Получаем целевые зоны только для выбранной группы
+  const filteredExercises = exercises.filter(ex => ex.groups.includes(selectedGroup));
+  const availableTargets = [...new Set(filteredExercises.flatMap(ex => ex.targets))];
   
   availableTargets.forEach(target => {
     const opt = document.createElement('option');
@@ -148,18 +147,28 @@ function updateTargetsFilter(selectedGroup) {
 }
 
 function updateGroupsFilter(selectedTarget) {
-  if (!filterGroups) return;
-  
+  // Сохраняем текущее выбранное значение
   const currentGroup = filterGroups.value;
+  
+  // Очищаем фильтр групп
   filterGroups.innerHTML = '<option value="">Все</option>';
   
-  let availableGroups;
   if (!selectedTarget) {
-    availableGroups = [...new Set(exercises.flatMap(ex => ex.groups))];
-  } else {
-    const filteredExercises = exercises.filter(ex => ex.targets.includes(selectedTarget));
-    availableGroups = [...new Set(filteredExercises.flatMap(ex => ex.groups))];
+    // Если целевая зона не выбрана, показываем все группы
+    const allGroups = [...new Set(exercises.flatMap(ex => ex.groups))];
+    allGroups.forEach(group => {
+      const opt = document.createElement('option');
+      opt.value = group;
+      opt.textContent = group;
+      if (group === currentGroup) opt.selected = true;
+      filterGroups.appendChild(opt);
+    });
+    return;
   }
+  
+  // Получаем группы только для выбранной целевой зоны
+  const filteredExercises = exercises.filter(ex => ex.targets.includes(selectedTarget));
+  const availableGroups = [...new Set(filteredExercises.flatMap(ex => ex.groups))];
   
   availableGroups.forEach(group => {
     const opt = document.createElement('option');
@@ -173,66 +182,38 @@ function updateGroupsFilter(selectedTarget) {
 }
 
 function renderExercises(list) {
-  if (!container) return;
-  
   container.innerHTML = '';
-  if (list.length === 0) {
-    container.innerHTML = '<p>Упражнения не найдены</p>';
-    return;
-  }
-  
   list.forEach(ex => {
     const card = document.createElement('div');
     card.className = 'exercise-card';
     card.innerHTML = `
       <h3>${ex.name_ru}</h3>
-      <img src="${ex.gif}" alt="${ex.name_en}" class="exercise-gif" loading="lazy">
+      <img src="${ex.gif}" alt="${ex.name_en}" class="exercise-gif">
       <p><b>Группы:</b> ${ex.groups.join(', ')}</p>
       <p><b>Цели:</b> ${ex.targets.join(', ')}</p>
       <button class="details-btn">Подробнее</button>
     `;
-    const btn = card.querySelector('.details-btn');
-    if (btn) {
-      btn.onclick = () => showDetails(ex);
-    }
+    card.querySelector('.details-btn').onclick = () => showDetails(ex);
     container.appendChild(card);
   });
 }
 
-// Дебаунс для поиска
-let searchTimeout;
 function applyFilters() {
-  if (searchTimeout) clearTimeout(searchTimeout);
-  
-  searchTimeout = setTimeout(() => {
-    let list = [...exercises];
-    const search = searchInput?.value.toLowerCase() || '';
-    if (search) {
-      list = list.filter(ex => 
-        ex.name_ru.toLowerCase().includes(search) || 
-        ex.name_en.toLowerCase().includes(search)
-      );
-    }
-    
-    const gr = (filterGroups?.value || '').trim();
-    if (gr) list = list.filter(ex => ex.groups.includes(gr));
-    
-    const tg = (filterTargets?.value || '').trim();
-    if (tg) list = list.filter(ex => ex.targets.includes(tg));
-    
-    const tp = (filterType?.value || '').trim();
-    if (tp) list = list.filter(ex => ex.type === tp);
-    
-    const eq = (filterEquipment?.value || '').trim();
-    if (eq) list = list.filter(ex => ex.equipment.includes(eq));
-    
-    renderExercises(list);
-  }, 300);
+  let list = [...exercises];
+  const search = searchInput.value.toLowerCase();
+  if (search) list = list.filter(ex => ex.name_ru.toLowerCase().includes(search) || ex.name_en.toLowerCase().includes(search));
+  const gr = (filterGroups?.value || '').trim();
+  if (gr) list = list.filter(ex => ex.groups.includes(gr));
+  const tg = (filterTargets?.value || '').trim();
+  if (tg) list = list.filter(ex => ex.targets.includes(tg));
+  const tp = (filterType?.value || '').trim();
+  if (tp) list = list.filter(ex => ex.type === tp);
+  const eq = (filterEquipment?.value || '').trim();
+  if (eq) list = list.filter(ex => ex.equipment.includes(eq));
+  renderExercises(list);
 }
 
 function showDetails(ex) {
-  if (!modalContent || !modalBack) return;
-  
   modalContent.innerHTML = `
     <h2>${ex.name_ru}</h2>
     <img src="${ex.gif}" alt="${ex.name_en}" class="modal-gif">
@@ -245,31 +226,12 @@ function showDetails(ex) {
   modalBack.style.display = 'flex';
 }
 
-// Добавляем обработчики безопасно
-if (modalClose) {
-  modalClose.onclick = () => {
-    if (modalBack) modalBack.style.display = 'none';
-  };
-}
+modalClose.onclick = () => modalBack.style.display = 'none';
+modalBack.onclick = (e) => { if (e.target === modalBack) modalBack.style.display = 'none'; };
 
-if (modalBack) {
-  modalBack.onclick = (e) => { 
-    if (e.target === modalBack) modalBack.style.display = 'none'; 
-  };
-}
-
-// Добавляем обработчики для всех фильтров с проверкой
-[filterGroups, filterTargets, filterType, filterEquipment].forEach(sel => {
-  if (sel) sel.addEventListener('change', applyFilters);
+// Добавляем обработчики для всех фильтров
+[filterGroups, filterTargets, filterType, filterEquipment, searchInput].forEach(sel => {
+  sel.addEventListener('input', applyFilters);
 });
 
-if (searchInput) {
-  searchInput.addEventListener('input', applyFilters);
-}
-
-// Загружаем упражнения только если контейнер существует
-if (container) {
-  loadExercises();
-} else {
-  console.error('Контейнер упражнений не найден');
-}
+loadExercises();
