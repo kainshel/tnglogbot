@@ -272,8 +272,8 @@ function renderPlan() {
       <div class="row">
         <h3>${EX.meta.name_ru || EX.meta.name_en}</h3>
         <div class="exercise-status">
-          ${index < currentExerciseIndex ? '✅ Выполнено' : 
-            index === currentExerciseIndex ? '🏋️ Выполняется' : '⏳ Ожидание'}
+          ${index < currentExerciseIndex ? '✅' : 
+            index === currentExerciseIndex ? }
         </div>
         <div>
           <button class="btn add-set">+ Подход</button>
@@ -298,7 +298,7 @@ function renderPlan() {
           <input type="number" step="1" min="0" placeholder="Повторы" value="${s.reps ?? ""}"
                  ${i < currentSetIndex && index === currentExerciseIndex ? 'readonly' : ''}>
           ${isCurrentSet ? 
-            `<button class="btn complete-set">✅ Завершить подход</button>` : 
+            `<button class="btn complete-set">Завершить подход</button>` : 
             `<button class="rm">×</button>`}
         `;
         
@@ -341,7 +341,7 @@ function renderPlan() {
                 currentExerciseIndex++;
               } else {
                 // Все упражнения выполнены
-                alert("🎉 Тренировка завершена! Сохраните результаты.");
+                alert("Тренировка завершена! Сохраните результаты.");
               }
             }
             renderPlan();
@@ -445,7 +445,7 @@ function saveCurrent() {
   
   localStorage.setItem("userProfile", JSON.stringify(profile));
   
-  alert("Тренировка сохранена! ✅");
+  alert("Тренировка сохранена!");
   
   // Сбрасываем план и текущие индексы
   plan = [];
