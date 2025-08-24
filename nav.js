@@ -50,3 +50,17 @@
     });
   }
 })();
+
+
+// Keep topbar visible and prevent text overlap on open
+(function(){
+  function onReady(fn){ if (document.readyState !== 'loading') fn(); else document.addEventListener('DOMContentLoaded', fn); }
+  onReady(function(){
+    var topbar = document.querySelector('.topbar');
+    var content = document.querySelector('.main-content');
+    if (topbar && content){
+      var h = topbar.getBoundingClientRect().height;
+      content.style.scrollMarginTop = h + 'px';
+    }
+  });
+})();

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Android Alpha Анимация</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        header {
+            text-align: center;
+            margin: 20px 0;
+            width: 100%;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 20px 0;
+        }
+        
+        .animation-box {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .animation-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #fdbb2d;
+        }
+        
+        .animated-object {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            background: linear-gradient(45deg, #ff9966, #ff5e62);
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            animation: alphaAnimation 0.15s cubic-bezier(0.33, 0.0, 0.67, 1.0) 1s infinite alternate;
+        }
+        
+        @keyframes alphaAnimation {
+            from {
+                opacity: 1;
+                transform: scale(1);
+            }
+            to {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+        }
+        
+        .controls {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        label {
+            min-width: 120px;
+            font-weight: bold;
+        }
+        
+        input[type="range"] {
+            flex: 1;
+        }
+        
+        .value-display {
+            min-width: 50px;
+            text-align: right;
+        }
+        
+        .code-explanation {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            padding: 25px;
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .code-block {
+            background: #2d2d2d;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .code-block code {
+            color: #f8f8f2;
+            line-height: 1.5;
+        }
+        
+        .property {
+            color: #ff79c6;
+        }
+        
+        .value {
+            color: #f1fa8c;
+        }
+        
+        .attribute {
+            color: #50fa7b;
+        }
+        
+        .tag {
+            color: #ff5555;
+        }
+        
+        .comment {
+            color: #6272a4;
+        }
+        
+        .explanation-list {
+            list-style-type: none;
+        }
+        
+        .explanation-list li {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            border-left: 3px solid #fdbb2d;
+        }
+        
+        .highlight {
+            color: #fdbb2d;
+            font-weight: bold;
+        }
+        
+        .play-button {
+            background: #fdbb2d;
+            color: #1a2a6c;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 20px auto;
+            display: block;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .play-button:hover {
+            background: #ffcc44;
+            transform: translateY(-2px);
+            box-shadow: 0 7px 18px rgba(0, 0, 0, 0.3);
+        }
+        
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .animation-box, .code-explanation {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Android Alpha Анимация</h1>
+        <p class="subtitle">Демонстрация и объяснение анимации прозрачности из Android, реализованная с помощью CSS</p>
+    </header>
+    
+    <div class="container">
+        <div class="animation-box">
+            <h2 class="animation-title">Демонстрация анимации</h2>
+            <div class="animated-object" id="animatedObject">
+                Android Alpha Animation
+            </div>
+            
+            <div class="controls">
+                <div class="control-group">
+                    <label for="duration">Длительность:</label>
+                    <input type="range" id="duration" min="50" max="1000" value="150" step="50">
+                    <span class="value-display" id="durationValue">150ms</span>
+                </div>
+                
+                <div class="control-group">
+                    <label for="delay">Задержка:</label>
+                    <input type="range" id="delay" min="0" max="2000" value="1000" step="100">
+                    <span class="value-display" id="delayValue">1000ms</span>
+                </div>
+            </div>
+            
+            <button class="play-button" id="playButton">Запустить анимацию</button>
+        </div>
+        
+        <div class="code-explanation">
+            <h2 class="animation-title">Объяснение кода</h2>
+            
+            <div class="code-block">
+                <code>
+                    <span class="tag">&lt;set</span> <span class="attribute">android:shareInterpolator</span>=<span class="value">"false"</span><span class="tag">&gt;</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;alpha</span> <span class="attribute">android:interpolator</span>=<span class="value">"@anim/decelerate_cubic"</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="attribute">android:duration</span>=<span class="value">"150"</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="attribute">android:fromAlpha</span>=<span class="value">"1.0"</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="attribute">android:toAlpha</span>=<span class="value">"0.0"</span> <span class="tag">/&gt;</span><br>
+                    <span class="tag">&lt;/set&gt;</span>
+                </code>
+            </div>
+            
+            <ul class="explanation-list">
+                <li><span class="highlight">set</span> - контейнер для анимаций, где <span class="highlight">shareInterpolator="false"</span> означает, что каждая анимация будет использовать свой собственный интерполятор.</li>
+                <li><span class="highlight">alpha</span> - определяет анимацию изменения прозрачности.</li>
+                <li><span class="highlight">android:interpolator="@anim/decelerate_cubic"</span> - определяет кубическую интерполяцию с замедлением, которая реализована в CSS как <span class="highlight">cubic-bezier(0.33, 0.0, 0.67, 1.0)</span>.</li>
+                <li><span class="highlight">android:duration="150"</span> - длительность анимации 150 миллисекунд.</li>
+                <li><span class="highlight">android:fromAlpha="1.0"</span> - начальное значение прозрачности (полностью непрозрачный).</li>
+                <li><span class="highlight">android:toAlpha="0.0"</span> - конечное значение прозрачности (полностью прозрачный).</li>
+            </ul>
+        </div>
+    </div>
+    
+    <footer>
+        <p>Демонстрация создана на основе Android XML анимации</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedObject = document.getElementById('animatedObject');
+            const playButton = document.getElementById('playButton');
+            const durationSlider = document.getElementById('duration');
+            const delaySlider = document.getElementById('delay');
+            const durationValue = document.getElementById('durationValue');
+            const delayValue = document.getElementById('delayValue');
+            
+            // Обновление значений слайдеров
+            durationSlider.addEventListener('input', function() {
+                durationValue.textContent = this.value + 'ms';
+                updateAnimation();
+            });
+            
+            delaySlider.addEventListener('input', function() {
+                delayValue.textContent = this.value + 'ms';
+                updateAnimation();
+            });
+            
+            // Запуск анимации по клику
+            playButton.addEventListener('click', function() {
+                // Останавливаем текущую анимацию
+                animatedObject.style.animation = 'none';
+                
+                // Запускаем заново
+                setTimeout(function() {
+                    updateAnimation();
+                }, 10);
+            });
+            
+            // Функция обновления параметров анимации
+            function updateAnimation() {
+                const duration = durationSlider.value;
+                const delay = delaySlider.value;
+                
+                animatedObject.style.animation = `alphaAnimation ${duration}ms cubic-bezier(0.33, 0.0, 0.67, 1.0) ${delay}ms infinite alternate`;
+            }
+            
+            // Инициализация
+            updateAnimation();
+        });
+    </script>
+</body>
+</html>

@@ -8,23 +8,35 @@
 <link rel="stylesheet" href="styles/responsive.css">
   <script src="nav.js" defer></script>
   <link rel="manifest" href="manifest.json">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script src="tg-init.js" defer></script>
+  <script src="nav.js" defer></script>
 </head>
 <body>
-  <button id="burger" class="burger" aria-label="Открыть меню" aria-controls="sidebar" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
-  <div id="backdrop" class="backdrop" hidden></div>
+<header class="topbar">
+  <button id="burger" class="burger" aria-label="Открыть меню" aria-controls="sidebar" aria-expanded="false"><span></span><span></span><span></span></button>
+  <h1 class="app-title">Дневник тренировок</h1>
+  <div class="tg-userchip" aria-live="polite">
+    <img id="tg-avatar" class="avatar" hidden>
+    <span data-user-name></span>
+  </div>
+</header>
+<div id="backdrop" class="backdrop" hidden></div>
+<aside id="sidebar" class="sidebar" aria-hidden="true">
+  <nav role="navigation" aria-label="Главное меню" class="nav">
+  <a href="index.html">Главная</a>
+  <a href="exercises.html">Упражнения</a>
+  <a href="workout.html">Тренировка</a>
+  <a href="history.html">История</a>
+  <a href="profile.html">Профиль</a>
+  </nav>
+</aside>
 
-  <aside id="sidebar" class="sidebar">
-    <div class="brand">Дневник Тренировок</div>
-    <nav role="navigation" aria-label="Main" class="nav">
-      <a href="index.html">Главная</a>
-      <a href="exercises.html">Упражнения</a>
-      <a href="workout.html">Тренировка</a>
-	    <a href="history.html">История</a> <!-- Добавляем эту строку -->
-      <a class="active" href="profile.html">Профиль</a>
-    </nav>
-  </aside>
+<main class="main-content">
+  
+  
+
+  
 
   <main class="content">
     <section class="card">
@@ -77,5 +89,6 @@
       });
     });
   </script>
+</main>
 </body>
 </html>
