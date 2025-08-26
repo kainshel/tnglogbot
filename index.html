@@ -1,107 +1,67 @@
-  <!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Главная</title>
-<link rel="stylesheet" href="styles/main.css">
-<link rel="stylesheet" href="styles/responsive.css">
-
-<script src="nav.js" defer></script>
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <script src="tg-init.js" defer></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Дневник тренировок — расширенная версия</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="styles/main.css" />
+  <script type="module" src="scripts/app_main.js" defer></script>
 </head>
 <body>
-<title>Telegram Mini App</title>
-<style>
-  body { font-family: Arial, sans-serif; padding: 20px; text-align: center; }
-  button { padding: 10px 20px; font-size: 16px; margin: 10px; cursor: pointer; }
-  .hidden { display: none; }
-  #results { margin-top: 20px; }
-</style>
-<header class="topbar">
-  <button id="burger" class="burger" aria-label="Открыть меню" aria-controls="sidebar" aria-expanded="false"><span></span><span></span><span></span></button>
-  <h1 class="app-title">Дневник тренировок</h1>
-  <div class="tg-userchip" aria-live="polite">
-    <img id="tg-avatar" class="avatar" hidden>
-    <span data-user-name></span>
-  </div>
-</header>
-<div id="backdrop" class="backdrop" hidden></div>
-<aside id="sidebar" class="sidebar" aria-hidden="true">
-  <nav role="navigation" aria-label="Главное меню" class="nav">
-  <a class="active" href="index.html">Главная</a>
-  <a href="exercises.html">Упражнения</a>
-  <a href="workout.html">Тренировка</a>
-  <a href="history.html">История</a>
-  <a href="profile.html">Профиль</a>
-  </nav>
-</aside>
+  <header class="topbar" role="banner">
+    <button id="burger" class="burger" aria-label="Открыть меню" aria-controls="sidebar" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <h1>Дневник тренировок</h1>
+    <nav class="top-actions" aria-hidden="true">
+      <a href="workout.html" class="btn primary">Новая тренировка</a>
+    </nav>
+  </header>
 
-<main class="main-content">
+  <div id="backdrop" class="backdrop" hidden></div>
+  <aside id="sidebar" class="sidebar" aria-hidden="true" role="navigation">
+    <nav>
+      <a href="index.html">Главная</a>
+      <a href="workout.html">Тренировка</a>
+      <a href="exercises.html">Упражнения</a>
+      <a href="history.html">История</a>
+      <a href="profile.html">Профиль</a>
+    </nav>
+  </aside>
 
-<h1>Добро пожаловать в наше мини-приложение!</h1>
-<div id="login-block">
-  <button id="login-btn">Войти через Telegram</button>
-</div>
+  <main class="container" role="main">
+    <section class="card">
+      <h2>Добро пожаловать</h2>
+      <p>Это расширенная версия проекта с улучшенным UX, модальным добавлением упражнений, поиском в истории и более строгой валидацией.</p>
+      <ul>
+        <li>Добавление тренировок с валидацией (дата, сеты).</li>
+        <li>Каталог упражнений (json).</li>
+        <li>Фильтрация и поиск по истории.</li>
+        <li>PWA: рабочий Service Worker, offline fallback и обновление кэша.</li>
+        <li>Telegram WebApp: темизация, BackButton, user-id namespacing.</li>
+      </ul>
+      <p>Используй меню слева чтобы исследовать функциональность.</p>
+    </section>
 
-<div id="user-block" class="hidden">
-  <h2>Привет, <span id="user-name"></span>!</h2>
-  <button id="start-btn">Начать новый тест</button>
-  <div id="results">
-    <h3>История результатов:</h3>
-    <ul id="results-list"></ul>
-  </div>
-</div>
+    <section class="card grid-3">
+      <article>
+        <h3>Быстрый старт</h3>
+        <p><a href="workout.html" class="btn primary">Создать тренировку</a></p>
+      </article>
+      <article>
+        <h3>История</h3>
+        <p><a href="history.html" class="btn">Посмотреть историю</a></p>
+      </article>
+      <article>
+        <h3>Профиль</h3>
+        <p><a href="profile.html" class="btn">Редактировать профиль</a></p>
+      </article>
+    </section>
+  </main>
 
-<script>
-  // Подключаем Telegram Web App
-  const tg = window.Telegram.WebApp;
-
-  const loginBtn = document.getElementById('login-btn');
-  const loginBlock = document.getElementById('login-block');
-  const userBlock = document.getElementById('user-block');
-  const userNameEl = document.getElementById('user-name');
-  const resultsList = document.getElementById('results-list');
-
-  // Клик по кнопке "Войти через Telegram"
-  loginBtn.addEventListener('click', () => {
-    const user = tg.initDataUnsafe.user; // Получаем данные пользователя
-    if (!user) {
-      alert("Ошибка: не удалось получить данные пользователя Telegram.");
-      return;
-    }
-
-    const userId = user.id;
-    const fullName = `${user.first_name || ''} ${user.last_name || ''}`.trim();
-    userNameEl.textContent = fullName;
-
-    // Прячем блок входа, показываем блок пользователя
-    loginBlock.classList.add('hidden');
-    userBlock.classList.remove('hidden');
-
-    // Загружаем результаты из локального хранилища (или с сервера)
-    const results = JSON.parse(localStorage.getItem(`results_${userId}`)) || [];
-    results.forEach(r => {
-      const li = document.createElement('li');
-      li.textContent = r;
-      resultsList.appendChild(li);
-    });
-
-    // Кнопка "Начать тест"
-    document.getElementById('start-btn').addEventListener('click', () => {
-      const result = prompt("Введите результат теста:");
-      if (result) {
-        results.push(result);
-        localStorage.setItem(`results_${userId}`, JSON.stringify(results));
-        const li = document.createElement('li');
-        li.textContent = result;
-        resultsList.appendChild(li);
-      }
-    });
-  });
-</script>
-
-</main>
+  <footer class="footer" role="contentinfo">
+    <p>Версия: <strong>expanded</strong>. © 2025</p>
+  </footer>
 </body>
 </html>
