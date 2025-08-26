@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>История тренировок — Дневник Тренировок</title>
+<link rel="stylesheet" href="styles/main.css">
+<link rel="stylesheet" href="styles/responsive.css">
+<link rel="stylesheet" href="styles/history.css">
+  <script src="nav.js" defer></script>
+  <link rel="manifest" href="manifest.json">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script src="tg-init.js" defer></script>
+</head>
+<body>
+
+  <button id="burger" class="burger" aria-label="Открыть меню" aria-controls="sidebar" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <div id="backdrop" class="backdrop" hidden></div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="brand">Дневник Тренировок</div>
+    <nav role="navigation" aria-label="Main" class="nav">
+      <a href="index.html">Главная</a>
+      <a href="exercises.html">Упражнения</a>
+      <a href="workout.html">Тренировка</a>
+      <a class="active" href="history.html">История</a> <!-- Новая ссылка -->
+      <a href="profile.html">Профиль</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <h1>История тренировок</h1>
+    
+    <section class="filters">
+      <input type="month" id="month-filter"> <!-- Фильтр по месяцу -->
+      <select id="exercise-filter">
+        <option value="">Все упражнения</option>
+        <!-- Сюда JS подставит варианты -->
+      </select>
+      <button class="btn" onclick="clearFilters()">Сбросить</button>
+    </section>
+
+    <section id="workouts-container" class="workouts-list">
+      <!-- Сюда будет вставляться список тренировок -->
+      <p id="no-workouts-message" style="display: none;">У вас пока нет сохранённых тренировок.</p>
+    </section>
+  </main>
+
+  <!-- Модальное окно для детального просмотра тренировки -->
+  <div id="modalBack" class="modal-back">
+    <div id="modal" class="modal">
+      <button id="modalClose" class="modal-close">×</button>
+      <div id="modalContent" class="modal-content"></div>
+    </div>
+  </div>
+
+  <script src="app_history.js"></script> <!-- Новый JS-файл для этой страницы -->
+</body>
+</html>

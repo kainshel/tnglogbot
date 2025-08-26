@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <link rel="manifest" href="manifest.json">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Тренировка — Дневник Тренировок</title>
+<link rel="stylesheet" href="styles/main.css">
+<link rel="stylesheet" href="styles/responsive.css">
+<link rel="stylesheet" href="styles/workout.css">
+  <script src="nav.js" defer></script>
+  <script src="app_workout.js" defer></script> 
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script src="tg-init.js" defer></script>
+</head>
+<body>
+  <!-- Кнопка бургер-меню -->
+  <button id="burger" class="burger" aria-label="Открыть меню" aria-controls="sidebar" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <div id="backdrop" class="backdrop" hidden></div>
+
+  <!-- Боковое меню -->
+  <aside id="sidebar" class="sidebar">
+    <div class="brand">Дневник Тренировок</div>
+    <nav role="navigation" aria-label="Main" class="nav">
+      <a href="index.html">Главная</a>
+      <a href="exercises.html">Упражнения</a>
+      <a class="active" href="workout.html">Тренировка</a>
+      <a href="history.html">История</a>
+      <a href="profile.html">Профиль</a>
+    </nav>
+  </aside>
+
+  <!-- Основное содержимое -->
+  <main class="content">
+    <h1>План тренировки</h1>
+
+    <!-- Выбор даты -->
+    <section class="card">
+      <label for="date"><strong>Дата тренировки:</strong></label>
+      <input type="date" id="date" value="">
+    </section>
+
+    <!-- Состав тренировки (ПЕРЕМЕЩЕНО НАВЕРХ) -->
+    <section class="card">
+      <h2>Моя тренировка</h2>
+      <div id="plan"></div>
+      <button id="saveBtn" class="btn">💾 Сохранить тренировку</button>
+    </section>
+
+    <!-- Фильтры -->
+    <section class="card filters">
+      <h2>Найти упражнение</h2>
+      <input type="text" id="search" placeholder="Поиск по названию...">
+      <select id="filter-groups"><option value="">Группа мышц</option></select>
+      <select id="filter-targets"><option value="">Целевая зона</option></select>
+      <select id="filter-type"><option value="">Тип</option></select>
+      <select id="filter-equipment"><option value="">Оборудование</option></select>
+    </section>
+
+    <!-- Доступные упражнения -->
+    <section class="card">
+      <h2>Доступные упражнения</h2>
+      <div id="exercises-container" class="exercise-grid"></div>
+    </section>
+  </main>
+
+  <!-- Модальное окно для деталей упражнения -->
+  <div id="modalBack" class="modal-back">
+    <div id="modal" class="modal">
+      <button id="modalClose" class="modal-close">×</button>
+      <div id="modalContent" class="modal-content"></div>
+    </div>
+  </div>
+</body>
+</html>

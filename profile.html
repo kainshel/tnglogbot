@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Профиль — TngLogBot</title>
+<link rel="stylesheet" href="styles/main.css">
+<link rel="stylesheet" href="styles/responsive.css">
+<link rel="stylesheet" href="styles/profile.css">
+  <script src="nav.js" defer></script>
+  <script src="app_profile.js" defer></script>|
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script src="tg-init.js" defer></script>
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <button id="burger" class="burger" aria-label="Открыть меню" aria-controls="sidebar" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <div id="backdrop" class="backdrop" hidden></div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="brand">Дневник Тренировок</div>
+    <nav role="navigation" aria-label="Main" class="nav">
+      <a href="index.html">Главная</a>
+      <a href="exercises.html">Упражнения</a>
+      <a href="workout.html">Тренировка</a>
+      <a href="history.html">История</a>
+      <a class="active" href="profile.html">Профиль</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <section class="card profile-header">
+      <img src="avatar.png" alt="Аватар пользователя" class="avatar">
+      <div>
+        <h1 id="username">Имя пользователя</h1>
+        <p id="usergoal">Цель: —</p>
+      </div>
+    </section>
+
+    <section class="card profile-info">
+      <h2>Основная информация</h2>
+      <ul>
+        <li><strong>Возраст:</strong> <span id="age">—</span></li>
+        <li><strong>Рост:</strong> <span id="height">—</span></li>
+        <li><strong>Вес:</strong> <span id="weight">—</span></li>
+      </ul>
+      <a href="edit_profile.html" class="btn">Редактировать</a>
+    </section>
+
+    <section class="card profile-progress">
+      <h2>Статистика тренировок</h2>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <span class="stat-number" id="totalWorkouts">0</span>
+          <span class="stat-label">Всего тренировок</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" id="totalExercises">0</span>
+          <span class="stat-label">Разных упражнений</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" id="totalSets">0</span>
+          <span class="stat-label">Всего подходов</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" id="lastWorkout">—</span>
+          <span class="stat-label">Последняя тренировка</span>
+        </div>
+      </div>
+      <a href="history.html" class="btn">Смотреть всю историю</a>
+    </section>
+
+    <section class="card profile-actions">
+      <button class="btn danger" onclick="logout()">Выйти</button>
+    </section>
+  </main>
+</body>
+</html>
