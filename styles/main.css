@@ -827,3 +827,48 @@ textarea,
 
 .btn-primary{ background: var(--primary-color); color:#fff; border:none; border-radius:12px; padding:12px 16px; box-shadow: var(--shadow); }
 .card{ background: var(--card-bg); border: var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 16px; }
+
+
+/* === Telegram Theme Support === */
+.theme-dark {
+  --bg-color: #1a1a1a;
+  --text-color: #ffffff;
+  --text-light: #cccccc;
+  --card-bg: #2a2a2a;
+  --border: 1px solid #404040;
+}
+
+.theme-light {
+  --bg-color: #f9faf9;
+  --text-color: #333333;
+  --text-light: #666666;
+  --card-bg: #ffffff;
+  --border: 1px solid #e0e0e0;
+}
+
+/* Smooth theme transitions */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Skeleton loader for initial loading */
+.skeleton-loader {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: 4px;
+  height: 24px;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.theme-dark .skeleton-loader {
+  background: linear-gradient(90deg, #2a2a2a 25%, #333 50%, #2a2a2a 75%);
+}
+
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}

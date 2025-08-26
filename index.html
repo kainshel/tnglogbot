@@ -7,18 +7,18 @@
   <link rel="stylesheet" href="styles/main.css">
   <link rel="stylesheet" href="styles/responsive.css">
   <link rel="stylesheet" href="styles/dashboard.css">
+  <script src="tg-init.js" defer></script>
   <script src="nav.js" defer></script>
-  <script src="dashboard.js" defer></script>
+  <script src="app_dashboard.js" defer></script>
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
+  <!-- Остальная разметка без изменений -->
+  <button id="burger" class="burger" aria-label="Открыть меню" aria-controls="sidebar" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <div id="backdrop" class="backdrop" hidden></div>
 
-<button id="burger" class="burger" aria-label="Открыть меню" aria-controls="sidebar" aria-expanded="false">
-  <span></span><span></span><span></span>
-</button>
-<div id="backdrop" class="backdrop" hidden></div>
-
-<div class="app">
   <aside id="sidebar" class="sidebar">
     <div class="brand">Дневник Тренировок</div>
     <nav role="navigation" aria-label="Main" class="nav">
@@ -31,7 +31,7 @@
   </aside>
   
   <main class="content">
-    <!-- Приветствие и быстрые действия -->
+    <!-- Содержимое главной страницы -->
     <section class="welcome-section">
       <h1>Добро пожаловать, <span id="user-name">Спортсмен</span>!</h1>
       <p>Отслеживайте свои тренировки и достигайте целей</p>
@@ -42,7 +42,6 @@
       </div>
     </section>
 
-    <!-- Статистика и прогресс -->
     <section class="stats-grid">
       <div class="stat-card">
         <div class="stat-icon">🏋️</div>
@@ -77,7 +76,6 @@
       </div>
     </section>
 
-    <!-- Предстоящие тренировки/напоминания -->
     <section class="card">
       <h2>Ближайшие планы</h2>
       <div id="upcoming-workouts">
@@ -86,7 +84,6 @@
       <a href="workout.html" class="btn">Запланировать тренировку</a>
     </section>
 
-    <!-- Недавние тренировки -->
     <section class="card">
       <h2>Недавние тренировки</h2>
       <div id="recent-workouts">
@@ -95,7 +92,6 @@
       <a href="history.html" class="btn">Вся история</a>
     </section>
 
-    <!-- Быстрый доступ к упражнениям -->
     <section class="card">
       <h2>Часто используемые упражнения</h2>
       <div id="favorite-exercises" class="exercise-mini-grid">
@@ -104,60 +100,5 @@
       <a href="exercises.html" class="btn">Все упражнения</a>
     </section>
   </main>
-</div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  // Загрузка статистики пользователя
-  loadUserStats();
-  loadRecentWorkouts();
-  loadFavoriteExercises();
-  
-  // Интеграция с Telegram Web App
-  initializeTelegramAuth();
-});
-
-function loadUserStats() {
-  // Загрузка статистики из localStorage
-  const stats = JSON.parse(localStorage.getItem('userStats')) || {};
-  
-  document.getElementById('total-workouts').textContent = stats.totalWorkouts || 0;
-  document.getElementById('week-workouts').textContent = stats.weekWorkouts || 0;
-  document.getElementById('total-exercises').textContent = stats.totalExercises || 0;
-  document.getElementById('last-workout').textContent = stats.lastWorkout || '—';
-}
-
-function loadRecentWorkouts() {
-  // Загрузка последних тренировок
-  const workouts = JSON.parse(localStorage.getItem('workoutHistory')) || [];
-  const container = document.getElementById('recent-workouts');
-  
-  if (workouts.length === 0) return;
-  
-  container.innerHTML = '';
-  workouts.slice(0, 3).forEach(workout => {
-    const workoutEl = document.createElement('div');
-    workoutEl.className = 'workout-item';
-    workoutEl.innerHTML = `
-      <strong>${workout.date}</strong>
-      <span>${workout.exercises.length} упражнений</span>
-    `;
-    container.appendChild(workoutEl);
-  });
-}
-
-function initializeTelegramAuth() {
-  if (typeof Telegram !== 'undefined') {
-    const tg = window.Telegram.WebApp;
-    const user = tg.initDataUnsafe.user;
-    
-    if (user) {
-      const userName = `${user.first_name || ''} ${user.last_name || ''}`.trim();
-      document.getElementById('user-name').textContent = userName || 'Спортсмен';
-    }
-  }
-}
-</script>
-
 </body>
 </html>
