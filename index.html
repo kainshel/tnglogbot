@@ -1,21 +1,22 @@
-
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Главная</title>
-<link rel="stylesheet" href="styles/main.css">
-<link rel="stylesheet" href="styles/responsive.css">
-
-<script src="nav.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Главная — Дневник Тренировок</title>
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/responsive.css">
+  <link rel="stylesheet" href="styles/dashboard.css">
+  <script src="nav.js" defer></script>
+  <script src="dashboard.js" defer></script>
+  <link rel="manifest" href="manifest.json">
 </head>
 <body>
 
 <button id="burger" class="burger" aria-label="Открыть меню" aria-controls="sidebar" aria-expanded="false">
   <span></span><span></span><span></span>
 </button>
-<div id="backdrop" class="backdrop" hidden></div></div>
+<div id="backdrop" class="backdrop" hidden></div>
 
 <div class="app">
   <aside id="sidebar" class="sidebar">
@@ -24,80 +25,138 @@
       <a class="active" href="index.html">Главная</a>
       <a href="exercises.html">Упражнения</a>
       <a href="workout.html">Тренировка</a>
-	  <a href="history.html">История</a> <!-- Добавляем эту строку -->
+      <a href="history.html">История</a>
       <a href="profile.html">Профиль</a>
     </nav>
   </aside>
-<title>Telegram Mini App</title>
-<style>
-  body { font-family: Arial, sans-serif; padding: 20px; text-align: center; }
-  button { padding: 10px 20px; font-size: 16px; margin: 10px; cursor: pointer; }
-  .hidden { display: none; }
-  #results { margin-top: 20px; }
-</style>
-</head>
-<body>
+  
+  <main class="content">
+    <!-- Приветствие и быстрые действия -->
+    <section class="welcome-section">
+      <h1>Добро пожаловать, <span id="user-name">Спортсмен</span>!</h1>
+      <p>Отслеживайте свои тренировки и достигайте целей</p>
+      
+      <div class="quick-actions">
+        <a href="workout.html" class="btn primary">➕ Начать тренировку</a>
+        <a href="exercises.html" class="btn secondary">📋 Библиотека упражнений</a>
+      </div>
+    </section>
 
-<h1>Добро пожаловать в наше мини-приложение!</h1>
-<div id="login-block">
-  <button id="login-btn">Войти через Telegram</button>
-</div>
+    <!-- Статистика и прогресс -->
+    <section class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">🏋️</div>
+        <div class="stat-info">
+          <span class="stat-number" id="total-workouts">0</span>
+          <span class="stat-label">Тренировок всего</span>
+        </div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-icon">🔥</div>
+        <div class="stat-info">
+          <span class="stat-number" id="week-workouts">0</span>
+          <span class="stat-label">На этой неделе</span>
+        </div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-icon">💪</div>
+        <div class="stat-info">
+          <span class="stat-number" id="total-exercises">0</span>
+          <span class="stat-label">Упражнений</span>
+        </div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-icon">📅</div>
+        <div class="stat-info">
+          <span class="stat-number" id="last-workout">—</span>
+          <span class="stat-label">Последняя тренировка</span>
+        </div>
+      </div>
+    </section>
 
-<div id="user-block" class="hidden">
-  <h2>Привет, <span id="user-name"></span>!</h2>
-  <button id="start-btn">Начать новый тест</button>
-  <div id="results">
-    <h3>История результатов:</h3>
-    <ul id="results-list"></ul>
-  </div>
+    <!-- Предстоящие тренировки/напоминания -->
+    <section class="card">
+      <h2>Ближайшие планы</h2>
+      <div id="upcoming-workouts">
+        <p class="empty-state">У вас нет запланированных тренировок</p>
+      </div>
+      <a href="workout.html" class="btn">Запланировать тренировку</a>
+    </section>
+
+    <!-- Недавние тренировки -->
+    <section class="card">
+      <h2>Недавние тренировки</h2>
+      <div id="recent-workouts">
+        <p class="empty-state">У вас пока нет завершённых тренировок</p>
+      </div>
+      <a href="history.html" class="btn">Вся история</a>
+    </section>
+
+    <!-- Быстрый доступ к упражнениям -->
+    <section class="card">
+      <h2>Часто используемые упражнения</h2>
+      <div id="favorite-exercises" class="exercise-mini-grid">
+        <p class="empty-state">Добавьте упражнения в избранное</p>
+      </div>
+      <a href="exercises.html" class="btn">Все упражнения</a>
+    </section>
+  </main>
 </div>
 
 <script>
-  // Подключаем Telegram Web App
-  const tg = window.Telegram.WebApp;
+document.addEventListener('DOMContentLoaded', function() {
+  // Загрузка статистики пользователя
+  loadUserStats();
+  loadRecentWorkouts();
+  loadFavoriteExercises();
+  
+  // Интеграция с Telegram Web App
+  initializeTelegramAuth();
+});
 
-  const loginBtn = document.getElementById('login-btn');
-  const loginBlock = document.getElementById('login-block');
-  const userBlock = document.getElementById('user-block');
-  const userNameEl = document.getElementById('user-name');
-  const resultsList = document.getElementById('results-list');
+function loadUserStats() {
+  // Загрузка статистики из localStorage
+  const stats = JSON.parse(localStorage.getItem('userStats')) || {};
+  
+  document.getElementById('total-workouts').textContent = stats.totalWorkouts || 0;
+  document.getElementById('week-workouts').textContent = stats.weekWorkouts || 0;
+  document.getElementById('total-exercises').textContent = stats.totalExercises || 0;
+  document.getElementById('last-workout').textContent = stats.lastWorkout || '—';
+}
 
-  // Клик по кнопке "Войти через Telegram"
-  loginBtn.addEventListener('click', () => {
-    const user = tg.initDataUnsafe.user; // Получаем данные пользователя
-    if (!user) {
-      alert("Ошибка: не удалось получить данные пользователя Telegram.");
-      return;
-    }
-
-    const userId = user.id;
-    const fullName = `${user.first_name || ''} ${user.last_name || ''}`.trim();
-    userNameEl.textContent = fullName;
-
-    // Прячем блок входа, показываем блок пользователя
-    loginBlock.classList.add('hidden');
-    userBlock.classList.remove('hidden');
-
-    // Загружаем результаты из локального хранилища (или с сервера)
-    const results = JSON.parse(localStorage.getItem(`results_${userId}`)) || [];
-    results.forEach(r => {
-      const li = document.createElement('li');
-      li.textContent = r;
-      resultsList.appendChild(li);
-    });
-
-    // Кнопка "Начать тест"
-    document.getElementById('start-btn').addEventListener('click', () => {
-      const result = prompt("Введите результат теста:");
-      if (result) {
-        results.push(result);
-        localStorage.setItem(`results_${userId}`, JSON.stringify(results));
-        const li = document.createElement('li');
-        li.textContent = result;
-        resultsList.appendChild(li);
-      }
-    });
+function loadRecentWorkouts() {
+  // Загрузка последних тренировок
+  const workouts = JSON.parse(localStorage.getItem('workoutHistory')) || [];
+  const container = document.getElementById('recent-workouts');
+  
+  if (workouts.length === 0) return;
+  
+  container.innerHTML = '';
+  workouts.slice(0, 3).forEach(workout => {
+    const workoutEl = document.createElement('div');
+    workoutEl.className = 'workout-item';
+    workoutEl.innerHTML = `
+      <strong>${workout.date}</strong>
+      <span>${workout.exercises.length} упражнений</span>
+    `;
+    container.appendChild(workoutEl);
   });
+}
+
+function initializeTelegramAuth() {
+  if (typeof Telegram !== 'undefined') {
+    const tg = window.Telegram.WebApp;
+    const user = tg.initDataUnsafe.user;
+    
+    if (user) {
+      const userName = `${user.first_name || ''} ${user.last_name || ''}`.trim();
+      document.getElementById('user-name').textContent = userName || 'Спортсмен';
+    }
+  }
+}
 </script>
 
 </body>
