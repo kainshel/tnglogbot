@@ -1,213 +1,500 @@
+/* ===== БАЗОВЫЕ СТИЛИ ДЛЯ МОБИЛЬНЫХ ===== */
+@media (max-width: 768px) {
+  :root {
+    --mobile-padding: 1rem;
+    --touch-target-min: 44px;
+  }
 
-        * {
-box-sizing: border-box;
-margin: 0;
-padding: 0;
-        }
+  /* Улучшение для touch-устройств */
+  button, a, input, select {
+    min-height: var(--touch-target-min);
+  }
 
-        body {
-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-background-color: var(--bg-color);
-color: var(--text-color);
-line-height: 1.6;
-overflow-x: hidden;
-        }
+  /* Основной контент */
+  .content {
+    padding: var(--mobile-padding);
+    margin-left: 0 !important;
+    width: 100%;
+    box-sizing: border-box;
+  }
 
-        /* === TOPBAR === */
-        .topbar {
-position: sticky;
-top: 0;
-z-index: 1000;
-background: var(--card-bg);
-border-bottom: var(--border);
-box-shadow: var(--shadow);
-display: flex;
-align-items: center;
-gap: 12px;
-padding: 10px 14px;
-        }
+  /* ===== СИСТЕМА ВЫДВИЖНОГО МЕНЮ ===== */
+  .burger {
+    display: flex !important;
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 1003;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--primary-color);
+    color: white;
+  }
 
-        .app-title {
-font-size: 1.1rem;
-font-weight: 700;
-color: var(--text-color);
-margin: 0;
-flex: 1 1 auto;
-text-align: left;
-        }
+  .burger span {
+    background: white;
+    width: 20px;
+    height: 2px;
+    margin: 3px 0;
+    transition: transform 0.3s ease;
+  }
 
-        /* === БУРГЕР МЕНЮ === */
-        .burger {
-flex: 0 0 auto;
-background: var(--primary-color);
-border: none;
-border-radius: 999px;
-width: 40px;
-height: 40px;
-display: grid;
-place-content: center;
-box-shadow: var(--shadow);
-cursor: pointer;
-        }
+  body.drawer-open .burger span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
 
-        .burger:focus-visible { 
-box-shadow: 0 0 0 3px rgba(169,186,157,0.5); 
-        }
+  body.drawer-open .burger span:nth-child(2) {
+    opacity: 0;
+  }
 
-        .burger span { 
-background: #fff; 
-width: 22px; 
-height: 2px; 
-margin: 2px 0; 
-display: block; 
-transition: transform 0.3s ease;
-        }
+  body.drawer-open .burger span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
 
-        body.drawer-open .burger span:nth-child(1) {
-transform: rotate(45deg) translate(5px, 5px);
-        }
-
-        body.drawer-open .burger span:nth-child(2) {
-opacity: 0;
-        }
-
-        body.drawer-open .burger span:nth-child(3) {
-transform: rotate(-45deg) translate(5px, -5px);
-        }
-
-        /* === САЙДБАР === */
-/* Sidebar / Navbar */
-.sidebar {
-  background: var(--primary-color);
-  color: white;
-  padding: 1rem;
-  min-height: 100vh;
-  position: fixed;
-  left: 0; top: 0;
-  width: 220px;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  z-index: 1000;
-}
-
-.sidebar .brand {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-  text-align: center;
-}
-
-.sidebar .nav a {
-  display: block;
-  padding: 0.5rem 1rem;
-  border-radius: var(--radius);
-  color: white;
-  text-decoration: none;
-  transition: background 0.2s;
-}
-
-.sidebar .nav a:hover,
-.sidebar .nav a.active {
-  background: rgba(255,255,255,0.2);
-}
-
-/* Sidebar links */
-.sidebar nav ul { 
-  list-style: none; 
-  margin: 0; 
-  padding: 0; 
-}
-
-.sidebar nav ul li { 
-  margin: 8px 0; 
-}
-
-.sidebar nav ul li a {
-  display: block;
-  padding: 10px 14px;
-  border-radius: var(--radius);
-  text-decoration: none;
-  color: inherit;
-  transition: background 0.2s, color 0.2s;
-  font-weight: 500;
-}
-
-.sidebar nav ul li a:hover,
-.sidebar nav ul li a.active {
-  background: rgba(255,255,255,0.2);
-}
-
-        /* === BACKDROP === */
-        .backdrop {
-position: fixed;
-top: 0;
-left: 0;
-right: 0;
-bottom: 0;
-background: rgba(0, 0, 0, 0.5);
-opacity: 0;
-pointer-events: none;
-transition: opacity 0.3s ease;
-z-index: 900;
-        }
-
-        body.drawer-open .backdrop {
-opacity: 1;
-pointer-events: auto;
-        }
-
-        body.drawer-open {
-overflow: hidden;
-        }
-
-        /* === ОСНОВНОЙ КОНТЕНТ === */
-        .main-content {
-max-width: 980px;
-margin: 16px auto;
-padding: 0 16px 64px;
-        }
-
-        .card {
-background: var(--card-bg);
-border: var(--border);
-border-radius: var(--radius);
-box-shadow: var(--shadow);
-padding: 16px;
-margin-bottom: 20px;
-        }
-
-        h1 {
-color: var(--primary-color);
-margin-bottom: 16px;
-        }
-
-        p {
-margin-bottom: 16px;
-line-height: 1.6;
-        }
-
-        /* === АДАПТИВНОСТЬ === */
-        @media (max-width: 768px) {
-.burger {
-    position: relative;
-    inset: auto;
-}
-
-.sidebar {
-    width: 85vw;
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 85vw !important;
     max-width: 300px;
+    height: 100vh;
+    z-index: 1002;
+    transition: left 0.3s ease-in-out;
+    box-shadow: 4px 0 20px rgba(0,0,0,0.3);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  body.drawer-open .sidebar {
+    left: 0;
+  }
+
+  .backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1001;
+  }
+
+  body.drawer-open .backdrop {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  body.drawer-open {
+    overflow: hidden;
+  }
+
+  /* ===== ФИЛЬТРЫ ===== */
+  .filters {
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .filters input, 
+  .filters select {
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 16px; /* Предотвращает zoom в iOS */
+    min-height: 48px;
+    box-sizing: border-box;
+  }
+
+  /* ===== СЕТКА КАРТОЧЕК ===== */
+  .exercise-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem;
+  }
+
+  .exercise-card {
+    padding: 1.2rem;
+    margin: 0;
+  }
+
+  .exercise-card img.exercise-gif {
+    max-height: 200px;
+    object-fit: cover;
+  }
+
+  .details-btn {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    min-height: 48px;
+  }
+
+  /* ===== МОДАЛЬНОЕ ОКНО ===== */
+  .modal-back {
+    padding: var(--mobile-padding);
+    align-items: flex-start;
+    padding-top: 60px;
+  }
+
+  .modal {
+    width: 100%;
+    max-width: none;
+    max-height: 85vh;
+    padding: 1.5rem;
+    margin: 0;
+    border-radius: 16px 16px 0 0;
+  }
+
+  .modal-close {
+    top: 15px;
+    right: 15px;
+    width: 44px;
+    height: 44px;
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ===== ПРОФИЛЬ ПОЛЬЗОВАТЕЛЯ ===== */
+  .profile-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .profile-header .avatar {
+    width: 100px;
+    height: 100px;
+  }
+
+  .card {
+    padding: 1.2rem;
+    margin-bottom: 1.2rem;
+    border-radius: 12px;
+  }
+
+  .profile-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    min-height: 48px;
+    text-align: center;
+  }
+
+  /* ===== ФОРМЫ ===== */
+  #editForm input, 
+  #editForm select {
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 16px;
+    min-height: 48px;
+    box-sizing: border-box;
+    margin-bottom: 0.8rem;
+  }
+
+  /* ===== ТИПОГРАФИКА И МЕЛКИЕ ДЕТАЛИ ===== */
+  h1, h2, h3 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .sidebar .brand {
+    font-size: 1.3rem;
+    padding: 1.5rem 1rem 1rem;
+    text-align: center;
+  }
+
+  .sidebar nav ul li a {
+    padding: 1rem 1.2rem;
+    font-size: 1rem;
+    margin: 0.5rem 0.8rem;
+    border-radius: 10px;
+  }
 }
 
-.main-content {
-    padding: 0 12px 40px;
-}
-        }
+/* ===== ДОПОЛНИТЕЛЬНЫЕ АДАПТИВНЫЕ СТИЛИ ДЛЯ ОЧЕНЬ МАЛЕНЬКИХ ЭКРАНОВ ===== */
+@media (max-width: 360px) {
+  .content {
+    padding: 0.8rem;
+  }
 
-        /* Улучшение для touch-устройств */
-        button, a {
-min-height: 44px;
-display: flex;
-align-items: center;
-justify-content: center;
-        }
+  .card {
+    padding: 1rem;
+  }
+
+  .exercise-card {
+    padding: 1rem;
+  }
+
+  .modal {
+    padding: 1.2rem;
+  }
+
+  .sidebar {
+    width: 90vw !important;
+  }
+}
+
+/* ===== ЛАНДШАФТНАЯ ОРИЕНТАЦИЯ ===== */
+@media (max-width: 768px) and (orientation: landscape) {
+  .modal {
+    max-height: 70vh;
+    border-radius: 12px;
+  }
+
+  .exercise-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+  }
+
+  .sidebar {
+    overflow-y: auto;
+    padding-bottom: 2rem;
+  }
+}
+
+/* ===== ПРЕДОТВРАЩЕНИЕ ZOOM ПРИ ФОКУСЕ НА iOS ===== */
+@media screen and (max-width: 768px) {
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* ===== УЛУЧШЕНИЕ SCROLLING ДЛЯ iOS ===== */
+.exercise-grid,
+.modal,
+.sidebar {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ===== АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ ===== */
+@media (max-width: 768px) {
+  /* Уменьшаем общие отступы контента */
+  .content {
+    margin-left: 0;
+    width: 100%;
+    padding: 1rem;
+  }
+
+  /* ===== ВСЕ КНОПКИ ===== */
+  .btn,
+  .details-btn,
+  .modal-close,
+  .filters input,
+  .filters select,
+  form input,
+  form select,
+  form textarea,
+  form button {
+    min-height: 42px;
+    font-size: 0.9rem;
+  }
+
+  /* Основные кнопки */
+  .btn {
+    padding: 0.6rem 1rem;
+  }
+
+  /* Кнопки в карточках упражнений */
+  .details-btn {
+    padding: 0.6rem 1rem;
+    margin-top: 0.8rem;
+    width: 100%;
+  }
+
+  /* Кнопка закрытия модального окна */
+  .modal-close {
+    width: 36px;
+    height: 36px;
+    font-size: 1.3rem;
+    top: 8px;
+    right: 8px;
+  }
+
+  /* Поля ввода и селекты в фильтрах */
+  .filters input,
+  .filters select {
+    padding: 0.7rem;
+    flex: 1;
+    min-width: 120px;
+  }
+
+  /* Кнопки в формах */
+  form button[type="submit"],
+  form button[type="button"] {
+    padding: 0.7rem 1rem;
+  }
+
+  /* ===== КОНТЕЙНЕРЫ И СЕТКИ ===== */
+  .filters {
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .exercise-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  /* ===== МОДАЛЬНОЕ ОКНО ===== */
+  .modal {
+    padding: 1.5rem;
+    margin: 1rem;
+    width: calc(100% - 2rem);
+  }
+
+  .modal-back {
+    padding: 0;
+    align-items: flex-start;
+    padding-top: 60px;
+  }
+
+  /* ===== КАРТОЧКИ ===== */
+  .exercise-card {
+    padding: 1.2rem;
+  }
+
+  .card {
+    padding: 1.2rem;
+    margin-bottom: 1.2rem;
+  }
+
+  /* ===== САЙДБАР ===== */
+  .sidebar {
+    width: 280px;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 1001;
+  }
+
+  body.drawer-open .sidebar {
+    transform: translateX(0);
+  }
+
+  /* Бургер-меню */
+  .burger {
+    display: flex;
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 1002;
+    width: 44px;
+    height: 44px;
+    background: var(--primary-color);
+    border: none;
+    border-radius: 8px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .burger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: white;
+    margin: 2px 0;
+    transition: 0.3s;
+  }
+
+  /* Затемняющий фон */
+  .backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+  }
+
+  body.drawer-open .backdrop {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  body.drawer-open {
+    overflow: hidden;
+  }
+}
+
+/* ===== ДОПОЛНИТЕЛЬНАЯ АДАПТАЦИЯ ДЛЯ ОЧЕНЬ МАЛЕНЬКИХ ЭКРАНОВ ===== */
+@media (max-width: 360px) {
+  .content {
+    padding: 0.8rem;
+  }
+
+  .btn,
+  .details-btn {
+    padding: 0.5rem 0.8rem;
+    min-height: 40px;
+    font-size: 0.85rem;
+  }
+
+  .filters input,
+  .filters select {
+    padding: 0.6rem;
+  }
+
+  .modal {
+    padding: 1.2rem;
+    margin: 0.8rem;
+    width: calc(100% - 1.6rem);
+  }
+
+  .exercise-card,
+  .card {
+    padding: 1rem;
+  }
+}
+
+/* ===== ПРЕДОТВРАЩЕНИЕ ZOOM НА iOS ПРИ ФОКУСЕ ===== */
+@media screen and (max-width: 768px) {
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* ===== ЛАНДШАФТНАЯ ОРИЕНТАЦИЯ ===== */
+@media (max-width: 768px) and (orientation: landscape) {
+  .modal {
+    max-height: 70vh;
+    margin: 0.5rem;
+  }
+
+  .exercise-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .filters {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .filters input,
+  .filters select {
+    min-width: 140px;
+    flex: 1;
+  }
+}
+
+/* ===== УЛУЧШЕНИЕ SCROLLING ДЛЯ МОБИЛЬНЫХ ===== */
+@media (max-width: 768px) {
+  .modal,
+  .sidebar {
+    -webkit-overflow-scrolling: touch;
+    overflow-y: auto;
+  }
+}

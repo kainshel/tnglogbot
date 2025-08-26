@@ -272,8 +272,8 @@ function renderPlan() {
       <div class="row">
         <h3>${EX.meta.name_ru || EX.meta.name_en}</h3>
         <div class="exercise-status">
-          ${index < currentExerciseIndex ? '✅' : 
-            index === currentExerciseIndex ? }
+          ${index < currentExerciseIndex ? '✅ Выполнено' : 
+            index === currentExerciseIndex ? '🏋️ Выполняется' : '⏳ Ожидание'}
         </div>
         <div>
           <button class="btn add-set">+ Подход</button>
@@ -298,7 +298,7 @@ function renderPlan() {
           <input type="number" step="1" min="0" placeholder="Повторы" value="${s.reps ?? ""}"
                  ${i < currentSetIndex && index === currentExerciseIndex ? 'readonly' : ''}>
           ${isCurrentSet ? 
-            `<button class="btn complete-set">Завершить подход</button>` : 
+            `<button class="btn complete-set">✅ Завершить подход</button>` : 
             `<button class="rm">×</button>`}
         `;
         
@@ -341,7 +341,7 @@ function renderPlan() {
                 currentExerciseIndex++;
               } else {
                 // Все упражнения выполнены
-                alert("Тренировка завершена! Сохраните результаты.");
+                alert("🎉 Тренировка завершена! Сохраните результаты.");
               }
             }
             renderPlan();
@@ -445,7 +445,7 @@ function saveCurrent() {
   
   localStorage.setItem("userProfile", JSON.stringify(profile));
   
-  alert("Тренировка сохранена!");
+  alert("Тренировка сохранена! ✅");
   
   // Сбрасываем план и текущие индексы
   plan = [];
@@ -462,17 +462,3 @@ if (saveBtn) saveBtn.addEventListener("click", saveCurrent);
   renderPlan();
   loadExercises();
 })();
-
-    // Добавляем текущую дату по умолчанию
-    document.addEventListener('DOMContentLoaded', function() {
-      const today = new Date();
-      const yyyy = today.getFullYear();
-      let mm = today.getMonth() + 1;
-      let dd = today.getDate();
-      
-      if (dd < 10) dd = '0' + dd;
-      if (mm < 10) mm = '0' + mm;
-      
-      const formattedToday = yyyy + '-' + mm + '-' + dd;
-      document.getElementById('date').value = formattedToday;
-    });

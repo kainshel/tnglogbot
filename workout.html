@@ -10,8 +10,6 @@
 <link rel="stylesheet" href="styles/workout.css">
   <script src="nav.js" defer></script>
   <script src="app_workout.js" defer></script> 
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <script src="tg-init.js" defer></script>
 </head>
 <body>
   <!-- Кнопка бургер-меню -->
@@ -73,5 +71,21 @@
       <div id="modalContent" class="modal-content"></div>
     </div>
   </div>
+
+  <script>
+    // Добавляем текущую дату по умолчанию
+    document.addEventListener('DOMContentLoaded', function() {
+      const today = new Date();
+      const yyyy = today.getFullYear();
+      let mm = today.getMonth() + 1;
+      let dd = today.getDate();
+      
+      if (dd < 10) dd = '0' + dd;
+      if (mm < 10) mm = '0' + mm;
+      
+      const formattedToday = yyyy + '-' + mm + '-' + dd;
+      document.getElementById('date').value = formattedToday;
+    });
+  </script>
 </body>
 </html>
