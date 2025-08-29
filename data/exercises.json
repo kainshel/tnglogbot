@@ -1,0 +1,2725 @@
+[
+  {
+    "name_ru": "Жим штанги лёжа",
+    "name_en": "Barbell Bench Press",
+    "groups": [
+      "Грудь",
+      "Плечи",
+      "Руки"
+    ],
+    "targets": [
+      "Середина",
+      "Передняя дельта",
+      "Трицепс"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Штанга",
+      "Скамья"
+    ],
+    "gif": "assets/images/exercises/bench_press.gif"
+  },
+  {
+    "name_ru": "Жим гантелей лёжа",
+    "name_en": "Dumbbell Bench Press",
+    "groups": [
+      "Грудь",
+      "Плечи",
+      "Руки"
+    ],
+    "targets": [
+      "Середина",
+      "Передняя дельта",
+      "Трицепс"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Гантели",
+      "Скамья"
+    ],
+    "gif": "assets/images/exercises/Dumbbell_Bench_Press.gif"
+  },
+  {
+    "name_ru": "Жим штанги на наклонной скамье",
+    "name_en": "Incline Barbell Press",
+    "groups": [
+      "Грудь",
+      "Плечи",
+      "Руки"
+    ],
+    "targets": [
+      "Верх",
+      "Передняя дельта",
+      "Трицепс"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Штанга",
+      "Скамья"
+    ],
+    "gif": "assets/images/exercises/Incline_Bench_Press.gif"
+  },
+  {
+    "name_ru": "Жим гантелей на наклонной",
+    "name_en": "Incline Dumbbell Press",
+    "groups": [
+      "Грудь",
+      "Плечи",
+      "Руки"
+    ],
+    "targets": [
+      "Верх",
+      "Передняя дельта",
+      "Трицепс"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Гантели",
+      "Скамья"
+    ],
+    "gif": "assets/images/exercises/Incline_Barbell_Press.gif"
+  },
+  {
+    "name_ru": "Жим штанги на отрицательной скамье",
+    "name_en": "Decline Barbell Bench Press",
+    "groups": [
+      "Грудь",
+      "Плечи",
+      "Руки"
+    ],
+    "targets": [
+      "Низ",
+      "Передняя дельта",
+      "Трицепс"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Штанга",
+      "Скамья"
+    ],
+    "gif": "assets/images/exercises/Decline_Barbell_Bench_Press.gif"
+  },
+  {
+    "name_ru": "Жим гантелей на отрицательной скамье",
+    "name_en": "Decline Dumbbell Press",
+    "groups": [
+      "Грудь",
+      "Плечи",
+      "Руки"
+    ],
+    "targets": [
+      "Низ",
+      "Передняя дельта",
+      "Трицепс"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Гантели",
+      "Скамья"
+    ],
+    "gif": "assets/images/exercises/Decline_Dumbbell_Press.gif"
+  },
+  {
+    "name_ru": "Разведение гантелей лёжа",
+    "name_en": "Dumbbell Fly",
+    "groups": [
+      "Грудь",
+      "Плечи"
+    ],
+    "targets": [
+      "Середина",
+      "Передняя дельта"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Гантели",
+      "Скамья"
+    ],
+    "gif": "assets/images/exercises/Dumbbell_Fly.gif"
+  },
+  {
+    "name_ru": "Разведение гантелей на наклонной",
+    "name_en": "Incline Dumbbell Fly",
+    "groups": [
+      "Грудь",
+      "Плечи"
+    ],
+    "targets": [
+      "Верх",
+      "Передняя дельта"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Гантели",
+      "Скамья"
+    ],
+    "gif": "assets/images/exercises/Incline_Dumbbell_Fly.gif"
+  },
+  {
+    "name_ru": "Разведение гантелей на отрицательной",
+    "name_en": "Decline Dumbbell Fly",
+    "groups": [
+      "Грудь",
+      "Плечи"
+    ],
+    "targets": [
+      "Низ",
+      "Передняя дельта"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Гантели",
+      "Скамья"
+    ],
+    "gif": "assets/images/exercises/Decline_Dumbbell_Fly.gif"
+  },
+  {
+    "name_ru": "Сведение на кроссовере",
+    "name_en": "Cable Fly",
+    "groups": [
+      "Грудь",
+      "Плечи"
+    ],
+    "targets": [
+      "Середина",
+      "Передняя дельта"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Кроссовер"
+    ],
+    "gif": "assets/images/exercises/Cable_Fly.gif"
+  },
+  {
+    "name_ru": "Сведение на кроссовере вверх",
+    "name_en": "High Cable Fly",
+    "groups": [
+      "Грудь",
+      "Плечи"
+    ],
+    "targets": [
+      "Верх",
+      "Передняя дельта"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Кроссовер"
+    ],
+    "gif": "assets/images/exercises/High_Cable_Fly.gif"
+  },
+  {
+    "name_ru": "Сведение на кроссовере вниз",
+    "name_en": "Low Cable Fly",
+    "groups": [
+      "Грудь",
+      "Плечи"
+    ],
+    "targets": [
+      "Низ",
+      "Передняя дельта"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Кроссовер"
+    ],
+    "gif": "assets/images/exercises/Low_Cable_Fly.gif"
+  },
+  {
+    "name_ru": "Отжимания от пола",
+    "name_en": "Push-Ups",
+    "groups": [
+      "Грудь",
+      "Плечи",
+      "Руки"
+    ],
+    "targets": [
+      "Середина",
+      "Передняя дельта",
+      "Трицепс"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Собственный вес"
+    ],
+    "gif": "assets/images/exercises/Push_Ups.gif"
+  },
+  {
+    "name_ru": "Отжимания узким хватом",
+    "name_en": "Close-Grip Push-Ups",
+    "groups": [
+      "Грудь",
+      "Плечи",
+      "Руки"
+    ],
+    "targets": [
+      "Середина",
+      "Трицепс",
+      "Передняя дельта"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Собственный вес"
+    ],
+    "gif": "assets/images/exercises/Close_Grip_Push_Ups.gif"
+  },
+  {
+    "name_ru": "Отжимания с широким хватом",
+    "name_en": "Wide-Grip Push-Ups",
+    "groups": [
+      "Грудь",
+      "Плечи"
+    ],
+    "targets": [
+      "Середина",
+      "Передняя дельта"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Собственный вес"
+    ],
+    "gif": "assets/images/exercises/Wide_Grip_Push_Ups.gif"
+  },
+  {
+    "name_ru": "Отжимания на брусьях",
+    "name_en": "Dips",
+    "groups": [
+      "Грудь",
+      "Плечи",
+      "Руки"
+    ],
+    "targets": [
+      "Низ",
+      "Передняя дельта",
+      "Трицепс"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Брусья"
+    ],
+    "gif": "assets/images/exercises/Dips.gif"
+  },
+  {
+    "name_ru": "Отжимания на кольцах",
+    "name_en": "Ring Dips",
+    "groups": [
+      "Грудь",
+      "Плечи",
+      "Руки"
+    ],
+    "targets": [
+      "Низ",
+      "Передняя дельта",
+      "Трицепс"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Гимнастические кольца"
+    ],
+    "gif": "assets/images/exercises/Ring_Dips.gif"
+  },
+  {
+    "name_ru": "Отжимания с хлопком",
+    "name_en": "Clap Push-Ups",
+    "groups": [
+      "Грудь",
+      "Плечи",
+      "Руки"
+    ],
+    "targets": [
+      "Середина",
+      "Передняя дельта",
+      "Трицепс"
+    ],
+    "type": "Взрывное",
+    "equipment": [
+      "Собственный вес"
+    ],
+    "gif": "assets/images/exercises/Clap_Push_Ups.gif"
+  },
+  {
+    "name_ru": "Жим в тренажёре",
+    "name_en": "Chest Press Machine",
+    "groups": [
+      "Грудь",
+      "Плечи",
+      "Руки"
+    ],
+    "targets": [
+      "Середина",
+      "Передняя дельта",
+      "Трицепс"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Тренажёр"
+    ],
+    "gif": "assets/images/exercises/Chest_Press_Machine.gif"
+  },
+  {
+    "name_ru": "Жим в тренажёре под углом",
+    "name_en": "Incline Chest Press Machine",
+    "groups": [
+      "Грудь",
+      "Плечи",
+      "Руки"
+    ],
+    "targets": [
+      "Верх",
+      "Передняя дельта",
+      "Трицепс"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Тренажёр"
+    ],
+    "gif": "assets/images/exercises/Incline_Chest_Press_Machine.gif"
+  },
+  {
+    "name_ru": "Подтягивания широким хватом",
+    "name_en": "Wide-Grip Pull-Ups",
+    "groups": [
+      "Спина",
+      "Руки"
+    ],
+    "targets": [
+      "Широчайшие",
+      "Бицепс",
+      "Предплечья"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Турник"
+    ],
+    "gif": "assets/images/exercises/Wide_Grip_Pull_Ups.gif"
+  },
+  {
+    "name_ru": "Подтягивания обратным хватом",
+    "name_en": "Chin-Ups",
+    "groups": [
+      "Спина",
+      "Руки"
+    ],
+    "targets": [
+      "Широчайшие",
+      "Бицепс",
+      "Предплечья"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Турник"
+    ],
+    "gif": "assets/images/exercises/Chin_Ups.gif"
+  },
+  {
+    "name_ru": "Подтягивания нейтральным хватом",
+    "name_en": "Neutral-Grip Pull-Ups",
+    "groups": [
+      "Спина",
+      "Руки"
+    ],
+    "targets": [
+      "Широчайшие",
+      "Бицепс",
+      "Предплечья"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Турник"
+    ],
+    "gif": "assets/images/exercises/Neutral_Grip_Pull_Ups.gif"
+  },
+  {
+    "name_ru": "Подтягивания с дополнительным весом",
+    "name_en": "Weighted Pull-Ups",
+    "groups": [
+      "Спина",
+      "Руки"
+    ],
+    "targets": [
+      "Широчайшие",
+      "Бицепс",
+      "Предплечья"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Турник",
+      "Пояс с отягощением"
+    ],
+    "gif": "assets/images/exercises/Weighted_Pull_Ups.gif"
+  },
+  {
+    "name_ru": "Тяга верхнего блока",
+    "name_en": "Lat Pulldown",
+    "groups": [
+      "Спина",
+      "Руки"
+    ],
+    "targets": [
+      "Широчайшие",
+      "Бицепс",
+      "Предплечья"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Тренажёр"
+    ],
+    "gif": "assets/images/exercises/Lat_Pulldown.gif"
+  },
+  {
+    "name_ru": "Тяга верхнего блока обратным хватом",
+    "name_en": "Reverse-Grip Lat Pulldown",
+    "groups": [
+      "Спина",
+      "Руки"
+    ],
+    "targets": [
+      "Широчайшие",
+      "Бицепс",
+      "Предплечья"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Тренажёр"
+    ],
+    "gif": "assets/images/exercises/Reverse_Grip_Lat_Pulldown.gif"
+  },
+  {
+    "name_ru": "Тяга верхнего блока узким хватом",
+    "name_en": "Close-Grip Lat Pulldown",
+    "groups": [
+      "Спина",
+      "Руки"
+    ],
+    "targets": [
+      "Широчайшие",
+      "Бицепс",
+      "Предплечья"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Тренажёр"
+    ],
+    "gif": "assets/images/exercises/Close_Grip_Lat_Pulldown.gif"
+  },
+  {
+    "name_ru": "Тяга штанги в наклоне",
+    "name_en": "Bent-Over Barbell Row",
+    "groups": [
+      "Спина",
+      "Руки"
+    ],
+    "targets": [
+      "Широчайшие",
+      "Трапеции",
+      "Бицепс"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Штанга"
+    ],
+    "gif": "assets/images/exercises/Bent_Over_Barbell_Row.gif"
+  },
+  {
+    "name_ru": "Тяга гантели в наклоне",
+    "name_en": "One-Arm Dumbbell Row",
+    "groups": [
+      "Спина",
+      "Руки"
+    ],
+    "targets": [
+      "Широчайшие",
+      "Трапеции",
+      "Бицепс"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Гантель",
+      "Скамья"
+    ],
+    "gif": "assets/images/exercises/One_Arm_Dumbbell_Row.gif"
+  },
+  {
+    "name_ru": "Тяга Т-грифа",
+    "name_en": "T-Bar Row",
+    "groups": [
+      "Спина",
+      "Руки"
+    ],
+    "targets": [
+      "Широчайшие",
+      "Трапеции",
+      "Бицепс"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Т-гриф"
+    ],
+    "gif": "assets/images/exercises/T_Bar_Row.gif"
+  },
+  {
+    "name_ru": "Тяга горизонтального блока",
+    "name_en": "Seated Cable Row",
+    "groups": [
+      "Спина",
+      "Руки"
+    ],
+    "targets": [
+      "Широчайшие",
+      "Трапеции",
+      "Бицепс"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Тренажёр"
+    ],
+    "gif": "assets/images/exercises/Seated_Cable_Row.gif"
+  },
+  {
+    "name_ru": "Тяга к поясу в наклоне с гирей",
+    "name_en": "Kettlebell Row",
+    "groups": [
+      "Спина",
+      "Руки"
+    ],
+    "targets": [
+      "Широчайшие",
+      "Трапеции",
+      "Бицепс"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Гиря"
+    ],
+    "gif": "assets/images/exercises/Kettlebell_Row.gif"
+  },
+  {
+    "name_ru": "Тяга штанги к подбородку",
+    "name_en": "Upright Barbell Row",
+    "groups": [
+      "Плечи",
+      "Спина",
+      "Руки"
+    ],
+    "targets": [
+      "Трапеции",
+      "Дельты",
+      "Бицепс"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Штанга"
+    ],
+    "gif": "assets/images/exercises/Upright_Barbell_Row.gif"
+  },
+  {
+    "name_ru": "Тяга гантелей к подбородку",
+    "name_en": "Upright Dumbbell Row",
+    "groups": [
+      "Плечи",
+      "Спина",
+      "Руки"
+    ],
+    "targets": [
+      "Трапеции",
+      "Дельты",
+      "Бицепс"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Гантели"
+    ],
+    "gif": "assets/images/exercises/Upright_Dumbbell_Row.gif"
+  },
+  {
+    "name_ru": "Пулловер с гантелей",
+    "name_en": "Dumbbell Pullover",
+    "groups": [
+      "Грудь",
+      "Спина"
+    ],
+    "targets": [
+      "Широчайшие",
+      "Грудные"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Гантель",
+      "Скамья"
+    ],
+    "gif": "assets/images/exercises/Dumbbell_Pullover.gif"
+  },
+  {
+    "name_ru": "Пулловер в тренажёре",
+    "name_en": "Pullover Machine",
+    "groups": [
+      "Грудь",
+      "Спина"
+    ],
+    "targets": [
+      "Широчайшие",
+      "Грудные"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Тренажёр"
+    ],
+    "gif": "assets/images/exercises/Pullover_Machine.gif"
+  },
+  {
+    "name_ru": "Тяга нижнего блока к лицу",
+    "name_en": "Face Pull",
+    "groups": [
+      "Спина",
+      "Плечи"
+    ],
+    "targets": [
+      "Задняя дельта",
+      "Трапеции"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Тросовый тренажёр"
+    ],
+    "gif": "assets/images/exercises/Face_Pull.gif"
+  },
+  {
+    "name_ru": "Тяга каната к груди",
+    "name_en": "Close-Grip Cable Row",
+    "groups": [
+      "Спина",
+      "Руки"
+    ],
+    "targets": [
+      "Широчайшие",
+      "Бицепс",
+      "Предплечья"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Кроссовер"
+    ],
+    "gif": "assets/images/exercises/Close_Grip_Cable_Row.gif"
+  },
+  {
+    "name_ru": "Становая тяга",
+    "name_en": "Deadlift",
+    "groups": [
+      "Спина",
+      "Ноги",
+      "Руки"
+    ],
+    "targets": [
+      "Разгибатели спины",
+      "Бедра",
+      "Предплечья"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Штанга"
+    ],
+    "gif": "assets/images/exercises/Deadlift.gif"
+  },
+  {
+    "name_ru": "Становая тяга с гантелями",
+    "name_en": "Dumbbell Deadlift",
+    "groups": [
+      "Спина",
+      "Ноги",
+      "Руки"
+    ],
+    "targets": [
+      "Разгибатели спины",
+      "Бедра",
+      "Предплечья"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Гантели"
+    ],
+    "gif": "assets/images/exercises/Dumbbell_Deadlift.gif"
+  },
+  {
+    "name_ru": "Становая тяга сумо",
+    "name_en": "Sumo Deadlift",
+    "groups": [
+      "Спина",
+      "Ноги",
+      "Руки"
+    ],
+    "targets": [
+      "Разгибатели спины",
+      "Бедра",
+      "Предплечья"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Штанга"
+    ],
+    "gif": "assets/images/exercises/Sumo_Deadlift.gif"
+  },
+  {
+    "name_ru": "Становая тяга на прямых ногах",
+    "name_en": "Stiff-Leg Deadlift",
+    "groups": [
+      "Спина",
+      "Ноги"
+    ],
+    "targets": [
+      "Разгибатели спины",
+      "Бедра"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Штанга"
+    ],
+    "gif": "assets/images/exercises/Stiff_Leg_Deadlift.gif"
+  },
+  {
+    "name_ru": "Становая тяга с гирями",
+    "name_en": "Kettlebell Deadlift",
+    "groups": [
+      "Спина",
+      "Ноги"
+    ],
+    "targets": [
+      "Разгибатели спины",
+      "Бедра"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Гиря"
+    ],
+    "gif": "assets/images/exercises/Kettlebell_Deadlift.gif"
+  },
+  {
+    "name_ru": "Гиперэкстензия",
+    "name_en": "Back Extension",
+    "groups": [
+      "Спина"
+    ],
+    "targets": [
+      "Разгибатели спины"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Гиперэкстензия"
+    ],
+    "gif": "assets/images/exercises/Back_Extension.gif"
+  },
+  {
+    "name_ru": "Гиперэкстензия с весом",
+    "name_en": "Weighted Back Extension",
+    "groups": [
+      "Спина"
+    ],
+    "targets": [
+      "Разгибатели спины"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Гиперэкстензия",
+      "Блин"
+    ],
+    "gif": "assets/images/exercises/Weighted_Back_Extension.gif"
+  },
+  {
+    "name_ru": "Жим штанги стоя",
+    "name_en": "Overhead Barbell Press",
+    "groups": [
+      "Плечи",
+      "Руки"
+    ],
+    "targets": [
+      "Передняя дельта",
+      "Средняя дельта",
+      "Трицепс"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Штанга"
+    ],
+    "gif": "assets/images/exercises/Overhead_Barbell_Press.gif"
+  },
+  {
+    "name_ru": "Жим гантелей сидя",
+    "name_en": "Seated Dumbbell Press",
+    "groups": [
+      "Плечи",
+      "Руки"
+    ],
+    "targets": [
+      "Передняя дельта",
+      "Средняя дельта",
+      "Трицепс"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Гантели",
+      "Скамья"
+    ],
+    "gif": "assets/images/exercises/Seated_Dumbbell_Press.gif"
+  },
+  {
+    "name_ru": "Жим гантелей стоя",
+    "name_en": "Standing Dumbbell Press",
+    "groups": [
+      "Плечи",
+      "Руки"
+    ],
+    "targets": [
+      "Передняя дельта",
+      "Средняя дельта",
+      "Трицепс"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Гантели"
+    ],
+    "gif": "assets/images/exercises/Standing_Dumbbell_Press.gif"
+  },
+  {
+    "name_ru": "Жим Арнольда",
+    "name_en": "Arnold Press",
+    "groups": [
+      "Плечи",
+      "Руки"
+    ],
+    "targets": [
+      "Передняя дельта",
+      "Средняя дельта",
+      "Трицепс"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Гантели"
+    ],
+    "gif": "assets/images/exercises/Arnold_Press.gif"
+  },
+  {
+    "name_ru": "Жим штанги из-за головы",
+    "name_en": "Behind-the-Neck Press",
+    "groups": [
+      "Плечи",
+      "Руки"
+    ],
+    "targets": [
+      "Средняя дельта",
+      "Передняя дельта",
+      "Трицепс"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Штанга"
+    ],
+    "gif": "assets/images/exercises/Behind_the_Neck_Press.gif"
+  },
+  {
+    "name_ru": "Жим в тренажёре для плеч",
+    "name_en": "Shoulder Press Machine",
+    "groups": [
+      "Плечи",
+      "Руки"
+    ],
+    "targets": [
+      "Передняя дельта",
+      "Средняя дельта",
+      "Трицепс"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Тренажёр"
+    ],
+    "gif": "assets/images/exercises/Shoulder Press Machine.gif"
+  },
+  {
+    "name_ru": "Подъём гантелей через стороны",
+    "name_en": "Lateral Raise",
+    "groups": [
+      "Плечи"
+    ],
+    "targets": [
+      "Средняя дельта"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Гантели"
+    ],
+    "gif": "assets/images/exercises/Lateral Raise.gif"
+  },
+  {
+    "name_ru": "Подъём гантелей перед собой",
+    "name_en": "Front Raise",
+    "groups": [
+      "Плечи"
+    ],
+    "targets": [
+      "Передняя дельта"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Гантели"
+    ],
+    "gif": "assets/images/exercises/Front Raise.gif"
+  },
+  {
+    "name_ru": "Подъём гантелей в наклоне",
+    "name_en": "Bent-Over Lateral Raise",
+    "groups": [
+      "Плечи"
+    ],
+    "targets": [
+      "Задняя дельта"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Гантели"
+    ],
+    "gif": "assets/images/exercises/Bent-Over Lateral Raise.gif"
+  },
+  {
+    "name_ru": "Подъём гантелей в стороны в тренажёре",
+    "name_en": "Lateral Raise Machine",
+    "groups": [
+      "Плечи"
+    ],
+    "targets": [
+      "Средняя дельта"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Тренажёр"
+    ],
+    "gif": "assets/images/exercises/Lateral Raise Machine.gif"
+  },
+  {
+    "name_ru": "Подъём гантелей перед собой в тренажёре",
+    "name_en": "Front Raise Machine",
+    "groups": [
+      "Плечи"
+    ],
+    "targets": [
+      "Передняя дельта"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Тренажёр"
+    ],
+    "gif": "assets/images/exercises/Front Raise Machine.gif"
+  },
+  {
+    "name_ru": "Подъём гантелей в наклоне в тренажёре",
+    "name_en": "Reverse Pec Deck",
+    "groups": [
+      "Плечи"
+    ],
+    "targets": [
+      "Задняя дельта"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Тренажёр"
+    ],
+    "gif": "assets/images/exercises/Reverse Pec Deck.gif"
+  },
+  {
+    "name_ru": "Жим штанги на наклонной скамье под углом 80°",
+    "name_en": "High Incline Barbell Press",
+    "groups": [
+      "Плечи",
+      "Грудь",
+      "Руки"
+    ],
+    "targets": [
+      "Передняя дельта",
+      "Верх груди",
+      "Трицепс"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Штанга",
+      "Скамья"
+    ],
+    "gif": "assets/images/exercises/High Incline Barbell Press.gif"
+  },
+  {
+    "name_ru": "Жим гантелей на наклонной скамье под углом 80°",
+    "name_en": "High Incline Dumbbell Press",
+    "groups": [
+      "Плечи",
+      "Грудь",
+      "Руки"
+    ],
+    "targets": [
+      "Передняя дельта",
+      "Верх груди",
+      "Трицепс"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Гантели",
+      "Скамья"
+    ],
+    "gif": "assets/images/exercises/High Incline Dumbbell Press.gif"
+  },
+  {
+    "name_ru": "Тяга штанги к подбородку",
+    "name_en": "Upright Barbell Row",
+    "groups": [
+      "Плечи",
+      "Спина",
+      "Руки"
+    ],
+    "targets": [
+      "Трапеции",
+      "Дельты",
+      "Бицепс"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Штанга"
+    ],
+    "gif": "assets/images/exercises/Upright Barbell Row.gif"
+  },
+  {
+    "name_ru": "Тяга гантелей к подбородку",
+    "name_en": "Upright Dumbbell Row",
+    "groups": [
+      "Плечи",
+      "Спина",
+      "Руки"
+    ],
+    "targets": [
+      "Трапеции",
+      "Дельты",
+      "Бицепс"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Гантели"
+    ],
+    "gif": "assets/images/exercises/Upright Dumbbell Row.gif"
+  },
+  {
+    "name_ru": "Подъём гирь через стороны",
+    "name_en": "Kettlebell Lateral Raise",
+    "groups": [
+      "Плечи"
+    ],
+    "targets": [
+      "Средняя дельта"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Гиря"
+    ],
+    "gif": "assets/images/exercises/Kettlebell Lateral Raise.gif"
+  },
+  {
+    "name_ru": "Подъём гирь перед собой",
+    "name_en": "Kettlebell Front Raise",
+    "groups": [
+      "Плечи"
+    ],
+    "targets": [
+      "Передняя дельта"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Гиря"
+    ],
+    "gif": "assets/images/exercises/Kettlebell Front Raise.gif"
+  },
+  {
+    "name_ru": "Жим гирь стоя",
+    "name_en": "Kettlebell Press",
+    "groups": [
+      "Плечи",
+      "Руки"
+    ],
+    "targets": [
+      "Передняя дельта",
+      "Средняя дельта",
+      "Трицепс"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Гиря"
+    ],
+    "gif": "assets/images/exercises/Kettlebell Press.gif"
+  },
+  {
+    "name_ru": "Жим гирь сидя",
+    "name_en": "Seated Kettlebell Press",
+    "groups": [
+      "Плечи",
+      "Руки"
+    ],
+    "targets": [
+      "Передняя дельта",
+      "Средняя дельта",
+      "Трицепс"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Гиря",
+      "Скамья"
+    ],
+    "gif": "assets/images/exercises/Seated Kettlebell Press.gif"
+  },
+  {
+    "name_ru": "Подъём штанги на грудь и толчок",
+    "name_en": "Push Press",
+    "groups": [
+      "Плечи",
+      "Руки",
+      "Ноги"
+    ],
+    "targets": [
+      "Передняя дельта",
+      "Средняя дельта",
+      "Трицепс"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Штанга"
+    ],
+    "gif": "assets/images/exercises/Push Press.gif"
+  },
+  {
+    "name_ru": "nan",
+    "name_en": "nan",
+    "groups": [
+      "nan"
+    ],
+    "targets": [
+      "nan"
+    ],
+    "type": "nan",
+    "equipment": [
+      "nan"
+    ],
+    "gif": "assets/images/exercises/nan.gif"
+  },
+  {
+    "name_ru": "Название (RU)",
+    "name_en": "Название (EN)",
+    "groups": [
+      "Основная группа"
+    ],
+    "targets": [
+      "Подгруппа"
+    ],
+    "type": "Тип",
+    "equipment": [
+      "Оборудование"
+    ],
+    "gif": "assets/images/exercises/Название (EN).gif"
+  },
+  {
+    "name_ru": "Подъём штанги на бицепс",
+    "name_en": "Barbell Curl",
+    "groups": [
+      "Руки"
+    ],
+    "targets": [
+      "Бицепс"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Штанга"
+    ],
+    "gif": "assets/images/exercises/Barbell Curl.gif"
+  },
+  {
+    "name_ru": "Подъём гантелей на бицепс",
+    "name_en": "Dumbbell Curl",
+    "groups": [
+      "Руки"
+    ],
+    "targets": [
+      "Бицепс"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Гантели"
+    ],
+    "gif": "assets/images/exercises/Dumbbell Curl.gif"
+  },
+  {
+    "name_ru": "Подъём гантелей на бицепс поочерёдно",
+    "name_en": "Alternating Dumbbell Curl",
+    "groups": [
+      "Руки"
+    ],
+    "targets": [
+      "Бицепс"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Гантели"
+    ],
+    "gif": "assets/images/exercises/Alternating Dumbbell Curl.gif"
+  },
+  {
+    "name_ru": "Подъём гантелей молотковым хватом",
+    "name_en": "Hammer Curl",
+    "groups": [
+      "Руки"
+    ],
+    "targets": [
+      "Бицепс",
+      "Брахиалис",
+      "Предплечья"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Гантели"
+    ],
+    "gif": "assets/images/exercises/Hammer Curl.gif"
+  },
+  {
+    "name_ru": "Подъём штанги на скамье Скотта",
+    "name_en": "Preacher Curl",
+    "groups": [
+      "Руки"
+    ],
+    "targets": [
+      "Бицепс"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Штанга",
+      "Скамья Скотта"
+    ],
+    "gif": "assets/images/exercises/Preacher Curl.gif"
+  },
+  {
+    "name_ru": "Подъём гантелей на скамье Скотта",
+    "name_en": "Preacher Dumbbell Curl",
+    "groups": [
+      "Руки"
+    ],
+    "targets": [
+      "Бицепс"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Гантели",
+      "Скамья Скотта"
+    ],
+    "gif": "assets/images/exercises/Preacher Dumbbell Curl.gif"
+  },
+  {
+    "name_ru": "Концентрированный подъём на бицепс",
+    "name_en": "Concentration Curl",
+    "groups": [
+      "Руки"
+    ],
+    "targets": [
+      "Бицепс"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Гантель"
+    ],
+    "gif": "assets/images/exercises/Concentration Curl.gif"
+  },
+  {
+    "name_ru": "Подъём EZ-штанги на бицепс",
+    "name_en": "EZ Bar Curl",
+    "groups": [
+      "Руки"
+    ],
+    "targets": [
+      "Бицепс"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "EZ-штанга"
+    ],
+    "gif": "assets/images/exercises/EZ Bar Curl.gif"
+  },
+  {
+    "name_ru": "Подъём на бицепс в тренажёре",
+    "name_en": "Biceps Curl Machine",
+    "groups": [
+      "Руки"
+    ],
+    "targets": [
+      "Бицепс"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Тренажёр"
+    ],
+    "gif": "assets/images/exercises/Biceps Curl Machine.gif"
+  },
+  {
+    "name_ru": "Подъём на бицепс на блоке",
+    "name_en": "Cable Curl",
+    "groups": [
+      "Руки"
+    ],
+    "targets": [
+      "Бицепс"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Кроссовер"
+    ],
+    "gif": "assets/images/exercises/Cable Curl.gif"
+  },
+  {
+    "name_ru": "Подъём каната на бицепс",
+    "name_en": "Rope Cable Curl",
+    "groups": [
+      "Руки"
+    ],
+    "targets": [
+      "Бицепс",
+      "Предплечья"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Кроссовер"
+    ],
+    "gif": "assets/images/exercises/Rope Cable Curl.gif"
+  },
+  {
+    "name_ru": "Разгибания штанги лёжа",
+    "name_en": "Lying Barbell Triceps Extension",
+    "groups": [
+      "Руки"
+    ],
+    "targets": [
+      "Трицепс"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Штанга",
+      "Скамья"
+    ],
+    "gif": "assets/images/exercises/Lying Barbell Triceps Extension.gif"
+  },
+  {
+    "name_ru": "Разгибания EZ-штанги лёжа",
+    "name_en": "Lying EZ Bar Triceps Extension",
+    "groups": [
+      "Руки"
+    ],
+    "targets": [
+      "Трицепс"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "EZ-штанга",
+      "Скамья"
+    ],
+    "gif": "assets/images/exercises/Lying EZ Bar Triceps Extension.gif"
+  },
+  {
+    "name_ru": "Разгибания гантелей лёжа",
+    "name_en": "Lying Dumbbell Triceps Extension",
+    "groups": [
+      "Руки"
+    ],
+    "targets": [
+      "Трицепс"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Гантели",
+      "Скамья"
+    ],
+    "gif": "assets/images/exercises/Lying Dumbbell Triceps Extension.gif"
+  },
+  {
+    "name_ru": "Разгибания рук с гантелей из-за головы",
+    "name_en": "Overhead Dumbbell Extension",
+    "groups": [
+      "Руки"
+    ],
+    "targets": [
+      "Трицепс"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Гантель"
+    ],
+    "gif": "assets/images/exercises/Overhead Dumbbell Extension.gif"
+  },
+  {
+    "name_ru": "Разгибания рук с штангой из-за головы",
+    "name_en": "Overhead Barbell Extension",
+    "groups": [
+      "Руки"
+    ],
+    "targets": [
+      "Трицепс"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Штанга"
+    ],
+    "gif": "assets/images/exercises/Overhead Barbell Extension.gif"
+  },
+  {
+    "name_ru": "Разгибания рук на блоке",
+    "name_en": "Triceps Pushdown",
+    "groups": [
+      "Руки"
+    ],
+    "targets": [
+      "Трицепс"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Кроссовер"
+    ],
+    "gif": "assets/images/exercises/Triceps Pushdown.gif"
+  },
+  {
+    "name_ru": "Разгибания рук с канатом на блоке",
+    "name_en": "Rope Triceps Pushdown",
+    "groups": [
+      "Руки"
+    ],
+    "targets": [
+      "Трицепс"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Кроссовер"
+    ],
+    "gif": "assets/images/exercises/Rope Triceps Pushdown.gif"
+  },
+  {
+    "name_ru": "Разгибания рук на верхнем блоке одной рукой",
+    "name_en": "One-Arm Cable Triceps Extension",
+    "groups": [
+      "Руки"
+    ],
+    "targets": [
+      "Трицепс"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Кроссовер"
+    ],
+    "gif": "assets/images/exercises/One-Arm Cable Triceps Extension.gif"
+  },
+  {
+    "name_ru": "Алмазные отжимания",
+    "name_en": "Diamond Push-Ups",
+    "groups": [
+      "Грудь",
+      "Руки"
+    ],
+    "targets": [
+      "Трицепс",
+      "Грудные"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Собственный вес"
+    ],
+    "gif": "assets/images/exercises/Diamond Push-Ups.gif"
+  },
+  {
+    "name_ru": "Отжимания на брусьях",
+    "name_en": "Dips",
+    "groups": [
+      "Грудь",
+      "Руки"
+    ],
+    "targets": [
+      "Трицепс",
+      "Грудные"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Брусья"
+    ],
+    "gif": "assets/images/exercises/Dips.gif"
+  },
+  {
+    "name_ru": "Отжимания на брусьях с весом",
+    "name_en": "Weighted Dips",
+    "groups": [
+      "Грудь",
+      "Руки"
+    ],
+    "targets": [
+      "Трицепс",
+      "Грудные"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Брусья",
+      "Пояс с отягощением"
+    ],
+    "gif": "assets/images/exercises/Weighted Dips.gif"
+  },
+  {
+    "name_ru": "Сгибания запястий с штангой",
+    "name_en": "Wrist Curl",
+    "groups": [
+      "Руки"
+    ],
+    "targets": [
+      "Предплечья"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Штанга"
+    ],
+    "gif": "assets/images/exercises/Wrist Curl.gif"
+  },
+  {
+    "name_ru": "Сгибания запястий с гантелями",
+    "name_en": "Dumbbell Wrist Curl",
+    "groups": [
+      "Руки"
+    ],
+    "targets": [
+      "Предплечья"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Гантели"
+    ],
+    "gif": "assets/images/exercises/Dumbbell Wrist Curl.gif"
+  },
+  {
+    "name_ru": "Разгибания запястий с штангой",
+    "name_en": "Reverse Wrist Curl",
+    "groups": [
+      "Руки"
+    ],
+    "targets": [
+      "Предплечья"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Штанга"
+    ],
+    "gif": "assets/images/exercises/Reverse Wrist Curl.gif"
+  },
+  {
+    "name_ru": "Разгибания запястий с гантелями",
+    "name_en": "Reverse Dumbbell Wrist Curl",
+    "groups": [
+      "Руки"
+    ],
+    "targets": [
+      "Предплечья"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Гантели"
+    ],
+    "gif": "assets/images/exercises/Reverse Dumbbell Wrist Curl.gif"
+  },
+  {
+    "name_ru": "Пронация/супинация предплечья",
+    "name_en": "Pronation/Supination",
+    "groups": [
+      "Руки"
+    ],
+    "targets": [
+      "Предплечья"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Гантели"
+    ],
+    "gif": "assets/images/exercises/Pronation/Supination.gif"
+  },
+  {
+    "name_ru": "nan",
+    "name_en": "nan",
+    "groups": [
+      "nan"
+    ],
+    "targets": [
+      "nan"
+    ],
+    "type": "nan",
+    "equipment": [
+      "nan"
+    ],
+    "gif": "assets/images/exercises/nan.gif"
+  },
+  {
+    "name_ru": "Название (RU)",
+    "name_en": "Название (EN)",
+    "groups": [
+      "Основная группа"
+    ],
+    "targets": [
+      "Подгруппа"
+    ],
+    "type": "Тип",
+    "equipment": [
+      "Оборудование"
+    ],
+    "gif": "assets/images/exercises/Название (EN).gif"
+  },
+  {
+    "name_ru": "Жим штанги лёжа",
+    "name_en": "Barbell Bench Press",
+    "groups": [
+      "Грудь",
+      "Плечи",
+      "Руки"
+    ],
+    "targets": [
+      "Середина",
+      "Передняя дельта",
+      "Трицепс"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Штанга",
+      "Скамья"
+    ],
+    "gif": "assets/images/exercises/Barbell Bench Press.gif"
+  },
+  {
+    "name_ru": "Жим гантелей лёжа",
+    "name_en": "Dumbbell Bench Press",
+    "groups": [
+      "Грудь",
+      "Плечи",
+      "Руки"
+    ],
+    "targets": [
+      "Середина",
+      "Передняя дельта",
+      "Трицепс"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Гантели",
+      "Скамья"
+    ],
+    "gif": "assets/images/exercises/Dumbbell Bench Press.gif"
+  },
+  {
+    "name_ru": "Жим штанги на наклонной скамье",
+    "name_en": "Incline Barbell Press",
+    "groups": [
+      "Грудь",
+      "Плечи",
+      "Руки"
+    ],
+    "targets": [
+      "Верх",
+      "Передняя дельта",
+      "Трицепс"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Штанга",
+      "Скамья"
+    ],
+    "gif": "assets/images/exercises/Incline Barbell Press.gif"
+  },
+  {
+    "name_ru": "Жим гантелей на наклонной",
+    "name_en": "Incline Dumbbell Press",
+    "groups": [
+      "Грудь",
+      "Плечи",
+      "Руки"
+    ],
+    "targets": [
+      "Верх",
+      "Передняя дельта",
+      "Трицепс"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Гантели",
+      "Скамья"
+    ],
+    "gif": "assets/images/exercises/Incline Dumbbell Press.gif"
+  },
+  {
+    "name_ru": "Жим штанги на отрицательной скамье",
+    "name_en": "Decline Barbell Bench Press",
+    "groups": [
+      "Грудь",
+      "Плечи",
+      "Руки"
+    ],
+    "targets": [
+      "Низ",
+      "Передняя дельта",
+      "Трицепс"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Штанга",
+      "Скамья"
+    ],
+    "gif": "assets/images/exercises/Decline Barbell Bench Press.gif"
+  },
+  {
+    "name_ru": "Жим гантелей на отрицательной скамье",
+    "name_en": "Decline Dumbbell Press",
+    "groups": [
+      "Грудь",
+      "Плечи",
+      "Руки"
+    ],
+    "targets": [
+      "Низ",
+      "Передняя дельта",
+      "Трицепс"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Гантели",
+      "Скамья"
+    ],
+    "gif": "assets/images/exercises/Decline Dumbbell Press.gif"
+  },
+  {
+    "name_ru": "Разведение гантелей лёжа",
+    "name_en": "Dumbbell Fly",
+    "groups": [
+      "Грудь",
+      "Плечи"
+    ],
+    "targets": [
+      "Середина",
+      "Передняя дельта"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Гантели",
+      "Скамья"
+    ],
+    "gif": "assets/images/exercises/Dumbbell Fly.gif"
+  },
+  {
+    "name_ru": "Разведение гантелей на наклонной",
+    "name_en": "Incline Dumbbell Fly",
+    "groups": [
+      "Грудь",
+      "Плечи"
+    ],
+    "targets": [
+      "Верх",
+      "Передняя дельта"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Гантели",
+      "Скамья"
+    ],
+    "gif": "assets/images/exercises/Incline Dumbbell Fly.gif"
+  },
+  {
+    "name_ru": "Разведение гантелей на отрицательной",
+    "name_en": "Decline Dumbbell Fly",
+    "groups": [
+      "Грудь",
+      "Плечи"
+    ],
+    "targets": [
+      "Низ",
+      "Передняя дельта"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Гантели",
+      "Скамья"
+    ],
+    "gif": "assets/images/exercises/Decline Dumbbell Fly.gif"
+  },
+  {
+    "name_ru": "Сведение на кроссовере",
+    "name_en": "Cable Fly",
+    "groups": [
+      "Грудь",
+      "Плечи"
+    ],
+    "targets": [
+      "Середина",
+      "Передняя дельта"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Кроссовер"
+    ],
+    "gif": "assets/images/exercises/Cable Fly.gif"
+  },
+  {
+    "name_ru": "Сведение на кроссовере вверх",
+    "name_en": "High Cable Fly",
+    "groups": [
+      "Грудь",
+      "Плечи"
+    ],
+    "targets": [
+      "Верх",
+      "Передняя дельта"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Кроссовер"
+    ],
+    "gif": "assets/images/exercises/High Cable Fly.gif"
+  },
+  {
+    "name_ru": "Сведение на кроссовере вниз",
+    "name_en": "Low Cable Fly",
+    "groups": [
+      "Грудь",
+      "Плечи"
+    ],
+    "targets": [
+      "Низ",
+      "Передняя дельта"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Кроссовер"
+    ],
+    "gif": "assets/images/exercises/Low Cable Fly.gif"
+  },
+  {
+    "name_ru": "Отжимания от пола",
+    "name_en": "Push-Ups",
+    "groups": [
+      "Грудь",
+      "Плечи",
+      "Руки"
+    ],
+    "targets": [
+      "Середина",
+      "Передняя дельта",
+      "Трицепс"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Собственный вес"
+    ],
+    "gif": "assets/images/exercises/Push-Ups.gif"
+  },
+  {
+    "name_ru": "Отжимания узким хватом",
+    "name_en": "Close-Grip Push-Ups",
+    "groups": [
+      "Грудь",
+      "Плечи",
+      "Руки"
+    ],
+    "targets": [
+      "Середина",
+      "Трицепс",
+      "Передняя дельта"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Собственный вес"
+    ],
+    "gif": "assets/images/exercises/Close-Grip Push-Ups.gif"
+  },
+  {
+    "name_ru": "Отжимания с широким хватом",
+    "name_en": "Wide-Grip Push-Ups",
+    "groups": [
+      "Грудь",
+      "Плечи"
+    ],
+    "targets": [
+      "Середина",
+      "Передняя дельта"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Собственный вес"
+    ],
+    "gif": "assets/images/exercises/Wide-Grip Push-Ups.gif"
+  },
+  {
+    "name_ru": "Отжимания на брусьях",
+    "name_en": "Dips",
+    "groups": [
+      "Грудь",
+      "Плечи",
+      "Руки"
+    ],
+    "targets": [
+      "Низ",
+      "Передняя дельта",
+      "Трицепс"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Брусья"
+    ],
+    "gif": "assets/images/exercises/Dips.gif"
+  },
+  {
+    "name_ru": "Отжимания на кольцах",
+    "name_en": "Ring Dips",
+    "groups": [
+      "Грудь",
+      "Плечи",
+      "Руки"
+    ],
+    "targets": [
+      "Низ",
+      "Передняя дельта",
+      "Трицепс"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Гимнастические кольца"
+    ],
+    "gif": "assets/images/exercises/Ring Dips.gif"
+  },
+  {
+    "name_ru": "Отжимания с хлопком",
+    "name_en": "Clap Push-Ups",
+    "groups": [
+      "Грудь",
+      "Плечи",
+      "Руки"
+    ],
+    "targets": [
+      "Середина",
+      "Передняя дельта",
+      "Трицепс"
+    ],
+    "type": "Взрывное",
+    "equipment": [
+      "Собственный вес"
+    ],
+    "gif": "assets/images/exercises/Clap Push-Ups.gif"
+  },
+  {
+    "name_ru": "Жим в тренажёре",
+    "name_en": "Chest Press Machine",
+    "groups": [
+      "Грудь",
+      "Плечи",
+      "Руки"
+    ],
+    "targets": [
+      "Середина",
+      "Передняя дельта",
+      "Трицепс"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Тренажёр"
+    ],
+    "gif": "assets/images/exercises/Chest Press Machine.gif"
+  },
+  {
+    "name_ru": "Жим в тренажёре под углом",
+    "name_en": "Incline Chest Press Machine",
+    "groups": [
+      "Грудь",
+      "Плечи",
+      "Руки"
+    ],
+    "targets": [
+      "Верх",
+      "Передняя дельта",
+      "Трицепс"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Тренажёр"
+    ],
+    "gif": "assets/images/exercises/Incline Chest Press Machine.gif"
+  },
+  {
+    "name_ru": "nan",
+    "name_en": "nan",
+    "groups": [
+      "nan"
+    ],
+    "targets": [
+      "nan"
+    ],
+    "type": "nan",
+    "equipment": [
+      "nan"
+    ],
+    "gif": "assets/images/exercises/nan.gif"
+  },
+  {
+    "name_ru": "Название (RU)",
+    "name_en": "Название (EN)",
+    "groups": [
+      "Основная группа"
+    ],
+    "targets": [
+      "Подгруппа"
+    ],
+    "type": "Тип",
+    "equipment": [
+      "Оборудование"
+    ],
+    "gif": "assets/images/exercises/Название (EN).gif"
+  },
+  {
+    "name_ru": "Скручивания на полу",
+    "name_en": "Crunch",
+    "groups": [
+      "Пресс"
+    ],
+    "targets": [
+      "Верхняя часть пресса"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Собственный вес"
+    ],
+    "gif": "assets/images/exercises/Crunch.gif"
+  },
+  {
+    "name_ru": "Обратные скручивания",
+    "name_en": "Reverse Crunch",
+    "groups": [
+      "Пресс"
+    ],
+    "targets": [
+      "Нижняя часть пресса"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Собственный вес"
+    ],
+    "gif": "assets/images/exercises/Reverse Crunch.gif"
+  },
+  {
+    "name_ru": "Подъём ног лёжа",
+    "name_en": "Leg Raise",
+    "groups": [
+      "Пресс"
+    ],
+    "targets": [
+      "Нижняя часть пресса"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Собственный вес"
+    ],
+    "gif": "assets/images/exercises/Leg Raise.gif"
+  },
+  {
+    "name_ru": "Подъём ног в висе",
+    "name_en": "Hanging Leg Raise",
+    "groups": [
+      "Пресс"
+    ],
+    "targets": [
+      "Нижняя часть пресса"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Турник"
+    ],
+    "gif": "assets/images/exercises/Hanging Leg Raise.gif"
+  },
+  {
+    "name_ru": "Подъём коленей в висе",
+    "name_en": "Hanging Knee Raise",
+    "groups": [
+      "Пресс"
+    ],
+    "targets": [
+      "Нижняя часть пресса"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Турник"
+    ],
+    "gif": "assets/images/exercises/Hanging Knee Raise.gif"
+  },
+  {
+    "name_ru": "Скручивания на скамье с наклоном",
+    "name_en": "Decline Bench Crunch",
+    "groups": [
+      "Пресс"
+    ],
+    "targets": [
+      "Верхняя часть пресса"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Скамья"
+    ],
+    "gif": "assets/images/exercises/Decline Bench Crunch.gif"
+  },
+  {
+    "name_ru": "Русский твист",
+    "name_en": "Russian Twist",
+    "groups": [
+      "Корпус"
+    ],
+    "targets": [
+      "Косые мышцы живота"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Медицинский мяч",
+      "Гантеля",
+      "Собственный вес"
+    ],
+    "gif": "assets/images/exercises/Russian Twist.gif"
+  },
+  {
+    "name_ru": "Планка",
+    "name_en": "Plank",
+    "groups": [
+      "Корпус"
+    ],
+    "targets": [
+      "Поперечная мышца живота",
+      "Стабилизаторы"
+    ],
+    "type": "Изометрическое",
+    "equipment": [
+      "Собственный вес"
+    ],
+    "gif": "assets/images/exercises/Plank.gif"
+  },
+  {
+    "name_ru": "Боковая планка",
+    "name_en": "Side Plank",
+    "groups": [
+      "Корпус"
+    ],
+    "targets": [
+      "Косые мышцы живота",
+      "Стабилизаторы"
+    ],
+    "type": "Изометрическое",
+    "equipment": [
+      "Собственный вес"
+    ],
+    "gif": "assets/images/exercises/Side Plank.gif"
+  },
+  {
+    "name_ru": "Планка с подъёмом ноги",
+    "name_en": "Plank with Leg Raise",
+    "groups": [
+      "Корпус"
+    ],
+    "targets": [
+      "Поперечная мышца живота",
+      "Стабилизаторы"
+    ],
+    "type": "Изометрическое",
+    "equipment": [
+      "Собственный вес"
+    ],
+    "gif": "assets/images/exercises/Plank with Leg Raise.gif"
+  },
+  {
+    "name_ru": "Велосипед",
+    "name_en": "Bicycle Crunch",
+    "groups": [
+      "Пресс",
+      "Корпус"
+    ],
+    "targets": [
+      "Верхняя часть пресса",
+      "Косые мышцы"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Собственный вес"
+    ],
+    "gif": "assets/images/exercises/Bicycle Crunch.gif"
+  },
+  {
+    "name_ru": "Косые скручивания",
+    "name_en": "Oblique Crunch",
+    "groups": [
+      "Пресс",
+      "Корпус"
+    ],
+    "targets": [
+      "Косые мышцы живота"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Собственный вес"
+    ],
+    "gif": "assets/images/exercises/Oblique Crunch.gif"
+  },
+  {
+    "name_ru": "Дракон флаг",
+    "name_en": "Dragon Flag",
+    "groups": [
+      "Пресс",
+      "Корпус"
+    ],
+    "targets": [
+      "Верхняя и нижняя часть пресса"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Скамья"
+    ],
+    "gif": "assets/images/exercises/Dragon Flag.gif"
+  },
+  {
+    "name_ru": "Колесо для пресса",
+    "name_en": "Ab Wheel Rollout",
+    "groups": [
+      "Пресс",
+      "Корпус"
+    ],
+    "targets": [
+      "Прямые мышцы",
+      "Поперечная мышца живота"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Колесо для пресса"
+    ],
+    "gif": "assets/images/exercises/Ab Wheel Rollout.gif"
+  },
+  {
+    "name_ru": "Подъём туловища на римском стуле",
+    "name_en": "Back Extension Roman Chair",
+    "groups": [
+      "Спина",
+      "Корпус"
+    ],
+    "targets": [
+      "Разгибатели спины",
+      "Ягодицы"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Римский стул"
+    ],
+    "gif": "assets/images/exercises/Back Extension Roman Chair.gif"
+  },
+  {
+    "name_ru": "V-скручивания",
+    "name_en": "V-Up",
+    "groups": [
+      "Пресс"
+    ],
+    "targets": [
+      "Верхняя и нижняя часть пресса"
+    ],
+    "type": "Базовое",
+    "equipment": [
+      "Собственный вес"
+    ],
+    "gif": "assets/images/exercises/V-Up.gif"
+  },
+  {
+    "name_ru": "Касания пяток",
+    "name_en": "Heel Touch",
+    "groups": [
+      "Пресс"
+    ],
+    "targets": [
+      "Косые мышцы живота"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Собственный вес"
+    ],
+    "gif": "assets/images/exercises/Heel Touch.gif"
+  },
+  {
+    "name_ru": "Повороты корпуса с грифом",
+    "name_en": "Bar Twist",
+    "groups": [
+      "Корпус"
+    ],
+    "targets": [
+      "Косые мышцы живота"
+    ],
+    "type": "Изолирующее",
+    "equipment": [
+      "Гриф"
+    ],
+    "gif": "assets/images/exercises/Bar Twist.gif"
+  },
+  {
+    "name_ru": "nan",
+    "name_en": "nan",
+    "groups": [
+      "nan"
+    ],
+    "targets": [
+      "nan"
+    ],
+    "type": "nan",
+    "equipment": [
+      "nan"
+    ],
+    "gif": "assets/images/exercises/nan.gif"
+  },
+  {
+    "name_ru": "Название (RU)",
+    "name_en": "Название (EN)",
+    "groups": [
+      "Основная группа"
+    ],
+    "targets": [
+      "Подгруппа"
+    ],
+    "type": "Тип",
+    "equipment": [
+      "Оборудование"
+    ],
+    "gif": "assets/images/exercises/Название (EN).gif"
+  },
+  {
+    "name_ru": "Берпи",
+    "name_en": "Burpee",
+    "groups": [
+      "Всё тело"
+    ],
+    "targets": [
+      "Ноги",
+      "Руки",
+      "Корпус"
+    ],
+    "type": "Функциональное",
+    "equipment": [
+      "Собственный вес"
+    ],
+    "gif": "assets/images/exercises/Burpee.gif"
+  },
+  {
+    "name_ru": "Берпи с прыжком на тумбу",
+    "name_en": "Burpee Box Jump",
+    "groups": [
+      "Всё тело"
+    ],
+    "targets": [
+      "Ноги",
+      "Руки",
+      "Корпус"
+    ],
+    "type": "Функциональное",
+    "equipment": [
+      "Плиометрическая тумба"
+    ],
+    "gif": "assets/images/exercises/Burpee Box Jump.gif"
+  },
+  {
+    "name_ru": "Прыжки на тумбу",
+    "name_en": "Box Jump",
+    "groups": [
+      "Ноги"
+    ],
+    "targets": [
+      "Квадрицепсы",
+      "Ягодицы",
+      "Икры"
+    ],
+    "type": "Функциональное",
+    "equipment": [
+      "Плиометрическая тумба"
+    ],
+    "gif": "assets/images/exercises/Box Jump.gif"
+  },
+  {
+    "name_ru": "Прыжки через скакалку",
+    "name_en": "Jump Rope",
+    "groups": [
+      "Всё тело"
+    ],
+    "targets": [
+      "Кардио",
+      "Координация"
+    ],
+    "type": "Кардио",
+    "equipment": [
+      "Скакалка"
+    ],
+    "gif": "assets/images/exercises/Jump Rope.gif"
+  },
+  {
+    "name_ru": "Альпинист",
+    "name_en": "Mountain Climber",
+    "groups": [
+      "Всё тело"
+    ],
+    "targets": [
+      "Пресс",
+      "Плечи",
+      "Ноги"
+    ],
+    "type": "Функциональное",
+    "equipment": [
+      "Собственный вес"
+    ],
+    "gif": "assets/images/exercises/Mountain Climber.gif"
+  },
+  {
+    "name_ru": "Тяга гири к подбородку",
+    "name_en": "Kettlebell High Pull",
+    "groups": [
+      "Всё тело"
+    ],
+    "targets": [
+      "Плечи",
+      "Спина",
+      "Ноги"
+    ],
+    "type": "Функциональное",
+    "equipment": [
+      "Гиря"
+    ],
+    "gif": "assets/images/exercises/Kettlebell High Pull.gif"
+  },
+  {
+    "name_ru": "Свинг гирей",
+    "name_en": "Kettlebell Swing",
+    "groups": [
+      "Всё тело"
+    ],
+    "targets": [
+      "Ягодицы",
+      "Бицепс бедра",
+      "Плечи"
+    ],
+    "type": "Функциональное",
+    "equipment": [
+      "Гиря"
+    ],
+    "gif": "assets/images/exercises/Kettlebell Swing.gif"
+  },
+  {
+    "name_ru": "Турецкий подъём",
+    "name_en": "TGU (Turkish Get-Up)",
+    "groups": [
+      "Всё тело"
+    ],
+    "targets": [
+      "Плечи",
+      "Пресс",
+      "Ноги"
+    ],
+    "type": "Функциональное",
+    "equipment": [
+      "Гиря"
+    ],
+    "gif": "assets/images/exercises/TGU (Turkish Get-Up).gif"
+  },
+  {
+    "name_ru": "Толчок штанги",
+    "name_en": "Push Jerk",
+    "groups": [
+      "Всё тело"
+    ],
+    "targets": [
+      "Плечи",
+      "Трицепс",
+      "Ноги"
+    ],
+    "type": "Функциональное",
+    "equipment": [
+      "Штанга"
+    ],
+    "gif": "assets/images/exercises/Push Jerk.gif"
+  },
+  {
+    "name_ru": "Рывок штанги",
+    "name_en": "Snatch",
+    "groups": [
+      "Всё тело"
+    ],
+    "targets": [
+      "Плечи",
+      "Спина",
+      "Ноги"
+    ],
+    "type": "Функциональное",
+    "equipment": [
+      "Штанга"
+    ],
+    "gif": "assets/images/exercises/Snatch.gif"
+  },
+  {
+    "name_ru": "Рывок гири",
+    "name_en": "Kettlebell Snatch",
+    "groups": [
+      "Всё тело"
+    ],
+    "targets": [
+      "Плечи",
+      "Спина",
+      "Ноги"
+    ],
+    "type": "Функциональное",
+    "equipment": [
+      "Гиря"
+    ],
+    "gif": "assets/images/exercises/Kettlebell Snatch.gif"
+  },
+  {
+    "name_ru": "Гребля на тренажёре",
+    "name_en": "Rowing Machine",
+    "groups": [
+      "Всё тело"
+    ],
+    "targets": [
+      "Спина",
+      "Ноги",
+      "Руки"
+    ],
+    "type": "Кардио",
+    "equipment": [
+      "Гребной тренажёр"
+    ],
+    "gif": "assets/images/exercises/Rowing Machine.gif"
+  },
+  {
+    "name_ru": "Атакующая велотренировка",
+    "name_en": "Assault Bike",
+    "groups": [
+      "Всё тело"
+    ],
+    "targets": [
+      "Кардио",
+      "Ноги",
+      "Руки"
+    ],
+    "type": "Кардио",
+    "equipment": [
+      "Велотренажёр"
+    ],
+    "gif": "assets/images/exercises/Assault Bike.gif"
+  },
+  {
+    "name_ru": "Спринт",
+    "name_en": "Sprint",
+    "groups": [
+      "Всё тело"
+    ],
+    "targets": [
+      "Кардио",
+      "Ноги"
+    ],
+    "type": "Кардио",
+    "equipment": [
+      "Беговая дорожка",
+      "Стадион"
+    ],
+    "gif": "assets/images/exercises/Sprint.gif"
+  },
+  {
+    "name_ru": "Бег на месте",
+    "name_en": "Running in Place",
+    "groups": [
+      "Всё тело"
+    ],
+    "targets": [
+      "Кардио",
+      "Ноги"
+    ],
+    "type": "Кардио",
+    "equipment": [
+      "Собственный вес"
+    ],
+    "gif": "assets/images/exercises/Running in Place.gif"
+  },
+  {
+    "name_ru": "Подтягивания с хлопком",
+    "name_en": "Clap Pull-Up",
+    "groups": [
+      "Всё тело"
+    ],
+    "targets": [
+      "Спина",
+      "Руки",
+      "Корпус"
+    ],
+    "type": "Функциональное",
+    "equipment": [
+      "Турник"
+    ],
+    "gif": "assets/images/exercises/Clap Pull-Up.gif"
+  },
+  {
+    "name_ru": "Отжимания с хлопком",
+    "name_en": "Clap Push-Up",
+    "groups": [
+      "Всё тело"
+    ],
+    "targets": [
+      "Грудь",
+      "Трицепс",
+      "Пресс"
+    ],
+    "type": "Функциональное",
+    "equipment": [
+      "Собственный вес"
+    ],
+    "gif": "assets/images/exercises/Clap Push-Up.gif"
+  },
+  {
+    "name_ru": "Чередующиеся выпрыгивания",
+    "name_en": "Alternating Jump Lunge",
+    "groups": [
+      "Ноги"
+    ],
+    "targets": [
+      "Квадрицепсы",
+      "Ягодицы",
+      "Икры"
+    ],
+    "type": "Функциональное",
+    "equipment": [
+      "Собственный вес"
+    ],
+    "gif": "assets/images/exercises/Alternating Jump Lunge.gif"
+  },
+  {
+    "name_ru": "Скейт-джамп",
+    "name_en": "Skater Jump",
+    "groups": [
+      "Ноги"
+    ],
+    "targets": [
+      "Ягодицы",
+      "Квадрицепсы",
+      "Икры"
+    ],
+    "type": "Функциональное",
+    "equipment": [
+      "Собственный вес"
+    ],
+    "gif": "assets/images/exercises/Skater Jump.gif"
+  },
+  {
+    "name_ru": "Гребной бурпи",
+    "name_en": "Rowing Burpee",
+    "groups": [
+      "Всё тело"
+    ],
+    "targets": [
+      "Спина",
+      "Ноги",
+      "Руки"
+    ],
+    "type": "Функциональное",
+    "equipment": [
+      "Собственный вес",
+      "Гребной тренажёр"
+    ],
+    "gif": "assets/images/exercises/Rowing_Burpee.gif"
+  }
+]

@@ -1,0 +1,27 @@
+/* Автоматическая тема (системные предпочтения) */
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg-color: #f9faf9;
+    --text-color: #333333;
+    --text-light: #666666;
+    --card-bg: #ffffff;
+    --border: 1px solid #e0e0e0;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #1a1a1a;
+    --text-color: #ffffff;
+    --text-light: #cccccc;
+    --card-bg: #2a2a2a;
+    --border: 1px solid #404040;
+  }
+}
+
+/* Smooth theme transitions */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}

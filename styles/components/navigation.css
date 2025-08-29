@@ -1,0 +1,249 @@
+/* Навигация - мобильное меню */
+.burger {
+  display: flex;
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 1002;
+  width: 44px;
+  height: 44px;
+  background: var(--primary-color);
+  border: none;
+  border-radius: 8px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.burger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: white;
+  margin: 2px 0;
+  transition: 0.3s;
+}
+
+/* Боковое меню */
+.sidebar {
+  background: var(--primary-color);
+  color: white;
+  padding: 1rem;
+  min-height: 100vh;
+  position: fixed;
+  left: 0; 
+  top: 0;
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  z-index: 1001;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+body.drawer-open .sidebar {
+  transform: translateX(0);
+}
+
+.sidebar .brand {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin: 2rem 0 1.5rem;
+  text-align: center;
+  color: white;
+}
+
+.sidebar nav ul { 
+  list-style: none; 
+  margin: 0; 
+  padding: 0; 
+}
+
+.sidebar nav ul li { 
+  margin: 12px 0; 
+}
+
+.sidebar nav ul li a {
+  display: flex;
+  align-items: center;
+  padding: 14px 16px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: white;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* СТИЛИ ДЛЯ АКТИВНОГО СОСТОЯНИЯ КНОПОК */
+.sidebar nav ul li a:hover,
+.sidebar nav ul li a.active {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateX(5px);
+}
+
+/* Стили для иконок */
+.sidebar nav ul li a i {
+  margin-right: 12px;
+  width: 20px;
+  text-align: center;
+}
+
+/* Заглушки для иконок (если нет реальных иконок) */
+.sidebar nav ul li a::before {
+  content: "•";
+  margin-right: 12px;
+  font-size: 1.2rem;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 1000;
+}
+
+body.drawer-open .backdrop {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+body.drawer-open {
+  overflow: hidden;
+}
+
+/* === Unified topbar & layout === */
+.topbar{
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--card-bg);
+  border-bottom: var(--border);
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+}
+
+.app-title{
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin: 0;
+  flex: 1 1 auto;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.burger{
+  flex: 0 0 auto;
+  position: relative;
+  inset: auto;
+  z-index: 1001;
+  background: var(--primary-color);
+  border: none;
+  border-radius: 999px;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-content: center;
+  box-shadow: var(--shadow);
+  outline-offset: 3px;
+}
+
+.burger:focus-visible{ 
+  box-shadow: 0 0 0 3px rgba(169,186,157,0.5); 
+}
+
+.burger span{ 
+  background: #fff; 
+  width: 22px; 
+  height: 2px; 
+  margin: 2px 0; 
+  display: block; 
+  transition: transform 0.3s ease;
+}
+
+/* Анимация бургер-меню */
+body.drawer-open .burger span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+body.drawer-open .burger span:nth-child(2) {
+  opacity: 0;
+}
+
+body.drawer-open .burger span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+.sidebar{ 
+  top: 0; 
+  padding-top: 64px; 
+}
+
+.brand{ 
+  display: none; 
+}
+
+.main-content{ 
+  max-width: 980px; 
+  margin: 16px auto; 
+  padding: 0 16px 64px; 
+}
+
+.backdrop{ 
+  z-index: 900; 
+}
+
+.tg-userchip{ 
+  display:flex; 
+  align-items:center; 
+  gap:8px; 
+  font-size:.9rem; 
+  color: var(--text-light); 
+}
+
+.tg-userchip .avatar{ 
+  width:28px; 
+  height:28px; 
+  border-radius:50%; 
+  object-fit:cover; 
+  box-shadow: var(--shadow); 
+}
+
+/* Адаптивность для навигации */
+@media (max-width: 768px) {
+  .burger {
+    position: relative;
+    inset: auto;
+  }
+
+  .sidebar {
+    width: 85vw;
+    max-width: 300px;
+  }
+
+  .main-content {
+    padding: 0 12px 40px;
+  }
+}
+
+/* Улучшение для touch-устройств */
+button, a {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
