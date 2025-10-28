@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Аналитика тренировок</title>
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/components/buttons.css">
+  <link rel="stylesheet" href="styles/components/cards.css">
+  <link rel="stylesheet" href="styles/components/navigation.css">
+  <link rel="stylesheet" href="styles/components/forms.css">
+  <link rel="stylesheet" href="styles/pages/analytics.css">
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <button id="burger" class="burger" aria-label="Открыть меню" aria-controls="sidebar" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  
+  <div id="backdrop" class="backdrop" hidden></div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="brand">Дневник Тренировок</div>
+    <nav role="navigation" aria-label="Main" class="nav">
+      <a href="index.html">Главная</a>
+      <a href="exercises.html">Упражнения</a>
+      <a href="workout.html">Тренировка</a>
+      <a href="history.html">История</a>
+      <a class="active" href="analytics.html">Аналитика</a>
+      <a href="profile.html">Профиль</a>
+    </nav>
+  </aside>
+
+  <main class="analytics-container">
+    <h1>Аналитика тренировок</h1>
+
+    <!-- Фильтры -->
+    <section class="card filters">
+      <h2>Период анализа</h2>
+      <select id="timeRange">
+        <option value="7">Последние 7 дней</option>
+        <option value="30" selected>Последние 30 дней</option>
+        <option value="90">Последние 3 месяца</option>
+        <option value="365">Последний год</option>
+        <option value="all">Все время</option>
+      </select>
+    </section>
+
+    <!-- Статистика -->
+    <section class="stats-cards">
+      <div class="card stat-card" id="totalWorkouts">
+        <h3>Тренировок</h3>
+        <span class="stat-value">0</span>
+      </div>
+      <div class="card stat-card" id="totalExercises">
+        <h3>Упражнений</h3>
+        <span class="stat-value">0</span>
+      </div>
+      <div class="card stat-card" id="totalVolume">
+        <h3>Общий тоннаж</h3>
+        <span class="stat-value">0 кг</span>
+      </div>
+      <div class="card stat-card" id="avgVolume">
+        <h3>Средний тоннаж</h3>
+        <span class="stat-value">0 кг</span>
+      </div>
+      <div class="card stat-card" id="bestDay">
+        <h3>Лучший день</h3>
+        <span class="stat-value">—</span>
+      </div>
+    </section>
+
+    <!-- Графики -->
+    <section class="charts-grid">
+      <div class="card chart-card">
+        <h3>Тренировки по неделям</h3>
+        <canvas id="workoutsPerWeek"></canvas>
+      </div>
+      <div class="card chart-card">
+        <h3>Динамика тоннажа</h3>
+        <canvas id="volumeTrend"></canvas>
+      </div>
+      <div class="card chart-card">
+        <h3>Распределение по группам мышц</h3>
+        <canvas id="muscleDistribution"></canvas>
+      </div>
+      <div class="card chart-card">
+        <h3>Топ упражнений</h3>
+        <canvas id="topExercises"></canvas>
+      </div>
+    </section>
+
+    <!-- Достижения -->
+    <section class="card achievements">
+      <h2>Достижения</h2>
+      <div id="achievementsList" class="achievements-grid"></div>
+    </section>
+
+    <!-- Сообщение если нет данных -->
+    <div id="noDataMessage" class="card no-data-message" style="display: none;">
+      <h3>Нет данных для анализа</h3>
+      <p>Начните тренироваться, чтобы увидеть статистику!</p>
+      <a href="workout.html" class="btn">Начать тренировку</a>
+    </div>
+  </main>
+
+  <script src="tg-init.js"></script>
+  <script src="nav.js" defer></script>
+  <script src="scripts/modules/analytics/app_analytics.js" defer></script>
+</body>
+</html>

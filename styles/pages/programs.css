@@ -1,0 +1,193 @@
+/* Страница программ тренировок */
+.programs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.program-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  border: var(--border);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.program-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+}
+
+.program-card h3 {
+  margin: 0 0 0.8rem 0;
+  color: var(--text-color);
+  font-size: 1.2rem;
+}
+
+.program-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.program-tag {
+  background: var(--primary-light);
+  color: var(--primary-dark);
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.program-description {
+  color: var(--text-light);
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+/* Детали программы */
+.weeks-container {
+  margin: 1.5rem 0;
+}
+
+.week-accordion {
+  margin-bottom: 0.8rem;
+  border: var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.week-header {
+  background: var(--primary-light);
+  padding: 1rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+}
+
+.week-content {
+  padding: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.week-content.expanded {
+  max-height: 2000px;
+}
+
+.day-section {
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.day-section:last-child {
+  border-bottom: none;
+}
+
+.day-section h4 {
+  margin: 0 0 0.8rem 0;
+  color: var(--text-color);
+}
+
+.exercise-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem;
+  margin-bottom: 0.5rem;
+  background: #f9f9f9;
+  border-radius: var(--radius);
+}
+
+.exercise-info {
+  flex: 1;
+}
+
+.exercise-info h5 {
+  margin: 0 0 0.3rem 0;
+  font-size: 1rem;
+}
+
+.exercise-meta {
+  font-size: 0.85rem;
+  color: var(--text-light);
+}
+
+.exercise-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.empty-message {
+  text-align: center;
+  color: var(--text-light);
+  padding: 2rem;
+  font-style: italic;
+}
+
+/* Добавить в programs.css */
+.multi-select {
+  height: auto;
+  min-height: 40px;
+}
+
+.rating-stars {
+  color: #ffc107;
+  margin: 0.5rem 0;
+}
+
+.progress-container {
+  margin: 1rem 0;
+}
+
+.progress-bar {
+  background: #e0e0e0;
+  border-radius: 10px;
+  height: 8px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  background: var(--primary-color);
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.progress-stats {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-light);
+}
+
+.completion-badge {
+  background: #4caf50;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+.social-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.recommendation-badge {
+  background: #ff9800;
+  color: white;
+  padding: 0.2rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  margin-left: 0.5rem;
+}

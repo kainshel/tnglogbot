@@ -1,0 +1,304 @@
+/* styles/pages/social.css */
+
+.user-stats-card {
+  margin-bottom: 2rem;
+}
+
+.user-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.user-avatar {
+  flex-shrink: 0;
+}
+
+.avatar-placeholder {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3498db, #2ecc71);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.user-info {
+  flex-grow: 1;
+}
+
+.user-info h2 {
+  margin: 0 0 0.25rem 0;
+}
+
+.user-badges {
+  display: flex;
+  gap: 1rem;
+}
+
+.badge {
+  background: #f8f9fa;
+  padding: 0.5rem 0.75rem;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-weight: 500;
+}
+
+/* Достижения */
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.achievement-card {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.achievement-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.achievement-card.locked {
+  opacity: 0.6;
+  filter: grayscale(1);
+}
+
+.achievement-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.achievement-title {
+  font-weight: bold;
+  margin: 0 0 0.25rem 0;
+  font-size: 0.9rem;
+}
+
+.achievement-desc {
+  font-size: 0.8rem;
+  color: #666;
+  margin: 0;
+}
+
+.achievement-skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  height: 120px;
+  border-radius: 8px;
+}
+
+/* Друзья */
+.friend-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+#friendSearch {
+  flex-grow: 1;
+  min-width: 200px;
+}
+
+.friends-list {
+  margin-top: 1rem;
+}
+
+.friend-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+  gap: 1rem;
+}
+
+.friend-item:last-child {
+  border-bottom: none;
+}
+
+.friend-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #e74c3c, #e67e22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.friend-info {
+  flex-grow: 1;
+}
+
+.friend-name {
+  margin: 0 0 0.25rem 0;
+  font-weight: 500;
+}
+
+.friend-stats {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.friend-stat {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.friend-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Лента активностей */
+.activity-feed {
+  margin-top: 1rem;
+}
+
+.activity-item {
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  gap: 1rem;
+}
+
+.activity-item:last-child {
+  border-bottom: none;
+}
+
+.activity-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #9b59b6, #3498db);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  flex-shrink: 0;
+  font-size: 0.8rem;
+}
+
+.activity-content {
+  flex-grow: 1;
+}
+
+.activity-user {
+  font-weight: 500;
+  margin-right: 0.5rem;
+}
+
+.activity-text {
+  margin: 0.25rem 0 0 0;
+  color: #333;
+}
+
+.activity-meta {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 0.25rem;
+}
+
+.activity-skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  height: 80px;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+
+/* Сравнение с друзьями */
+.comparison-controls {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.comparison-controls select {
+  min-width: 200px;
+}
+
+.comparison-chart {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 1.5rem;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Заголовки секций */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .user-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .user-badges {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .achievements-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+  
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .friend-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .comparison-controls {
+    flex-direction: column;
+  }
+  
+  .comparison-controls select {
+    min-width: 100%;
+  }
+}
+
+/* Анимация загрузки */
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}

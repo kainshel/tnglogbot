@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Профиль — TngLogBot</title>
+  
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/components/buttons.css">
+  <link rel="stylesheet" href="styles/components/cards.css">
+  <link rel="stylesheet" href="styles/components/navigation.css">
+  <link rel="stylesheet" href="styles/components/forms.css">
+    <link rel="stylesheet" href="styles/pages/profile.css">
+	
+  <script src="scripts/modules/profile/app_profile.js" defer></script>
+  <script src="tg-init.js" defer></script>
+  <script src="nav.js" defer></script>
+  <link rel="manifest" href="manifest.json">
+  
+</head>
+<body>
+  <button id="burger" class="burger" aria-label="Открыть меню" aria-controls="sidebar" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  
+  <div id="backdrop" class="backdrop" hidden></div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="brand">Дневник Тренировок</div>
+    <nav role="navigation" aria-label="Main" class="nav">
+      <a href="index.html">Главная</a>
+      <a href="exercises.html">Упражнения</a>
+      <a href="workout.html">Тренировка</a>
+      <a href="history.html">История</a>
+      <a class="active" href="profile.html">Профиль</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <section class="card">
+      <div class="profile-header">
+        <h2>Мой профиль</h2>
+        <button id="editBtn" class="btn btn-secondary">Редактировать</button>
+      </div>
+      
+      <div class="profile-info">
+        <div class="profile-avatar">
+          <div class="avatar-placeholder" id="avatarPlaceholder">
+            <span id="avatarInitials">ИИ</span>
+          </div>
+          <input type="file" id="avatarUpload" accept="image/*" hidden>
+          <button id="changeAvatarBtn" class="btn btn-small">Сменить фото</button>
+        </div>
+        
+        <div class="profile-details">
+          <div class="detail-item">
+            <span class="label">Имя:</span>
+            <span id="profileUsername" class="value">Иван Иванов</span>
+          </div>
+          <div class="detail-item">
+            <span class="label">Цель:</span>
+            <span id="profileGoal" class="value">Поддержка формы</span>
+          </div>
+          <div class="detail-item">
+            <span class="label">Возраст:</span>
+            <span id="profileAge" class="value">28 лет</span>
+          </div>
+          <div class="detail-item">
+            <span class="label">Рост:</span>
+            <span id="profileHeight" class="value">180 см</span>
+          </div>
+          <div class="detail-item">
+            <span class="label">Вес:</span>
+            <span id="profileWeight" class="value">75 кг</span>
+          </div>
+          <div class="detail-item">
+            <span class="label">ИМТ:</span>
+            <span id="profileBMI" class="value">23.1 (норма)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="profile-stats">
+        <h3>Статистика тренировок</h3>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-number" id="totalWorkouts">0</div>
+            <div class="stat-label">Всего тренировок</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="totalExercises">0</div>
+            <div class="stat-label">Выполнено упражнений</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="avgWorkoutsWeek">0</div>
+            <div class="stat-label">Тренировок в неделю</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="currentStreak">0</div>
+            <div class="stat-label">Дней подряд</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="profile-actions">
+        <button id="exportDataBtn" class="btn btn-secondary">Экспорт данных</button>
+        <button id="resetDataBtn" class="btn btn-danger">Сбросить все данные</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Модальное окно подтверждения сброса -->
+  <div id="resetConfirmModal" class="modal" hidden>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Подтверждение сброса</h3>
+        <button class="modal-close" id="modalCloseBtn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Вы уверены, что хотите удалить все данные? Это действие нельзя отменить.</p>
+        <p class="warning-text">Будут удалены: история тренировок, упражнения, настройки профиля.</p>
+      </div>
+      <div class="modal-actions">
+        <button id="confirmResetBtn" class="btn btn-danger">Да, удалить всё</button>
+        <button id="cancelResetBtn" class="btn btn-secondary">Отмена</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

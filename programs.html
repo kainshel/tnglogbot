@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <link rel="manifest" href="manifest.json">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Программы тренировок — Дневник Тренировок</title>
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/components/buttons.css">
+  <link rel="stylesheet" href="styles/components/cards.css">
+  <link rel="stylesheet" href="styles/components/navigation.css">
+  <link rel="stylesheet" href="styles/components/modals.css">
+  <link rel="stylesheet" href="styles/components/forms.css">
+  <link rel="stylesheet" href="styles/pages/programs.css">
+  
+  <script src="scripts/modules/programs/app_programs.js" defer></script>
+  <script src="tg-init.js" defer></script>
+  <script src="nav.js" defer></script>
+</head>
+<body>
+  <!-- Кнопка бургер-меню -->
+  <button id="burger" class="burger" aria-label="Открыть меню" aria-controls="sidebar" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <div id="backdrop" class="backdrop" hidden></div>
+
+  <!-- Боковое меню -->
+  <aside id="sidebar" class="sidebar">
+    <div class="brand">Дневник Тренировок</div>
+    <nav role="navigation" aria-label="Main" class="nav">
+      <a href="index.html">Главная</a>
+      <a href="exercises.html">Упражнения</a>
+      <a href="workout.html">Тренировка</a>
+      <a class="active" href="programs.html">Программы</a>
+      <a href="history.html">История</a>
+      <a href="profile.html">Профиль</a>
+    </nav>
+  </aside>
+
+  <!-- Основное содержимое -->
+  <main class="content">
+    <h1>Готовые программы тренировок</h1>
+
+    <!-- Фильтры программ -->
+    <section class="card filters">
+      <h2>Поиск программы</h2>
+      <input type="text" id="search-programs" placeholder="Поиск по названию...">
+      <select id="filter-level">
+        <option value="">Уровень сложности</option>
+        <option value="новичок">Новичок</option>
+        <option value="средний">Средний</option>
+        <option value="продвинутый">Продвинутый</option>
+      </select>
+      <select id="filter-goal">
+        <option value="">Цель тренировки</option>
+        <option value="похудение">Похудение</option>
+        <option value="набор массы">Набор массы</option>
+        <option value="сила">Сила</option>
+        <option value="выносливость">Выносливость</option>
+        <option value="общее развитие">Общее развитие</option>
+      </select>
+      <select id="filter-duration">
+        <option value="">Продолжительность</option>
+        <option value="4">4 недели</option>
+        <option value="8">8 недель</option>
+        <option value="12">12 недель</option>
+        <option value="16">16+ недель</option>
+      </select>
+    </section>
+
+    <!-- Список программ -->
+    <section class="card">
+      <h2>Доступные программы</h2>
+      <div id="programs-container" class="programs-grid"></div>
+    </section>
+
+    <!-- Детали выбранной программы -->
+    <section id="program-details" class="card" style="display: none;">
+      <h2 id="program-title">Название программы</h2>
+      <div id="program-meta"></div>
+      <div id="program-weeks" class="weeks-container"></div>
+      <button id="add-to-plan" class="btn">➕ Добавить в мой план</button>
+    </section>
+  </main>
+
+  <!-- Модальное окно для деталей упражнения -->
+  <div id="modalBack" class="modal-back" style="display: none;">
+    <div id="modal" class="modal">
+      <button id="modalClose" class="modal-close">×</button>
+      <div id="modalContent" class="modal-content"></div>
+    </div>
+  </div>
+</body>
+</html>

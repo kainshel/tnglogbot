@@ -1,0 +1,12 @@
+/* Светлая тема (значения по умолчанию) */
+.theme-light {
+  --bg-color: #f9faf9;
+  --text-color: #333333;
+  --text-light: #666666;
+  --card-bg: #ffffff;
+  --border: 1px solid #e0e0e0;
+}
+
+.theme-light .skeleton-loader {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+}

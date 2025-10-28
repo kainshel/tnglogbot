@@ -1,0 +1,12 @@
+/* Темная тема */
+.theme-dark {
+  --bg-color: #1a1a1a;
+  --text-color: #ffffff;
+  --text-light: #cccccc;
+  --card-bg: #2a2a2a;
+  --border: 1px solid #404040;
+}
+
+.theme-dark .skeleton-loader {
+  background: linear-gradient(90deg, #2a2a2a 25%, #333 50%, #2a2a2a 75%);
+}

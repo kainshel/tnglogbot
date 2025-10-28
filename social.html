@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Сообщество — Дневник Тренировок</title>
+  
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/components/buttons.css">
+  <link rel="stylesheet" href="styles/components/cards.css">
+  <link rel="stylesheet" href="styles/components/navigation.css">
+  <link rel="stylesheet" href="styles/components/modals.css">
+  <link rel="stylesheet" href="styles/components/forms.css">
+  <link rel="stylesheet" href="styles/pages/social.css">
+  
+  <script src="tg-init.js" defer></script>
+  <script src="nav.js" defer></script>
+  <script src="scripts/modules/social/app_social.js" defer></script>
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <button id="burger" class="burger" aria-label="Открыть меню" aria-controls="sidebar" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <div id="backdrop" class="backdrop" hidden></div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="brand">Дневник Тренировок</div>
+    <nav role="navigation" aria-label="Main" class="nav">
+      <a href="index.html">Главная</a>
+      <a href="exercises.html">Упражнения</a>
+      <a href="workout.html">Тренировка</a>
+      <a href="history.html">История</a>
+      <a href="programs.html">Программы</a>
+      <a href="analytics.html">Аналитика</a>
+      <a href="profile.html">Профиль</a>
+      <a class="active" href="social.html">Сообщество</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <h1>Сообщество</h1>
+    
+    <!-- Статистика пользователя -->
+    <section class="card user-stats-card">
+      <div class="user-header">
+        <div class="user-avatar">
+          <div class="avatar-placeholder" id="userAvatar">
+            <span id="avatarInitials">СП</span>
+          </div>
+        </div>
+        <div class="user-info">
+          <h2 id="userName">Спортсмен</h2>
+          <p id="userLevel">Уровень: Новичок</p>
+        </div>
+        <div class="user-badges">
+          <span class="badge" title="Тренировок завершено">🏋️ <span id="userWorkouts">0</span></span>
+          <span class="badge" title="Дней подряд">🔥 <span id="userStreak">0</span></span>
+          <span class="badge" title="Друзей">👥 <span id="userFriends">0</span></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Достижения -->
+    <section class="card">
+      <div class="section-header">
+        <h2>Мои достижения</h2>
+        <button class="btn secondary" id="shareAchievements">Поделиться</button>
+      </div>
+      <div id="achievements-container" class="achievements-grid">
+        <div class="achievement-skeleton"></div>
+        <div class="achievement-skeleton"></div>
+        <div class="achievement-skeleton"></div>
+      </div>
+    </section>
+
+    <!-- Друзья -->
+    <section class="card">
+      <div class="section-header">
+        <h2>Друзья</h2>
+        <div class="friend-actions">
+          <input type="text" id="friendSearch" placeholder="Поиск друзей">
+          <button class="btn" id="addFriendBtn">Добавить друга</button>
+        </div>
+      </div>
+      <div id="friends-container" class="friends-list">
+        <p class="empty-state">У вас пока нет друзей</p>
+      </div>
+    </section>
+
+    <!-- Лента активностей -->
+    <section class="card">
+      <div class="section-header">
+        <h2>Активности друзей</h2>
+        <div class="feed-filter">
+          <select id="activityFilter">
+            <option value="all">Все активности</option>
+            <option value="workouts">Тренировки</option>
+            <option value="achievements">Достижения</option>
+            <option value="personalBests">Рекорды</option>
+          </select>
+        </div>
+      </div>
+      <div id="activity-feed" class="activity-feed">
+        <div class="activity-skeleton"></div>
+        <div class="activity-skeleton"></div>
+        <div class="activity-skeleton"></div>
+      </div>
+    </section>
+
+    <!-- Сравнение с друзьями -->
+    <section class="card">
+      <h2>Сравнение с друзьями</h2>
+      <div class="comparison-controls">
+        <select id="comparisonMetric">
+          <option value="workouts">Количество тренировок</option>
+          <option value="volume">Общий тоннаж</option>
+          <option value="streak">Серия тренировок</option>
+          <option value="consistency">Регулярность</option>
+        </select>
+        <select id="comparisonPeriod">
+          <option value="week">За неделю</option>
+          <option value="month">За месяц</option>
+          <option value="all">За всё время</option>
+        </select>
+      </div>
+      <div id="comparison-chart" class="comparison-chart">
+        <p class="empty-state">Добавьте друзей для сравнения</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Модальное окно добавления друга -->
+  <div id="addFriendModal" class="modal-back">
+    <div class="modal">
+      <button class="modal-close" id="closeAddFriendModal">×</button>
+      <div class="modal-content">
+        <h2>Добавить друга</h2>
+        <div class="form-group">
+          <label for="friendUsername">Имя пользователя или ID</label>
+          <input type="text" id="friendUsername" placeholder="Введите username или ID">
+        </div>
+        <div class="form-group">
+          <label for="friendMessage">Пригласительное сообщение (необязательно)</label>
+          <textarea id="friendMessage" placeholder="Привет! Давай дружить и мотивировать друг друга!"></textarea>
+        </div>
+        <button class="btn primary" id="sendFriendRequest">Отправить запрос</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Модальное окно профиля друга -->
+  <div id="friendProfileModal" class="modal-back">
+    <div class="modal modal-large">
+      <button class="modal-close" id="closeFriendModal">×</button>
+      <div class="modal-content" id="friendProfileContent">
+        <!-- Контент будет загружен динамически -->
+      </div>
+    </div>
+  </div>
+</body>
+</html>
