@@ -19,6 +19,7 @@
       <a href="exercises.html">Библиотека упражнений</a>
       <a href="workout.html">Тренировка</a>
       <a href="history.html">История</a>
+	  <a href="programs.html">Программы тренировок</a>
       <a href="analytics.html">Аналитика</a>
       <a href="social.html">Социальное</a>
       <a href="challenges.html">Челленджи</a>
