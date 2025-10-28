@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="styles/components/buttons.css">
   <link rel="stylesheet" href="styles/components/cards.css">
   <link rel="stylesheet" href="styles/components/navigation.css">
-    <link rel="stylesheet" href="styles/components/modals.css">
+  <link rel="stylesheet" href="styles/components/modals.css">
   <link rel="stylesheet" href="styles/components/forms.css">
   <link rel="stylesheet" href="styles/pages/workout.css">
   
@@ -46,11 +46,16 @@
       <input type="date" id="date" value="">
     </section>
 
-    <!-- Состав тренировки (ПЕРЕМЕЩЕНО НАВЕРХ) -->
+    <!-- Состав тренировки (ЕДИНСТВЕННЫЙ блок) -->
     <section class="card">
       <h2>Моя тренировка</h2>
       <div id="plan"></div>
-      <button id="saveBtn" class="btn">💾 Сохранить тренировку</button>
+      <div class="plan-actions">
+        <button id="saveBtn" class="btn">💾 Сохранить тренировку</button>
+        <button class="btn secondary" onclick="window.location.href='programs.html'">
+          📋 Выбрать программу
+        </button>
+      </div>
     </section>
 
     <!-- Фильтры -->
@@ -71,12 +76,11 @@
   </main>
 
   <!-- Модальное окно для деталей упражнения -->
-<!-- Модальное окно для деталей упражнения -->
-<div id="modalBack" class="modal-back" style="display: none;">
-  <div id="modal" class="modal">
-    <button id="modalClose" class="modal-close">×</button>
-    <div id="modalContent" class="modal-content"></div>
+  <div id="modalBack" class="modal-back" style="display: none;">
+    <div id="modal" class="modal">
+      <button id="modalClose" class="modal-close">×</button>
+      <div id="modalContent" class="modal-content"></div>
+    </div>
   </div>
-</div>
 </body>
 </html>

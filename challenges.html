@@ -3,26 +3,233 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Главная — Дневник Тренировок</title>
+  <title>Испытания и Достижения — Дневник Тренировок</title>
   
-  
-<link rel="stylesheet" href="styles/main.css">
-
-<!-- Компоненты -->
-<link rel="stylesheet" href="styles/components/buttons.css">
-<link rel="stylesheet" href="styles/components/cards.css">
-<link rel="stylesheet" href="styles/components/modals.css">
-<link rel="stylesheet" href="styles/components/navigation.css">
-<link rel="stylesheet" href="styles/components/forms.css">
-<link rel="stylesheet" href="styles/pages/analytics.css">
-  
-  
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/components/buttons.css">
+  <link rel="stylesheet" href="styles/components/cards.css">
+  <link rel="stylesheet" href="styles/components/navigation.css">
+  <link rel="stylesheet" href="styles/components/modals.css">
+  <link rel="stylesheet" href="styles/components/forms.css">
+  <link rel="stylesheet" href="styles/pages/challenges.css">
   
   <script src="tg-init.js" defer></script>
   <script src="nav.js" defer></script>
-  <script src="scripts\modules\dashboard\app_dashboard.js" defer></script>
+  <script src="scripts/modules/challenges/app_challenges.js" defer></script>
   <link rel="manifest" href="manifest.json">
 </head>
+<body>
+  <button id="burger" class="burger" aria-label="Открыть меню" aria-controls="sidebar" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <div id="backdrop" class="backdrop" hidden></div>
 
+  <aside id="sidebar" class="sidebar">
+    <div class="brand">Дневник Тренировок</div>
+    <nav role="navigation" aria-label="Main" class="nav">
+      <a href="index.html">Главная</a>
+      <a href="exercises.html">Упражнения</a>
+      <a href="workout.html">Тренировка</a>
+      <a href="history.html">История</a>
+      <a href="programs.html">Программы</a>
+      <a href="analytics.html">Аналитика</a>
+      <a href="profile.html">Профиль</a>
+      <a href="social.html">Сообщество</a>
+      <a class="active" href="challenges.html">Испытания</a>
+    </nav>
+  </aside>
 
-  <script src="scripts/modules/social/challenges.js" defer></script>
+  <main class="content">
+    <h1>Испытания и Достижения</h1>
+    
+    <!-- Прогресс пользователя -->
+    <section class="card user-progress-card">
+      <div class="progress-header">
+        <h2>Мой прогресс</h2>
+        <div class="level-info">
+          <span class="level-badge">Уровень <span id="userLevel">5</span></span>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 65%"></div>
+            <span class="progress-text">65% до следующего уровня</span>
+          </div>
+        </div>
+      </div>
+      <div class="progress-stats">
+        <div class="progress-stat">
+          <span class="stat-value" id="earnedAchievements">12</span>
+          <span class="stat-label">Получено достижений</span>
+        </div>
+        <div class="progress-stat">
+          <span class="stat-value" id="completedChallenges">8</span>
+          <span class="stat-label">Завершено испытаний</span>
+        </div>
+        <div class="progress-stat">
+          <span class="stat-value" id="totalPoints">1,250</span>
+          <span class="stat-label">Накоплено очков</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Текущие испытания -->
+    <section class="card">
+      <div class="section-header">
+        <h2>Текущие испытания</h2>
+        <button class="btn secondary" id="createChallengeBtn">Создать испытание</button>
+      </div>
+      <div class="challenges-tabs">
+        <button class="tab-btn active" data-tab="active">Активные</button>
+        <button class="tab-btn" data-tab="available">Доступные</button>
+        <button class="tab-btn" data-tab="completed">Завершенные</button>
+      </div>
+      <div id="challenges-container" class="challenges-grid">
+        <div class="challenge-skeleton"></div>
+        <div class="challenge-skeleton"></div>
+        <div class="challenge-skeleton"></div>
+      </div>
+    </section>
+
+    <!-- Достижения -->
+    <section class="card">
+      <div class="section-header">
+        <h2>Достижения</h2>
+        <div class="achievements-filter">
+          <select id="achievementsFilter">
+            <option value="all">Все достижения</option>
+            <option value="earned">Полученные</option>
+            <option value="not-earned">Не полученные</option>
+            <option value="category-training">Тренировки</option>
+            <option value="category-consistency">Регулярность</option>
+            <option value="category-strength">Сила</option>
+            <option value="category-endurance">Выносливость</option>
+          </select>
+        </div>
+      </div>
+      <div id="achievements-container" class="achievements-grid">
+        <div class="achievement-skeleton"></div>
+        <div class="achievement-skeleton"></div>
+        <div class="achievement-skeleton"></div>
+        <div class="achievement-skeleton"></div>
+        <div class="achievement-skeleton"></div>
+        <div class="achievement-skeleton"></div>
+      </div>
+    </section>
+
+    <!-- Ежедневные задания -->
+    <section class="card">
+      <div class="section-header">
+        <h2>Ежедневные задания</h2>
+        <div class="daily-info">
+          <span class="daily-streak">🔥 Серия: <span id="dailyStreak">7 дней</span></span>
+          <span class="daily-points">+<span id="dailyPoints">25</span> очков за выполнение</span>
+        </div>
+      </div>
+      <div id="daily-challenges" class="daily-challenges-list">
+        <div class="daily-challenge completed">
+          <div class="daily-checkbox">✓</div>
+          <div class="daily-content">
+            <h3>Выполните 30-минутную тренировку</h3>
+            <p>Любая тренировка продолжительностью не менее 30 минут</p>
+          </div>
+          <span class="daily-reward">+10 очков</span>
+        </div>
+        <div class="daily-challenge">
+          <div class="daily-checkbox"></div>
+          <div class="daily-content">
+            <h3>Сделайте 5000 шагов</h3>
+            <p>Прогуляйтесь и наберите 5000 шагов за день</p>
+          </div>
+          <span class="daily-reward">+5 очков</span>
+        </div>
+        <div class="daily-challenge">
+          <div class="daily-checkbox"></div>
+          <div class="daily-content">
+            <h3>Выполните упражнение на растяжку</h3>
+            <p>5 минут растяжки основных групп мышц</p>
+          </div>
+          <span class="daily-reward">+5 очков</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Награды -->
+    <section class="card">
+      <h2>Награды</h2>
+      <div class="rewards-tabs">
+        <button class="tab-btn active" data-tab="available-rewards">Доступные</button>
+        <button class="tab-btn" data-tab="earned-rewards">Полученные</button>
+      </div>
+      <div id="rewards-container" class="rewards-grid">
+        <div class="reward-card">
+          <div class="reward-icon">🎁</div>
+          <div class="reward-content">
+            <h3>Скидка 15% на спортивные товары</h3>
+            <p>Используйте код: FITNESS15</p>
+          </div>
+          <div class="reward-cost">500 очков</div>
+        </div>
+        <div class="reward-card">
+          <div class="reward-icon">📘</div>
+          <div class="reward-content">
+            <h3>Гайд по питанию</h3>
+            <p>PDF-руководство по правильному питанию</p>
+          </div>
+          <div class="reward-cost">300 очков</div>
+        </div>
+        <div class="reward-card locked">
+          <div class="reward-icon">⭐</div>
+          <div class="reward-content">
+            <h3>Персональная тренировка</h3>
+            <p>60 минут с персональным тренером</p>
+          </div>
+          <div class="reward-cost">1500 очков</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Модальное окно создания испытания -->
+  <div id="createChallengeModal" class="modal-back">
+    <div class="modal">
+      <button class="modal-close" id="closeCreateChallengeModal">×</button>
+      <div class="modal-content">
+        <h2>Создать испытание</h2>
+        <div class="form-group">
+          <label for="challengeTitle">Название испытания</label>
+          <input type="text" id="challengeTitle" placeholder="Например: 30 дней приседаний">
+        </div>
+        <div class="form-group">
+          <label for="challengeDescription">Описание</label>
+          <textarea id="challengeDescription" placeholder="Опишите условия испытания"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="challengeType">Тип испытания</label>
+          <select id="challengeType">
+            <option value="personal">Личное</option>
+            <option value="group">Групповое</option>
+            <option value="competition">Соревнование</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="challengeDuration">Продолжительность (дней)</label>
+          <input type="number" id="challengeDuration" min="1" max="365" value="7">
+        </div>
+        <div class="form-group">
+          <label for="challengeGoal">Цель</label>
+          <input type="text" id="challengeGoal" placeholder="Например: 1000 приседаний">
+        </div>
+        <button class="btn primary" id="createChallengeConfirm">Создать испытание</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Модальное окно деталей испытания -->
+  <div id="challengeDetailModal" class="modal-back">
+    <div class="modal modal-large">
+      <button class="modal-close" id="closeChallengeDetailModal">×</button>
+      <div class="modal-content" id="challengeDetailContent">
+        <!-- Контент будет загружен динамически -->
+      </div>
+    </div>
+  </div>
+</body>
+</html>

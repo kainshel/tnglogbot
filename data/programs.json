@@ -1,0 +1,442 @@
+[
+  {
+    "id": "fullbody-beginner",
+    "name": "Фулбоди для начинающих",
+    "description": "Базовая программа для новичков, направленная на общее развитие всех групп мышц. Идеальна для старта тренировок.",
+    "level": "новичок",
+    "goal": "общее развитие",
+    "duration": 8,
+    "frequency": 3,
+    "weeks": [
+      {
+        "days": [
+          {
+            "focus": "Все тело",
+            "exercises": [
+              { "exerciseId": "Barbell Bench Press", "sets": 3, "reps": "10-12", "rest": "60сек" },
+              { "exerciseId": "Bent-Over Barbell Row", "sets": 3, "reps": "10-12", "rest": "60сек" },
+              { "exerciseId": "Squat", "sets": 3, "reps": "10-12", "rest": "60сек" },
+              { "exerciseId": "Overhead Barbell Press", "sets": 3, "reps": "10-12", "rest": "60сек" },
+              { "exerciseId": "Plank", "sets": 3, "reps": "30сек", "rest": "45сек" },
+              { "exerciseId": "Crunch", "sets": 3, "reps": "15-20", "rest": "45сек" }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "chest-back-power",
+    "name": "Грудь-Спина (силовой)",
+    "description": "Программа для развития верхней части тела с акцентом на грудные и спинные мышцы.",
+    "level": "средний",
+    "goal": "набор массы",
+    "duration": 6,
+    "frequency": 4,
+    "weeks": [
+      {
+        "days": [
+          {
+            "focus": "Грудь",
+            "exercises": [
+              { "exerciseId": "Barbell Bench Press", "sets": 4, "reps": "8-10", "rest": "90сек" },
+              { "exerciseId": "Incline Barbell Press", "sets": 3, "reps": "10-12", "rest": "75сек" },
+              { "exerciseId": "Dumbbell Fly", "sets": 3, "reps": "12-15", "rest": "60сек" },
+              { "exerciseId": "Dips", "sets": 3, "reps": "до отказа", "rest": "60сек" }
+            ]
+          },
+          {
+            "focus": "Спина",
+            "exercises": [
+              { "exerciseId": "Wide-Grip Pull-Ups", "sets": 4, "reps": "6-8", "rest": "90сек" },
+              { "exerciseId": "Bent-Over Barbell Row", "sets": 4, "reps": "8-10", "rest": "75сек" },
+              { "exerciseId": "Lat Pulldown", "sets": 3, "reps": "10-12", "rest": "60сек" },
+              { "exerciseId": "Face Pull", "sets": 3, "reps": "15-20", "rest": "45сек" }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "push-pull-legs",
+    "name": "PUSH-PULL-LEGS",
+    "description": "Классическая трехдневная сплит-программа: жимовые движения, тяговые движения и ноги.",
+    "level": "средний",
+    "goal": "набор массы",
+    "duration": 12,
+    "frequency": 6,
+    "weeks": [
+      {
+        "days": [
+          {
+            "focus": "PUSH (Жимовой день)",
+            "exercises": [
+              { "exerciseId": "Barbell Bench Press", "sets": 4, "reps": "8-10", "rest": "90сек" },
+              { "exerciseId": "Overhead Barbell Press", "sets": 4, "reps": "8-10", "rest": "90сек" },
+              { "exerciseId": "Incline Dumbbell Press", "sets": 3, "reps": "10-12", "rest": "75сек" },
+              { "exerciseId": "Lateral Raise", "sets": 3, "reps": "12-15", "rest": "60сек" },
+              { "exerciseId": "Triceps Pushdown", "sets": 3, "reps": "12-15", "rest": "60сек" }
+            ]
+          },
+          {
+            "focus": "PULL (Тяговой день)",
+            "exercises": [
+              { "exerciseId": "Deadlift", "sets": 4, "reps": "5-8", "rest": "120сек" },
+              { "exerciseId": "Wide-Grip Pull-Ups", "sets": 4, "reps": "6-8", "rest": "90сек" },
+              { "exerciseId": "Bent-Over Barbell Row", "sets": 4, "reps": "8-10", "rest": "75сек" },
+              { "exerciseId": "Barbell Curl", "sets": 3, "reps": "10-12", "rest": "60сек" },
+              { "exerciseId": "Face Pull", "sets": 3, "reps": "15-20", "rest": "45сек" }
+            ]
+          },
+          {
+            "focus": "LEGS (Ноги)",
+            "exercises": [
+              { "exerciseId": "Squat", "sets": 4, "reps": "8-10", "rest": "90сек" },
+              { "exerciseId": "Leg Press", "sets": 4, "reps": "10-12", "rest": "75сек" },
+              { "exerciseId": "Leg Extension", "sets": 3, "reps": "12-15", "rest": "60сек" },
+              { "exerciseId": "Leg Curl", "sets": 3, "reps": "12-15", "rest": "60сек" },
+              { "exerciseId": "Calf Raise", "sets": 4, "reps": "15-20", "rest": "45сек" }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "upper-lower-strength",
+    "name": "Верх-Низ (Сила)",
+    "description": "Четырехдневный сплит с разделением на тренировки верха и низа тела.",
+    "level": "средний",
+    "goal": "сила",
+    "duration": 8,
+    "frequency": 4,
+    "weeks": [
+      {
+        "days": [
+          {
+            "focus": "Верх тела (Сила)",
+            "exercises": [
+              { "exerciseId": "Barbell Bench Press", "sets": 4, "reps": "5-8", "rest": "120сек" },
+              { "exerciseId": "Bent-Over Barbell Row", "sets": 4, "reps": "6-8", "rest": "120сек" },
+              { "exerciseId": "Overhead Barbell Press", "sets": 3, "reps": "8-10", "rest": "90сек" },
+              { "exerciseId": "Wide-Grip Pull-Ups", "sets": 3, "reps": "6-8", "rest": "90сек" }
+            ]
+          },
+          {
+            "focus": "Низ тела (Сила)",
+            "exercises": [
+              { "exerciseId": "Squat", "sets": 4, "reps": "5-8", "rest": "120сек" },
+              { "exerciseId": "Deadlift", "sets": 3, "reps": "5-8", "rest": "120сек" },
+              { "exerciseId": "Leg Press", "sets": 3, "reps": "8-10", "rest": "90сек" },
+              { "exerciseId": "Calf Raise", "sets": 4, "reps": "10-12", "rest": "60сек" }
+            ]
+          },
+          {
+            "focus": "Верх тела (Объем)",
+            "exercises": [
+              { "exerciseId": "Incline Dumbbell Press", "sets": 4, "reps": "10-12", "rest": "75сек" },
+              { "exerciseId": "Lat Pulldown", "sets": 4, "reps": "10-12", "rest": "75сек" },
+              { "exerciseId": "Dumbbell Fly", "sets": 3, "reps": "12-15", "rest": "60сек" },
+              { "exerciseId": "Seated Cable Row", "sets": 3, "reps": "12-15", "rest": "60сек" }
+            ]
+          },
+          {
+            "focus": "Низ тела (Объем)",
+            "exercises": [
+              { "exerciseId": "Front Squat", "sets": 4, "reps": "8-10", "rest": "90сек" },
+              { "exerciseId": "Lunges", "sets": 3, "reps": "10-12", "rest": "75сек" },
+              { "exerciseId": "Leg Extension", "sets": 3, "reps": "12-15", "rest": "60сек" },
+              { "exerciseId": "Leg Curl", "sets": 3, "reps": "12-15", "rest": "60сек" }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "powerlifting-strength",
+    "name": "Пауэрлифтинг (Силовая)",
+    "description": "Программа для развития максимальной силы в трех основных движениях: жим, присед, становая.",
+    "level": "продвинутый",
+    "goal": "сила",
+    "duration": 16,
+    "frequency": 4,
+    "weeks": [
+      {
+        "days": [
+          {
+            "focus": "Жим лежа",
+            "exercises": [
+              { "exerciseId": "Barbell Bench Press", "sets": 5, "reps": "3-5", "rest": "180сек" },
+              { "exerciseId": "Close-Grip Push-Ups", "sets": 4, "reps": "6-8", "rest": "120сек" },
+              { "exerciseId": "Dumbbell Bench Press", "sets": 3, "reps": "8-10", "rest": "90сек" },
+              { "exerciseId": "Lying Barbell Triceps Extension", "sets": 3, "reps": "10-12", "rest": "60сек" }
+            ]
+          },
+          {
+            "focus": "Приседания",
+            "exercises": [
+              { "exerciseId": "Squat", "sets": 5, "reps": "3-5", "rest": "180сек" },
+              { "exerciseId": "Front Squat", "sets": 4, "reps": "6-8", "rest": "120сек" },
+              { "exerciseId": "Leg Press", "sets": 3, "reps": "8-10", "rest": "90сек" },
+              { "exerciseId": "Leg Extension", "sets": 3, "reps": "12-15", "rest": "60сек" }
+            ]
+          },
+          {
+            "focus": "Становая тяга",
+            "exercises": [
+              { "exerciseId": "Deadlift", "sets": 5, "reps": "3-5", "rest": "180сек" },
+              { "exerciseId": "Stiff-Leg Deadlift", "sets": 4, "reps": "6-8", "rest": "120сек" },
+              { "exerciseId": "Bent-Over Barbell Row", "sets": 3, "reps": "8-10", "rest": "90сек" },
+              { "exerciseId": "Back Extension", "sets": 3, "reps": "12-15", "rest": "60сек" }
+            ]
+          },
+          {
+            "focus": "Вспомогательные",
+            "exercises": [
+              { "exerciseId": "Overhead Barbell Press", "sets": 4, "reps": "6-8", "rest": "120сек" },
+              { "exerciseId": "Wide-Grip Pull-Ups", "sets": 4, "reps": "6-8", "rest": "120сек" },
+              { "exerciseId": "Barbell Curl", "sets": 3, "reps": "8-10", "rest": "60сек" },
+              { "exerciseId": "Plank", "sets": 3, "reps": "60сек", "rest": "60сек" }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cutting-fatloss",
+    "name": "Сушка/Похудение",
+    "description": "Программа для сжигания жира с сочетанием силовых тренировок и кардио.",
+    "level": "средний",
+    "goal": "похудение",
+    "duration": 12,
+    "frequency": 5,
+    "weeks": [
+      {
+        "days": [
+          {
+            "focus": "Верх тела + Кардио",
+            "exercises": [
+              { "exerciseId": "Barbell Bench Press", "sets": 3, "reps": "12-15", "rest": "60сек" },
+              { "exerciseId": "Lat Pulldown", "sets": 3, "reps": "12-15", "rest": "60сек" },
+              { "exerciseId": "Overhead Barbell Press", "sets": 3, "reps": "12-15", "rest": "60сек" },
+              { "exerciseId": "Bent-Over Barbell Row", "sets": 3, "reps": "12-15", "rest": "60сек" },
+              { "exerciseId": "Running in Place", "sets": 1, "reps": "20мин", "rest": "0сек" }
+            ]
+          },
+          {
+            "focus": "Низ тела + Кардио",
+            "exercises": [
+              { "exerciseId": "Squat", "sets": 3, "reps": "12-15", "rest": "60сек" },
+              { "exerciseId": "Leg Press", "sets": 3, "reps": "15-20", "rest": "60сек" },
+              { "exerciseId": "Lunges", "sets": 3, "reps": "12-15", "rest": "60сек" },
+              { "exerciseId": "Leg Curl", "sets": 3, "reps": "15-20", "rest": "60сек" },
+              { "exerciseId": "Assault Bike", "sets": 1, "reps": "25мин", "rest": "0сек" }
+            ]
+          },
+          {
+            "focus": "Кардио + Пресс",
+            "exercises": [
+              { "exerciseId": "Jump Rope", "sets": 1, "reps": "30мин", "rest": "0сек" },
+              { "exerciseId": "Crunch", "sets": 4, "reps": "20-25", "rest": "45сек" },
+              { "exerciseId": "Leg Raise", "sets": 4, "reps": "15-20", "rest": "45сек" },
+              { "exerciseId": "Plank", "sets": 3, "reps": "60сек", "rest": "45сек" },
+              { "exerciseId": "Russian Twist", "sets": 3, "reps": "20-25", "rest": "45сек" }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "functional-crossfit",
+    "name": "Функциональная (Кроссфит)",
+    "description": "Высокоинтенсивные функциональные тренировки для развития общей физической подготовки.",
+    "level": "продвинутый",
+    "goal": "выносливость",
+    "duration": 8,
+    "frequency": 5,
+    "weeks": [
+      {
+        "days": [
+          {
+            "focus": "WOD 1 - Сила",
+            "exercises": [
+              { "exerciseId": "Deadlift", "sets": 5, "reps": "5", "rest": "90сек" },
+              { "exerciseId": "Box Jump", "sets": 5, "reps": "10", "rest": "60сек" },
+              { "exerciseId": "Wide-Grip Pull-Ups", "sets": 5, "reps": "10", "rest": "60сек" },
+              { "exerciseId": "Push-Ups", "sets": 5, "reps": "20", "rest": "60сек" }
+            ]
+          },
+          {
+            "focus": "WOD 2 - Выносливость",
+            "exercises": [
+              { "exerciseId": "Squat", "sets": 5, "reps": "10", "rest": "75сек" },
+              { "exerciseId": "Burpee", "sets": 5, "reps": "15", "rest": "60сек" },
+              { "exerciseId": "Kettlebell Swing", "sets": 5, "reps": "20", "rest": "45сек" },
+              { "exerciseId": "Jump Rope", "sets": 5, "reps": "30сек", "rest": "45сек" }
+            ]
+          },
+          {
+            "focus": "WOD 3 - Взрывная сила",
+            "exercises": [
+              { "exerciseId": "Push Press", "sets": 4, "reps": "8", "rest": "90сек" },
+              { "exerciseId": "Clap Push-Ups", "sets": 4, "reps": "10", "rest": "60сек" },
+              { "exerciseId": "Kettlebell Snatch", "sets": 4, "reps": "12", "rest": "60сек" },
+              { "exerciseId": "Alternating Jump Lunge", "sets": 4, "reps": "15", "rest": "60сек" }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "home-workout",
+    "name": "Домашняя тренировка",
+    "description": "Эффективная программа для тренировок дома с минимальным оборудованием.",
+    "level": "новичок",
+    "goal": "общее развитие",
+    "duration": 4,
+    "frequency": 4,
+    "weeks": [
+      {
+        "days": [
+          {
+            "focus": "Верх тела",
+            "exercises": [
+              { "exerciseId": "Push-Ups", "sets": 4, "reps": "15-20", "rest": "60сек" },
+              { "exerciseId": "Diamond Push-Ups", "sets": 3, "reps": "10-15", "rest": "60сек" },
+              { "exerciseId": "Dips", "sets": 3, "reps": "12-15", "rest": "45сек" },
+              { "exerciseId": "Plank", "sets": 3, "reps": "60сек", "rest": "45сек" }
+            ]
+          },
+          {
+            "focus": "Низ тела",
+            "exercises": [
+              { "exerciseId": "Squat", "sets": 4, "reps": "20-25", "rest": "60сек" },
+              { "exerciseId": "Lunges", "sets": 3, "reps": "12-15", "rest": "60сек" },
+              { "exerciseId": "Calf Raise", "sets": 4, "reps": "20-25", "rest": "45сек" },
+              { "exerciseId": "Jumping Jacks", "sets": 3, "reps": "30сек", "rest": "30сек" }
+            ]
+          },
+          {
+            "focus": "Кардио + Пресс",
+            "exercises": [
+              { "exerciseId": "Burpee", "sets": 4, "reps": "10", "rest": "60сек" },
+              { "exerciseId": "Mountain Climber", "sets": 4, "reps": "30сек", "rest": "45сек" },
+              { "exerciseId": "Crunch", "sets": 3, "reps": "20", "rest": "45сек" },
+              { "exerciseId": "Leg Raise", "sets": 3, "reps": "15", "rest": "45сек" }
+            ]
+          },
+          {
+            "focus": "Полное тело",
+            "exercises": [
+              { "exerciseId": "Push-Ups", "sets": 4, "reps": "15-20", "rest": "60сек" },
+              { "exerciseId": "Squat", "sets": 4, "reps": "20-25", "rest": "60сек" },
+              { "exerciseId": "Plank", "sets": 3, "reps": "60сек", "rest": "45сек" },
+              { "exerciseId": "Bicycle Crunch", "sets": 3, "reps": "20", "rest": "45сек" }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bodyweight-only",
+    "name": "Только с весом тела",
+    "description": "Программа для развития силы и выносливости без использования дополнительного оборудования.",
+    "level": "средний",
+    "goal": "выносливость",
+    "duration": 6,
+    "frequency": 4,
+    "weeks": [
+      {
+        "days": [
+          {
+            "focus": "Сила верха",
+            "exercises": [
+              { "exerciseId": "Wide-Grip Pull-Ups", "sets": 4, "reps": "6-10", "rest": "90сек" },
+              { "exerciseId": "Push-Ups", "sets": 4, "reps": "15-20", "rest": "75сек" },
+              { "exerciseId": "Dips", "sets": 3, "reps": "8-12", "rest": "60сек" },
+              { "exerciseId": "Plank", "sets": 3, "reps": "60сек", "rest": "60сек" }
+            ]
+          },
+          {
+            "focus": "Сила низа",
+            "exercises": [
+              { "exerciseId": "Squat", "sets": 4, "reps": "20-25", "rest": "90сек" },
+              { "exerciseId": "Lunges", "sets": 3, "reps": "12-15", "rest": "75сек" },
+              { "exerciseId": "Calf Raise", "sets": 4, "reps": "20-25", "rest": "45сек" },
+              { "exerciseId": "Jump Squat", "sets": 3, "reps": "10-12", "rest": "60сек" }
+            ]
+          },
+          {
+            "focus": "Выносливость",
+            "exercises": [
+              { "exerciseId": "Burpee", "sets": 5, "reps": "10", "rest": "60сек" },
+              { "exerciseId": "Mountain Climber", "sets": 4, "reps": "30сек", "rest": "45сек" },
+              { "exerciseId": "Jumping Jacks", "sets": 4, "reps": "30сек", "rest": "30сек" },
+              { "exerciseId": "High Knees", "sets": 4, "reps": "30сек", "rest": "30сек" }
+            ]
+          },
+          {
+            "focus": "Пресс и кора",
+            "exercises": [
+              { "exerciseId": "Hanging Leg Raise", "sets": 4, "reps": "10-15", "rest": "60сек" },
+              { "exerciseId": "Russian Twist", "sets": 3, "reps": "20", "rest": "45сек" },
+              { "exerciseId": "V-Up", "sets": 3, "reps": "12-15", "rest": "45сек" },
+              { "exerciseId": "Side Plank", "sets": 3, "reps": "45сек", "rest": "30сек" }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "arms-shoulders-focused",
+    "name": "Руки и Плечи",
+    "description": "Специализированная программа для развития мышц рук и плечевого пояса.",
+    "level": "средний",
+    "goal": "набор массы",
+    "duration": 6,
+    "frequency": 3,
+    "weeks": [
+      {
+        "days": [
+          {
+            "focus": "Плечи + Трицепс",
+            "exercises": [
+              { "exerciseId": "Overhead Barbell Press", "sets": 4, "reps": "8-10", "rest": "90сек" },
+              { "exerciseId": "Lateral Raise", "sets": 4, "reps": "12-15", "rest": "60сек" },
+              { "exerciseId": "Front Raise", "sets": 3, "reps": "12-15", "rest": "60сек" },
+              { "exerciseId": "Triceps Pushdown", "sets": 4, "reps": "10-12", "rest": "60сек" },
+              { "exerciseId": "Overhead Dumbbell Extension", "sets": 3, "reps": "12-15", "rest": "60сек" }
+            ]
+          },
+          {
+            "focus": "Бицепс + Предплечья",
+            "exercises": [
+              { "exerciseId": "Barbell Curl", "sets": 4, "reps": "8-10", "rest": "90сек" },
+              { "exerciseId": "Hammer Curl", "sets": 3, "reps": "10-12", "rest": "60сек" },
+              { "exerciseId": "Preacher Curl", "sets": 3, "reps": "10-12", "rest": "60сек" },
+              { "exerciseId": "Concentration Curl", "sets": 3, "reps": "12-15", "rest": "60сек" },
+              { "exerciseId": "Wrist Curl", "sets": 4, "reps": "15-20", "rest": "45сек" }
+            ]
+          },
+          {
+            "focus": "Дельты + Руки",
+            "exercises": [
+              { "exerciseId": "Arnold Press", "sets": 4, "reps": "10-12", "rest": "75сек" },
+              { "exerciseId": "Bent-Over Lateral Raise", "sets": 4, "reps": "12-15", "rest": "60сек" },
+              { "exerciseId": "Rope Cable Curl", "sets": 3, "reps": "12-15", "rest": "60сек" },
+              { "exerciseId": "Rope Triceps Pushdown", "sets": 3, "reps": "12-15", "rest": "60сек" },
+              { "exerciseId": "Face Pull", "sets": 3, "reps": "15-20", "rest": "45сек" }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

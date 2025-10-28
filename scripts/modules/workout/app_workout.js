@@ -133,6 +133,8 @@ function handleCompleteSet(exerciseIndex, setIndex, EX) {
 }
 
 function handleRemoveSet(EX, setIndex, exerciseIndex) {
+  if (!confirm("Удалить этот подход?")) return;
+  
   EX.sets.splice(setIndex, 1);
   
   if (EX.sets.length === 0) {
@@ -147,6 +149,8 @@ function handleRemoveSet(EX, setIndex, exerciseIndex) {
 // === Загрузка базы упражнений ===
 async function loadExercises() {
   try {
+    exercisesContainer.innerHTML = '<div class="loading">🔄 Загрузка упражнений...</div>';
+    
     const res = await fetch('data/exercises.json', { 
       cache: 'no-store',
       headers: {
@@ -476,6 +480,7 @@ function setupExerciseEventListeners(wrap, EX, index) {
   });
   
   wrap.querySelector(".remove-ex").addEventListener("click", () => {
+    if (!confirm("Удалить это упражнение из плана?")) return;
     plan = plan.filter(p => p !== EX);
     if (index <= currentExerciseIndex) {
       currentExerciseIndex = Math.max(0, currentExerciseIndex - 1);
@@ -494,7 +499,10 @@ function renderPlan() {
     planContainer.innerHTML = `
       <div class="empty-plan-message">
         <p>Ваш план тренировки пуст</p>
-        <p>Добавьте упражнения из списка ниже</p>
+        <p>Добавьте упражнения из списка ниже или выберите готовую программу</p>
+        <button class="btn" onclick="window.location.href='programs.html'">
+          📋 Выбрать программу
+        </button>
       </div>
     `;
     return;
@@ -502,12 +510,45 @@ function renderPlan() {
   
   const fragment = document.createDocumentFragment();
   
-  plan.forEach((EX, index) => {
-    const wrap = createExerciseCardElement(EX, index);
-    const setsEl = setupExerciseEventListeners(wrap, EX, index);
-    
-    fragment.appendChild(wrap);
-    renderSets(EX, setsEl, index);
+  // Группируем упражнения по дням (если есть информация о днях)
+  const exercisesByDay = {};
+  plan.forEach((exercise, index) => {
+    const dayNumber = exercise.dayInfo?.dayNumber || 1;
+    if (!exercisesByDay[dayNumber]) {
+      exercisesByDay[dayNumber] = [];
+    }
+    exercisesByDay[dayNumber].push({ exercise, index });
+  });
+  
+  // Рендерим по дням
+  Object.entries(exercisesByDay).forEach(([dayNumber, dayExercises]) => {
+    // Создаем секцию дня только если есть информация о днях
+    if (plan.some(ex => ex.dayInfo)) {
+      const daySection = document.createElement('div');
+      daySection.className = 'day-section';
+      
+      const dayTitle = document.createElement('h3');
+      const dayInfo = dayExercises[0].exercise.dayInfo;
+      dayTitle.textContent = `День ${dayNumber}${dayInfo?.focus ? ': ' + dayInfo.focus : ''}`;
+      daySection.appendChild(dayTitle);
+      
+      dayExercises.forEach(({ exercise, index }) => {
+        const wrap = createExerciseCardElement(exercise, index);
+        const setsEl = setupExerciseEventListeners(wrap, exercise, index);
+        daySection.appendChild(wrap);
+        renderSets(exercise, setsEl, index);
+      });
+      
+      fragment.appendChild(daySection);
+    } else {
+      // Обычный рендеринг без группировки по дням
+      dayExercises.forEach(({ exercise, index }) => {
+        const wrap = createExerciseCardElement(exercise, index);
+        const setsEl = setupExerciseEventListeners(wrap, exercise, index);
+        fragment.appendChild(wrap);
+        renderSets(exercise, setsEl, index);
+      });
+    }
   });
   
   planContainer.appendChild(fragment);
@@ -525,21 +566,62 @@ function addExerciseToPlan(ex) {
   }
 }
 
+// === Валидация данных ===
+function validateWorkoutData() {
+  if (!dateInput.value) {
+    alert("Выберите дату тренировки!");
+    dateInput.focus();
+    return false;
+  }
+  
+  // Проверяем, что есть хотя бы одно упражнение
+  if (plan.length === 0) {
+    alert("Добавьте хотя бы одно упражнение в план тренировки!");
+    return false;
+  }
+  
+  // Проверяем, что все подходы заполнены
+  const incompleteSets = plan.some(ex => 
+    ex.sets.some(set => set.weight === null || set.reps === null)
+  );
+  
+  if (incompleteSets) {
+    return confirm("Некоторые подходы не заполнены. Сохранить тренировку как есть?");
+  }
+  
+  // Проверяем, не существует ли уже тренировка на эту дату
+  const workouts = JSON.parse(localStorage.getItem("workouts") || "{}");
+  if (workouts[dateInput.value]) {
+    return confirm("Тренировка на эту дату уже существует. Перезаписать?");
+  }
+  
+  return true;
+}
+
+function updateProfileStats(workouts) {
+  const profile = JSON.parse(localStorage.getItem("userProfile") || "{}");
+  profile.totalWorkouts = Object.keys(workouts).length;
+  
+  let allExercises = [];
+  Object.values(workouts).forEach(workout => {
+    workout.forEach(ex => allExercises.push(ex.name_ru));
+  });
+  profile.totalExercises = new Set(allExercises).size;
+  
+  localStorage.setItem("userProfile", JSON.stringify(profile));
+}
+
+function resetWorkoutPlan() {
+  plan = [];
+  currentExerciseIndex = 0;
+  currentSetIndex = 0;
+  renderPlan();
+}
+
 // === Сохранение плана ===
 function saveCurrent() {
   try {
-    if (plan.length === 0) {
-      alert("Добавьте хотя бы одно упражнение в план тренировки!");
-      return;
-    }
-    
-    const incompleteSets = plan.some(ex => 
-      ex.sets.some(set => set.weight === null || set.reps === null)
-    );
-    
-    if (incompleteSets && !confirm("Некоторые подходы не заполнены. Сохранить тренировку как есть?")) {
-      return;
-    }
+    if (!validateWorkoutData()) return;
     
     const date = dateInput.value || todayISO();
     const workouts = JSON.parse(localStorage.getItem("workouts") || "{}");
@@ -557,24 +639,12 @@ function saveCurrent() {
     localStorage.setItem("workouts", JSON.stringify(workouts));
     
     // Обновляем статистику профиля
-    const profile = JSON.parse(localStorage.getItem("userProfile") || "{}");
-    profile.totalWorkouts = Object.keys(workouts).length;
-    
-    let allExercises = [];
-    Object.values(workouts).forEach(workout => {
-      workout.forEach(ex => allExercises.push(ex.name_ru));
-    });
-    profile.totalExercises = new Set(allExercises).size;
-    
-    localStorage.setItem("userProfile", JSON.stringify(profile));
+    updateProfileStats(workouts);
     
     alert("Тренировка сохранена! ✅");
     
     // Сбрасываем план
-    plan = [];
-    currentExerciseIndex = 0;
-    currentSetIndex = 0;
-    renderPlan();
+    resetWorkoutPlan();
     
   } catch (error) {
     console.error("Ошибка при сохранении тренировки:", error);
@@ -584,15 +654,140 @@ function saveCurrent() {
 
 if (saveBtn) saveBtn.addEventListener("click", saveCurrent);
 
+// === Загрузка программы из localStorage ===
+function loadSavedProgram() {
+  const savedProgram = JSON.parse(localStorage.getItem('currentProgram') || 'null');
+  
+  if (savedProgram && savedProgram.plan) {
+    plan = savedProgram.plan;
+    renderPlan();
+    
+    // Очищаем сохраненную программу после загрузки
+    localStorage.removeItem('currentProgram');
+    
+    // Показываем уведомление
+    showProgramLoadedNotification(savedProgram.name || 'Программа');
+  }
+}
+
+function showProgramLoadedNotification(programName) {
+  const notification = document.createElement('div');
+  notification.className = 'program-notification';
+  notification.innerHTML = `
+    <p>✅ Программа "${programName}" загружена в план тренировки</p>
+    <button onclick="this.parentElement.remove()">✕</button>
+  `;
+  
+  notification.style.cssText = `
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #4caf50;
+    color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    max-width: 300px;
+  `;
+  
+  document.body.appendChild(notification);
+  
+  // Автоматическое скрытие через 5 секунд
+  setTimeout(() => {
+    if (notification.parentElement) {
+      notification.remove();
+    }
+  }, 5000);
+}
+
+// Функция для поиска упражнения по названию
+function findExerciseByName(name) {
+  return exercises.find(ex => 
+    ex.name_ru === name || ex.name_en === name
+  );
+}
+
 // === Инициализация ===
 document.addEventListener('DOMContentLoaded', function() {
   dateInput.value = todayISO();
+  loadSavedProgram();
 });
 
 (function init() {
   dateInput.value = todayISO();
+  loadSavedProgram();
   renderPlan();
   loadExercises().catch(error => {
     console.error("Ошибка при загрузке упражнений:", error);
   });
 })();
+
+// Добавляем CSS для стилизации дней
+const style = document.createElement('style');
+style.textContent = `
+  .day-section {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #007bff;
+  }
+  
+  .day-section h3 {
+    margin: 0 0 1rem 0;
+    color: #007bff;
+    font-size: 1.2rem;
+  }
+  
+  .empty-plan-message {
+    text-align: center;
+    padding: 2rem;
+    color: #6c757d;
+  }
+  
+  .empty-plan-message .btn {
+    margin-top: 1rem;
+  }
+  
+  .loading {
+    text-align: center;
+    padding: 2rem;
+    color: #6c757d;
+    font-size: 1.1rem;
+  }
+  
+  .program-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #4caf50;
+    color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    max-width: 300px;
+  }
+  
+  .program-notification button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+`;
+document.head.appendChild(style);
