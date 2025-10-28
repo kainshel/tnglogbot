@@ -13,6 +13,7 @@
 let programs = [];
 let exercises = [];
 let selectedProgram = null;
+let selectedDayIndex = null;
 
 const searchInput = document.getElementById("search-programs");
 const filterLevel = document.getElementById("filter-level");
@@ -218,48 +219,62 @@ function findExerciseById(name_en) {
   };
 }
 
-function toggleWeek(weekIndex) {
-  const weekContent = document.getElementById(`week-${weekIndex}-content`);
-  const weekHeader = document.getElementById(`week-${weekIndex}-header`);
+function toggleDay(dayIndex) {
+  const dayContent = document.getElementById(`day-${dayIndex}-content`);
+  const dayHeader = document.getElementById(`day-${dayIndex}-header`);
   
-  const isExpanded = weekContent.classList.contains('expanded');
+  const isExpanded = dayContent.classList.contains('expanded');
   
   if (isExpanded) {
-    weekContent.classList.remove('expanded');
-    weekHeader.querySelector('.toggle-icon').textContent = '▶';
+    dayContent.classList.remove('expanded');
+    dayHeader.querySelector('.toggle-icon').textContent = '▶';
+    dayHeader.classList.remove('selected');
   } else {
-    weekContent.classList.add('expanded');
-    weekHeader.querySelector('.toggle-icon').textContent = '▼';
+    dayContent.classList.add('expanded');
+    dayHeader.querySelector('.toggle-icon').textContent = '▼';
   }
 }
 
-function createWeekElement(week, weekIndex) {
-  const weekElement = document.createElement('div');
-  weekElement.className = 'week-accordion';
+function selectDay(dayIndex) {
+  // Сбрасываем выделение со всех дней
+  document.querySelectorAll('.day-header').forEach(header => {
+    header.classList.remove('selected');
+  });
   
-  weekElement.innerHTML = `
-    <div id="week-${weekIndex}-header" class="week-header" onclick="toggleWeek(${weekIndex})">
-      <span>Неделя ${weekIndex + 1}</span>
+  // Выделяем выбранный день
+  const selectedHeader = document.getElementById(`day-${dayIndex}-header`);
+  selectedHeader.classList.add('selected');
+  
+  selectedDayIndex = dayIndex;
+  
+  // Обновляем текст кнопки добавления
+  const days = getProgramDays(selectedProgram);
+  const selectedDay = days[dayIndex];
+  addToPlanBtn.textContent = `➕ Добавить ${selectedDay.focus || `День ${dayIndex + 1}`}`;
+  addToPlanBtn.style.display = 'block';
+}
+
+function createDayElement(day, dayIndex) {
+  const dayElement = document.createElement('div');
+  dayElement.className = 'day-accordion';
+  
+  dayElement.innerHTML = `
+    <div id="day-${dayIndex}-header" class="day-header" onclick="toggleDay(${dayIndex})">
+      <span>${day.focus || `День ${day.dayNumber || dayIndex + 1}`}</span>
       <span class="toggle-icon">▶</span>
     </div>
-    <div id="week-${weekIndex}-content" class="week-content">
-      ${createDaysContent(week.days, weekIndex)}
+    <div id="day-${dayIndex}-content" class="day-content">
+      <div class="day-actions">
+        <button class="btn small select-day-btn" onclick="selectDay(${dayIndex})">✓ Выбрать этот день</button>
+      </div>
+      ${createExercisesContent(day.exercises, dayIndex)}
     </div>
   `;
   
-  return weekElement;
+  return dayElement;
 }
 
-function createDaysContent(days, weekIndex) {
-  return days.map((day, dayIndex) => `
-    <div class="day-section">
-      <h4>День ${dayIndex + 1}: ${day.focus || 'Тренировка'}</h4>
-      ${createExercisesContent(day.exercises, weekIndex, dayIndex)}
-    </div>
-  `).join('');
-}
-
-function createExercisesContent(exercisesList, weekIndex, dayIndex) {
+function createExercisesContent(exercisesList, dayIndex) {
   return exercisesList.map((ex, exIndex) => {
     const exercise = findExerciseById(ex.exerciseId);
     return `
@@ -279,8 +294,18 @@ function createExercisesContent(exercisesList, weekIndex, dayIndex) {
   }).join('');
 }
 
+function getProgramDays(program) {
+  if (program.days) {
+    return program.days;
+  } else if (program.weeks && program.weeks[0] && program.weeks[0].days) {
+    return program.weeks[0].days;
+  }
+  return [];
+}
+
 function selectProgram(program) {
   selectedProgram = program;
+  selectedDayIndex = null;
   
   programTitle.textContent = program.name;
   
@@ -292,11 +317,23 @@ function selectProgram(program) {
       <span class="program-tag">Частота: ${program.frequency} раз/неделю</span>
     </div>
     <p>${program.description}</p>
+    <div class="program-instruction">
+      <p>💡 <strong>Выберите нужный день тренировки ниже и нажмите "Добавить в план"</strong></p>
+    </div>
   `;
   
   programWeeks.innerHTML = '';
-  program.weeks.forEach((week, index) => {
-    programWeeks.appendChild(createWeekElement(week, index));
+  
+  const days = getProgramDays(program);
+  
+  if (days.length === 0) {
+    programWeeks.innerHTML = '<p class="empty-message">В программе нет дней тренировок</p>';
+    addToPlanBtn.style.display = 'none';
+    return;
+  }
+  
+  days.forEach((day, index) => {
+    programWeeks.appendChild(createDayElement(day, index));
   });
   
   // Добавляем обработчики для кнопок деталей упражнений
@@ -308,6 +345,9 @@ function selectProgram(program) {
     });
   });
   
+  // Скрываем кнопку добавления до выбора дня
+  addToPlanBtn.textContent = '➕ Добавить в план';
+  addToPlanBtn.style.display = 'none';
   programDetails.style.display = 'block';
 }
 
@@ -330,70 +370,83 @@ addToPlanBtn.addEventListener('click', function() {
     return;
   }
   
-  const confirmAdd = confirm(`Добавить программу "${selectedProgram.name}" в ваш план тренировок?`);
+  if (selectedDayIndex === null) {
+    alert('Пожалуйста, выберите день тренировки!');
+    return;
+  }
+  
+  const days = getProgramDays(selectedProgram);
+  const selectedDay = days[selectedDayIndex];
+  const dayName = selectedDay.focus || `День ${selectedDayIndex + 1}`;
+  
+  const confirmAdd = confirm(`Добавить "${dayName}" в ваш план тренировок?`);
   
   if (confirmAdd) {
-    const success = saveProgramToWorkoutPlan(selectedProgram);
+    const success = saveDayToWorkoutPlan(selectedProgram, selectedDayIndex);
     
     if (success) {
-      alert('Программа добавлена в ваш план! Перейдите на страницу "Тренировка" для просмотра.');
+      alert(`"${dayName}" добавлен в ваш план! Перейдите на страницу "Тренировка" для просмотра.`);
       
       // Перенаправляем на страницу тренировки
       window.location.href = 'workout.html';
     } else {
-      alert('Произошла ошибка при добавлении программы. Попробуйте еще раз.');
+      alert('Произошла ошибка при добавлении дня. Попробуйте еще раз.');
     }
   }
 });
 
-// Функция сохранения программы в план тренировок
-function saveProgramToWorkoutPlan(program) {
+// Функция сохранения конкретного дня в план тренировок
+function saveDayToWorkoutPlan(program, dayIndex) {
   try {
-    // Преобразуем программу в формат плана тренировки
-    const workoutPlan = convertProgramToWorkoutPlan(program);
+    const days = getProgramDays(program);
+    const selectedDay = days[dayIndex];
+    
+    if (!selectedDay) {
+      throw new Error('Выбранный день не найден');
+    }
+    
+    // Преобразуем день в формат плана тренировки
+    const workoutPlan = convertDayToWorkoutPlan(selectedDay, dayIndex);
     
     // Сохраняем в localStorage для передачи на страницу тренировки
     localStorage.setItem('currentProgram', JSON.stringify({
-      id: program.id,
-      name: program.name,
+      id: program.id + '-day-' + (dayIndex + 1),
+      name: `${program.name} - ${selectedDay.focus || `День ${dayIndex + 1}`}`,
       plan: workoutPlan,
-      date: new Date().toISOString().split('T')[0]
+      date: new Date().toISOString().split('T')[0],
+      sourceProgram: program.name,
+      dayNumber: dayIndex + 1
     }));
     
     return true;
   } catch (error) {
-    console.error('Ошибка при сохранении программы:', error);
+    console.error('Ошибка при сохранении дня:', error);
     return false;
   }
 }
 
-// Функция преобразования программы в план тренировки
-function convertProgramToWorkoutPlan(program) {
+// Функция преобразования дня в план тренировки
+function convertDayToWorkoutPlan(day, dayIndex) {
   const workoutPlan = [];
   
-  // Берем первую неделю для демонстрации
-  const firstWeek = program.weeks[0];
-  
-  firstWeek.days.forEach((day, dayIndex) => {
-    day.exercises.forEach(exerciseData => {
-      const exercise = findExerciseById(exerciseData.exerciseId);
-      if (exercise) {
-        // Создаем объект упражнения для плана
-        const planExercise = {
-          meta: exercise,
-          sets: Array(exerciseData.sets).fill().map(() => ({
-            weight: null,
-            reps: null
-          })),
-          // Сохраняем информацию о дне для группировки
-          dayInfo: {
-            dayNumber: dayIndex + 1,
-            focus: day.focus
-          }
-        };
-        workoutPlan.push(planExercise);
-      }
-    });
+  day.exercises.forEach(exerciseData => {
+    const exercise = findExerciseById(exerciseData.exerciseId);
+    if (exercise) {
+      // Создаем объект упражнения для плана
+      const planExercise = {
+        meta: exercise,
+        sets: Array(exerciseData.sets).fill().map(() => ({
+          weight: null,
+          reps: null
+        })),
+        // Сохраняем информацию о дне для группировки
+        dayInfo: {
+          dayNumber: dayIndex + 1,
+          focus: day.focus
+        }
+      };
+      workoutPlan.push(planExercise);
+    }
   });
   
   return workoutPlan;
@@ -485,18 +538,31 @@ style.textContent = `
     margin-bottom: 1.5rem;
   }
   
+  .program-instruction {
+    background: #e8f5e9;
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+    border-left: 4px solid #4caf50;
+  }
+  
+  .program-instruction p {
+    margin: 0;
+    color: #2e7d32;
+  }
+  
   .view-program {
     width: 100%;
   }
   
-  .week-accordion {
+  .day-accordion {
     border: 1px solid #e9ecef;
     border-radius: 8px;
     margin-bottom: 1rem;
     overflow: hidden;
   }
   
-  .week-header {
+  .day-header {
     background: #f8f9fa;
     padding: 1rem;
     cursor: pointer;
@@ -507,35 +573,39 @@ style.textContent = `
     transition: background-color 0.2s;
   }
   
-  .week-header:hover {
+  .day-header:hover {
     background: #e9ecef;
   }
   
-  .week-content {
+  .day-header.selected {
+    background: #e3f2fd;
+    border-left: 4px solid #2196f3;
+  }
+  
+  .day-content {
     display: none;
     padding: 0;
   }
   
-  .week-content.expanded {
+  .day-content.expanded {
     display: block;
     padding: 1rem;
   }
   
-  .day-section {
-    margin-bottom: 1.5rem;
+  .day-actions {
+    margin-bottom: 1rem;
     padding-bottom: 1rem;
     border-bottom: 1px solid #e9ecef;
   }
   
-  .day-section:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
+  .select-day-btn {
+    background: #4caf50;
+    color: white;
+    border: none;
   }
   
-  .day-section h4 {
-    margin: 0 0 1rem 0;
-    color: #495057;
-    font-size: 1.1rem;
+  .select-day-btn:hover {
+    background: #45a049;
   }
   
   .exercise-item {
