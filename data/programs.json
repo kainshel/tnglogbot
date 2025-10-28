@@ -1,4 +1,46 @@
 [
+{
+  "id": "for-anechka",
+  "name": "Для Анечки 💕",
+  "description": "Специальная 3-дневная программа для Анечки с акцентом на общее развитие и тонус мышц.",
+  "level": "новичок",
+  "goal": "общее развитие",
+  "duration": 4,
+  "frequency": 3,
+  "weeks": [
+    {
+      "days": [
+        {
+          "focus": "День 1 - Верх тела + Пресс",
+          "exercises": [
+            { "exerciseId": "Close-Grip Push-Ups", "sets": 3, "reps": "10-15", "rest": "60сек" },
+            { "exerciseId": "Neutral-Grip Pull-Ups", "sets": 3, "reps": "6-10", "rest": "75сек" },
+            { "exerciseId": "Rope Triceps Pushdown", "sets": 3, "reps": "12-15", "rest": "60сек" },
+            { "exerciseId": "Chest Press Machine", "sets": 3, "reps": "10-12", "rest": "60сек" },
+            { "exerciseId": "Crunch", "sets": 3, "reps": "15-20", "rest": "45сек" }
+          ]
+        },
+        {
+          "focus": "День 2 - Грудь + Ноги + Бицепс",
+          "exercises": [
+            { "exerciseId": "Dips", "sets": 3, "reps": "8-12", "rest": "75сек" },
+            { "exerciseId": "Leg Extension", "sets": 3, "reps": "12-15", "rest": "60сек" },
+            { "exerciseId": "Leg Press", "sets": 3, "reps": "10-12", "rest": "75сек" },
+            { "exerciseId": "Hammer Curl", "sets": 3, "reps": "10-12", "rest": "60сек" }
+          ]
+        },
+        {
+          "focus": "День 3 - Функциональные + Спина + Внутренняя поверхность бедра",
+          "exercises": [
+            { "exerciseId": "Burpee", "sets": 3, "reps": "8-10", "rest": "75сек" },
+            { "exerciseId": "Back Extension", "sets": 3, "reps": "12-15", "rest": "60сек" },
+            { "exerciseId": "Sumo Deadlift", "sets": 3, "reps": "10-12", "rest": "75сек" }
+          ]
+        }
+      ]
+    }
+  ]
+}
   {
     "id": "fullbody-beginner",
     "name": "Фулбоди для начинающих",
