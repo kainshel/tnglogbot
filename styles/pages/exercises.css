@@ -213,3 +213,25 @@
   border-radius: 8px;
   margin: 0.5rem 0;
 }
+.loading, .no-results, .error-message {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+}
+
+.image-placeholder {
+  background: #f5f5f5;
+  padding: 2rem;
+  text-align: center;
+  border-radius: 8px;
+  color: #999;
+}
+
+.reset-btn {
+  margin-left: 10px;
+  background: #6c757d;
+}
+
+.reset-btn:hover {
+  background: #5a6268;
+}

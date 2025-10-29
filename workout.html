@@ -38,49 +38,200 @@
 
   <!-- Основное содержимое -->
   <main class="content">
-    <h1>План тренировки</h1>
+    <header class="page-header">
+      <h1>План тренировки</h1>
+      <div class="header-actions">
+        <button class="btn secondary" onclick="workoutState.reset()" title="Очистить план тренировки">
+          🗑️ Очистить
+        </button>
+      </div>
+    </header>
 
     <!-- Выбор даты -->
-    <section class="card">
-      <label for="date"><strong>Дата тренировки:</strong></label>
-      <input type="date" id="date" value="">
-    </section>
-
-    <!-- Состав тренировки (ЕДИНСТВЕННЫЙ блок) -->
-    <section class="card">
-      <h2>Моя тренировка</h2>
-      <div id="plan"></div>
-      <div class="plan-actions">
-        <button id="saveBtn" class="btn">💾 Сохранить тренировку</button>
-        <button class="btn secondary" onclick="window.location.href='programs.html'">
-          📋 Выбрать программу
-        </button>
+    <section class="card date-section">
+      <div class="date-input-group">
+        <label for="date" class="date-label">
+          <strong>📅 Дата тренировки:</strong>
+        </label>
+        <input type="date" id="date" class="date-picker">
       </div>
     </section>
 
-    <!-- Фильтры -->
-    <section class="card filters">
-      <h2>Найти упражнение</h2>
-      <input type="text" id="search" placeholder="Поиск по названию...">
-      <select id="filter-groups"><option value="">Группа мышц</option></select>
-      <select id="filter-targets"><option value="">Целевая зона</option></select>
-      <select id="filter-type"><option value="">Тип</option></select>
-      <select id="filter-equipment"><option value="">Оборудование</option></select>
+    <!-- Состав тренировки -->
+    <section class="card workout-plan-section">
+      <div class="section-header">
+        <h2>🏋️ Моя тренировка</h2>
+        <div class="workout-stats" id="workoutStats">
+          <span class="stat">Упражнения: <strong>0</strong></span>
+          <span class="stat">Подходы: <strong>0</strong></span>
+        </div>
+      </div>
+      
+      <div id="plan" class="plan-container"></div>
+      
+      <div class="plan-actions">
+        <button id="saveBtn" class="btn primary save-btn">
+          💾 Сохранить тренировку
+        </button>
+        <div class="secondary-actions">
+          <button class="btn secondary" onclick="window.location.href='programs.html'">
+            📋 Выбрать программу
+          </button>
+          <button class="btn outline" onclick="exportWorkoutPlan()">
+            📤 Экспорт
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Поиск и фильтры -->
+    <section class="card filters-section">
+      <div class="section-header">
+        <h2>🔍 Найти упражнение</h2>
+        <button class="btn text-btn" onclick="resetFilters()">
+          Сбросить фильтры
+        </button>
+      </div>
+      
+      <div class="filters-grid">
+        <div class="search-group">
+          <input type="text" id="search" placeholder="Поиск по названию..." class="search-input">
+        </div>
+        
+        <div class="filter-group">
+          <label for="filter-groups">Группа мышц</label>
+          <select id="filter-groups" class="filter-select">
+            <option value="">Все группы</option>
+          </select>
+        </div>
+        
+        <div class="filter-group">
+          <label for="filter-targets">Целевая зона</label>
+          <select id="filter-targets" class="filter-select">
+            <option value="">Все зоны</option>
+          </select>
+        </div>
+        
+        <div class="filter-group">
+          <label for="filter-type">Тип упражнения</label>
+          <select id="filter-type" class="filter-select">
+            <option value="">Все типы</option>
+          </select>
+        </div>
+        
+        <div class="filter-group">
+          <label for="filter-equipment">Оборудование</label>
+          <select id="filter-equipment" class="filter-select">
+            <option value="">Любое</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="active-filters" id="activeFilters"></div>
     </section>
 
     <!-- Доступные упражнения -->
-    <section class="card">
-      <h2>Доступные упражнения</h2>
+    <section class="card exercises-section">
+      <div class="section-header">
+        <h2>💪 Доступные упражнения</h2>
+        <div class="exercises-count" id="exercisesCount">
+          <span>Найдено: <strong>0</strong></span>
+        </div>
+      </div>
+      
       <div id="exercises-container" class="exercise-grid"></div>
+      
+      <div class="exercises-footer">
+        <button class="btn text-btn" onclick="scrollToPlan()">
+          ⬆️ К плану тренировки
+        </button>
+      </div>
     </section>
   </main>
 
   <!-- Модальное окно для деталей упражнения -->
   <div id="modalBack" class="modal-back" style="display: none;">
     <div id="modal" class="modal">
-      <button id="modalClose" class="modal-close">×</button>
+      <button id="modalClose" class="modal-close" aria-label="Закрыть">×</button>
       <div id="modalContent" class="modal-content"></div>
     </div>
   </div>
+
+  <!-- Уведомления -->
+  <div id="notifications" class="notifications-container"></div>
+
+  <script>
+    // Вспомогательные функции для HTML
+    function resetFilters() {
+      document.getElementById('search').value = '';
+      document.getElementById('filter-groups').value = '';
+      document.getElementById('filter-targets').value = '';
+      document.getElementById('filter-type').value = '';
+      document.getElementById('filter-equipment').value = '';
+      
+      // Вызов функции применения фильтров из основного скрипта
+      if (typeof applyFilters === 'function') {
+        applyFilters();
+      }
+    }
+    
+    function scrollToPlan() {
+      const planSection = document.querySelector('.workout-plan-section');
+      if (planSection) {
+        planSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+    
+    function exportWorkoutPlan() {
+      if (workoutState.plan.length === 0) {
+        alert('План тренировки пуст!');
+        return;
+      }
+      
+      const workoutData = {
+        date: document.getElementById('date').value,
+        exercises: workoutState.plan.map(ex => ({
+          name: ex.meta.name_ru || ex.meta.name_en,
+          sets: ex.sets.length,
+          completed: ex.sets.filter(set => set.weight && set.reps).length
+        })),
+        totalExercises: workoutState.plan.length,
+        totalSets: workoutState.plan.reduce((sum, ex) => sum + ex.sets.length, 0)
+      };
+      
+      const blob = new Blob([JSON.stringify(workoutData, null, 2)], { 
+        type: 'application/json' 
+      });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `workout-plan-${workoutData.date}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+    
+    // Обновление статистики
+    function updateWorkoutStats() {
+      const statsElement = document.getElementById('workoutStats');
+      if (statsElement) {
+        statsElement.innerHTML = `
+          <span class="stat">Упражнения: <strong>${workoutState.plan.length}</strong></span>
+          <span class="stat">Подходы: <strong>${workoutState.plan.reduce((sum, ex) => sum + ex.sets.length, 0)}</strong></span>
+        `;
+      }
+    }
+    
+    // Переопределяем renderPlan для обновления статистики
+    const originalRenderPlan = renderPlan;
+    renderPlan = function() {
+      originalRenderPlan();
+      updateWorkoutStats();
+    };
+    
+    // Инициализация при загрузке
+    document.addEventListener('DOMContentLoaded', function() {
+      updateWorkoutStats();
+    });
+  </script>
 </body>
 </html>

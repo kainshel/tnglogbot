@@ -9,12 +9,56 @@
   } catch (e) { /* ignore */ }
 })();
 
-// === Глобальные переменные ===
-let exercises = [];
-let plan = [];
-let currentExerciseIndex = 0;
-let currentSetIndex = 0;
+// === Централизованный менеджер состояния ===
+const workoutState = {
+  exercises: [],
+  plan: [],
+  currentExerciseIndex: 0,
+  currentSetIndex: 0,
+  
+  updatePlan(newPlan) {
+    this.plan = newPlan;
+    renderPlan();
+  },
+  
+  updateCurrentExercise(index) {
+    this.currentExerciseIndex = index;
+    this.currentSetIndex = 0;
+  },
+  
+  reset() {
+    this.plan = [];
+    this.currentExerciseIndex = 0;
+    this.currentSetIndex = 0;
+    renderPlan();
+  },
+  
+  addExercise(ex) {
+    const EX = { 
+      meta: ex, 
+      sets: [{ weight: null, reps: null }] 
+    };
+    this.plan.push(EX);
+    renderPlan();
+    
+    // Прокрутка к добавленному упражнению
+    const lastExercise = planContainer.lastElementChild;
+    if (lastExercise) {
+      lastExercise.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  },
+  
+  removeExercise(index) {
+    this.plan.splice(index, 1);
+    if (index <= this.currentExerciseIndex) {
+      this.currentExerciseIndex = Math.max(0, this.currentExerciseIndex - 1);
+      this.currentSetIndex = 0;
+    }
+    renderPlan();
+  }
+};
 
+// === Глобальные переменные ===
 const searchInput = document.getElementById("search");
 const filterGroups = document.getElementById("filter-groups");
 const filterTargets = document.getElementById("filter-targets");
@@ -67,29 +111,47 @@ function hideModal() {
   if (modalBack) modalBack.style.display = "none"; 
 }
 
+// Инициализация модального окна
 if (modalClose) modalClose.addEventListener("click", hideModal);
-if (modalBack) modalBack.addEventListener("click", e => { if (e.target === modalBack) hideModal(); });
+if (modalBack) modalBack.addEventListener("click", e => { 
+  if (e.target === modalBack) hideModal(); 
+});
 
-function showErrorMessage(message) {
-  const errorDiv = document.createElement('div');
-  errorDiv.className = 'error-message';
-  errorDiv.innerHTML = `
-    <p>${message}</p>
-    <button onclick="location.reload()">Обновить страницу</button>
-  `;
+// === Обработчик ошибок ===
+const ErrorHandler = {
+  showError(message, isFatal = false) {
+    const errorDiv = document.createElement('div');
+    errorDiv.className = `error-message ${isFatal ? 'fatal' : ''}`;
+    errorDiv.innerHTML = `
+      <p>${message}</p>
+      ${isFatal ? '<button onclick="location.reload()">Обновить страницу</button>' : ''}
+    `;
+    
+    const content = document.querySelector('.content');
+    if (content) {
+      content.insertBefore(errorDiv, content.firstChild);
+    }
+    
+    if (!isFatal) {
+      setTimeout(() => errorDiv.remove(), 5000);
+    }
+  },
   
-  const content = document.querySelector('.content');
-  if (content) {
-    content.insertBefore(errorDiv, content.firstChild);
+  handleAPIError(error, context) {
+    console.error(`Ошибка в ${context}:`, error);
+    this.showError(`Ошибка ${context}: ${error.message}`, context === 'loadExercises');
   }
-}
+};
 
-// === Валидация и обработка ввода ===
-function validateNumberInput(inputElement, isFloat = false) {
+// === Улучшенная валидация ввода ===
+function validateNumberInput(inputElement, options = {}) {
+  const { isFloat = false, min = 0, max = null } = options;
   let value = inputElement.value;
   
+  // Очистка
   value = value.replace(isFloat ? /[^\d.]/g : /[^\d]/g, '');
   
+  // Для дробных чисел
   if (isFloat) {
     const parts = value.split('.');
     if (parts.length > 2) {
@@ -97,17 +159,26 @@ function validateNumberInput(inputElement, isFloat = false) {
     }
   }
   
+  // Приведение к числу и проверка диапазона
+  let numValue = isFloat ? parseFloat(value) : parseInt(value, 10);
+  
+  if (!isNaN(numValue)) {
+    if (numValue < min) numValue = min;
+    if (max !== null && numValue > max) numValue = max;
+    value = numValue.toString();
+  }
+  
   inputElement.value = value;
   return value;
 }
 
 function handleWeightInput(input, set) {
-  const value = validateNumberInput(input, true);
+  const value = validateNumberInput(input, { isFloat: true, min: 0 });
   set.weight = value ? parseFloat(value) : null;
 }
 
 function handleRepsInput(input, set) {
-  const value = validateNumberInput(input, false);
+  const value = validateNumberInput(input, { min: 0 });
   set.reps = value ? parseInt(value, 10) : null;
 }
 
@@ -119,12 +190,12 @@ function handleCompleteSet(exerciseIndex, setIndex, EX) {
     return false;
   }
   
-  if (currentSetIndex < EX.sets.length - 1) {
-    currentSetIndex++;
+  if (workoutState.currentSetIndex < EX.sets.length - 1) {
+    workoutState.currentSetIndex++;
   } else {
-    currentSetIndex = 0;
-    if (currentExerciseIndex < plan.length - 1) {
-      currentExerciseIndex++;
+    workoutState.currentSetIndex = 0;
+    if (workoutState.currentExerciseIndex < workoutState.plan.length - 1) {
+      workoutState.currentExerciseIndex++;
     } else {
       alert("🎉 Тренировка завершена! Сохраните результаты.");
     }
@@ -138,11 +209,9 @@ function handleRemoveSet(EX, setIndex, exerciseIndex) {
   EX.sets.splice(setIndex, 1);
   
   if (EX.sets.length === 0) {
-    plan.splice(exerciseIndex, 1);
-    if (exerciseIndex <= currentExerciseIndex) {
-      currentExerciseIndex = Math.max(0, currentExerciseIndex - 1);
-      currentSetIndex = 0;
-    }
+    workoutState.removeExercise(exerciseIndex);
+  } else {
+    renderPlan();
   }
 }
 
@@ -151,36 +220,38 @@ async function loadExercises() {
   try {
     exercisesContainer.innerHTML = '<div class="loading">🔄 Загрузка упражнений...</div>';
     
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 10000);
+    
     const res = await fetch('data/exercises.json', { 
-      cache: 'no-store',
-      headers: {
-        'Cache-Control': 'no-cache'
-      }
+      signal: controller.signal,
+      cache: 'no-store'
     });
+    
+    clearTimeout(timeoutId);
     
     if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
     
-    exercises = await res.json();
+    workoutState.exercises = await res.json();
     
-    if (!exercises || exercises.length === 0) {
+    if (!workoutState.exercises || workoutState.exercises.length === 0) {
       throw new Error('Получен пустой массив упражнений');
     }
     
     normalizeData();
     fillFilters();
-    renderExercises(exercises);
+    renderExercises(workoutState.exercises);
     
-    return exercises;
+    return workoutState.exercises;
     
   } catch (e) {
-    console.error('Ошибка загрузки упражнений', e);
-    showErrorMessage('Не удалось загрузить упражнения. Попробуйте обновить страницу.');
+    ErrorHandler.handleAPIError(e, 'loadExercises');
     return [];
   }
 }
 
 function normalizeData() {
-  exercises = exercises.map(ex => ({
+  workoutState.exercises = workoutState.exercises.map(ex => ({
     ...ex,
     groups: Array.isArray(ex.groups) ? ex.groups : (ex.groups ? [ex.groups] : []),
     targets: Array.isArray(ex.targets) ? ex.targets : (ex.targets ? [ex.targets] : []),
@@ -188,41 +259,44 @@ function normalizeData() {
   }));
 }
 
-// === Фильтры ===
+// === Оптимизированные фильтры ===
+const filterData = {
+  groups: new Set(),
+  targets: new Set(),
+  types: new Set(),
+  equipment: new Set()
+};
+
 function fillFilters() {
+  // Очистка фильтров
   [filterGroups, filterTargets, filterType, filterEquipment].forEach(filter => {
     filter.innerHTML = '<option value="">Все</option>';
   });
   
-  const groups = [...new Set(exercises.flatMap(ex => ex.groups))];
-  groups.forEach(g => {
-    const opt = document.createElement("option");
-    opt.value = g; opt.textContent = g;
-    filterGroups.appendChild(opt);
+  // Заполнение данными
+  workoutState.exercises.forEach(ex => {
+    ex.groups.forEach(g => filterData.groups.add(g));
+    ex.targets.forEach(t => filterData.targets.add(t));
+    filterData.types.add(ex.type);
+    ex.equipment.forEach(e => filterData.equipment.add(e));
   });
   
-  const targets = [...new Set(exercises.flatMap(ex => ex.targets))];
-  targets.forEach(t => {
-    const opt = document.createElement("option");
-    opt.value = t; opt.textContent = t;
-    filterTargets.appendChild(opt);
-  });
-  
-  const types = [...new Set(exercises.map(ex => ex.type))];
-  types.forEach(t => {
-    const opt = document.createElement("option");
-    opt.value = t; opt.textContent = t;
-    filterType.appendChild(opt);
-  });
-  
-  const equipments = [...new Set(exercises.flatMap(ex => ex.equipment))];
-  equipments.forEach(eq => {
-    const opt = document.createElement("option");
-    opt.value = eq; opt.textContent = eq;
-    filterEquipment.appendChild(opt);
-  });
+  // Заполнение выпадающих списков
+  fillSelect(filterGroups, filterData.groups);
+  fillSelect(filterTargets, filterData.targets);
+  fillSelect(filterType, filterData.types);
+  fillSelect(filterEquipment, filterData.equipment);
   
   setupDependentFilters();
+}
+
+function fillSelect(selectElement, dataSet) {
+  Array.from(dataSet).sort().forEach(value => {
+    const opt = document.createElement("option");
+    opt.value = value;
+    opt.textContent = value;
+    selectElement.appendChild(opt);
+  });
 }
 
 function setupDependentFilters() {
@@ -245,29 +319,21 @@ function updateTargetsFilter(selectedGroup) {
   filterTargets.innerHTML = '<option value="">Все</option>';
   
   if (!selectedGroup) {
-    const allTargets = [...new Set(exercises.flatMap(ex => ex.targets))];
-    allTargets.forEach(target => {
-      const opt = document.createElement('option');
-      opt.value = target;
-      opt.textContent = target;
-      if (target === currentTarget) opt.selected = true;
-      filterTargets.appendChild(opt);
-    });
+    fillSelect(filterTargets, filterData.targets);
+    if (currentTarget && filterData.targets.has(currentTarget)) {
+      filterTargets.value = currentTarget;
+    }
     return;
   }
   
-  const filteredExercises = exercises.filter(ex => ex.groups.includes(selectedGroup));
-  const availableTargets = [...new Set(filteredExercises.flatMap(ex => ex.targets))];
+  const filteredExercises = workoutState.exercises.filter(ex => ex.groups.includes(selectedGroup));
+  const availableTargets = new Set(filteredExercises.flatMap(ex => ex.targets));
   
-  availableTargets.forEach(target => {
-    const opt = document.createElement('option');
-    opt.value = target;
-    opt.textContent = target;
-    if (target === currentTarget && availableTargets.includes(currentTarget)) {
-      opt.selected = true;
-    }
-    filterTargets.appendChild(opt);
-  });
+  fillSelect(filterTargets, availableTargets);
+  
+  if (currentTarget && availableTargets.has(currentTarget)) {
+    filterTargets.value = currentTarget;
+  }
 }
 
 function updateGroupsFilter(selectedTarget) {
@@ -275,33 +341,25 @@ function updateGroupsFilter(selectedTarget) {
   filterGroups.innerHTML = '<option value="">Все</option>';
   
   if (!selectedTarget) {
-    const allGroups = [...new Set(exercises.flatMap(ex => ex.groups))];
-    allGroups.forEach(group => {
-      const opt = document.createElement('option');
-      opt.value = group;
-      opt.textContent = group;
-      if (group === currentGroup) opt.selected = true;
-      filterGroups.appendChild(opt);
-    });
+    fillSelect(filterGroups, filterData.groups);
+    if (currentGroup && filterData.groups.has(currentGroup)) {
+      filterGroups.value = currentGroup;
+    }
     return;
   }
   
-  const filteredExercises = exercises.filter(ex => ex.targets.includes(selectedTarget));
-  const availableGroups = [...new Set(filteredExercises.flatMap(ex => ex.groups))];
+  const filteredExercises = workoutState.exercises.filter(ex => ex.targets.includes(selectedTarget));
+  const availableGroups = new Set(filteredExercises.flatMap(ex => ex.groups));
   
-  availableGroups.forEach(group => {
-    const opt = document.createElement('option');
-    opt.value = group;
-    opt.textContent = group;
-    if (group === currentGroup && availableGroups.includes(currentGroup)) {
-      opt.selected = true;
-    }
-    filterGroups.appendChild(opt);
-  });
+  fillSelect(filterGroups, availableGroups);
+  
+  if (currentGroup && availableGroups.has(currentGroup)) {
+    filterGroups.value = currentGroup;
+  }
 }
 
 function applyFilters() {
-  let list = [...exercises];
+  let list = [...workoutState.exercises];
   const search = searchInput.value.toLowerCase();
   
   if (search) {
@@ -324,20 +382,28 @@ function applyFilters() {
   renderExercises(list);
 }
 
+// Инициализация обработчиков фильтров
 [filterGroups, filterTargets, filterType, filterEquipment].forEach(sel => {
   sel.addEventListener("change", applyFilters);
 });
 
 searchInput.addEventListener("input", debounce(applyFilters, 300));
 
-// === Отрисовка упражнений ===
+// === Кэширование карточек упражнений ===
+const exerciseCardCache = new Map();
+
 function createExerciseCard(ex) {
+  const cacheKey = JSON.stringify(ex);
+  if (exerciseCardCache.has(cacheKey)) {
+    return exerciseCardCache.get(cacheKey).cloneNode(true);
+  }
+  
   const card = document.createElement("div");
   card.className = "exercise-card";
   
   const groups = ex.groups.join(", ");
   const targets = ex.targets.join(", ");
-  const gif = ex.gif ? `<img src="${ex.gif}" alt="${ex.name_en}" class="exercise-gif">` : "";
+  const gif = ex.gif ? `<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f0f0f0'/%3E%3C/svg%3E" data-src="${ex.gif}" alt="${ex.name_en}" class="exercise-gif lazy">` : "";
   
   card.innerHTML = `
     <h3>${ex.name_ru || ex.name_en}</h3>
@@ -350,7 +416,8 @@ function createExerciseCard(ex) {
     </div>
   `;
   
-  return card;
+  exerciseCardCache.set(cacheKey, card);
+  return card.cloneNode(true);
 }
 
 function renderExercises(list) {
@@ -367,11 +434,7 @@ function renderExercises(list) {
     const card = createExerciseCard(ex);
     
     card.querySelector(".add-btn").addEventListener("click", () => {
-      addExerciseToPlan(ex);
-      document.querySelector('#plan').scrollIntoView({ 
-        behavior: 'smooth', 
-        block: 'start' 
-      });
+      workoutState.addExercise(ex);
     });
     
     card.querySelector(".details-btn").addEventListener("click", () => showDetails(ex));
@@ -379,6 +442,34 @@ function renderExercises(list) {
   });
   
   exercisesContainer.appendChild(fragment);
+  
+  // Инициализация ленивой загрузки изображений
+  initLazyLoading();
+}
+
+function initLazyLoading() {
+  const lazyImages = document.querySelectorAll('img.lazy');
+  
+  if ('IntersectionObserver' in window) {
+    const imageObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          img.src = img.dataset.src;
+          img.classList.remove('lazy');
+          imageObserver.unobserve(img);
+        }
+      });
+    });
+    
+    lazyImages.forEach(img => imageObserver.observe(img));
+  } else {
+    // Fallback для браузеров без IntersectionObserver
+    lazyImages.forEach(img => {
+      img.src = img.dataset.src;
+      img.classList.remove('lazy');
+    });
+  }
 }
 
 function showDetails(ex) {
@@ -395,8 +486,8 @@ function showDetails(ex) {
 
 // === План тренировки ===
 function createSetRow(EX, s, i, index) {
-  const isCurrentSet = index === currentExerciseIndex && i === currentSetIndex;
-  const isCompleted = i < currentSetIndex && index === currentExerciseIndex;
+  const isCurrentSet = index === workoutState.currentExerciseIndex && i === workoutState.currentSetIndex;
+  const isCompleted = i < workoutState.currentSetIndex && index === workoutState.currentExerciseIndex;
   
   const row = document.createElement("div");
   row.className = `set-row ${isCurrentSet ? 'current-set' : ''} ${isCompleted ? 'completed-set' : ''}`;
@@ -430,7 +521,6 @@ function createSetRow(EX, s, i, index) {
   if (rmBtn) {
     rmBtn.addEventListener("click", () => { 
       handleRemoveSet(EX, i, index);
-      renderPlan();
     });
   }
   
@@ -451,14 +541,14 @@ function renderSets(EX, setsEl, index) {
 
 function createExerciseCardElement(EX, index) {
   const wrap = document.createElement("div");
-  wrap.className = `card plan-exercise ${index === currentExerciseIndex ? 'active-exercise' : ''}`;
+  wrap.className = `card plan-exercise ${index === workoutState.currentExerciseIndex ? 'active-exercise' : ''}`;
   
   wrap.innerHTML = `
     <div class="row">
       <h3>${EX.meta.name_ru || EX.meta.name_en}</h3>
       <div class="exercise-status">
-        ${index < currentExerciseIndex ? '✅ Выполнено' : 
-          index === currentExerciseIndex ? '🏋️ Выполняется' : '⏳ Ожидание'}
+        ${index < workoutState.currentExerciseIndex ? '✅ Выполнено' : 
+          index === workoutState.currentExerciseIndex ? '🏋️ Выполняется' : '⏳ Ожидание'}
       </div>
       <div>
         <button class="btn add-set">+ Подход</button>
@@ -481,12 +571,7 @@ function setupExerciseEventListeners(wrap, EX, index) {
   
   wrap.querySelector(".remove-ex").addEventListener("click", () => {
     if (!confirm("Удалить это упражнение из плана?")) return;
-    plan = plan.filter(p => p !== EX);
-    if (index <= currentExerciseIndex) {
-      currentExerciseIndex = Math.max(0, currentExerciseIndex - 1);
-      currentSetIndex = 0;
-    }
-    renderPlan();
+    workoutState.removeExercise(index);
   });
   
   return setsEl;
@@ -495,13 +580,16 @@ function setupExerciseEventListeners(wrap, EX, index) {
 function renderPlan() {
   planContainer.innerHTML = '';
   
-  if (plan.length === 0) {
+  if (workoutState.plan.length === 0) {
     planContainer.innerHTML = `
       <div class="empty-plan-message">
         <p>Ваш план тренировки пуст</p>
         <p>Добавьте упражнения из списка ниже или выберите готовую программу</p>
         <button class="btn" onclick="window.location.href='programs.html'">
           📋 Выбрать программу
+        </button>
+        <button class="btn secondary" onclick="workoutState.reset()">
+          🗑️ Очистить план
         </button>
       </div>
     `;
@@ -512,7 +600,7 @@ function renderPlan() {
   
   // Группируем упражнения по дням (если есть информация о днях)
   const exercisesByDay = {};
-  plan.forEach((exercise, index) => {
+  workoutState.plan.forEach((exercise, index) => {
     const dayNumber = exercise.dayInfo?.dayNumber || 1;
     if (!exercisesByDay[dayNumber]) {
       exercisesByDay[dayNumber] = [];
@@ -523,7 +611,7 @@ function renderPlan() {
   // Рендерим по дням
   Object.entries(exercisesByDay).forEach(([dayNumber, dayExercises]) => {
     // Создаем секцию дня только если есть информация о днях
-    if (plan.some(ex => ex.dayInfo)) {
+    if (workoutState.plan.some(ex => ex.dayInfo)) {
       const daySection = document.createElement('div');
       daySection.className = 'day-section';
       
@@ -554,18 +642,6 @@ function renderPlan() {
   planContainer.appendChild(fragment);
 }
 
-function addExerciseToPlan(ex) {
-  const EX = { meta: ex, sets: [] };
-  plan.push(EX);
-  EX.sets.push({ weight: null, reps: null });
-  renderPlan();
-  
-  const lastExercise = planContainer.lastElementChild;
-  if (lastExercise) {
-    lastExercise.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }
-}
-
 // === Валидация данных ===
 function validateWorkoutData() {
   if (!dateInput.value) {
@@ -575,13 +651,13 @@ function validateWorkoutData() {
   }
   
   // Проверяем, что есть хотя бы одно упражнение
-  if (plan.length === 0) {
+  if (workoutState.plan.length === 0) {
     alert("Добавьте хотя бы одно упражнение в план тренировки!");
     return false;
   }
   
   // Проверяем, что все подходы заполнены
-  const incompleteSets = plan.some(ex => 
+  const incompleteSets = workoutState.plan.some(ex => 
     ex.sets.some(set => set.weight === null || set.reps === null)
   );
   
@@ -611,13 +687,6 @@ function updateProfileStats(workouts) {
   localStorage.setItem("userProfile", JSON.stringify(profile));
 }
 
-function resetWorkoutPlan() {
-  plan = [];
-  currentExerciseIndex = 0;
-  currentSetIndex = 0;
-  renderPlan();
-}
-
 // === Сохранение плана ===
 function saveCurrent() {
   try {
@@ -626,7 +695,7 @@ function saveCurrent() {
     const date = dateInput.value || todayISO();
     const workouts = JSON.parse(localStorage.getItem("workouts") || "{}");
     
-    workouts[date] = plan.map(e => ({
+    workouts[date] = workoutState.plan.map(e => ({
       name_ru: e.meta.name_ru,
       name_en: e.meta.name_en,
       type: e.meta.type,
@@ -644,7 +713,7 @@ function saveCurrent() {
     alert("Тренировка сохранена! ✅");
     
     // Сбрасываем план
-    resetWorkoutPlan();
+    workoutState.reset();
     
   } catch (error) {
     console.error("Ошибка при сохранении тренировки:", error);
@@ -659,7 +728,7 @@ function loadSavedProgram() {
   const savedProgram = JSON.parse(localStorage.getItem('currentProgram') || 'null');
   
   if (savedProgram && savedProgram.plan) {
-    plan = savedProgram.plan;
+    workoutState.plan = savedProgram.plan;
     renderPlan();
     
     // Очищаем сохраненную программу после загрузки
@@ -704,90 +773,12 @@ function showProgramLoadedNotification(programName) {
   }, 5000);
 }
 
-// Функция для поиска упражнения по названию
-function findExerciseByName(name) {
-  return exercises.find(ex => 
-    ex.name_ru === name || ex.name_en === name
-  );
-}
-
 // === Инициализация ===
-document.addEventListener('DOMContentLoaded', function() {
-  dateInput.value = todayISO();
-  loadSavedProgram();
-});
-
 (function init() {
   dateInput.value = todayISO();
   loadSavedProgram();
   renderPlan();
   loadExercises().catch(error => {
-    console.error("Ошибка при загрузке упражнений:", error);
+    ErrorHandler.handleAPIError(error, 'init');
   });
 })();
-
-// Добавляем CSS для стилизации дней
-const style = document.createElement('style');
-style.textContent = `
-  .day-section {
-    margin-bottom: 2rem;
-    padding: 1rem;
-    background: #f8f9fa;
-    border-radius: 8px;
-    border-left: 4px solid #007bff;
-  }
-  
-  .day-section h3 {
-    margin: 0 0 1rem 0;
-    color: #007bff;
-    font-size: 1.2rem;
-  }
-  
-  .empty-plan-message {
-    text-align: center;
-    padding: 2rem;
-    color: #6c757d;
-  }
-  
-  .empty-plan-message .btn {
-    margin-top: 1rem;
-  }
-  
-  .loading {
-    text-align: center;
-    padding: 2rem;
-    color: #6c757d;
-    font-size: 1.1rem;
-  }
-  
-  .program-notification {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: #4caf50;
-    color: white;
-    padding: 1rem;
-    border-radius: 8px;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    max-width: 300px;
-  }
-  
-  .program-notification button {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.2rem;
-    cursor: pointer;
-    padding: 0;
-    width: 24px;
-    height: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-`;
-document.head.appendChild(style);
