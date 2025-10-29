@@ -38,74 +38,215 @@
   </aside>
   
   <main class="content">
-    <!-- Содержимое главной страницы -->
+    <!-- Приветственная секция с улучшенным UI -->
     <section class="welcome-section">
-      <h1>Добро пожаловать, <span id="user-name">Спортсмен</span>!</h1>
-      <p>Отслеживайте свои тренировки и достигайте целей</p>
+      <div class="welcome-header">
+        <div class="user-greeting">
+          <h1>Привет, <span id="user-name">Спортсмен</span>! <span id="greeting-emoji">👋</span></h1>
+          <p id="motivational-quote">Каждая тренировка приближает тебя к цели</p>
+        </div>
+        <div class="user-avatar" id="user-avatar">
+          <span id="avatar-placeholder">💪</span>
+        </div>
+      </div>
       
       <div class="quick-actions">
-        <a href="workout.html" class="btn primary">➕ Начать тренировку</a>
-        <a href="exercises.html" class="btn secondary">📋 Библиотека упражнений</a>
+        <a href="workout.html" class="btn primary large">
+          <span class="btn-icon">➕</span>
+          Начать тренировку
+        </a>
+        <a href="exercises.html" class="btn secondary">
+          <span class="btn-icon">📋</span>
+          Библиотека упражнений
+        </a>
+        <button id="quick-plan" class="btn outline">
+          <span class="btn-icon">📅</span>
+          Запланировать
+        </button>
       </div>
     </section>
 
-    <section class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-icon">🏋️</div>
-        <div class="stat-info">
-          <span class="stat-number" id="total-workouts">0</span>
-          <span class="stat-label">Тренировок всего</span>
-        </div>
+    <!-- Статистика с прогресс-барами -->
+    <section class="stats-section">
+      <div class="section-header">
+        <h2>Ваша активность</h2>
+        <button id="refresh-stats" class="icon-btn" title="Обновить статистику">
+          <span>🔄</span>
+        </button>
       </div>
       
-      <div class="stat-card">
-        <div class="stat-icon">🔥</div>
-        <div class="stat-info">
-          <span class="stat-number" id="week-workouts">0</span>
-          <span class="stat-label">На этой неделе</span>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">🏋️</div>
+          <div class="stat-info">
+            <span class="stat-number" id="total-workouts">0</span>
+            <span class="stat-label">Тренировок всего</span>
+          </div>
+          <div class="stat-trend" id="total-trend"></div>
         </div>
-      </div>
-      
-      <div class="stat-card">
-        <div class="stat-icon">💪</div>
-        <div class="stat-info">
-          <span class="stat-number" id="total-exercises">0</span>
-          <span class="stat-label">Упражнений</span>
+        
+        <div class="stat-card">
+          <div class="stat-icon">🔥</div>
+          <div class="stat-info">
+            <span class="stat-number" id="week-workouts">0</span>
+            <span class="stat-label">На этой неделе</span>
+          </div>
+          <div class="week-progress">
+            <div class="progress-bar">
+              <div class="progress-fill" id="week-progress"></div>
+            </div>
+            <span class="progress-text" id="week-progress-text">0/7 дней</span>
+          </div>
         </div>
-      </div>
-      
-      <div class="stat-card">
-        <div class="stat-icon">📅</div>
-        <div class="stat-info">
-          <span class="stat-number" id="last-workout">—</span>
-          <span class="stat-label">Последняя тренировка</span>
+        
+        <div class="stat-card">
+          <div class="stat-icon">💪</div>
+          <div class="stat-info">
+            <span class="stat-number" id="total-exercises">0</span>
+            <span class="stat-label">Упражнений</span>
+          </div>
+          <div class="stat-trend" id="exercises-trend"></div>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-icon">📅</div>
+          <div class="stat-info">
+            <span class="stat-number" id="last-workout">—</span>
+            <span class="stat-label">Последняя тренировка</span>
+          </div>
+          <div class="workout-recency" id="workout-recency"></div>
         </div>
       </div>
     </section>
 
+    <!-- Ближайшие планы с улучшенным отображением -->
     <section class="card">
-      <h2>Ближайшие планы</h2>
+      <div class="card-header">
+        <h2>Ближайшие планы</h2>
+        <button id="add-plan" class="icon-btn small" title="Добавить тренировку в план">
+          <span>➕</span>
+        </button>
+      </div>
       <div id="upcoming-workouts">
-        <p class="empty-state">У вас нет запланированных тренировок</p>
+        <div class="empty-state">
+          <div class="empty-icon">📅</div>
+          <p>У вас нет запланированных тренировок</p>
+          <small>Добавьте тренировки в свой план для лучшего отслеживания</small>
+        </div>
       </div>
-      <a href="workout.html" class="btn">Запланировать тренировку</a>
+      <div class="card-footer">
+        <a href="workout.html?plan=true" class="btn">Запланировать тренировку</a>
+      </div>
     </section>
 
+    <!-- Недавние тренировки с улучшенным списком -->
     <section class="card">
-      <h2>Недавние тренировки</h2>
+      <div class="card-header">
+        <h2>Недавние тренировки</h2>
+        <button id="filter-workouts" class="icon-btn small" title="Фильтровать тренировки">
+          <span>🔍</span>
+        </button>
+      </div>
       <div id="recent-workouts">
-        <p class="empty-state">У вас пока нет завершённых тренировок</p>
+        <div class="workouts-list">
+          <!-- Будет заполнено скриптом -->
+        </div>
+        <div class="empty-state">
+          <div class="empty-icon">🏃</div>
+          <p>У вас пока нет завершённых тренировок</p>
+          <small>Начните свою первую тренировку прямо сейчас!</small>
+        </div>
       </div>
-      <a href="history.html" class="btn">Вся история</a>
+      <div class="card-footer">
+        <a href="history.html" class="btn">Вся история</a>
+        <button id="export-data" class="btn outline">Экспорт данных</button>
+      </div>
     </section>
 
+    <!-- Часто используемые упражнения с улучшенной сеткой -->
     <section class="card">
-      <h2>Часто используемые упражнения</h2>
-      <div id="favorite-exercises" class="exercise-mini-grid">
-        <p class="empty-state">Добавьте упражнения в избранное</p>
+      <div class="card-header">
+        <h2>Ваши любимые упражнения</h2>
+        <button id="manage-favorites" class="icon-btn small" title="Управление избранными">
+          <span>⭐</span>
+        </button>
       </div>
-      <a href="exercises.html" class="btn">Все упражнения</a>
+      <div id="favorite-exercises" class="exercise-mini-grid">
+        <div class="empty-state">
+          <div class="empty-icon">💪</div>
+          <p>Добавьте упражнения в избранное</p>
+          <small>Отмечайте часто используемые упражнения для быстрого доступа</small>
+        </div>
+      </div>
+      <div class="card-footer">
+        <a href="exercises.html" class="btn">Все упражнения</a>
+        <a href="exercises.html?favorites=true" class="btn outline">Только избранные</a>
+      </div>
+    </section>
+
+    <!-- Новая секция: Достижения -->
+    <section class="card">
+      <div class="card-header">
+        <h2>Ваши достижения</h2>
+        <button id="view-all-achievements" class="icon-btn small" title="Все достижения">
+          <span>🏆</span>
+        </button>
+      </div>
+      <div id="achievements-preview">
+        <div class="achievements-grid">
+          <!-- Будет заполнено скриптом -->
+        </div>
+        <div class="empty-state">
+          <div class="empty-icon">🎯</div>
+          <p>Пока нет достижений</p>
+          <small>Продолжайте тренироваться, чтобы открывать новые достижения!</small>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button id="motivation-tip" class="btn outline">Совет для мотивации</button>
+      </div>
     </section>
   </main>
+
+  <!-- Модальные окна -->
+  <div id="plan-workout-modal" class="modal" hidden>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Запланировать тренировку</h3>
+        <button class="close-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <!-- Форма планирования тренировки -->
+      </div>
+    </div>
+  </div>
+
+  <div id="motivation-modal" class="modal" hidden>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Мотивация на сегодня</h3>
+        <button class="close-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p id="daily-motivation">Загрузка...</p>
+      </div>
+    </div>
+  </div>
+  
+<div id="motivation-modal" class="modal" hidden>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Мотивация на сегодня</h3>
+            <button class="close-modal" aria-label="Закрыть окно">&times;</button>
+        </div>
+        <div class="modal-body">
+            <p id="daily-motivation">Загрузка...</p>
+        </div>
+    </div>
+</div>
+  <!-- Уведомления -->
+  <div id="notification" class="notification" hidden>
+    <span id="notification-text"></span>
+  </div>
 </body>
 </html>

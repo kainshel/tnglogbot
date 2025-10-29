@@ -16,12 +16,10 @@
     <div class="brand">Дневник Тренировок</div>
     <nav role="navigation" class="nav">
       <a href="index.html">Главная</a>
-      <a href="exercises.html">Библиотека упражнений</a>
+      <a href="exercises.html">База упражнений</a>
       <a href="workout.html">Тренировка</a>
       <a href="history.html">История</a>
 	  <a href="programs.html">Программы тренировок</a>
-      <a href="analytics.html">Аналитика</a>
-      <a href="social.html">Социальное</a>
       <a href="challenges.html">Челленджи</a>
       <a href="profile.html">Профиль</a>
     </nav>
@@ -29,6 +27,16 @@
   sidebar.innerHTML = menuHtml;
   // close after clicking link
   sidebar.addEventListener('click', (e)=>{ const a = e.target.closest('a'); if (a) closeDrawer(); });
+  
+  // Автоматическое выделение активной страницы
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  sidebar.querySelectorAll('.nav a').forEach(link => {
+    const linkPage = link.getAttribute('href');
+    if (linkPage === currentPage) {
+      link.classList.add('active');
+    }
+  });
+
   // service worker registration (если есть)
   if ('serviceWorker' in navigator) window.addEventListener('load', ()=> navigator.serviceWorker.register('./sw.js').catch(()=>{}));
 })();

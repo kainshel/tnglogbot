@@ -10,7 +10,7 @@
     "days": [
       {
         "dayNumber": 1,
-        "focus": "Верх тела + Пресс",
+        "focus": "День 1",
         "exercises": [
           { "exerciseId": "Close-Grip Push-Ups", "sets": 3, "reps": "10-15", "rest": "60сек" },
           { "exerciseId": "Neutral-Grip Pull-Ups", "sets": 3, "reps": "6-10", "rest": "75сек" },
@@ -21,7 +21,7 @@
       },
       {
         "dayNumber": 2,
-        "focus": "Ноги + Ягодицы",
+        "focus": "День 2",
         "exercises": [
           { "exerciseId": "Bodyweight Squats", "sets": 3, "reps": "12-15", "rest": "60сек" },
           { "exerciseId": "Glute Bridges", "sets": 3, "reps": "12-15", "rest": "60сек" },
@@ -32,7 +32,7 @@
       },
       {
         "dayNumber": 3,
-        "focus": "Верх тела + Кардио",
+        "focus": "День 3",
         "exercises": [
           { "exerciseId": "Push-Ups", "sets": 3, "reps": "8-12", "rest": "60сек" },
           { "exerciseId": "Seated Row", "sets": 3, "reps": "10-12", "rest": "60сек" },

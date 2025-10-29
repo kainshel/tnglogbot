@@ -1,298 +1,923 @@
-/* dashboard.css - Стили для главной страницы */
+/* styles/pages/dashboard.css */
+
+/* Основной контент */
+.content {
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  animation: fadeIn 0.5s ease;
+}
 
 /* Приветственная секция */
 .welcome-section {
-  text-align: center;
-  padding: 2rem 1rem;
   background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
   color: white;
+  padding: 2rem;
   border-radius: var(--radius);
   margin-bottom: 2rem;
   box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
 }
 
-.welcome-section h1 {
+.welcome-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 200px;
+  height: 200px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  transform: translate(30%, -30%);
+}
+
+.welcome-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.user-greeting h1 {
   font-size: 1.8rem;
   margin-bottom: 0.5rem;
-  color: white;
   font-weight: 700;
 }
 
-.welcome-section p {
-  font-size: 1.1rem;
-  margin-bottom: 1.5rem;
+#motivational-quote {
+  font-size: 1rem;
   opacity: 0.9;
+  font-style: italic;
+}
+
+.user-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+}
+
+.user-avatar.has-avatar {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .quick-actions {
   display: flex;
   gap: 1rem;
-  justify-content: center;
   flex-wrap: wrap;
 }
 
-.quick-actions .btn {
-  min-width: 200px;
-  padding: 1rem 1.5rem;
+.btn-icon {
+  margin-right: 0.5rem;
+  font-size: 1.1em;
+}
+
+/* Секция статистики */
+.stats-section {
+  margin-bottom: 2rem;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.section-header h2 {
+  font-size: 1.5rem;
+  color: var(--text-color);
   font-weight: 600;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  padding: 0.5rem;
   border-radius: var(--radius);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  cursor: pointer;
   transition: all 0.3s ease;
+  font-size: 1.2rem;
 }
 
-.quick-actions .btn.primary {
-  background: rgba(255,255,255,0.95);
-  color: var(--primary-color);
-  border: 2px solid white;
+.icon-btn:hover {
+  background: var(--primary-light);
+  transform: scale(1.1);
 }
 
-.quick-actions .btn.secondary {
-  background: transparent;
-  color: white;
-  border: 2px solid rgba(255,255,255,0.3);
+.icon-btn.small {
+  padding: 0.375rem;
+  font-size: 1rem;
 }
 
-.quick-actions .btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+/* Сетка статистики */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
 }
 
-.quick-actions .btn.primary:hover {
-  background: white;
+.stat-card {
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: var(--border);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.3s ease;
+  position: relative;
 }
 
-.quick-actions .btn.secondary:hover {
-  background: rgba(255,255,255,0.1);
-  border-color: white;
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.stat-icon {
+  font-size: 2rem;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary-light);
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.stat-info {
+  flex: 1;
+}
+
+.stat-number {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  font-weight: 500;
+}
+
+.stat-trend {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 20px;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.stat-trend.positive {
+  background: #e8f5e8;
+  color: #2e7d32;
+}
+
+.stat-trend.negative {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.stat-trend.neutral {
+  background: #f5f5f5;
+  color: var(--text-light);
+}
+
+/* Прогресс-бар недели */
+.week-progress {
+  margin-top: 0.75rem;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: var(--gray-light);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+
+.progress-text {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  display: block;
+  text-align: center;
+}
+
+/* Индикатор давности тренировки */
+.workout-recency {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 20px;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.workout-recency.recent {
+  background: #e8f5e8;
+  color: #2e7d32;
+}
+
+.workout-recency.warning {
+  background: #fff3e0;
+  color: #ef6c00;
+}
+
+.workout-recency.old {
+  background: #ffebee;
+  color: #c62828;
 }
 
 /* Карточки контента */
-.content-section {
-  margin: 2rem 0;
+.card {
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: var(--border);
+  margin-bottom: 2rem;
+  transition: all 0.3s ease;
 }
 
-.content-section h2 {
+.card:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.card-header h2 {
+  font-size: 1.3rem;
   color: var(--text-color);
-  font-size: 1.4rem;
-  margin-bottom: 1.2rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 2px solid var(--primary-color);
-}
-
-.content-section {
-  animation: fadeInUp 0.5s ease-out;
-}
-
-.content-section:nth-child(1) { animation-delay: 0.1s; }
-.content-section:nth-child(2) { animation-delay: 0.2s; }
-.content-section:nth-child(3) { animation-delay: 0.3s; }
-.content-section:nth-child(4) { animation-delay: 0.4s; }
-
-/* Улучшение читаемости */
-.content-section h2 {
   font-weight: 600;
-  letter-spacing: -0.02em;
+}
+
+.card-footer {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: var(--border);
+  flex-wrap: wrap;
+}
+
+/* Списки тренировок */
+.workouts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.workout-item {
+  background: var(--bg-color);
+  padding: 1.25rem;
+  border-radius: var(--radius);
+  border: var(--border);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.workout-item:hover {
+  background: var(--primary-light);
+  transform: translateX(4px);
+}
+
+.workout-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.workout-header strong {
+  color: var(--text-color);
+  font-weight: 600;
+}
+
+.workout-duration {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  background: var(--primary-light);
+  padding: 0.25rem 0.75rem;
+  border-radius: 15px;
+}
+
+.workout-exercises {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.exercise-tag {
+  background: var(--card-bg);
+  padding: 0.375rem 0.75rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  color: var(--text-light);
+  border: 1px solid var(--primary-light);
+}
+
+.more-exercises {
+  background: var(--primary-color);
+  color: white;
+  padding: 0.375rem 0.75rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.workout-stats {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.9rem;
+  color: var(--text-light);
+}
+
+.workout-stats span {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* Сетка избранных упражнений */
+.exercise-mini-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.exercise-mini-item {
+  background: var(--bg-color);
+  padding: 1.25rem;
+  border-radius: var(--radius);
+  border: var(--border);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+}
+
+.exercise-mini-item:hover {
+  background: var(--primary-light);
+  transform: translateY(-2px);
+}
+
+.exercise-icon {
+  font-size: 1.5rem;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary-light);
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.exercise-info {
+  flex: 1;
+}
+
+.exercise-info h4 {
+  font-size: 1rem;
+  color: var(--text-color);
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+}
+
+.exercise-info p {
+  font-size: 0.85rem;
+  color: var(--text-light);
+}
+
+.exercise-quick-action {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.exercise-quick-action:hover {
+  background: var(--primary-dark);
+  transform: scale(1.1);
+}
+
+/* Сетка достижений */
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.achievement-item {
+  background: var(--bg-color);
+  padding: 1rem;
+  border-radius: var(--radius);
+  border: var(--border);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.achievement-item:hover {
+  background: var(--primary-light);
+}
+
+.achievement-icon {
+  font-size: 1.5rem;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary-light);
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.achievement-info {
+  flex: 1;
+}
+
+.achievement-info strong {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--text-color);
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+}
+
+.achievement-info span {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  line-height: 1.3;
+}
+
+/* Состояния пустых данных */
+.empty-state {
+  text-align: center;
+  padding: 3rem 2rem;
+  color: var(--text-light);
+}
+
+.empty-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+.empty-state p {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
+}
+
+.empty-state small {
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+.error-state {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-light);
+}
+
+.error-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  opacity: 0.7;
+}
+
+.error-state p {
+  margin-bottom: 1rem;
+  color: var(--text-color);
+}
+
+/* Модальные окна */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 1rem;
+}
+
+.modal-content {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  max-width: 500px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: var(--border);
+}
+
+.modal-header h3 {
+  font-size: 1.3rem;
+  color: var(--text-color);
+  font-weight: 600;
+}
+
+.close-modal {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text-light);
+  padding: 0.25rem;
+  border-radius: var(--radius);
+  transition: all 0.3s ease;
+}
+
+.close-modal:hover {
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+
+.modal-body {
+  padding: 1.5rem;
+}
+
+/* Уведомления */
+.notification {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background: var(--card-bg);
+  color: var(--text-color);
+  padding: 1rem 1.5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border-left: 4px solid var(--primary-color);
+  z-index: 3000;
+  animation: slideInFromLeft 0.3s ease;
+  max-width: 400px;
+}
+
+.notification.success {
+  border-left-color: #4caf50;
+}
+
+.notification.error {
+  border-left-color: #f44336;
+}
+
+.notification.warning {
+  border-left-color: #ff9800;
+}
+
+.notification.info {
+  border-left-color: #2196f3;
 }
 
 /* Адаптивность */
 @media (max-width: 768px) {
-  .welcome-section h1 {
-    font-size: 1.5rem;
+  .content {
+    padding: 0.75rem;
   }
   
-  .welcome-section p {
-    font-size: 1rem;
+  .welcome-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  
+  .user-avatar {
+    align-self: flex-end;
   }
   
   .quick-actions {
     flex-direction: column;
   }
   
-  .quick-actions .btn {
-    width: 100%;
-    min-width: auto;
-  }
-  
   .stats-grid {
     grid-template-columns: 1fr;
-  }
-  
-  .stat-card {
-    flex-direction: column;
-    text-align: center;
-  }
-  
-  .stat-info {
-    text-align: center;
+    gap: 1rem;
   }
   
   .exercise-mini-grid {
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    grid-template-columns: 1fr;
+  }
+  
+  .achievements-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .card-footer {
+    flex-direction: column;
+  }
+  
+  .workout-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .modal-content {
+    margin: 1rem;
+    max-height: calc(100vh - 2rem);
   }
 }
 
 @media (max-width: 480px) {
   .welcome-section {
-    padding: 1.5rem 1rem;
+    padding: 1.5rem;
+  }
+  
+  .user-greeting h1 {
+    font-size: 1.5rem;
+  }
+  
+  .stat-card {
+    padding: 1.25rem;
   }
   
   .stat-icon {
     width: 50px;
     height: 50px;
-    font-size: 2rem;
-  }
-  
-  .stat-number {
     font-size: 1.5rem;
   }
   
-  .exercise-mini-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .stat-number {
+    font-size: 1.75rem;
+  }
+  
+  .card {
+    padding: 1.25rem;
   }
 }
-/* styles/pages/dashboard.css */
 
-/* Стили для скелетонов */
-.skeleton-loader {
-  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-  background-size: 200% 100%;
-  animation: loading 1.5s infinite;
-  height: 1.2em;
-  width: 80%;
-  border-radius: 4px;
-  margin: 0.5rem 0;
+/* Анимации для динамического контента */
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
 }
 
-@keyframes loading {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+.loading {
+  animation: pulse 1.5s ease-in-out infinite;
 }
 
-.empty-state {
-  color: #666;
-  font-style: italic;
-  text-align: center;
-  padding: 1rem;
+/* Улучшения для доступности */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
-/* Стили для карточек статистики */
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  margin-bottom: 2rem;
+/* Фокус-стили для клавиатурной навигации */
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--primary-dark);
+  outline-offset: 2px;
 }
 
-.stat-card {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem;
-  background: #f8f9fa;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+/* Поддержка темной темы */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #1a1a1a;
+    --text-color: #e0e0e0;
+    --text-light: #a0a0a0;
+    --card-bg: #2d2d2d;
+    --border: 1px solid #404040;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+  
+  .empty-state,
+  .error-state {
+    color: var(--text-light);
+  }
+  
+  .exercise-tag {
+    background: #3d3d3d;
+    border-color: #404040;
+  }
+}
+/* Добавьте эти стили в main.css или dashboard.css */
+
+/* Блокировка скролла при открытом модальном окне */
+body.modal-open {
+    overflow: hidden;
 }
 
-.stat-icon {
-  font-size: 2rem;
+/* Стили для модальных окон */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    padding: 1rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
 }
 
-.stat-info {
-  display: flex;
-  flex-direction: column;
+.modal:not([hidden]) {
+    opacity: 1;
+    visibility: visible;
 }
 
-.stat-number {
-  display: block;
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #333;
+.modal-content {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    max-width: 500px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    transform: translateY(-20px);
+    transition: all 0.3s ease;
+    position: relative;
 }
 
-.stat-label {
-  color: #666;
-  font-size: 0.9rem;
+.modal:not([hidden]) .modal-content {
+    transform: translateY(0);
 }
 
-/* Стили для мини-сетки упражнений */
-.exercise-mini-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 1rem;
-  margin-bottom: 1rem;
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: var(--border);
+    position: sticky;
+    top: 0;
+    background: var(--card-bg);
+    z-index: 1;
+    border-radius: var(--radius) var(--radius) 0 0;
 }
 
-.exercise-mini-item {
-  padding: 1rem;
-  background: #f8f9fa;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.2s, transform 0.2s;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+.modal-header h3 {
+    font-size: 1.3rem;
+    color: var(--text-color);
+    font-weight: 600;
+    margin: 0;
 }
 
-.exercise-mini-item:hover {
-  background: #e9ecef;
-  transform: translateY(-2px);
+.close-modal {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-light);
+    padding: 0.5rem;
+    border-radius: var(--radius);
+    transition: all 0.3s ease;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.exercise-mini-item h4 {
-  margin: 0 0 0.5rem 0;
-  font-size: 1rem;
-  color: #333;
+.close-modal:hover {
+    background: var(--bg-color);
+    color: var(--text-color);
+    transform: scale(1.1);
 }
 
-.exercise-mini-item p {
-  margin: 0;
-  font-size: 0.9rem;
-  color: #666;
+.modal-body {
+    padding: 1.5rem;
 }
 
-/* Стили для элементов тренировок */
-.workout-item {
-  padding: 0.75rem;
-  border-bottom: 1px solid #eee;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: background-color 0.2s;
+/* Специфичные стили для мотивационного модального окна */
+#motivation-modal .modal-content {
+    text-align: center;
+    max-width: 400px;
 }
 
-.workout-item:hover {
-  background: #f8f9fa;
+#daily-motivation {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-color);
+    font-style: italic;
+    margin: 0;
+    padding: 1rem 0;
 }
 
-.workout-item:last-child {
-  border-bottom: none;
+/* Анимация появления */
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
-.workout-item strong {
-  color: #333;
+.modal:not([hidden]) .modal-content {
+    animation: modalFadeIn 0.3s ease;
 }
 
-.workout-item span {
-  color: #666;
-  font-size: 0.9rem;
-}
-
-/* Адаптивность */
+/* Адаптивность для модальных окон */
 @media (max-width: 768px) {
-  .stats-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .exercise-mini-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+    .modal {
+        padding: 0.5rem;
+    }
+    
+    .modal-content {
+        max-height: 95vh;
+        margin: 0.5rem;
+    }
+    
+    .modal-header {
+        padding: 1.25rem;
+    }
+    
+    .modal-body {
+        padding: 1.25rem;
+    }
+    
+    .modal-header h3 {
+        font-size: 1.2rem;
+    }
 }
 
-@media (max-width: 480px) {
-  .stats-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .exercise-mini-grid {
-    grid-template-columns: 1fr;
-  }
+/* Предотвращение закрытия при клике на контент */
+.modal-content {
+    pointer-events: auto;
+}
+
+.modal {
+    pointer-events: none;
+}
+
+/* Улучшение доступности */
+.modal:not([hidden]) {
+    pointer-events: auto;
+}
+
+.close-modal:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
 }
