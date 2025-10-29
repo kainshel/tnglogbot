@@ -1,193 +1,738 @@
-/* Страница программ тренировок */
-.programs-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
-  margin-top: 1rem;
+/* styles/pages/workout.css */
+
+/* === Стили для страницы тренировки === */
+
+/* Заголовок страницы */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.875rem;
+  border-bottom: 2px solid var(--primary-light);
 }
 
-.program-card {
-  background: var(--card-bg);
+.page-header h1 {
+  color: var(--sidebar-text);
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.header-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+/* Секция с датой */
+.date-section {
+  margin-bottom: 1.5rem;
+}
+
+.date-input-group {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.date-label {
+  font-size: 1rem;
+  color: var(--text-color);
+  font-weight: 500;
+}
+
+.date-picker {
+  padding: 0.625rem 0.875rem;
+  border: 2px solid var(--primary-light);
   border-radius: var(--radius);
-  padding: 1.5rem;
-  box-shadow: var(--shadow);
-  border: var(--border);
+  background: var(--card-bg);
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  min-width: 160px;
+}
+
+.date-picker:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(169, 186, 157, 0.2);
+}
+
+/* Секция плана тренировки */
+.workout-plan-section {
+  margin-bottom: 1.5rem;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.625rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-header h2 {
+  color: var(--sidebar-text);
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.workout-stats {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.stat {
+  color: var(--text-light);
+  font-size: 0.85rem;
+}
+
+.stat strong {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+/* Контейнер плана */
+.plan-container {
+  min-height: 150px;
+  margin-bottom: 1.25rem;
+}
+
+/* Действия с планом */
+.plan-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  padding-top: 0.875rem;
+  border-top: 1px solid var(--border);
+}
+
+.save-btn {
+  font-size: 1rem;
+  padding: 0.875rem 1.5rem;
+  font-weight: 600;
+}
+
+.secondary-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* Секция фильтров */
+.filters-section {
+  margin-bottom: 1.5rem;
+}
+
+.filters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.875rem;
+  margin-bottom: 0.875rem;
+}
+
+.search-group {
+  grid-column: 1 / -1;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.75rem 0.875rem;
+  border: 2px solid var(--primary-light);
+  border-radius: var(--radius);
+  background: var(--card-bg);
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(169, 186, 157, 0.2);
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.filter-group label {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  font-weight: 500;
+}
+
+.filter-select {
+  padding: 0.625rem 0.875rem;
+  border: 2px solid var(--primary-light);
+  border-radius: var(--radius);
+  background: var(--card-bg);
+  font-size: 0.95rem;
   transition: all 0.3s ease;
   cursor: pointer;
 }
 
-.program-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-hover);
+.filter-select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(169, 186, 157, 0.2);
 }
 
-.program-card h3 {
-  margin: 0 0 0.8rem 0;
-  color: var(--text-color);
-  font-size: 1.2rem;
-}
-
-.program-meta {
+/* Активные фильтры */
+.active-filters {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.8rem;
-  margin-bottom: 1rem;
-}
-
-.program-tag {
-  background: var(--primary-light);
-  color: var(--primary-dark);
-  padding: 0.3rem 0.8rem;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: 500;
-}
-
-.program-description {
-  color: var(--text-light);
-  line-height: 1.5;
-  margin-bottom: 1rem;
-}
-
-/* Детали программы */
-.weeks-container {
-  margin: 1.5rem 0;
-}
-
-.week-accordion {
-  margin-bottom: 0.8rem;
-  border: var(--border);
+  gap: 0.375rem;
+  padding: 0.75rem;
+  background: rgba(169, 186, 157, 0.1);
   border-radius: var(--radius);
-  overflow: hidden;
+  border-left: 4px solid var(--primary-color);
 }
 
-.week-header {
-  background: var(--primary-light);
-  padding: 1rem;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+/* Секция упражнений */
+.exercises-section {
+  margin-bottom: 1.5rem;
+}
+
+.exercises-count {
+  color: var(--text-light);
+  font-size: 0.85rem;
+}
+
+.exercises-count strong {
+  color: var(--primary-color);
+}
+
+/* Сетка упражнений */
+.exercise-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin: 1.25rem 0;
+}
+
+.exercise-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  transition: all 0.3s ease;
+  animation: fadeIn 0.4s ease;
+}
+
+.exercise-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  border-color: var(--primary-light);
+}
+
+.exercise-card h3 {
+  color: var(--sidebar-text);
+  margin-bottom: 0.875rem;
+  font-size: 1.1rem;
   font-weight: 600;
 }
 
-.week-content {
-  padding: 0;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease;
+.exercise-gif {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 0.875rem;
+  background: var(--bg-color);
 }
 
-.week-content.expanded {
-  max-height: 2000px;
+.exercise-card p {
+  color: var(--text-light);
+  margin-bottom: 0.625rem;
+  font-size: 0.9rem;
 }
 
-.day-section {
-  padding: 1rem;
-  border-bottom: 1px solid #eee;
-}
-
-.day-section:last-child {
-  border-bottom: none;
-}
-
-.day-section h4 {
-  margin: 0 0 0.8rem 0;
+.exercise-card p b {
   color: var(--text-color);
 }
 
-.exercise-item {
+.card-actions {
+  display: flex;
+  gap: 0.625rem;
+  margin-top: 0.875rem;
+}
+
+.card-actions .btn {
+  flex: 1;
+  padding: 0.625rem 0.875rem;
+  font-size: 0.85rem;
+}
+
+/* Упражнения в плане */
+.plan-exercise {
+  margin-bottom: 1.25rem;
+  border-left: 4px solid var(--primary-light);
+  transition: all 0.3s ease;
+}
+
+.plan-exercise.active-exercise {
+  border-left-color: var(--primary-color);
+  background: rgba(169, 186, 157, 0.05);
+}
+
+.plan-exercise .row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.8rem;
-  margin-bottom: 0.5rem;
-  background: #f9f9f9;
-  border-radius: var(--radius);
+  margin-bottom: 0.875rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
 }
 
-.exercise-info {
+.plan-exercise h3 {
+  color: var(--sidebar-text);
+  font-size: 1.2rem;
+  font-weight: 600;
   flex: 1;
+  min-width: 180px;
 }
 
-.exercise-info h5 {
-  margin: 0 0 0.3rem 0;
+.exercise-status {
+  padding: 0.375rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  background: var(--primary-light);
+  color: var(--sidebar-text);
+}
+
+.plan-exercise.active-exercise .exercise-status {
+  background: var(--primary-color);
+  color: white;
+}
+
+/* Подходы */
+.sets {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.set-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem;
+  background: var(--bg-color);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  transition: all 0.3s ease;
+}
+
+.set-row.current-set {
+  border-color: var(--primary-color);
+  background: rgba(169, 186, 157, 0.1);
+  box-shadow: 0 0 0 2px rgba(169, 186, 157, 0.2);
+}
+
+.set-row.completed-set {
+  background: rgba(169, 186, 157, 0.05);
+  opacity: 0.8;
+}
+
+.set-row span {
+  font-weight: 600;
+  color: var(--text-color);
+  min-width: 35px;
+  font-size: 0.9rem;
+}
+
+.set-row input {
+  padding: 0.375rem 0.625rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--card-bg);
+  font-size: 0.95rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.set-row input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.set-row input:read-only {
+  background: var(--bg-color);
+  color: var(--text-light);
+}
+
+.set-row .complete-set {
+  padding: 0.375rem 0.75rem;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.set-row .rm {
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  color: var(--text-light);
+  cursor: pointer;
+  padding: 0.125rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.set-row .rm:hover {
+  color: #e74c3c;
+  background: rgba(231, 76, 60, 0.1);
+}
+
+/* Секции по дням */
+.day-section {
+  margin-bottom: 1.5rem;
+  padding: 1.25rem;
+  background: rgba(169, 186, 157, 0.05);
+  border-radius: var(--radius);
+  border: 1px solid var(--primary-light);
+}
+
+.day-section h3 {
+  color: var(--primary-color);
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.875rem;
+  padding-bottom: 0.375rem;
+  border-bottom: 2px solid var(--primary-light);
+}
+
+/* Сообщения о пустом состоянии */
+.empty-plan-message {
+  text-align: center;
+  padding: 2rem 1.5rem;
+  color: var(--text-light);
+}
+
+.empty-plan-message p {
+  margin-bottom: 0.875rem;
   font-size: 1rem;
 }
 
-.exercise-meta {
-  font-size: 0.85rem;
-  color: var(--text-light);
-}
-
-.exercise-actions {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.empty-message {
-  text-align: center;
-  color: var(--text-light);
-  padding: 2rem;
-  font-style: italic;
-}
-
-/* Добавить в programs.css */
-.multi-select {
-  height: auto;
-  min-height: 40px;
-}
-
-.rating-stars {
-  color: #ffc107;
-  margin: 0.5rem 0;
-}
-
-.progress-container {
-  margin: 1rem 0;
-}
-
-.progress-bar {
-  background: #e0e0e0;
-  border-radius: 10px;
-  height: 8px;
-  overflow: hidden;
-}
-
-.progress-fill {
-  background: var(--primary-color);
-  height: 100%;
-  transition: width 0.3s ease;
-}
-
-.progress-stats {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 0.5rem;
+.empty-plan-message .btn {
+  margin: 0.375rem;
   font-size: 0.9rem;
-  color: var(--text-light);
+  padding: 0.75rem 1.25rem;
 }
 
-.completion-badge {
-  background: #4caf50;
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  margin-top: 0.5rem;
-  text-align: center;
-}
-
-.social-actions {
+/* Уведомления */
+.notifications-container {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 1100;
   display: flex;
-  gap: 0.5rem;
-  margin: 1rem 0;
+  flex-direction: column;
+  gap: 0.625rem;
 }
 
-.recommendation-badge {
-  background: #ff9800;
+.program-notification {
+  background: var(--primary-color);
   color: white;
-  padding: 0.2rem 0.5rem;
-  border-radius: 12px;
-  font-size: 0.8rem;
-  margin-left: 0.5rem;
+  padding: 0.875rem 1.25rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  animation: fadeIn 0.3s ease;
+  max-width: 300px;
+  font-size: 0.9rem;
+}
+
+.program-notification button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0.125rem;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.program-notification button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Кнопки */
+.text-btn {
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  cursor: pointer;
+  padding: 0.375rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+  text-decoration: underline;
+}
+
+.text-btn:hover {
+  background: rgba(169, 186, 157, 0.1);
+  text-decoration: none;
+}
+
+/* Футер упражнений */
+.exercises-footer {
+  text-align: center;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.875rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .page-header h1 {
+    font-size: 1.5rem;
+  }
+  
+  .header-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+  
+  .header-actions .btn {
+    font-size: 0.9rem;
+    padding: 0.75rem 1rem;
+  }
+  
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  
+  .section-header h2 {
+    font-size: 1.2rem;
+  }
+  
+  .workout-stats {
+    width: 100%;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  
+  .stat {
+    font-size: 0.8rem;
+  }
+  
+  .filters-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  
+  .exercise-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .exercise-card {
+    padding: 1rem;
+  }
+  
+  .exercise-card h3 {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .exercise-gif {
+    height: 150px;
+    margin-bottom: 0.75rem;
+  }
+  
+  .exercise-card p {
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .card-actions {
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+  }
+  
+  .card-actions .btn {
+    font-size: 0.8rem;
+    padding: 0.75rem;
+  }
+  
+  .plan-actions {
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+  
+  .save-btn {
+    font-size: 0.95rem;
+    padding: 0.75rem 1.25rem;
+  }
+  
+  .secondary-actions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .plan-exercise .row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.625rem;
+  }
+  
+  .plan-exercise h3 {
+    font-size: 1.1rem;
+    min-width: auto;
+  }
+  
+  .exercise-status {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.625rem;
+  }
+  
+  .set-row {
+    flex-wrap: wrap;
+    padding: 0.75rem;
+    gap: 0.5rem;
+  }
+  
+  .set-row input {
+    min-width: 70px;
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
+  
+  .set-row .complete-set {
+    width: 100%;
+    margin-top: 0.375rem;
+    padding: 0.5rem;
+  }
+  
+  .date-input-group {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .date-picker {
+    width: 100%;
+    min-width: auto;
+    padding: 0.75rem;
+  }
+  
+  .date-label {
+    font-size: 0.95rem;
+  }
+  
+  .empty-plan-message {
+    padding: 1.5rem 1rem;
+  }
+  
+  .empty-plan-message p {
+    font-size: 0.95rem;
+  }
+  
+  .program-notification {
+    max-width: 280px;
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-header h1 {
+    font-size: 1.4rem;
+  }
+  
+  .section-header h2 {
+    font-size: 1.1rem;
+  }
+  
+  .exercise-card {
+    padding: 0.875rem;
+  }
+  
+  .exercise-card h3 {
+    font-size: 0.95rem;
+  }
+  
+  .exercise-gif {
+    height: 130px;
+  }
+  
+  .set-row {
+    padding: 0.625rem;
+  }
+  
+  .set-row span {
+    font-size: 0.85rem;
+    min-width: 30px;
+  }
+  
+  .set-row input {
+    font-size: 0.85rem;
+    padding: 0.375rem;
+  }
+  
+  .btn {
+    font-size: 0.85rem;
+    padding: 0.625rem 1rem;
+  }
+  
+  .text-btn {
+    font-size: 0.8rem;
+    padding: 0.5rem;
+  }
+  
+  .notifications-container {
+    top: 10px;
+    right: 10px;
+    left: 10px;
+  }
+  
+  .program-notification {
+    max-width: none;
+    width: 100%;
+  }
+}
+
+/* Особо мелкие экраны */
+@media (max-width: 360px) {
+  .page-header h1 {
+    font-size: 1.3rem;
+  }
+  
+  .exercise-card {
+    padding: 0.75rem;
+  }
+  
+  .exercise-card h3 {
+    font-size: 0.9rem;
+  }
+  
+  .card-actions .btn {
+    font-size: 0.75rem;
+    padding: 0.625rem;
+  }
+  
+  .set-row {
+    padding: 0.5rem;
+  }
+  
+  .set-row input {
+    min-width: 60px;
+    font-size: 0.8rem;
+  }
 }
