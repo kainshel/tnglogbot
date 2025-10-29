@@ -108,5 +108,145 @@
   "targets": ["Бицепс", "Плечевая мышца", "Предплечья"],
   "equipment": ["Гантели"],
   "gif": "assets/images/exercises/hammer_curl.gif"
+},
+{
+  "id": 12,
+  "name_ru": "Жим штанги на наклонной скамье",
+  "name_en": "Incline Barbell Bench Press",
+  "type": "Базовое",
+  "groups": ["Грудь", "Плечи", "Руки"],
+  "targets": ["Верх груди", "Передняя дельта", "Трицепс"],
+  "equipment": ["Штанга", "Наклонная скамья"],
+  "gif": "assets/images/exercises/incline_bench_press.gif"
+},
+  {
+    "id": 13,
+    "name_ru": "Жим гантелей на наклонной",
+    "name_en": "Incline Dumbbell Press",
+    "type": "Базовое",
+    "groups": ["Грудь", "Плечи", "Руки"],
+    "targets": ["Верх", "Передняя дельта", "Трицепс"],
+    "equipment": ["Гантели", "Скамья"],
+    "gif": "assets/images/exercises/Incline_Barbell_Press.gif"
+  },
+    {
+    "id": 14,
+    "name_ru": "Разведение гантелей на отрицательной",
+    "name_en": "Decline Dumbbell Fly",
+    "type": "Изолирующее",
+    "groups": ["Грудь", "Плечи"],
+    "targets": ["Низ", "Передняя дельта"],
+    "equipment": ["Гантели", "Скамья"],
+    "gif": "assets/images/exercises/Decline_Dumbbell_Fly.gif"
+  },
+    {
+    "id": 15,
+    "name_ru": "Жим штанги на отрицательной скамье",
+    "name_en": "Decline Barbell Bench Press",
+    "type": "Базовое",
+    "groups": ["Грудь", "Плечи", "Руки"],
+    "targets": ["Низ", "Передняя дельта", "Трицепс"],
+    "equipment": ["Штанга", "Скамья"],
+    "gif": "assets/images/exercises/Decline_Barbell_Bench_Press.gif"
+  },
+  {
+    "id": 16,
+    "name_ru": "Жим гантелей на отрицательной скамье",
+    "name_en": "Decline Dumbbell Press",
+    "type": "Базовое",
+    "groups": ["Грудь", "Плечи", "Руки"],
+    "targets": ["Низ", "Передняя дельта", "Трицепс"],
+    "equipment": ["Гантели", "Скамья"],
+    "gif": "assets/images/exercises/Decline_Dumbbell_Press.gif"
+  },
+  {
+    "id": 17,
+    "name_ru": "Разведение гантелей лёжа",
+    "name_en": "Dumbbell Fly",
+    "type": "Изолирующее",
+    "groups": ["Грудь", "Плечи"],
+    "targets": ["Середина", "Передняя дельта"],
+    "equipment": ["Гантели", "Скамья"],
+    "gif": "assets/images/exercises/Dumbbell_Fly.gif"
+  },
+  {
+    "id": 18,
+    "name_ru": "Разведение гантелей на наклонной",
+    "name_en": "Incline Dumbbell Fly",
+    "type": "Изолирующее",
+    "groups": ["Грудь", "Плечи"],
+    "targets": ["Верх", "Передняя дельта"],
+    "equipment": ["Гантели", "Скамья"],
+    "gif": "assets/images/exercises/Incline_Dumbbell_Fly.gif"
+  },
+    {
+    "id": 19,
+    "name_ru": "Сведение на кроссовере",
+    "name_en": "Cable Fly",
+    "type": "Изолирующее",
+    "groups": ["Грудь", "Плечи"],
+    "targets": ["Середина", "Передняя дельта"],
+    "equipment": ["Кроссовер"],
+    "gif": "assets/images/exercises/Cable_Fly.gif"
+  },
+{
+  "id": 20,
+  "name_ru": "Сведение на кроссовере вверх",
+  "name_en": "Cable Crossover Up",
+  "type": "Изолирующее",
+  "groups": ["Грудь"],
+  "targets": ["Верх груди", "Середина груди"],
+  "equipment": ["Кроссовер", "Ручки"],
+  "gif": "assets/images/exercises/cable_crossover_up.gif"
+},
+{
+  "id": 21,
+  "name_ru": "Сведение на кроссовере вниз",
+  "name_en": "High to Low Cable Crossover",
+  "type": "Изолирующее",
+  "groups": ["Грудь"],
+  "targets": ["Низ груди", "Середина груди"],
+  "equipment": ["Кроссовер", "Ручки"],
+  "gif": "assets/images/exercises/high_to_low_cable_crossover.gif"
+},
+{
+  "id": 22,
+  "name_ru": "Отжимания от пола",
+  "name_en": "Push-ups",
+  "type": "Базовое",
+  "groups": ["Грудь", "Плечи", "Руки"],
+  "targets": ["Середина груди", "Передняя дельта", "Трицепс"],
+  "equipment": ["Пол"],
+  "gif": "assets/images/exercises/push_ups.gif"
+},
+{
+  "id": 23,
+  "name_ru": "Отжимания узким хватом",
+  "name_en": "Close Grip Push-ups",
+  "type": "Базовое",
+  "groups": ["Грудь", "Плечи", "Руки"],
+  "targets": ["Трицепс", "Середина груди", "Передняя дельта"],
+  "equipment": ["Пол"],
+  "gif": "assets/images/exercises/close_grip_push_ups.gif"
+},
+{
+  "id": 24,
+  "name_ru": "Гребной бурпи",
+  "name_en": "Row Burpee",
+  "type": "Базовое",
+  "groups": ["Ноги", "Спина", "Плечи", "Руки"],
+  "targets": ["Квадрицепсы", "Широчайшие мышцы спины", "Плечи", "Трицепс"],
+  "equipment": ["Гантели", "Пол"],
+  "gif": "assets/images/exercises/row_burpee.gif"
+},
+{
+  "id": 25,
+  "name_ru": "Отжимания с хлопком",
+  "name_en": "Clap Push-Up",
+  "type": "Базовое",
+  "groups": ["Грудь", "Плечи", "Руки"],
+  "targets": ["Взрывная сила груди", "Передняя дельта", "Трицепс"],
+  "equipment": ["Пол"],
+  "gif": "assets/images/exercises/clap_push_up.gif"
 }
 ]
