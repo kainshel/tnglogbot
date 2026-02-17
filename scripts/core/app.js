@@ -341,7 +341,11 @@ window.addEventListener('unhandledrejection', (e) => {
     App.showErrorNotification('Асинхронная ошибка. Обновите страницу.');
   }
 });
+import { initScrollToTop } from '../ui/scroll-to-top.js';
 
+document.addEventListener('DOMContentLoaded', () => {
+  initScrollToTop();
+});
 // Пример использования в компонентах:
 /*
 // Создаем Error Boundary для компонента
