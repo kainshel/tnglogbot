@@ -1,11 +1,32 @@
 // app.js - Инициализация приложения с глобальным Error Boundary
+
+// Импорты должны быть в начале файла
+import { initScrollToTop } from '../ui/scroll-to-top.js';
+
+// Функция для показа уведомлений
+function showNotification(message, type = 'info') {
+  // Проверяем наличие Telegram WebApp
+  if (window.Telegram?.WebApp?.showPopup) {
+    Telegram.WebApp.showPopup({
+      title: type === 'error' ? 'Ошибка' : 'Внимание',
+      message: message,
+      buttons: [{ type: 'ok' }]
+    });
+  } else {
+    // Fallback для браузера
+    console.log(`[${type}] ${message}`);
+    alert(message);
+  }
+}
+
 (function(){
   window.App = {
     version: 'v2.0',
     ready: false,
     onReadyQueue: [],
     errors: [],
-    errorHandlers: []
+    errorHandlers: [],
+    componentBoundaries: new Map() // Храним все созданные boundary
   };
 
   // Error Boundary класс для компонентов
@@ -35,10 +56,8 @@
       this.hasError = true;
       this.error = error;
       
-      // Логируем ошибку
       console.error(`❌ Error Boundary [${this.componentName}]:`, error);
       
-      // Добавляем в глобальный список ошибок
       App.errors.push({
         component: this.componentName,
         error: error.toString(),
@@ -46,7 +65,6 @@
         timestamp: new Date().toISOString()
       });
 
-      // Вызываем обработчики
       App.errorHandlers.forEach(handler => {
         try {
           handler(error, this.componentName);
@@ -55,7 +73,6 @@
         }
       });
 
-      // Показываем уведомление
       if (App.showErrorNotification) {
         App.showErrorNotification(`Ошибка в компоненте ${this.componentName}`);
       }
@@ -66,7 +83,6 @@
         return this.fallbackUI(this.error);
       }
       
-      // Дефолтный fallback UI
       return `
         <div class="error-boundary-fallback" style="
           padding: 20px;
@@ -80,7 +96,7 @@
           <h4 style="color: #ff4d4f; margin: 0 0 10px 0;">
             Ошибка в компоненте "${this.componentName}"
           </h4>
-          <button onclick="location.reload()" style="
+          <button onclick="App.resetComponentBoundary('${this.componentName}')" style="
             padding: 8px 16px;
             background: #ff4d4f;
             color: white;
@@ -89,7 +105,7 @@
             cursor: pointer;
             font-size: 14px;
           ">
-            Перезагрузить
+            Попробовать снова
           </button>
         </div>
       `;
@@ -109,38 +125,32 @@
     }
 
     setupGlobalHandlers() {
-      // Перехват синхронных ошибок
-      window.addEventListener('error', (e) => {
-        this.handleError(e.error || e.message, 'global');
-        console.error('🌍 Global error:', e.error);
-        
-        // Показываем уведомление, но не для всех ошибок (игнорируем ресурсные ошибки)
-        if (!e.target || e.target.tagName !== 'SCRIPT' && e.target.tagName !== 'LINK') {
-          showNotification('Произошла ошибка. Обновите страницу.', 'error');
-        }
-        
+      // Удаляем существующие обработчики, чтобы избежать дублирования
+      window.removeEventListener('error', this.globalErrorHandler);
+      window.removeEventListener('unhandledrejection', this.promiseErrorHandler);
+      
+      // Добавляем новые обработчики
+      this.globalErrorHandler = this.handleGlobalError.bind(this);
+      this.promiseErrorHandler = this.handlePromiseError.bind(this);
+      
+    }
+
+    handleGlobalError(e) {
+      // Игнорируем ресурсные ошибки
+      if (e.target && (e.target.tagName === 'SCRIPT' || e.target.tagName === 'LINK' || e.target.tagName === 'IMG')) {
+        console.warn('Resource error ignored:', e.target);
         return false;
-      });
-
-      // Перехват Promise ошибок
-      window.addEventListener('unhandledrejection', (e) => {
-        this.handleError(e.reason, 'promise');
-        console.error('🌍 Unhandled promise:', e.reason);
-        showNotification('Асинхронная ошибка. Обновите страницу.', 'error');
-      });
-
-      // Перехват ошибок в React рендере (если используется)
-      if (window.__REACT_ERROR_OVERLAY_GLOBAL_HOOK__) {
-        const originalOnError = window.__REACT_ERROR_OVERLAY_GLOBAL_HOOK__.handleError;
-        window.__REACT_ERROR_OVERLAY_GLOBAL_HOOK__.handleError = (error) => {
-          this.handleError(error, 'react');
-          if (originalOnError) originalOnError(error);
-        };
       }
+      
+      this.handleError(e.error || e.message, 'global');
+      return false;
+    }
+
+    handlePromiseError(e) {
+      this.handleError(e.reason, 'promise');
     }
 
     createErrorOverlay() {
-      // Создаем контейнер для глобального fallback UI
       if (!document.getElementById('global-error-boundary')) {
         const overlay = document.createElement('div');
         overlay.id = 'global-error-boundary';
@@ -162,7 +172,6 @@
     }
 
     handleError(error, source) {
-      // Сохраняем ошибку
       App.errors.push({
         source,
         error: error?.toString() || 'Unknown error',
@@ -170,7 +179,6 @@
         timestamp: new Date().toISOString()
       });
 
-      // Вызываем обработчики
       App.errorHandlers.forEach(handler => {
         try {
           handler(error, source);
@@ -179,14 +187,12 @@
         }
       });
 
-      // Если ошибка критическая, показываем глобальный fallback
       if (this.isCriticalError(error)) {
         this.showGlobalFallback(error);
       }
     }
 
     isCriticalError(error) {
-      // Определяем критические ошибки
       const criticalMessages = [
         'chunk',
         'loading',
@@ -231,7 +237,7 @@
             ">
               Перезагрузить
             </button>
-            <button onclick="App.errorBoundary.reset()" style="
+            <button onclick="App.resetAllBoundaries()" style="
               padding: 10px 20px;
               background: #f0f0f0;
               color: #333;
@@ -249,12 +255,11 @@
       overlay.style.display = 'flex';
     }
 
-    reset() {
+    hideGlobalFallback() {
       const overlay = document.getElementById('global-error-boundary');
       if (overlay) {
         overlay.style.display = 'none';
       }
-      App.errors = [];
     }
   }
 
@@ -263,7 +268,23 @@
   
   // Метод для создания Error Boundary для компонентов
   App.createErrorBoundary = (componentName, fallbackUI) => {
-    return new ErrorBoundary(componentName, fallbackUI);
+    const boundary = new ErrorBoundary(componentName, fallbackUI);
+    App.componentBoundaries.set(componentName, boundary);
+    return boundary;
+  };
+
+  // Метод для сброса конкретного компонента
+  App.resetComponentBoundary = (componentName) => {
+    const boundary = App.componentBoundaries.get(componentName);
+    if (boundary) {
+      boundary.reset();
+    }
+  };
+
+  // Метод для сброса всех компонентов
+  App.resetAllBoundaries = () => {
+    App.componentBoundaries.forEach(boundary => boundary.reset());
+    App.errorBoundary.hideGlobalFallback();
   };
 
   // Метод для добавления обработчика ошибок
@@ -277,11 +298,7 @@
 
   // Метод для показа уведомления об ошибке
   App.showErrorNotification = (message) => {
-    if (typeof showNotification === 'function') {
-      showNotification(message, 'error');
-    } else {
-      console.warn('showNotification not available:', message);
-    }
+    showNotification(message, 'error');
   };
 
   // Метод для получения истории ошибок
@@ -308,9 +325,14 @@
     document.dispatchEvent(new Event('appReady'));
   }
 
-  // wait for DOM and tg-init
   document.addEventListener('DOMContentLoaded', function(){
-    // small delay to ensure tg-init fires its event first
+    // Инициализируем scroll-to-top
+    try {
+      initScrollToTop();
+    } catch(e) {
+      App.errorBoundary.handleError(e, 'init-scroll-to-top');
+    }
+    
     setTimeout(ready, 10);
   });
 
@@ -326,39 +348,3 @@
     }
   };
 })();
-
-// Переопределяем глобальные обработчики
-window.addEventListener('error', (e) => {
-  console.error('Global error:', e.error);
-  if (window.App && App.showErrorNotification) {
-    App.showErrorNotification('Произошла ошибка. Обновите страницу.');
-  }
-});
-
-window.addEventListener('unhandledrejection', (e) => {
-  console.error('Unhandled promise:', e.reason);
-  if (window.App && App.showErrorNotification) {
-    App.showErrorNotification('Асинхронная ошибка. Обновите страницу.');
-  }
-});
-import { initScrollToTop } from '../ui/scroll-to-top.js';
-
-document.addEventListener('DOMContentLoaded', () => {
-  initScrollToTop();
-});
-// Пример использования в компонентах:
-/*
-// Создаем Error Boundary для компонента
-const userProfileBoundary = App.createErrorBoundary('UserProfile');
-
-// Оборачиваем рендер функцию
-function renderUserProfile() {
-  return userProfileBoundary.wrap(() => {
-    // Ваш код рендера
-    return '<div>User Profile</div>';
-  })();
-}
-
-// Сброс состояния после исправления ошибки
-userProfileBoundary.reset();
-*/

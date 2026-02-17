@@ -25,7 +25,7 @@
         SESSION_KEY: 'tg_session_id',
         AUTH_DURATION: 7 * 24 * 60 * 60 * 1000, // 7 дней
         REFRESH_THRESHOLD: 24 * 60 * 60 * 1000, // Обновлять за 24 часа до истечения
-        API_ENDPOINT: 'https://your-api.com/auth/telegram' // Замените на ваш endpoint
+        API_ENDPOINT: 'http://kainshel.fvds.ru/' // Замените на ваш endpoint
     };
     
     function initTelegramWebApp() {
